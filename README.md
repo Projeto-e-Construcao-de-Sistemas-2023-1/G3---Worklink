@@ -34,6 +34,25 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ![image](https://user-images.githubusercontent.com/83520652/235213127-c25f171c-92e1-43a4-8be6-5255ed21e162.png)
 
+## Diagrama de Casos de Uso
+
+### Caso 1: Criar Cadastro
+
+![image](https://user-images.githubusercontent.com/83520652/235237886-286866f6-0594-4f36-bd50-c6aaf927eb51.png)
+
+### Caso 2: Iniciar Sessão
+
+![image](https://user-images.githubusercontent.com/83520652/235237977-52f7d74b-dbb5-4ae5-86e6-2e5f44d0aa76.png)
+
+### Caso 3: Encerrar Sessão
+
+![image](https://user-images.githubusercontent.com/83520652/235238058-0558c14f-0598-4bbd-9259-83bca2e203c4.png)
+
+### Caso 4: Marcar Reunião
+
+![image](https://user-images.githubusercontent.com/83520652/235238160-e3a541dd-262c-4315-b629-adaa19228c5c.png)
+
 ## Diagrama de Classes
 
 !![image](https://user-images.githubusercontent.com/83520652/235218546-b283c9c6-b615-4a0c-bc5c-2a1cd62583c7.png)
+
