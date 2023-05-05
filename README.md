@@ -54,5 +54,5 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ## Diagrama de Classes
 
-!![image](https://user-images.githubusercontent.com/83520652/235218546-b283c9c6-b615-4a0c-bc5c-2a1cd62583c7.png)
+![image](https://user-images.githubusercontent.com/83520652/236583380-6031a692-ae95-4bc9-acef-06afc2d38631.png)
 
