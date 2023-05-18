@@ -5,7 +5,6 @@ class Usuario:
         self.telefone = '123456789'
         self.agencia = '1234'
         self.conta = '123456'
-        self.login = 'xxxx'
         self.senha = 'yyyy'
     def criaUsuario(self, id, email, telefone, agencia, conta, login, senha): # O id vai ser necessário no back-end e no BD?
         self.email = email
@@ -22,8 +21,6 @@ class Usuario:
     def setContaBancaria(self, agencia, conta):
         self.agencia = agencia
         self.conta = conta
-    def setLogin(self, login):
-        self.login = login
     def setSenha(self, senha):
         self.senha = senha
     def editaUsuario(self, mudança):
@@ -42,10 +39,6 @@ class Usuario:
             novo_agencia = input(print('Digite a nova agencia: '))
             novo_conta = input(print('Digite a nova conta: '))
             self.setContaBancaria(novo_agencia, novo_conta)
-        elif(mudança == 'login'):
-            # pedir o novo login
-            novo_login = input(print('Digite o novo login: '))
-            self.setLogin(novo_login)
         elif(mudança == 'senha'):
             # pedir a nova senha
             novo_senha = input(print('Digite a nova senha: '))
