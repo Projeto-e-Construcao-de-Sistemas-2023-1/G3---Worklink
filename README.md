@@ -19,16 +19,40 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
  
  ### Funcionais
  
- ![image](https://user-images.githubusercontent.com/83520652/235211240-0dece606-dbff-47ad-8402-71bd90fb4473.png)
-![image](https://user-images.githubusercontent.com/83520652/235211396-076ce9f2-36a7-45cb-bd0b-e986cf1d42da.png)
+| ID | Descrição |
+| --- | --- |
+| RF01 | O sistema deve permitir cadastro de empresas, com razão social, CNPJ, e-mail, telefone e senha. |
+| RF02 | O sistema deve permitir cadastro de desenvolvedores, com nome, CPF, data de nascimento, telefone, e-mail e senha. |
+| RF03 | O sistema deve permitir login de usuário mediante e-mail e senha cadastrados. |
+| RF04 | O sistema deve permitir manter usuário. |
+| RF05 | O sistema deve permitir que empresas publiquem projetos que estão em andamento ou que precisam ser iniciados em um feed geral, definindo prazos, requisitos técnicos e orçamento disponível. |
+| RF06 | O sistema deve exibir no perfil dos desenvolvedores em quais projetos eles estão atualmente trabalhando. |
+| RF07 | O sistema deve permitir que os desenvolvedores escolham tags que mostrem quais são suas proficiências e área de atuação, além de um campo de descrição nas páginas dos usuários em que eles podem escrever. |
+| RF08 | O sistema deve permitir aos desenvolvedores seguirem empresas e vice-versa. |
+| RF09 | O sistema deve permitir a candidaturas de desenvolvedores a projetos de empresas. |
+| RF10 | O sistema deve permitir que as empresas aceitem desenvolvedores para seus projetos. |
+| RF11 | O sistema deve apresentar um feed geral para os desenvolvedores com os projetos apresentados pelas empresas. |
+| RF12 | O sistema deve permitir que o desenvolvedor filtre os projetos apresentados no feed geral pelas tags, ou mostrar apenas projetos publicados por empresas que ele segue. |
+| RF13 | O sistema deve permitir à empresa inserir dinheiro em sua própria carteira virtual. |
+| RF14 | O sistema deve permitir a transação de fundos entre empresa e desenvolvedor. |
+| RF15 | O sistema deve permitir marcar reuniões em calendário para conversas entre empresas e desenvolvedores. |
+| RF16 | O sistema deve permitir que usuários pesquisem uns aos outros. |
 
  ### Não-Funcionais
  
- ![image](https://user-images.githubusercontent.com/83520652/235212825-1d2f036d-1bfa-4c2c-a51f-ad937ef44b98.png)
+| ID | Tipo |Descrição |
+| --- | --- | --- |
+| RNF1 | Segurança | O sistema deve ter um reCAPTCHA no login de usuário. |
+| RNF2 | Compatibilidade | O sistema deve ser compatível com as versões atualizadas do Google Chrome.  |
 
 ## Regras de Negócio
 
-![image](https://user-images.githubusercontent.com/83520652/235212953-74d4d1f1-d51f-4e65-a95f-f6d67f352a01.png)
+| ID | Descrição |
+| --- | --- |
+| RN1 | Um desenvolvedor deve ter, no mínimo, 1 tag em comum com o projeto para poder se candidatar à ele. |
+| RN2 | Usuário só pode acessar o sistema mediante cadastro. |
+| RN3 | Uma empresa só poderá contratar desenvolvedores se possuir um valor na carteira maior ou igual ao valor a ser pago pelo projeto. |
+| RN4 | (Se uma empresa excluir um projeto durante seu desenvolvimento, o que acontece com o pagamento? Ela deve pagar totalmente os desenvolvedores?) |
 
 ## Diagrama de Casos de Uso
 
