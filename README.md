@@ -32,9 +32,9 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ## Diagrama de Casos de Uso
 
-![image](https://user-images.githubusercontent.com/83520652/235213127-c25f171c-92e1-43a4-8be6-5255ed21e162.png)
+<img src="https://github.com/Projeto-e-Construcao-de-Sistemas-2023-1/G3---Worklink/blob/main/Documentos/Print%20Diagrama%20CDU%20PNG.png" alt="Diagrama de Caso de Uso PNG">
 
-## Diagrama de Casos de Uso
+## Descrições de Casos de Uso
 
 ### Caso 1: Criar Cadastro
 
