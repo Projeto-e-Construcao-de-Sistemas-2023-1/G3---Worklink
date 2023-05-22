@@ -1,7 +1,8 @@
+import Usuario
 class Empresa(Usuario):
     def __init__(self):
         super().__init__()
-        self.razao_social = ''
+        self.razao_social = 'xxxx'
         self.projetos = []
     
     def criaEmpresa(self, id, email, telefone, agencia, conta, login, senha, razao_social):
@@ -41,7 +42,7 @@ class Empresa(Usuario):
         desenvolvedor.saldo_carteira += valor
     
     def marcarReuniao(self, desenvolvedor, data, hora):
-        reuniao = Reuniao(desenvolvedor, data, hora)
+        reuniao = Reuniao(desenvolvedor, data, hora) # Usar integração com Calendar
         self.reunioes_agendadas.append(reuniao)
     
     def pesquisarDesenvolvedor(self, nome):
@@ -67,7 +68,3 @@ class Empresa(Usuario):
         print("Razão Social:", self.razao_social)
         print("Email:", self.email)
         print("Telefone:", self.telefone)
-
-
-    def deletaEmpresa(self):
-        pass

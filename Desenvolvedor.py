@@ -1,22 +1,34 @@
+import Usuario
 class Desenvolvedor(Usuario):
     def __init__(self):
         super().__init__()
-        self.nome = ''
-        self.CPF = ''
-        self.data_nascimento = ''
+        self.nome = 'xxxx'
+        self.CPF = 'xxxx'
+        self.data_nascimento = 'xx/xx/xxxx'
     
     def criaDesenvolvedor(self, id, email, telefone, agencia, conta, login, senha, nome, CPF, data_nascimento):
         self.criaUsuario(id, email, telefone, agencia, conta, login, senha)
         self.nome = nome
         self.CPF = CPF
         self.data_nascimento = data_nascimento
+        self.tags = []
+        self.empresas_seguidas = []
     
     def getNome(self):
         return self.nome
     
+    def setDescricao(self, descricao):
+        self.descricao = descricao
+
+    def getDescricao(self):
+        return self.descricao
+
     def setNome(self, nome):
         self.nome = nome
     
+    def setTags(self, tag):
+        self.tags.append(tag) # COLOCAR NO BANCO DE DADOS ESSA TAG NOVA
+
     def getCPF(self):
         return self.CPF
     
@@ -29,38 +41,40 @@ class Desenvolvedor(Usuario):
     def setDataNascimento(self, data_nascimento):
         self.data_nascimento = data_nascimento
     
-    def candidatarProjeto(self, projeto):
+    def candidataProjeto(self, projeto):
         self.projetos_candidatados.append(projeto)
     
-    def visualizarProjetos(self, status):
+    def visualizaProjetos(self, status):
         for projeto in self.projetos:
             if projeto.status == status:
                 print(projeto)
     
-    def seguirEmpresa(self, empresa):
+    def segueEmpresa(self, empresa):
         self.empresas_seguidas.append(empresa)
     
-    def pesquisarProjetos(self, tags):
+    def pesquisaProjetos(self, tags):
         projetos_encontrados = []
         for projeto in self.projetos:
             if any(tag in projeto.tags for tag in tags):
                 projetos_encontrados.append(projeto)
         return projetos_encontrados
     
-    def guardarDinheiroCarteira(self, valor):
+    def guardaDinheiroCarteira(self, valor):
         self.saldo_carteira += valor
     
-    def marcarReuniao(self, empresa, data, hora):
-        reuniao = Reuniao(empresa, data, hora)
+    def marcaReuniao(self, empresa, data, hora):
+        reuniao = Reuniao(empresa, data, hora) # Usar integração com Calendar
         self.reunioes_agendadas.append(reuniao)
     
-    def pesquisarEmpresa(self, razao_social):
+    def pesquisaEmpresa(self, razao_social):
         for empresa in self.empresas:
             if empresa.razao_social == razao_social:
                 return empresa
         return None
-    
-    def avaliarEmpresa(self, empresa, avaliacao):
+
+    def avaliaEmpresa(self, empresa, avaliacao):
         empresa.avaliacoes.append(avaliacao)
+
+    
     
 
