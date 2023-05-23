@@ -60,17 +60,50 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ## Descrições de Casos de Uso
 
-### Caso 1: Criar Cadastro
+### Caso 1: Manter Usuário
 
-![image](https://user-images.githubusercontent.com/83520652/235237886-286866f6-0594-4f36-bd50-c6aaf927eb51.png)
+| 01 | Manter Usuário |
+| --- | --- |
+| Nome | Manter usuário |
+| Objetivo | Manter usuário no sistema |
+| Ator | Usuário |
+| Pré-Condições | Ator sem cadastro |
+| Trigger | Ator entra no endpoint de login do sistema |
+| Fluxo Principal | 1 - Sistema exibe na tela as opções “Registre-se como Desenvolvedor” e “Registre-se como Empresa”. <br> 2 - Ator seleciona a opção desejada [A1][A2] |
+| Fluxos Alternativos | <strong>A1. Ator seleciona a opção “Desenvolvedor”.</strong> <br> 1 - Sistema exibe os campos “Nome”, “CPF”, “Telefone”, “Data de nascimento”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - Ator preenche os dados e clica em “Cadastrar”. <br> 3 - Sistema registra o cadastro do ator como desenvolvedor. <br><br> <strong>A2. Ator seleciona a opção “Empresa”.</strong> <br> 1 - Sistema exibe os campos “Razão Social”, “CNPJ”, “Telefone”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - Ator preenche os dados e clica em “Cadastrar”. <br> 3 - Sistema registra o cadastro do ator como empresa. <br><br> <strong>A3. Ator seleciona a opção “Perfil” na tela de usuário</strong> <br> 1 - Sistema exibe a foto e os campos “Nome”, “Email”, “Telefone”, “Descrição”,  “Tags”, além dos projetos do ator, na tela. <br><br> <strong>A4. Ator seleciona a opção “Editar Perfil” em seu perfil.</strong> <br> 1 - Sistema exibe na tela a foto do ator e os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Tags” preenchidos como anteriormente para serem alterados. <br> 2 - Ator altera os campos e seleciona o botão de “Confirmar”. <br> 3 - Sistema atualiza os campos do ator. <br><br> <strong>A5. Ator seleciona a opção “Deletar conta” em seu perfil.</strong> <br> 1 - Sistema deleta a conta do ator. |
+| Extensões | N/A. |
+| Pós-Condições | Ator é cadastrado no sistema com sucesso. |
+| Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
 
 ### Caso 2: Iniciar Sessão
 
-![image](https://user-images.githubusercontent.com/83520652/235237977-52f7d74b-dbb5-4ae5-86e6-2e5f44d0aa76.png)
+| 02 | Iniciar Sessão |
+| --- | --- |
+| Nome | Iniciar Sessão |
+| Objetivo | Iniciar sessão do usuário |
+| Ator | Usuário |
+| Pré-Condições | Ator com cadastro |
+| Trigger | Ator seleciona a opção de login. |
+| Fluxo Principal | 1 - Sistema exibe na tela os campos “Email” e “Senha”. <br> 2 - Ator preenche os campos e seleciona a opção “Entrar”. <br> Sistema checa se o ator tem cadastro, realiza autenticação e permite acesso. [A1][A2] |
+| Fluxos Alternativos |  <strong>A1. Sistema não consegue validar o email.</strong> <br> 1 - Sistema exibe a mensagem de email não cadastrado. <br> 2- Voltar para o passo 2. <br><br> <strong>A2. Sistema não consegue validar a senha.</strong> <br> 1 - Sistema exibe a mensagem de senha inválida. <br> 2- Voltar para o passo 2. |
+| Extensões | N/A. |
+| Pós-Condições | Ator autenticado. |
+| Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
 
 ### Caso 3: Encerrar Sessão
 
-![image](https://user-images.githubusercontent.com/83520652/235238058-0558c14f-0598-4bbd-9259-83bca2e203c4.png)
+| 03 | Encerrar Sessão |
+| --- | --- |
+| Nome | Encerrar Sessão |
+| Objetivo | Encerrar sessão do usuário |
+| Ator | Usuário |
+| Pré-Condições | Ator com sessão em andamento. |
+| Trigger | Ator seleciona a opção “Sair”. |
+| Fluxo Principal | 1 - Sistema desautentica ator. |
+| Fluxos Alternativos | N/A |
+| Extensões | N/A. |
+| Pós-Condições | Ator na tela de login. |
+| Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
 
 ### Caso 4: Marcar Reunião
 
