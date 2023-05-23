@@ -1,5 +1,5 @@
 import Usuario
-class Desenvolvedor(Usuario):
+class Desenvolvedor(Usuario.Usuario):
     def __init__(self):
         super().__init__()
         self.nome = 'xxxx'

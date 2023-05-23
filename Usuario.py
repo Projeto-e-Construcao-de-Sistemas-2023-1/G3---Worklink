@@ -76,6 +76,7 @@ class Usuario:
         consulta = 'SELECT * FROM usuario WHERE nome = ?'
         cursor.execute(consulta, nome)
         resultado = cursor.fetchall()
+        return resultado
         # MOSTRAR OS REGISTROS NA TELA DO FRONT END
     
         

@@ -1,5 +1,5 @@
 import Usuario
-class Empresa(Usuario):
+class Empresa(Usuario.Usuario):
     def __init__(self):
         super().__init__()
         self.razao_social = 'xxxx'
@@ -9,7 +9,6 @@ class Empresa(Usuario):
         self.criaUsuario(id, email, telefone, agencia, conta, login, senha)
         self.razao_social = razao_social
     
-
     def getRazaoSocial(self):
         return self.razao_social
     
