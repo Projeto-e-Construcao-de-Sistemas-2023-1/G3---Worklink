@@ -54,6 +54,31 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | RN3 | Uma empresa só poderá contratar desenvolvedores se possuir um valor na carteira maior ou igual ao valor a ser pago pelo projeto. |
 | RN4 | (Se uma empresa excluir um projeto durante seu desenvolvimento, o que acontece com o pagamento? Ela deve pagar totalmente os desenvolvedores?) |
 
+## Casos de Uso
+
+| ID | Nome |
+| --- | --- |
+| CDU01 | Manter usuário. |
+| CDU02 | Iniciar sessão. |
+| CDU03 | Realizar reCAPTCHA. |
+| CDU04 | Pesquisar usuário. |
+| CDU05 | Navegar por calendário. |
+| CDU06 | Marcar reunião. |
+| CDU07 | Encerrar sessão. |
+| CDU08 | Seguir usuário. |
+| CDU09 | Candidatar-se a um projeto. |
+| CDU10 | Definir Tags. |
+| CDU11 | Filtrar feed. |
+| CDU12 | Sacar dinheiro. |
+| CDU13 | Cancelar candidatura. |
+| CDU14 | Manter projeto. |
+| CDU15 | Escolher desenvolvedor. |
+| CDU16 | Encerrar inscrições. |
+| CDU17 | Inserir dinheiro na carteira virtual. |
+| CDU18 | Realizar transação. |
+| CDU19 | Completar descrição. |
+| CDU20 | Redefinir senha. |
+
 ## Diagrama de Casos de Uso
 
 <img src="https://github.com/Projeto-e-Construcao-de-Sistemas-2023-1/G3---Worklink/blob/main/Documentos/Print%20Diagrama%20CDU%20PNG.png" alt="Diagrama de Caso de Uso PNG">
