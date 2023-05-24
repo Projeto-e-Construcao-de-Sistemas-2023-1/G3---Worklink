@@ -70,7 +70,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pré-Condições | Ator sem cadastro |
 | Trigger | Ator entra no endpoint de login do sistema |
 | Fluxo Principal | 1 - Sistema exibe na tela as opções “Registre-se como Desenvolvedor” e “Registre-se como Empresa”. <br> 2 - Ator seleciona a opção desejada [A1][A2] |
-| Fluxos Alternativos | <strong>A1. Ator seleciona a opção “Desenvolvedor”.</strong> <br> 1 - Sistema exibe os campos “Nome”, “CPF”, “Telefone”, “Data de nascimento”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - Ator preenche os dados e clica em “Cadastrar”. <br> 3 - Sistema registra o cadastro do ator como desenvolvedor. <br><br> <strong>A2. Ator seleciona a opção “Empresa”.</strong> <br> 1 - Sistema exibe os campos “Razão Social”, “CNPJ”, “Telefone”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - Ator preenche os dados e clica em “Cadastrar”. <br> 3 - Sistema registra o cadastro do ator como empresa. <br><br> <strong>A3. Ator seleciona a opção “Perfil” na tela de usuário</strong> <br> 1 - Sistema exibe a foto e os campos “Nome”, “Email”, “Telefone”, “Descrição”,  “Tags”, além dos projetos do ator, na tela. <br><br> <strong>A4. Ator seleciona a opção “Editar Perfil” em seu perfil.</strong> <br> 1 - Sistema exibe na tela a foto do ator e os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Tags” preenchidos como anteriormente para serem alterados. <br> 2 - Ator altera os campos e seleciona o botão de “Confirmar”. <br> 3 - Sistema atualiza os campos do ator. <br><br> <strong>A5. Ator seleciona a opção “Deletar conta” em seu perfil.</strong> <br> 1 - Sistema deleta a conta do ator. |
+| Fluxos Alternativos | <strong>A1. Ator seleciona a opção “Desenvolvedor”.</strong> <br> 1 - Sistema exibe os campos “Nome”, “CPF”, “Telefone”, “Data de nascimento”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - Ator preenche os dados e clica em “Cadastrar”. <br> 3 - Sistema registra o cadastro do ator como desenvolvedor. <br><br> <strong>A2. Ator seleciona a opção “Empresa”.</strong> <br> 1 - Sistema exibe os campos “Razão Social”, “CNPJ”, “Telefone”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - Ator preenche os dados e clica em “Cadastrar”. <br> 3 - Sistema registra o cadastro do ator como empresa. <br><br> <strong>A3. Ator seleciona a opção “Perfil” na tela de usuário.</strong> <br> 1 - Sistema exibe a foto e os campos “Nome”, “Email”, “Telefone”, “Descrição”,  “Tags”, além dos projetos do ator, na tela. <br><br> <strong>A4. Ator seleciona a opção “Editar Perfil” em seu perfil.</strong> <br> 1 - Sistema exibe na tela a foto do ator e os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Tags” preenchidos como anteriormente para serem alterados. <br> 2 - Ator altera os campos e seleciona o botão de “Confirmar”. <br> 3 - Sistema atualiza os campos do ator. <br><br> <strong>A5. Ator seleciona a opção “Deletar conta” em seu perfil.</strong> <br> 1 - Sistema deleta a conta do ator. |
 | Extensões | N/A. |
 | Pós-Condições | Ator é cadastrado no sistema com sucesso. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
@@ -107,7 +107,48 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ### Caso 4: Marcar Reunião
 
-![image](https://user-images.githubusercontent.com/83520652/235238160-e3a541dd-262c-4315-b629-adaa19228c5c.png)
+| 04 | Marcar Reunião |
+| --- | --- |
+| Nome | Marcar Reunião |
+| Objetivo | Desenvolvedor e empresa se reunirem para comunicação |?
+| Ator | Usuário |
+| Pré-Condições | Ator com sessão em andamento. |
+| Trigger | Ator seleciona a opção “Marcar Reunião”. |
+| Fluxo Principal | 1 - Sistema exibe campos “Nome”, “Email” e “Horário” para serem preenchidos. <br> 2 - Ator preenche os campos.[A1][A2] <br> 3 - Sistema envia um aviso de reunião para a pessoa solicitada. |
+| Fluxos Alternativos |  <strong>A1. Sistema não consegue autenticar o nome preenchido.</strong> <br> 1 - Sistema exibe a mensagem de nome não cadastrado. <br> 2- Voltar para o passo 2. <br><br> <strong>A2. Sistema não consegue autenticar email.</strong> <br> 1 - Sistema exibe mensagem de email não cadastrado. <br> 2- Voltar para o passo 2. |
+| Extensões | N/A. |
+| Pós-Condições | Ator recebe notificação da reunião. |
+| Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
+
+### Caso 5: Manter Projeto
+
+| 05 | Manter Projeto |
+| --- | --- |
+| Nome | Manter Projeto |
+| Objetivo | Manter projetos feitos pela empresa |
+| Ator | Empresa |
+| Pré-Condições | Ator precisa estar com sessão em andamento |
+| Trigger | Ator seleciona a opção “Criar Projeto” em sua tela de usuário |
+| Fluxo Principal | 1 - Sistema exibe na tela as opções “Registre-se como Desenvolvedor” e “Registre-se como Empresa”. <br> 2 - Ator seleciona a opção desejada.[A1][A2] <br> 3 - Sistema cria e publica o novo projeto da empresa. |
+| Fluxos Alternativos | <strong>A1.Ator seleciona o botão “Visualizar projetos” em sua tela de usuário.</strong> <br> 1 - Sistema lista nome e descrição de todos os projetos. <br><br> <strong>A2. Ator seleciona o botão “Editar Projeto” em um projeto.</strong> <br> 1 - Sistema exibe tela com campos “Nome do projeto”, “Descrição”, “Número de desenvolvedores” e “tags” preenchidos como anteriormente para serem alterados. <br> 2 - Ator altera os campos e seleciona o botão de “Confirmar”. <br> 3 - Sistema atualiza os campos do projeto. <br><br> <strong>A3. Ator seleciona o botão “Excluir Projeto” em um projeto.</strong> <br> 1 - Sistema exclui o projeto do sistema. |
+| Extensões | N/A. |
+| Pós-Condições | Ator mantém projeto em seu perfil. |
+| Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
+
+### Caso 6: Escolher Desenvolvedor
+
+| 06 | Escolher Desenvolvedor |
+| --- | --- |
+| Nome | Escolher Desenvolvedor |
+| Objetivo | Escolher o(s) desenvolvedor(es) que participará/participarão do projeto. |
+| Ator | Empresa |
+| Pré-Condições | Projeto publicado possui candidaturas de desenvolvedores. |
+| Trigger | Ator clica no botão “Selecionar desenvolvedores” na aba do projeto. |
+| Fluxo Principal | 1 - Sistema exibe na tela uma lista com nome e descrição de todos os desenvolvedores que se candidataram ao projeto.[A1] <br> 2 - Ator clica no botão “Escolher Desenvolvedor” ao lado do desenvolvedor desejado. <br> 3 - Sistema exibe a opção “Confirmar Desenvolvedores” após o número de desenvolvedores para o projeto ser totalizado. <br> 4 - Ator clica no botão “Confirmar Desenvolvedores”. |
+| Fluxos Alternativos |  <strong>A1.  Projeto não possui candidaturas de desenvolvedores.</strong> <br> 1 - Sistema exibe a mensagem “Projeto não possui desenvolvedores candidatados, tente novamente mais tarde.” <br> 2- Voltar para o passo ? |
+| Extensões | N/A. |
+| Pós-Condições | Desenvolvedores para o projeto são confirmados. |
+| Regras de negócios | RN1 - Um desenvolvedor deve ter, no mínimo, 1 tag em comum com o projeto para poder se candidatar à ele. |
 
 ## Diagrama de Classes
 
