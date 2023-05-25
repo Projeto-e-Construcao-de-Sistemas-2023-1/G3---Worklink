@@ -42,8 +42,6 @@ class Desenvolvedor(Usuario.Usuario):
         # MUDAR A DATA_NASC DO CARA NO BD
         pass
     
-    def conectaBD():
-        
     #def candidataProjeto(self, projeto):
         # INSERIR NO BD O PROJETO QUE O CARA SE CANDIDATOU
     #    pass
