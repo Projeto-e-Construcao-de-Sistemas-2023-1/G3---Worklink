@@ -37,10 +37,11 @@ class Empresa(Usuario.Usuario):
     #def seguirDesenvolvedor(self, desenvolvedor):
     #    self.desenvolvedores_seguidos.append(desenvolvedor)
     
-    def pesquisarDesenvolvedores(self, tags):
-        # SELECT * FROM DEVS WHERE ?
-        pass
-        #return desenvolvedores_encontrados
+    def pesquisarDesenvolvedores(self):
+        self.cursor.execute(f'SELECT * FROM desenvolvedor') # Tenta achar o cara com essas credenciais
+        self.con.commit()
+        return str(self.cursor.fetchall())
+    
     
     #def inserirDinheiroCarteira(self, valor):
     #    self.saldo_carteira += valor
