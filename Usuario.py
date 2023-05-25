@@ -1,6 +1,10 @@
 import sqlite3
+import mysql.connector
+
+
 class Usuario:    
     def criaUsuario(self, email, telefone, agencia, conta, login, senha): # O id vai ser necessário no back-end e no BD?
+        
         print('usuario criado com sucesso!')
         pass
         # Fazer os inserts no BD
@@ -65,8 +69,22 @@ class Usuario:
         return resultado
         # MOSTRAR OS REGISTROS NA TELA DO FRONT END
     def conectaBD(self):
-        self.conexao = sqlite3.connect('banco-de-dados.sql')
-        self.cursor = self.conexao.cursor()
-        
+        con = mysql.connector.connect(
+        host='localhost',
+        database='worklink',
+        user='root',
+        password='pjSq2023@')
+
+        if con.is_connected():
+            db_info = con.get_server_info()
+            print("conectado ao servidor MYSQL versão", db_info)
+            cursor = con.cursor()
+            comando = 'SELECT * FROM usuario'
+            cursor.execute(comando)
+            resultado = cursor.fetchall()
+            print(resultado)
+            
+            cursor.close()
+            con.close()
 
 

@@ -7,13 +7,9 @@ from Usuario import Usuario
 app = Flask(__name__)
 def main():
     dev = Desenvolvedor()
-    empresa = Empresa()
-    dev.conectaBD()
-    empresa.conectaBD()
-    dev.criaDesenvolvedor()
     #home()
     #login(dev, empresa)
-
+    dev.conectaBD()
 @app.route('/')
 def home():
     return render_template('login.html')

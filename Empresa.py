@@ -1,4 +1,4 @@
-import Usuario, pymysql
+import Usuario
 class Empresa(Usuario.Usuario):
    
     def criaEmpresa(self, email, telefone, agencia, conta, login, senha, razao_social):
