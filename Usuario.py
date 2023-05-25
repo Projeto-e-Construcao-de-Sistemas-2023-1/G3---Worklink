@@ -1,33 +1,21 @@
 import sqlite3
-class Usuario:
-    def __init__(self) -> None:
-        self.id = 0
-        self.email = 'xxxx@gmail.com'
-        self.telefone = '123456789'
-        self.agencia = '1234'
-        self.conta = '123456'
-        self.senha = 'yyyy'
-    def criaUsuario(self, id, email, telefone, agencia, conta, login, senha): # O id vai ser necessário no back-end e no BD?
-        self.email = email
-        self.telefone = telefone
-        self.agencia = agencia
-        self.conta = conta
-        self.login = login
-        self.senha = senha
-        # Usar lib externa pra colocar esse usuario no BD
+class Usuario:    
+    def criaUsuario(self, email, telefone, agencia, conta, login, senha): # O id vai ser necessário no back-end e no BD?
+        print('usuario criado com sucesso!')
+        pass
+        # Fazer os inserts no BD
     def setEmail(self, email):
-        self.email = email
-        # Colocar novo email no BD
+        # Colocar novo email no BD -- UPDATE
+        pass
     def setTelefone(self, telefone):
-        self.telefone = telefone
-        # Colocar novo telefone no BD
+        # Colocar novo telefone no BD -- UPDATE
+        pass
     def setContaBancaria(self, agencia, conta):
-        self.agencia = agencia
-        self.conta = conta
-        # Colocar nova Agência e conta no BD
+        # Colocar nova Agência e conta no BD -- UPDATE
+        pass
     def setSenha(self, senha):
-        self.senha = senha 
-        # Colocar nova senha no BD
+        # Colocar nova senha no BD -- UPDATE
+        pass
     def editaUsuario(self, mudança):
         # perguntar ao usuario o que ele quer editar -> ver com pessoal do frontend
         mudança = mudança.lower()
@@ -48,21 +36,19 @@ class Usuario:
         else:
             self.editaUsuario()
     def deletaUsuario(self):
-        # Conversar com Julia em como faremos pra deletar do banco de dados o objeto dessa classe.
+        # Deletar usuário do BD.
         pass
     def iniciaSessao(self, login, senha):
         global sessao_ativa
-        conexao = sqlite3.connect('nossoBD.db')
-        cursor = conexao.cursor()
         consulta = 'SELECT * FROM desenvolvedor WHERE login = ? AND password = ?'
-        cursor.execute(consulta, login, senha)
-        if cursor.fetchone():
-            conexao.close()
+        self.cursor.execute(consulta, login, senha)
+        if self.cursor.fetchone():
+            self.conexao.close()
             sessao_ativa = True # Apto para rodar o site do usuário FALAR COM JHONNY
             return True # Logado com sucesso 
             
         else:
-            conexao.close()
+            self.conexao.close()
             sessao_ativa = False
             return False # Credenciais inválidas
         
@@ -78,7 +64,9 @@ class Usuario:
         resultado = cursor.fetchall()
         return resultado
         # MOSTRAR OS REGISTROS NA TELA DO FRONT END
-    
+    def conectaBD(self):
+        self.conexao = sqlite3.connect('banco-de-dados.sql')
+        self.cursor = self.conexao.cursor()
         
 
 
