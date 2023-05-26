@@ -1,23 +1,14 @@
-
-CREATE TABLE USUARIO (
-                cod_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                telefone VARCHAR(14) NOT NULL,
+CREATE TABLE DESENVOLVEDOR (
+				telefone VARCHAR(14) NOT NULL,
                 email VARCHAR(50) NOT NULL,
                 conta_bancaria VARCHAR(11) NOT NULL,
-                senha VARCHAR(50) NOT NULL
-                
-);
-
-
-CREATE TABLE DESENVOLVEDOR (
-				cod_usuario INT,
-				FOREIGN KEY (cod_usuario) REFERENCES USUARIO(cod_usuario),
-                CPF CHAR(11) NOT NULL,
-                nome VARCHAR(20) NOT NULL,
-                sobrenome VARCHAR(30) NOT NULL,
-                genero VARCHAR(12) NOT NULL,
-                data_nascimento DATE NOT NULL,
-                habilidade VARCHAR(50) NOT NULL,
+                senha VARCHAR(50) NOT NULL,
+                CPF CHAR(11),
+                nome VARCHAR(20),
+                sobrenome VARCHAR(30),
+                genero VARCHAR(12),
+                data_nascimento VARCHAR(20),
+                habilidade VARCHAR(50),
                 experiencia VARCHAR(300),
                 status_desenvolvedor BIT(1),
                 tag_desenvolvedor VARCHAR(30) 
@@ -25,20 +16,20 @@ CREATE TABLE DESENVOLVEDOR (
 );
 
 CREATE TABLE EMPRESA (
-                cod_usuario INT,
-				FOREIGN KEY (cod_usuario) REFERENCES USUARIO(cod_usuario),
-                CNPJ CHAR(18) NOT NULL,
-                razao_social VARCHAR(20) NOT NULL,
-                area_negocio VARCHAR(20) NOT NULL
+				telefone VARCHAR(14) NOT NULL,
+                email VARCHAR(50) NOT NULL,
+                conta_bancaria VARCHAR(11) NOT NULL,
+                senha VARCHAR(50) NOT NULL,
+                CNPJ CHAR(18),
+                razao_social VARCHAR(20),
+                area_negocio VARCHAR(20)
 );
 
 
 CREATE TABLE CARTEIRA_DIGITAL (
                 cod_carteira INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                cod_usuario INT,
-				saldo DECIMAL(10, 2),
-				FOREIGN KEY (cod_usuario) REFERENCES USUARIO(cod_usuario)
-                
+				saldo DECIMAL(10, 2)
+				
 );
 
 
@@ -58,8 +49,6 @@ CREATE TABLE CARTEIRA_EMPRESA (
 
 
 CREATE TABLE PROJETO (
-                cod_usuario INT,
-				FOREIGN KEY (cod_usuario) REFERENCES USUARIO(cod_usuario),
                 especificacao VARCHAR(50) NOT NULL,
                 valor_orcamento DECIMAL(10, 2) NOT NULL,
                 prazo DATE,
@@ -67,4 +56,3 @@ CREATE TABLE PROJETO (
                 status_projeto VARCHAR(50) NOT NULL,
                 tag_projeto VARCHAR(30) NOT NULL
 );
-carteira_desenvolvedor
