@@ -8,7 +8,7 @@ app = Flask(__name__)
 def main():
     dev = Desenvolvedor()
     dev.conectaBD()
-    dev.criaDesenvolvedor('x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x')
+
 @app.route('/')
 def home():
     return render_template('login.html')
