@@ -4,19 +4,22 @@ from Empresa import Empresa
 from flask import Flask, render_template, redirect, request
 from Usuario import Usuario
 
+emp = Empresa()
+dev = Desenvolvedor()
+dev.conectaBD()
 app = Flask(__name__)
-def main():
-    dev = Desenvolvedor()
-    dev.conectaBD()
-
 @app.route('/')
 def home():
     return render_template('login.html')
 
 @app.route('/login', methods=['POST'])
-def login(dev, empresa):
+def login():
     email = request.form.get('email')
     password = request.form.get('password')
+    # SE FOR INICIAR SESSAO COMO DESENVOLVEDOR
+    dev.iniciaSessao(email, password)
+    # SE FOR INICIAR SESSAO COMO EMPRESA
+    emp.iniciaSessao(email, password)
     if dev.iniciaSessao(email, password) == True:
         # Avançar de página
         print('Passei!')
@@ -26,6 +29,3 @@ def login(dev, empresa):
         # Printar erro
         pass
     return redirect('/')
-
-if(__name__) == '__main__':
-    main()
