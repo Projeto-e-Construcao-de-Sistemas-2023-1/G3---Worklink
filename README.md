@@ -109,8 +109,8 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Ator | Usuário |
 | Pré-Condições | Ator com cadastro |
 | Trigger | Ator entra no endpoint de sessão do sistema |
-| Fluxo Principal | 1 - Sistema exibe na tela os campos “Entrar como Desenvolvedor” e “Entrar como Empresa”. <br> 2 - Ator seleciona a opção desejada. [A1] |
-| Fluxos Alternativos |  <strong>A1. Ator seleciona a opção “Entrar como Desenvolvedor”.</strong> <br> 1 - Sistema exibe os campos "Email" e "Senha" para serem preenchidos. <br> 2 - Ator preenche os campos e seleciona a opção "Entrar". <br> 3 - Sistema checar se o ator tem cadastro, realiza autenticação e permite acesso. |
+| Fluxo Principal | 1 - Sistema exibe na tela os campos “Entrar como Desenvolvedor” e “Entrar como Empresa”. <br> 2 - Ator seleciona a opção desejada. <br> 3 - Sistema exibe os campos "Email" e "Senha" para serem preenchidos. <br> 4 - Ator preenche os campos e seleciona a opção "Entrar". <br> 5 - Sistema checar se o ator tem cadastro, realiza autenticação e permite acesso. |
+| Fluxos Alternativos |  N/A |
 | Extensões | N/A. |
 | Pós-Condições | Ator autenticado. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
