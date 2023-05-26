@@ -93,9 +93,9 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Objetivo | Manter usuário no sistema |
 | Ator | Usuário |
 | Pré-Condições | Ator sem cadastro |
-| Trigger | Ator entra no endpoint de login do sistema |
+| Trigger | Ator entra no endpoint de sessão do sistema |
 | Fluxo Principal | 1 - Sistema exibe na tela as opções “Registre-se como Desenvolvedor” e “Registre-se como Empresa”. <br> 2 - Ator seleciona a opção desejada [A1][A2] |
-| Fluxos Alternativos | <strong>A1. Ator seleciona a opção “Desenvolvedor”.</strong> <br> 1 - Sistema exibe os campos “Nome”, “CPF”, “Telefone”, “Data de nascimento”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - Ator preenche os dados e clica em “Cadastrar”. <br> 3 - Sistema registra o cadastro do ator como desenvolvedor. <br><br> <strong>A2. Ator seleciona a opção “Empresa”.</strong> <br> 1 - Sistema exibe os campos “Razão Social”, “CNPJ”, “Telefone”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - Ator preenche os dados e clica em “Cadastrar”. <br> 3 - Sistema registra o cadastro do ator como empresa. <br><br> <strong>A3. Ator seleciona a opção “Perfil” na tela de usuário.</strong> <br> 1 - Sistema exibe a foto e os campos “Nome”, “Email”, “Telefone”, “Descrição”,  “Tags”, além dos projetos do ator, na tela. <br><br> <strong>A4. Ator seleciona a opção “Editar Perfil” em seu perfil.</strong> <br> 1 - Sistema exibe na tela a foto do ator e os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Tags” preenchidos como anteriormente para serem alterados. <br> 2 - Ator altera os campos e seleciona o botão de “Confirmar”. <br> 3 - Sistema atualiza os campos do ator. <br><br> <strong>A5. Ator seleciona a opção “Deletar conta” em seu perfil.</strong> <br> 1 - Sistema deleta a conta do ator. |
+| Fluxos Alternativos | <strong>A1. Ator seleciona a opção “Registre-se como Desenvolvedor”.</strong> <br> 1 - Sistema exibe os campos “Nome”, “CPF”, “Telefone”, “Data de nascimento”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - Ator preenche os dados e clica em “Cadastrar”. <br> 3 - Sistema registra o cadastro do ator como desenvolvedor. <br><br> <strong>A2. Ator seleciona a opção “Registre-se como Empresa”.</strong> <br> 1 - Sistema exibe os campos “Razão Social”, “CNPJ”, “Telefone”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - Ator preenche os dados e clica em “Cadastrar”. <br> 3 - Sistema registra o cadastro do ator como empresa. <br><br> <strong>A3. Ator seleciona a opção “Perfil” na tela de usuário.</strong> <br> 1 - Sistema exibe a foto e os campos “Nome”, “Email”, “Telefone”, “Descrição”,  “Tags”, além dos projetos do ator, na tela. <br><br> <strong>A4. Ator seleciona a opção “Editar Perfil” em seu perfil.</strong> <br> 1 - Sistema exibe na tela a foto do ator e os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Tags” preenchidos como anteriormente para serem alterados. <br> 2 - Ator altera os campos e seleciona o botão de “Confirmar”. <br> 3 - Sistema atualiza os campos do ator. <br><br> <strong>A5. Ator seleciona a opção “Deletar conta” em seu perfil.</strong> <br> 1 - Sistema deleta a conta do ator. |
 | Extensões | N/A. |
 | Pós-Condições | Ator é cadastrado no sistema com sucesso. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
@@ -108,9 +108,9 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Objetivo | Iniciar sessão do usuário |
 | Ator | Usuário |
 | Pré-Condições | Ator com cadastro |
-| Trigger | Ator seleciona a opção de login. |
-| Fluxo Principal | 1 - Sistema exibe na tela os campos “Email” e “Senha”. <br> 2 - Ator preenche os campos e seleciona a opção “Entrar”. <br> Sistema checa se o ator tem cadastro, realiza autenticação e permite acesso. [A1][A2] |
-| Fluxos Alternativos |  <strong>A1. Sistema não consegue validar o email.</strong> <br> 1 - Sistema exibe a mensagem de email não cadastrado. <br> 2- Voltar para o passo 2. <br><br> <strong>A2. Sistema não consegue validar a senha.</strong> <br> 1 - Sistema exibe a mensagem de senha inválida. <br> 2- Voltar para o passo 2. |
+| Trigger | Ator entra no endpoint de sessão do sistema |
+| Fluxo Principal | 1 - Sistema exibe na tela os campos “Entrar como Desenvolvedor” e “Entrar como Empresa”. <br> 2 - Ator seleciona a opção desejada. [A1] |
+| Fluxos Alternativos |  <strong>A1. Ator seleciona a opção “Entrar como Desenvolvedor”.</strong> <br> 1 - Sistema exibe os campos "Email" e "Senha" para serem preenchidos. <br> 2 - Ator preenche os campos e seleciona a opção "Entrar". <br> 3 - Sistema checar se o ator tem cadastro, realiza autenticação e permite acesso. |
 | Extensões | N/A. |
 | Pós-Condições | Ator autenticado. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
