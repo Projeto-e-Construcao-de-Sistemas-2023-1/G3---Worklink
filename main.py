@@ -1,7 +1,7 @@
 # Arquivo main para testes de funcionalidades das classes e do BD
 from Desenvolvedor import Desenvolvedor
 from Empresa import Empresa
-from flask import Flask, render_template, redirect, request, requests, abort
+from flask import Flask, render_template, redirect, request, requests, abort, url_for
 from Usuario import Usuario
 
 emp = Empresa()
@@ -10,7 +10,6 @@ dev.conectaBD()
 dev.criaDesenvolvedor('dev@email.com', '21989212222', '123456789', '12345', 'desenvolvedor', 'pleno', 'nb', 'java',
                       '12345678900', '12/12/1995')
 app = Flask(__name__)
-
 
 @app.route('/')
 def home():
@@ -67,5 +66,5 @@ def sign_in_user():
 
 
 SITE_KEY = "6LeKBj8mAAAAAA3jCMVID2PjUUYmIM1TYOIKf3Ei"
-SECRET_KEY: = "6LeKBj8mAAAAAAIsJpHljREaS2EPF8y5uw2frJHA"
+SECRET_KEY = "6LeKBj8mAAAAAAIsJpHljREaS2EPF8y5uw2frJHA"
 VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify"
