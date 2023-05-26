@@ -1,5 +1,5 @@
 CREATE TABLE DESENVOLVEDOR (
-				telefone VARCHAR(14) NOT NULL,
+		telefone VARCHAR(14) NOT NULL,
                 email VARCHAR(50) NOT NULL,
                 conta_bancaria VARCHAR(11) NOT NULL,
                 senha VARCHAR(50) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE DESENVOLVEDOR (
 );
 
 CREATE TABLE EMPRESA (
-				telefone VARCHAR(14) NOT NULL,
+		telefone VARCHAR(14) NOT NULL,
                 email VARCHAR(50) NOT NULL,
                 conta_bancaria VARCHAR(11) NOT NULL,
                 senha VARCHAR(50) NOT NULL,
@@ -28,23 +28,23 @@ CREATE TABLE EMPRESA (
 
 CREATE TABLE CARTEIRA_DIGITAL (
                 cod_carteira INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				saldo DECIMAL(10, 2)
+		saldo DECIMAL(10, 2)
 				
 );
 
 
 CREATE TABLE CARTEIRA_DESENVOLVEDOR (
-				id_carteira_dev INT AUTO_INCREMENT PRIMARY KEY,
+		id_carteira_dev INT AUTO_INCREMENT PRIMARY KEY,
                 cod_carteira INT,
-				FOREIGN KEY (cod_carteira) REFERENCES CARTEIRA_DIGITAL(cod_carteira)
+		FOREIGN KEY (cod_carteira) REFERENCES CARTEIRA_DIGITAL(cod_carteira)
 );
 
 
 
 CREATE TABLE CARTEIRA_EMPRESA (
-				id_carteira_emp INT AUTO_INCREMENT PRIMARY KEY,
-				cod_carteira INT,
-				FOREIGN KEY (cod_carteira) REFERENCES CARTEIRA_DIGITAL(cod_carteira)
+		id_carteira_emp INT AUTO_INCREMENT PRIMARY KEY,
+		cod_carteira INT,
+		FOREIGN KEY (cod_carteira) REFERENCES CARTEIRA_DIGITAL(cod_carteira)
 );
 
 
