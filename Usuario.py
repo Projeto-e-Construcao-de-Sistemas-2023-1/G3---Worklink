@@ -87,4 +87,6 @@ class Usuario:
         password='pjSq2023@') # BD acessado!!!
         if self.con.is_connected():
             self.cursor = self.con.cursor()
-
+            inserir = """INSERT INTO usuario (cod_usuario, telefone, email, conta_bancaria, senha) VALUES (1, '21999999999', 'TESTE@email.com', '123456789', '12345)  """
+            self.cursor.execute(inserir)
+            self.con.commit()
