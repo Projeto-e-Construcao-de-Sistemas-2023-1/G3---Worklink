@@ -1,7 +1,7 @@
 # Arquivo main para testes de funcionalidades das classes e do BD
 from Desenvolvedor import Desenvolvedor
 from Empresa import Empresa
-from flask import Flask, render_template, redirect, request, abort
+from flask import Flask, render_template, redirect, request, requests, abort
 from Usuario import Usuario
 
 emp = Empresa()
