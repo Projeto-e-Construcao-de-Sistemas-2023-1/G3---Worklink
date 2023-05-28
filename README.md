@@ -52,7 +52,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | RN1 | Um desenvolvedor deve ter, no mínimo, 1 tag em comum com o projeto para poder se candidatar à ele. |
 | RN2 | Usuário só pode acessar o sistema mediante cadastro. |
 | RN3 | Uma empresa só poderá contratar desenvolvedores se possuir um valor na carteira maior ou igual ao valor a ser pago pelo projeto. |
-| RN4 | (Se uma empresa excluir um projeto durante seu desenvolvimento, o que acontece com o pagamento? Ela deve pagar totalmente os desenvolvedores?) |
+| RN4 | Uma vez que o status do Projeto for “Em desenvolvimento”, a empresa não poderá deletar o projeto. |
 
 ## Casos de Uso
 
@@ -185,3 +185,8 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | --- | --- |
 | reCAPTCHA | Verifica se o usuário que está iniciando sessão é um humano. |
 | Google Calendar API | API de Calendário para visualizar datas e marcar reuniões. |
+ 
+## Slides e Entregas
+ 
+Entrega Final 1: 
+<br>Entrega Final 2: https://github.com/Projeto-e-Construcao-de-Sistemas-2023-1/G3---Worklink/blob/main/Documentos/PCS-ENTREGA-FINAL-2.pdf  
