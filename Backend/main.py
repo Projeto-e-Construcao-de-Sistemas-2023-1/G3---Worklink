@@ -2,7 +2,6 @@
 from Desenvolvedor import Desenvolvedor
 from Empresa import Empresa
 from flask import Flask, render_template, redirect, request, requests, abort, url_for
-from Usuario import Usuario
 
 emp = Empresa()
 dev = Desenvolvedor()
