@@ -1,7 +1,8 @@
 # Arquivo main para testes de funcionalidades das classes e do BD
 from Desenvolvedor import Desenvolvedor
 from Empresa import Empresa
-from flask import Flask, render_template, redirect, request, requests, abort, url_for
+from flask import Flask, render_template, redirect, request, abort, url_for
+import requests
 
 emp = Empresa()
 dev = Desenvolvedor()
@@ -17,18 +18,9 @@ def home():
 
 @app.route('/loginDesenvolvedor', methods=['POST'])
 def logindev():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    if dev.iniciaSessao(email, password) == True:
-        return render_template('feed.html')
-        # Avançar de página
-        print('Passei!')
-        pass
-    else:
-        print('Erro')
-        return render_template('index.html')  # criar pagina de erro com para nova tentativa
-        # Printar erro
-        pass
+    secret_response = request.form['g-recaptcha-response']
+    verify_response = requests.post(url=f'{VERIFY_URL}?secret={SECRET_KEY}&response={secret_response}')
+    print(verify_response)
 
 
 @app.route('/loginempresa', methods=['POST'])
