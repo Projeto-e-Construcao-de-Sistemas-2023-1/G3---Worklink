@@ -7,7 +7,7 @@ class Desenvolvedor(Usuario.Usuario):
 
     def getNome(self):
         self.cursor.execute(f'SELECT nome FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
+        self.con.commit() 
         return str(self.cursor.fetchall())
     
     def getGenero(self):
