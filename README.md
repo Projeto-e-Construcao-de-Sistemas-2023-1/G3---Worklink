@@ -43,7 +43,8 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | ID | Tipo |Descrição |
 | --- | --- | --- |
 | RNF1 | Segurança | O sistema deve ter um reCAPTCHA no login de usuário. |
-| RNF2 | Compatibilidade | O sistema deve ser compatível com as versões atualizadas do Google Chrome.  |
+| RNF2 | Compatibilidade | O sistema deve ser compatível com as versões atualizadas do Google Chrome. |
+| RNF3 | Compatibilidade | Verificação de CPF/CEP.  |
 
 ## Regras de Negócio
 
@@ -127,10 +128,10 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pré-Condições | O ator está com sessão em andamento |
 | Trigger | O ator seleciona a opção “Editar Perfil” em sua tela de usuário. |
 | Fluxo Principal | 1 - O sistema exibe na tela os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Tags” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do ator. |
-| Fluxos Alternativos | N/A |
+| Fluxos Alternativos | <strong>A1. Dados inválidos</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
 | Pós-Condições | Os dados do ator são alterados. |
-| Regras de negócios | N/A |
+| Regras de negócios | RN5 - O usuário não pode alterar CPF ou CNPJ. |
 
 ### Caso 1.4: Desativar Desenvolvedor
 
@@ -141,15 +142,75 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Ator | Desenvolvedor |
 | Pré-Condições | O ator possui cadastro |
 | Trigger | O ator seleciona a opção “Excluir conta” em sua tela de usuário. |
-| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 - O ator confirma a desativação de conta. [A1] <br> 3 - O sistema verifica possíveis pendências e exclui a conta. [A2] |
-| Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Não” na pergunta de deleção de conta.</strong> <br> 1 - O ator não confirma a desativação. <br> 2 - Voltar para o passo 1. <br><br ><strong>O ator tem alguma pendência no sistema.</strong> <br> 1 - O sistema exibe mensagem informando que a conta não pode ser desativada. <br> 2 - Voltar para o passo 1. |
+| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 - O ator confirma a desativação de conta. [A1] <br> 3 - O sistema verifica possíveis pendências e desativa a conta. [A2] |
+| Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Não” na pergunta de deleção de conta.</strong> <br> 1 - O ator não confirma a desativação. <br> 2 - Voltar para o passo 1. <br><br ><strong>2 - O ator tem alguma pendência no sistema.</strong> <br> 1 - O sistema exibe mensagem informando que a conta não pode ser desativada. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
 | Pós-Condições | A conta do ator é desativada. |
 | Regras de negócios | N/A |
 
-### Caso 2: Iniciar Sessão
+### Caso 2.1: Cadastrar Empresa
 
-| 02 | Iniciar Sessão |
+| 01 | Cadastrar Empresa |
+| --- | --- |
+| Nome | Cadastrar Empresa |
+| Objetivo | Cadastrar nova empresa no sistema |
+| Ator | Empresa |
+| Pré-Condições | O ator não possui cadastro |
+| Trigger | O ator seleciona a opção “Registre-se como Empresa” na tela de sessão. |
+| Fluxo Principal | 1 - O sistema exibe os campos “Razão Social”, “CNPJ”, “Telefone”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - O ator preenche os dados e clica em “Cadastrar”. [A1] <br> 3 -O sistema registra o cadastro do ator como empresa. |
+| Fluxos Alternativos | <strong>A1. Dados inválidos</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Extensões | N/A. |
+| Pós-Condições | O ator é cadastrado no sistema com sucesso. |
+| Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
+
+### Caso 2.2: Visualizar Empresa
+
+| 01 | Visualizar  Empresa |
+| --- | --- |
+| Nome | Visualizar Empresa |
+| Objetivo | Mostrar dados da empresa |
+| Ator | Empresa |
+| Pré-Condições | O ator está com sessão em andamento |
+| Trigger | O ator seleciona a opção “Perfil” em sua tela de usuário. |
+| Fluxo Principal | 1 - O sistema exibe os campos “Razão Social”, “Email”, “Telefone”, “Descrição”, além dos projetos do ator, na tela. |
+| Fluxos Alternativos | N/A |
+| Extensões | N/A. |
+| Pós-Condições | Os dados do ator são exibidos na tela. |
+| Regras de negócios | N/A |
+
+### Caso 2.3: Editar Empresa
+
+| 01 | Editar Empresa |
+| --- | --- |
+| Nome | Editar Empresa |
+| Objetivo | Editar dados da empresa |
+| Ator | Empresa |
+| Pré-Condições | O ator está com sessão em andamento |
+| Trigger | O ator seleciona a opção “Editar Perfil” em sua tela de usuário. |
+| Fluxo Principal | 1 - O sistema exibe na tela os campos “Razão Social”, “Telefone”, “Email”, “Senha” e "Confirmar Senha” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do ator. |
+| Fluxos Alternativos | <strong>A1. Dados inválidos</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Extensões | N/A. |
+| Pós-Condições | Os dados do ator são alterados. |
+| Regras de negócios | RN5 - O usuário não pode alterar CPF ou CNPJ. |
+
+### Caso 2.4: Desativar Empresa
+
+| 01 | Desativar Empresa |
+| --- | --- |
+| Nome | Desativar Empresa |
+| Objetivo | Desativar conta da empresa |
+| Ator | Empresa |
+| Pré-Condições | O ator possui cadastro |
+| Trigger | O ator seleciona a opção “Excluir conta” em sua tela de usuário. |
+| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 - O ator confirma a desativação de conta. [A1] <br> 3 - O sistema verifica possíveis pendências e desativa a conta. [A2] |
+| Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Não” na pergunta de deleção de conta.</strong> <br> 1 - O ator não confirma a desativação. <br> 2 - Voltar para o passo 1. <br><br> <strong> 2 - O ator tem alguma pendência no sistema.</strong> <br> 1 - O sistema exibe mensagem informando que a conta não pode ser desativada. <br> 2 - Voltar para o passo 1. |
+| Extensões | N/A. |
+| Pós-Condições | A conta do ator é desativada. |
+| Regras de negócios | N/A |
+
+### Caso 3: Iniciar Sessão
+
+| 03 | Iniciar Sessão |
 | --- | --- |
 | Nome | Iniciar Sessão |
 | Objetivo | Iniciar sessão do usuário |
@@ -162,9 +223,9 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pós-Condições | Ator autenticado. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
 
-### Caso 3: Encerrar Sessão
+### Caso 4: Encerrar Sessão
 
-| 03 | Encerrar Sessão |
+| 04 | Encerrar Sessão |
 | --- | --- |
 | Nome | Encerrar Sessão |
 | Objetivo | Encerrar sessão do usuário |
@@ -177,9 +238,9 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pós-Condições | Ator na tela de login. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
 
-### Caso 4: Marcar Reunião
+### Caso 5: Marcar Reunião
 
-| 04 | Marcar Reunião |
+| 05 | Marcar Reunião |
 | --- | --- |
 | Nome | Marcar Reunião |
 | Objetivo | Desenvolvedor e empresa se reunirem para comunicação |?
@@ -192,24 +253,69 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pós-Condições | Ator recebe notificação da reunião. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
 
-### Caso 5: Manter Projeto
+### Caso 6.1: Criar Projeto
 
-| 05 | Manter Projeto |
+| 01 | Criar Projeto |
 | --- | --- |
-| Nome | Manter Projeto |
-| Objetivo | Manter projetos feitos pela empresa |
+| Nome | Criar Projeto |
+| Objetivo | Criar um novo projeto da empresa |
 | Ator | Empresa |
-| Pré-Condições | Ator precisa estar com sessão em andamento |
-| Trigger | Ator seleciona a opção “Meus Projetos” em sua tela de usuário |
-| Fluxo Principal | 1 - Sistema exibe uma tela com os nomes dos projetos da Empresa, um botão de “Visualizar Projeto” ao lado de cada projeto junto com um botão de “Excluir Projeto”, e um único botão separado de “Criar Novo Projeto”. <br> 2 - Ator seleciona a opção desejada.[A1][A2][A3][A4] <br> |
-| Fluxos Alternativos | <strong>A1.Ator seleciona o botão “Criar Novo Projeto” em sua tela de usuário.</strong> <br> 1 - Sistema exibe a tela com campos “Nome do projeto”, “Descrição”, “Número de desenvolvedores” e “tags” para serem preenchidos. <br> 2 - Usuário preenche os campos e clica na opção “Publicar Projeto”. <br> 3 - Sistema cria e publica o novo projeto da empresa. <br> 4 - Voltar para o passo 1. <br><br> <strong>A2. Ator seleciona o botão “Visualizar projeto” em um projeto na sua tela de usuário.</strong> <br> 1 - Sistema exibe os detalhes do projeto desejado, como nome, descrição, tags e desenvolvedores. <br> 2 - Voltar para o passo 1. <br><br> <strong>A3. Ator seleciona o botão “Editar Projeto” em um projeto.</strong> <br> 1 -Sistema exibe tela com campos “Nome do projeto”, “Descrição”, “Número de desenvolvedores” e “tags” preenchidos como anteriormente para serem alterados. <br> 2 - Ator altera os campos e seleciona o botão de “Confirmar”. <br> 3 - Sistema atualiza os campos do projeto. <br> 4 - Voltar para o passo 1. <br><br> <strong>A4. Ator seleciona o botão “Excluir Projeto” em um projeto. <br> 1 - Sistema exibe um pop-up perguntando se o ator deseja realmente deletar o projeto do sistema, com as opções “Sim” ou “Não”. [A5][A6] <br><br> <strong>A5. Ator seleciona a opção “Sim” na pergunta de deleção de projeto. <br> 1 - Sistema deleta o projeto do ator do banco de dados. <br> 2 - Voltar para o passo 1. <br><br>  <strong>A6. Ator seleciona a opção “Não” na pergunta de deleção de projeto. <br> 1 - Voltar para o passo 1. |
+| Pré-Condições | O ator está com sessão em andamento |
+| Trigger | O ator seleciona o botão “Criar Novo Projeto” em sua tela de usuário |
+| Fluxo Principal | 1 - O sistema exibe a tela com campos “Nome do Projeto”, “Descrição”, “Número de desenvolvedores” e “Tags” para serem preenchidos. <br> 2 - O ator preenche os campos e clica na opção “Publicar Projeto”. [A1] <br> 3 - O sistema cria e publica o novo projeto da empresa. |
+| Fluxos Alternativos | <strong>A1. Campos “Nome do Projeto”, “Número de Desenvolvedores” ou “Tags” estão vazios</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
-| Pós-Condições | Ator mantém projeto em seu perfil. |
+| Pós-Condições | O ator cria um novo projeto em seu perfil. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
 
-### Caso 6: Escolher Desenvolvedor
+### Caso 6.2: Visualizar Projeto
 
-| 06 | Escolher Desenvolvedor |
+| 01 | Visualizar  Projeto |
+| --- | --- |
+| Nome | Visualizar Projeto |
+| Objetivo | Visualizar detalhes de um projeto feito pela empresa |
+| Ator | Empresa |
+| Pré-Condições | O ator está com sessão em andamento |
+| Trigger | O ator seleciona a opção “Ver mais” em um projeto |
+| Fluxo Principal | 1 - O sistema exibe os detalhes do projeto desejado, como nome, descrição, tags e desenvolvedores. |
+| Fluxos Alternativos | N/A |
+| Extensões | N/A. |
+| Pós-Condições | O ator visualiza detalhes do projeto. |
+| Regras de negócios | N/A |
+
+### Caso 1.3: Editar Projeto
+
+| 01 | Editar Projeto |
+| --- | --- |
+| Nome | Editar Projeto |
+| Objetivo | Editar dados do projeto da empresa |
+| Ator | Empresa |
+| Pré-Condições | O ator está com sessão em andamento |
+| Trigger | O ator seleciona o botão “Editar Projeto” em um projeto |
+| Fluxo Principal | 1 - O sistema exibe tela com campos “Nome do projeto”, “Descrição”, “Número de desenvolvedores” e “Tags” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do projeto. |
+| Fluxos Alternativos | <strong>A1. Campos “Nome do Projeto”, “Número de Desenvolvedores” ou “Tags” estão vazios</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Extensões | N/A. |
+| Pós-Condições | Os dados do projeto do ator são alterados. |
+| Regras de negócios | N/A |
+
+### Caso 1.4: Desativar Projeto
+
+| 01 | Desativar Projeto |
+| --- | --- |
+| Nome | Desativar Projeto |
+| Objetivo | Desativar projeto da empresa |
+| Ator | Empresa |
+| Pré-Condições | O ator possui um projeto criado |
+| Trigger | O ator seleciona o botão “Excluir Projeto” em um projeto. |
+| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 -O ator confirma a desativação do projeto. [A1] <br> 3 - O sistema verifica possíveis pendências e desativa o projeto. [A2] |
+| Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Não” na pergunta de deleção de conta.</strong> <br> 1 - O ator não confirma a desativação. <br> 2 - Voltar para o passo 1. <br><br ><strong>2 - Status do Projeto é “Em desenvolvimento”.</strong> <br> 1 - O sistema exibe mensagem informando que o projeto não pode ser desativado. <br> 2 - Voltar para o passo 1. |
+| Extensões | N/A. |
+| Pós-Condições | O ator desativa o projeto de seu perfil. |
+| Regras de negócios | N/A |
+
+### Caso 7: Escolher Desenvolvedor
+
+| 07 | Escolher Desenvolvedor |
 | --- | --- |
 | Nome | Escolher Desenvolvedor |
 | Objetivo | Escolher o(s) desenvolvedor(es) que participará/participarão do projeto. |
@@ -235,5 +341,5 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
  
 ## Slides e Entregas
  
-Entrega Final 1: 
+Entrega Final 1: https://github.com/Projeto-e-Construcao-de-Sistemas-2023-1/G3---Worklink/blob/main/Documentos/PCS%20ENTREGA%20FINAL.pdf
 <br>Entrega Final 2: https://github.com/Projeto-e-Construcao-de-Sistemas-2023-1/G3---Worklink/blob/main/Documentos/PCS-ENTREGA-FINAL-2.pdf  
