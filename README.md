@@ -53,31 +53,33 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | RN2 | Usuário só pode acessar o sistema mediante cadastro. |
 | RN3 | Uma empresa só poderá contratar desenvolvedores se possuir um valor na carteira maior ou igual ao valor a ser pago pelo projeto. |
 | RN4 | Uma vez que o status do Projeto for “Em desenvolvimento”, a empresa não poderá deletar o projeto. |
+| RN5 | O usuário não pode alterar CPF ou CNPJ.  |
 
 ## Casos de Uso
 
 | ID | Nome |
 | --- | --- |
-| CDU01 | Manter usuário. |
-| CDU02 | Iniciar sessão. |
-| CDU03 | Realizar reCAPTCHA. |
-| CDU04 | Pesquisar usuário. |
-| CDU05 | Navegar por calendário. |
-| CDU06 | Marcar reunião. |
-| CDU07 | Encerrar sessão. |
-| CDU08 | Seguir usuário. |
-| CDU09 | Candidatar-se a um projeto. |
-| CDU10 | Definir Tags. |
-| CDU11 | Filtrar feed. |
-| CDU12 | Sacar dinheiro. |
-| CDU13 | Cancelar candidatura. |
-| CDU14 | Manter projeto. |
-| CDU15 | Escolher desenvolvedor. |
-| CDU16 | Encerrar inscrições. |
-| CDU17 | Inserir dinheiro na carteira virtual. |
-| CDU18 | Realizar transação. |
-| CDU19 | Completar descrição. |
-| CDU20 | Redefinir senha. |
+| CDU01 | Manter Desenvolvedor. |
+| CDU02 | Manter Empresa. |
+| CDU03 | Iniciar sessão. |
+| CDU04 | Realizar reCAPTCHA. |
+| CDU05 | Pesquisar usuário. |
+| CDU06 | Navegar por calendário. |
+| CDU07 | Marcar reunião. |
+| CDU08 | Encerrar sessão. |
+| CDU09 | Seguir usuário. |
+| CDU10 | Candidatar-se a um projeto. |
+| CDU11 | Definir Tags. |
+| CDU12 | Filtrar feed. |
+| CDU13 | Sacar dinheiro. |
+| CDU14 | Cancelar candidatura. |
+| CDU15 | Manter projeto. |
+| CDU16 | Escolher desenvolvedor. |
+| CDU17 | Encerrar inscrições. |
+| CDU18 | Inserir dinheiro na carteira virtual. |
+| CDU19 | Realizar transação. |
+| CDU20 | Completar descrição. |
+| CDU21 | Redefinir senha. |
 
 ## Diagrama de Casos de Uso
 
@@ -85,20 +87,65 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ## Descrições de Casos de Uso
 
-### Caso 1: Manter Usuário
+### Caso 1.1: Cadastrar Desenvolvedor
 
-| 01 | Manter Usuário |
+| 01 | Cadastrar Desenvolvedor |
 | --- | --- |
-| Nome | Manter usuário |
-| Objetivo | Manter usuário no sistema |
-| Ator | Usuário |
-| Pré-Condições | Ator sem cadastro |
-| Trigger | Ator entra no endpoint de sessão do sistema |
-| Fluxo Principal | 1 - Sistema exibe na tela as opções “Registre-se como Desenvolvedor” e “Registre-se como Empresa”. <br> 2 - Ator seleciona a opção desejada [A1][A2] |
-| Fluxos Alternativos | <strong>A1. Ator seleciona a opção “Registre-se como Desenvolvedor”.</strong> <br> 1 - Sistema exibe os campos “Nome”, “CPF”, “Telefone”, “Data de nascimento”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - Ator preenche os dados e clica em “Cadastrar”. <br> 3 - Sistema registra o cadastro do ator como desenvolvedor. <br> 4 - Voltar para o passo 1. <br><br> <strong>A2. Ator seleciona a opção “Registre-se como Empresa”.</strong> <br> 1 - Sistema exibe os campos “Razão Social”, “CNPJ”, “Telefone”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - Ator preenche os dados e clica em “Cadastrar”. <br> 3 - Sistema registra o cadastro do ator como empresa. <br> 4 - Voltar para o passo 1. <br><br> <strong>A3. Ator seleciona a opção “Perfil” na tela de usuário.</strong> <br> 1 - Sistema exibe a foto e os campos “Nome”, “Email”, “Telefone”, “Descrição”,  “Tags”, além dos projetos do ator, na tela. <br> 2. Voltar para o passo 1. <br><br> <strong>A4. Ator seleciona a opção “Editar Perfil” em seu perfil.</strong> <br> 1 - Sistema exibe na tela a foto do ator e os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Tags” preenchidos como anteriormente para serem alterados. <br> 2 - Ator altera os campos e seleciona o botão de “Confirmar”. <br> 3 - Sistema atualiza os campos do ator. <br> 4 - Voltar para o passo 1. <br><br> <strong>A5. Ator seleciona a opção “Deletar conta” em seu perfil.</strong> <br> 1 - Sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. [A6][A7] <br><br> <strong>A6. Ator seleciona a opção “Sim” na pergunta de deleção de conta. <br> 1 - Sistema deleta a conta do ator do banco de dados. <br> 2 - Voltar para o passo 1. <br><br>  <strong>A6. Ator seleciona a opção “Não” na pergunta de deleção de conta. <br> 1 - Voltar para o passo 1.|
+| Nome | Cadastrar Desenvolvedor |
+| Objetivo | Cadastrar novo desenvolvedor no sistema |
+| Ator | Desenvolvedor |
+| Pré-Condições | O ator não possui cadastro |
+| Trigger | O ator seleciona a opção “Registre-se como Desenvolvedor” na tela de sessão. |
+| Fluxo Principal | 1 - O sistema exibe os campos “Nome”, “CPF”, “Telefone”, “Data de nascimento”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - O ator preenche os dados e clica em “Cadastrar”. [A1] <br> 3 - O sistema registra o cadastro do ator como desenvolvedor. |
+| Fluxos Alternativos | <strong>A1. Ator seleciona a opção “Registre-se como Desenvolvedor”.</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
-| Pós-Condições | Ator é cadastrado no sistema com sucesso. |
+| Pós-Condições | O ator é cadastrado no sistema com sucesso. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
+
+### Caso 1.2: Visualizar Desenvolvedor
+
+| 01 | Visualizar  Desenvolvedor |
+| --- | --- |
+| Nome | Visualizar Desenvolvedor |
+| Objetivo | Mostrar dados do desenvolvedor |
+| Ator | Desenvolvedor |
+| Pré-Condições | O ator está com sessão em andamento |
+| Trigger | O ator seleciona a opção “Perfil” em sua tela de usuário. |
+| Fluxo Principal | 1 - O sistema exibe os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Tags”, além dos projetos do ator, na tela. |
+| Fluxos Alternativos | N/A |
+| Extensões | N/A. |
+| Pós-Condições | Os dados do ator são exibidos na tela. |
+| Regras de negócios | N/A |
+
+### Caso 1.3: Editar Desenvolvedor
+
+| 01 | Editar Desenvolvedor |
+| --- | --- |
+| Nome | Editar Desenvolvedor |
+| Objetivo | Editar dados do desenvolvedor |
+| Ator | Desenvolvedor |
+| Pré-Condições | O ator está com sessão em andamento |
+| Trigger | O ator seleciona a opção “Editar Perfil” em sua tela de usuário. |
+| Fluxo Principal | 1 - O sistema exibe na tela os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Tags” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do ator. |
+| Fluxos Alternativos | N/A |
+| Extensões | N/A. |
+| Pós-Condições | Os dados do ator são alterados. |
+| Regras de negócios | N/A |
+
+### Caso 1.4: Desativar Desenvolvedor
+
+| 01 | Desativar Desenvolvedor |
+| --- | --- |
+| Nome | Desativar Desenvolvedor |
+| Objetivo | Desativar conta do desenvolvedor |
+| Ator | Desenvolvedor |
+| Pré-Condições | O ator possui cadastro |
+| Trigger | O ator seleciona a opção “Excluir conta” em sua tela de usuário. |
+| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 - O ator confirma a desativação de conta. [A1] <br> 3 - O sistema verifica possíveis pendências e exclui a conta. [A2] |
+| Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Não” na pergunta de deleção de conta.</strong> <br> 1 - O ator não confirma a desativação. <br> 2 - Voltar para o passo 1. <br><br ><strong>O ator tem alguma pendência no sistema.</strong> <br> 1 - O sistema exibe mensagem informando que a conta não pode ser desativada. <br> 2 - Voltar para o passo 1. |
+| Extensões | N/A. |
+| Pós-Condições | A conta do ator é desativada. |
+| Regras de negócios | N/A |
 
 ### Caso 2: Iniciar Sessão
 
@@ -109,7 +156,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Ator | Usuário |
 | Pré-Condições | Ator com cadastro |
 | Trigger | Ator entra no endpoint de sessão do sistema |
-| Fluxo Principal | 1 - Sistema exibe na tela os campos “Entrar como Desenvolvedor” e “Entrar como Empresa”. <br> 2 - Ator seleciona a opção desejada. <br> 3 - Sistema exibe os campos "Email" e "Senha" para serem preenchidos. <br> 4 - Ator preenche os campos e seleciona a opção "Entrar". <br> 5 - Sistema checar se o ator tem cadastro, realiza autenticação e permite acesso. |
+| Fluxo Principal | 1 - O sistema exibe na tela os campos “Entrar como Desenvolvedor” e “Entrar como Empresa”. <br> 2 - Ator seleciona a opção desejada. <br> 3 - Sistema exibe os campos "Email" e "Senha" para serem preenchidos. <br> 4 - Ator preenche os campos e seleciona a opção "Entrar". <br> 5 - Sistema checar se o ator tem cadastro, realiza autenticação e permite acesso. |
 | Fluxos Alternativos |  N/A |
 | Extensões | N/A. |
 | Pós-Condições | Ator autenticado. |
