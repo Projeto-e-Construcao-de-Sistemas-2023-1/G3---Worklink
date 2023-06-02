@@ -1,13 +1,15 @@
 # Arquivo main para testes de funcionalidades das classes e do BD
 from Desenvolvedor import Desenvolvedor
 from Empresa import Empresa
-from flask import Flask, render_template, redirect, request, requests, abort, url_for
+from Database import Database
+from flask import Flask, render_template, redirect, request, abort, url_for
+import requests
+from datetime import datetime as dt
 
 emp = Empresa()
 dev = Desenvolvedor()
-dev.conectaBD()
-dev.criaDesenvolvedor('dev@email.com', '21989212222', '123456789', '12345', 'desenvolvedor', 'pleno', 'nb', 'java',
-                      '12345678900', '12/12/1995')
+dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
+                      'senha', 'pleno', 'gigantesca', 'python')
 app = Flask(__name__)
 
 @app.route('/')
@@ -17,18 +19,9 @@ def home():
 
 @app.route('/loginDesenvolvedor', methods=['POST'])
 def logindev():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    if dev.iniciaSessao(email, password) == True:
-        return render_template('feed.html')
-        # Avançar de página
-        print('Passei!')
-        pass
-    else:
-        print('Erro')
-        return render_template('index.html')  # criar pagina de erro com para nova tentativa
-        # Printar erro
-        pass
+    secret_response = request.form['g-recaptcha-response']
+    verify_response = requests.post(url=f'{VERIFY_URL}?secret={SECRET_KEY}&response={secret_response}')
+    print(verify_response)
 
 
 @app.route('/loginempresa', methods=['POST'])
