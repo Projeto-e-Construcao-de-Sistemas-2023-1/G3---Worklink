@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Desenvolvedor</title>
+    <link rel="stylesheet" href="style.css">
+<style>
+body {
+  background-color: #141034;
+}
+</style>
+</head>
+<body>
+  <div class="container_form">
+
+    <img id = "cadastro-dev" src="imagens wl/cadastro-desenvolvedor.png" alt="cadastro-desenvolvedor logo" >
+
+    <form class="form" action="#" method="post">
+        
+        <div class="form_grupo">
+            <label for="nome" class="form_label">Nome</label>
+            <input type="text" name="nome" class="form_input" id="nome" placeholder="Nome" required>
+        </div>
+
+        <div class="form_grupo">
+          <label for="sobrenome" class="form_label">Sobrenome</label>
+          <input type="text" name="sobrenome" class="form_input" id="nome" placeholder="Sobrenome" required>
+      </div>
+        
+        <div class="form_grupo">
+            <label for="e-mail" class="form_label">Email</label>
+            <input type="email" name="email" class="form_input" id="email" placeholder="seuemail@email.com" required>
+        </div>
+        
+        <div class="form_grupo">
+            <label for="datanascimento" class="form_label">Data de Nascimento</label>
+            <input type="date" name="datanascimento" class="form_input" id="datanascimento" placeholder="Data de Nascimento" required>
+        </div>        
+
+        <div class="form_grupo">
+            
+            <label for="estadocivil" class="text">Estado civil</label>
+            <select name="estadocivil" class="dropdown" required>
+                
+                <option selected disabled class="form_select_option" value="">Selecione</option>
+                <option value="Solteiro" class="form_select_option">Solteiro(a)</option>
+                <option value="Casado" class="form_select_option">Casado(a) </option>
+                <option value="Divorciado" class="form_select_option">Divorciado(a)</option>                    
+                <option value="Viúvo" class="form_select_option">Viúvo(a)</option>                    
+            
+            </select>
+
+        </div>
+
+        <div class="form_grupo">
+
+            <span class="legenda">Gênero:</span>
+
+            <div class="radio-btn">
+              <input type="radio" class="form_new_input" id="feminino" name="sexo" value="Feminino" required="required">
+              <label for="feminino" class="radio_label form_label"> <span class="radio_new_btn"></span> Feminino</label>
+            </div>
+            
+            <div class="radio-btn">
+                <input type="radio" class="form_new_input" id="masculino" name="sexo" value="Masculino" required="required">
+                <label for="masculino" class="radio_label form_label"> <span class="radio_new_btn"></span> Masculino</label>
+            </div>
+
+            <div class="radio-btn">
+              <input type="radio" class="form_new_input" id="não-binário" name="sexo" value="Não-binário" required="required">
+              <label for="não-binário" class="radio_label form_label"> <span class="radio_new_btn"></span>Não-binário</label>
+          </div>
+
+          <div class="radio-btn">
+            <input type="radio" class="form_new_input" id="outro" name="sexo" value="Outro" required="required">
+            <label for="outro" class="radio_label form_label"> <span class="radio_new_btn"></span>Outro</label>
+        </div>
+
+        </div>
+      
+
+        <div class="form_grupo">
+
+            <span class="legenda">Tags</span>
+
+            <div class="check-btn">
+                <input type="checkbox" class="form_new_input" id="Frontend" name="tags" value="html5">
+                <label for="Frontend" class="form_label check_label"> <span class="check_new_btn"></span>Frontend</label>
+            </div>
+
+            <div class="check-btn">
+                <input type="checkbox" class="form_new_input" id="Backend" name="tags" value="css3">
+                <label for="Backend" class="form_label check_label"><span class="check_new_btn"></span>Backend</label>
+            </div>
+
+            <div class="check-btn">
+              <input type="checkbox" class="form_new_input" id="UX/UI" name="tags" value="wordpress">
+              <label for="UX/UI" class="form_label check_label"><span class="check_new_btn"></span>UX/UI Design</label>
+              </div>
+
+            <div class="check-btn">
+                <input type="checkbox" class="form_new_input" id="DataScience" name="tags" value="wordpress">
+                <label for="DataScience" class="form_label check_label"><span class="check_new_btn"></span>Data Science</label>
+            </div>
+
+            <div class="check-btn">
+                <input type="checkbox" class="form_new_input" id="MobileDevelopment" name="tags" value="wordpress">
+                <label for="MobileDevelopment" class="form_label check_label"><span class="check_new_btn"></span>Mobile Development</label>
+            </div>
+
+            <div class="check-btn">
+              <input type="checkbox" class="form_new_input" id="CyberSecurity" name="tags" value="wordpress">
+              <label for="CyberSecurity" class="form_label check_label"><span class="check_new_btn"></span>Cyber Security</label>
+          </div>
+          
+          <div class="check-btn">
+            <input type="checkbox" class="form_new_input" id="Machine" name="tags" value="wordpress">
+            <label for="Machine" class="form_label check_label"><span class="check_new_btn"></span>Machine Learning</label>
+        </div>
+        
+        <div class="check-btn">
+          <input type="checkbox" class="form_new_input" id="Automação" name="tags" value="wordpress">
+          <label for="Automação" class="form_label check_label"><span class="check_new_btn"></span>Automação</label>
+      </div>
+      
+            
+            <div class="check-btn">
+                <input type="checkbox" class="form_new_input" id="Java" name="tags" value="jquery">
+                <label for="Java" class="form_label check_label"><span class="check_new_btn"></span>Java</label>
+            </div>
+
+            <div class="check-btn">
+                <input type="checkbox" class="form_new_input" id="Python" name="tags" value="wordpress">
+                <label for="Python" class="form_label check_label"><span class="check_new_btn"></span>Python</label>
+            </div>
+
+        <div class="check-btn">
+          <input type="checkbox" class="form_new_input" id="C++" name="tags" value="wordpress">
+          <label for="C++" class="form_label check_label"><span class="check_new_btn"></span>C++</label>
+      </div>
+
+      <div class="check-btn">
+        <input type="checkbox" class="form_new_input" id="C#" name="tags" value="wordpress">
+        <label for="C#" class="form_label check_label"><span class="check_new_btn"></span>C#</label>
+      </div>
+
+        
+  <div class="check-btn">
+    <input type="checkbox" class="form_new_input" id="PHP" name="tags" value="wordpress">
+    <label for="PHP" class="form_label check_label"><span class="check_new_btn"></span>PHP</label>
+</div>
+
+
+  <div class="check-btn">
+    <input type="checkbox" class="form_new_input" id="React" name="tags" value="wordpress">
+    <label for="React" class="form_label check_label"><span class="check_new_btn"></span>React.js</label>
+  </div>
+
+  <div class="check-btn">
+    <input type="checkbox" class="form_new_input" id="Angular" name="tags" value="wordpress">
+    <label for="Angular" class="form_label check_label"><span class="check_new_btn"></span>Angular</label>
+  </div>
+
+  <div class="check-btn">
+    <input type="checkbox" class="form_new_input" id="Django" name="tags" value="wordpress">
+    <label for="Django" class="form_label check_label"><span class="check_new_btn"></span>Django</label>
+  </div>
+
+<div class="check-btn">
+<input type="checkbox" class="form_new_input" id="Flutter" name="tags" value="wordpress">
+<label for="Flutter" class="form_label check_label"><span class="check_new_btn"></span>Flutter</label>
+</div>
+
+            <div class="form_message">
+                
+                <label for="message" class="form_message_label">Experiência:</label>
+                <textarea name="experiencia" id="experiencia" cols="30" rows="3" class="form_input message_input" required></textarea>
+
+            </div>
+
+            <div class="submit">
+
+              <input type="hidden" name="acao" value="enviar">
+              <button type="submit" name="Submit" class="submit_btn" >Cadastrar</button>
+            
+            </div>
+    </form>
+
+</div><!--container_form-->
+    </body>
+</body>
+</html>
