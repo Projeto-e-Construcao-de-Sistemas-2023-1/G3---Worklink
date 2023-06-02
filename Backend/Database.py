@@ -1,6 +1,6 @@
 import mysql.connector
 class Database:
-    def insert(self, query, values, tipo):
+    def insert(self, values, tipo):
         if tipo == True: # Indica que é um desenvolvedor
             query = """ INSERT INTO DESENVOLVEDOR (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta_bancaria, senha, habilidade, experiencia, tag_desenvolvedor) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         else:
