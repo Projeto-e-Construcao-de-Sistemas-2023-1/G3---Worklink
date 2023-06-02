@@ -90,7 +90,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ### Caso 1.1: Cadastrar Desenvolvedor
 
-| 01 | Cadastrar Desenvolvedor |
+| 01.1 | Cadastrar Desenvolvedor |
 | --- | --- |
 | Nome | Cadastrar Desenvolvedor |
 | Objetivo | Cadastrar novo desenvolvedor no sistema |
@@ -105,7 +105,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ### Caso 1.2: Visualizar Desenvolvedor
 
-| 01 | Visualizar  Desenvolvedor |
+| 01.2 | Visualizar  Desenvolvedor |
 | --- | --- |
 | Nome | Visualizar Desenvolvedor |
 | Objetivo | Mostrar dados do desenvolvedor |
@@ -120,7 +120,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ### Caso 1.3: Editar Desenvolvedor
 
-| 01 | Editar Desenvolvedor |
+| 01.3 | Editar Desenvolvedor |
 | --- | --- |
 | Nome | Editar Desenvolvedor |
 | Objetivo | Editar dados do desenvolvedor |
@@ -135,7 +135,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ### Caso 1.4: Desativar Desenvolvedor
 
-| 01 | Desativar Desenvolvedor |
+| 01.4 | Desativar Desenvolvedor |
 | --- | --- |
 | Nome | Desativar Desenvolvedor |
 | Objetivo | Desativar conta do desenvolvedor |
@@ -150,7 +150,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ### Caso 2.1: Cadastrar Empresa
 
-| 01 | Cadastrar Empresa |
+| 02.1 | Cadastrar Empresa |
 | --- | --- |
 | Nome | Cadastrar Empresa |
 | Objetivo | Cadastrar nova empresa no sistema |
@@ -165,7 +165,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ### Caso 2.2: Visualizar Empresa
 
-| 01 | Visualizar  Empresa |
+| 02.2 | Visualizar  Empresa |
 | --- | --- |
 | Nome | Visualizar Empresa |
 | Objetivo | Mostrar dados da empresa |
@@ -180,7 +180,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ### Caso 2.3: Editar Empresa
 
-| 01 | Editar Empresa |
+| 02.3 | Editar Empresa |
 | --- | --- |
 | Nome | Editar Empresa |
 | Objetivo | Editar dados da empresa |
@@ -195,7 +195,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ### Caso 2.4: Desativar Empresa
 
-| 01 | Desativar Empresa |
+| 02.4 | Desativar Empresa |
 | --- | --- |
 | Nome | Desativar Empresa |
 | Objetivo | Desativar conta da empresa |
