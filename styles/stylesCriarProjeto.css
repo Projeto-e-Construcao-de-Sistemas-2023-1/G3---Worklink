@@ -6,7 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Monomaniac+One&display=swap');
 
 .formulario{
-    width: 400px;
+    width: 1200px;
     margin: auto;
     padding: 30px;
     border:1px solid #ccc;
@@ -26,8 +26,9 @@
 }
 
 .field{
-    width: 100%;
+    width: 30%;
     margin: 15px 0;
+    display: inline-block;
 }
 
 .field label, 
@@ -77,6 +78,8 @@ input[type=submit]{
 
 body{
     background-color: #EAEAEA;
+    height: 4000px;
+    overflow-y: scroll;
 }
 
 .required:after {
@@ -91,6 +94,7 @@ body{
 
 .conteiner img{
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .textoCentral{
