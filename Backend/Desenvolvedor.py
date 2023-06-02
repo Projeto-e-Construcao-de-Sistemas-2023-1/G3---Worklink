@@ -3,23 +3,13 @@ from Database import Database
 # OS GETTERS VÃO SER CONSULTAS NO BANCO DE DADOS PEDINDO AQUELA VARIAVEL
 class Desenvolvedor(Usuario.Usuario):    
     def criaDesenvolvedor(self, nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, habilidade, experiencia, tag):
-        email = email
-        telefone = telefone
-        conta = conta
-        senha = senha
-        nome = nome
-        sobrenome = sobrenome
-        genero = genero
-        habilidade = habilidade
-        CPF = CPF
-        data_nascimento = data_nascimento
-        experiencia = experiencia
-        tag = tag
-        lista_colunas = """nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, habilidade, experiencia, tag_desenvolvedor"""
-        lista_dados = f'{nome}, {sobrenome}, {CPF}, {email}, {genero}, {data_nascimento}, {telefone}, {conta}, {senha}, {habilidade}, {experiencia}, {tag}'
-        print(lista_dados)
+
+        
+        values = (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, habilidade, experiencia, tag)
+        tipo = True
+        #print(lista_dados)
         Database.connect(self)
-        Database.insert(self,'DESENVOLVEDOR', lista_colunas, lista_dados)
+        Database.insert(self, values, tipo)
         
     def getNome(self):
         self.cursor.execute(f'SELECT nome FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
