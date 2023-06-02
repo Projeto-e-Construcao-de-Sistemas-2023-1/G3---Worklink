@@ -1,10 +1,26 @@
 import Usuario
+from Database import Database
 # OS GETTERS VÃO SER CONSULTAS NO BANCO DE DADOS PEDINDO AQUELA VARIAVEL
 class Desenvolvedor(Usuario.Usuario):    
-    def criaDesenvolvedor(self, email, telefone, conta, senha, nome, sobrenome, genero, habilidade, CPF, data_nascimento):
-        self.cursor.execute(f'INSERT INTO desenvolvedor (CPF, email, conta, senha, telefone, nome, sobrenome, genero, habilidade, data_nascimento) VALUES ({CPF}, {email}, {conta}, {senha},{telefone}, {nome}, {sobrenome}, {genero}, {habilidade}, {data_nascimento})')
-        self.con.commit() # INSERT REALIZADO
-
+    def criaDesenvolvedor(self, nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, habilidade, experiencia, tag):
+        email = email
+        telefone = telefone
+        conta = conta
+        senha = senha
+        nome = nome
+        sobrenome = sobrenome
+        genero = genero
+        habilidade = habilidade
+        CPF = CPF
+        data_nascimento = data_nascimento
+        experiencia = experiencia
+        tag = tag
+        lista_colunas = """nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, habilidade, experiencia, tag_desenvolvedor"""
+        lista_dados = f'{nome}, {sobrenome}, {CPF}, {email}, {genero}, {data_nascimento}, {telefone}, {conta}, {senha}, {habilidade}, {experiencia}, {tag}'
+        print(lista_dados)
+        Database.connect(self)
+        Database.insert(self,'DESENVOLVEDOR', lista_colunas, lista_dados)
+        
     def getNome(self):
         self.cursor.execute(f'SELECT nome FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
         self.con.commit() 

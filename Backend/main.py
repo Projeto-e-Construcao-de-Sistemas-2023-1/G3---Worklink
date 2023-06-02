@@ -1,14 +1,15 @@
 # Arquivo main para testes de funcionalidades das classes e do BD
 from Desenvolvedor import Desenvolvedor
 from Empresa import Empresa
+from Database import Database
 from flask import Flask, render_template, redirect, request, abort, url_for
 import requests
+from datetime import datetime as dt
 
 emp = Empresa()
 dev = Desenvolvedor()
-dev.conectaBD()
-dev.criaDesenvolvedor('dev@email.com', '21989212222', '123456789', '12345', 'desenvolvedor', 'pleno', 'nb', 'java',
-                      '12345678900', '12/12/1995')
+dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
+                      'senha', 'pleno', 'gigantesca', 'python')
 app = Flask(__name__)
 
 @app.route('/')
