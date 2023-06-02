@@ -283,7 +283,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pós-Condições | O ator visualiza detalhes do projeto. |
 | Regras de negócios | N/A |
 
-### Caso 1.3: Editar Projeto
+### Caso 6.3: Editar Projeto
 
 | 01 | Editar Projeto |
 | --- | --- |
@@ -298,7 +298,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pós-Condições | Os dados do projeto do ator são alterados. |
 | Regras de negócios | N/A |
 
-### Caso 1.4: Desativar Projeto
+### Caso 6.4: Desativar Projeto
 
 | 01 | Desativar Projeto |
 | --- | --- |
