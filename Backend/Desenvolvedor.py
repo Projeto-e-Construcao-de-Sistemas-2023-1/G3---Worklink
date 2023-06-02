@@ -3,11 +3,8 @@ from Database import Database
 # OS GETTERS VÃO SER CONSULTAS NO BANCO DE DADOS PEDINDO AQUELA VARIAVEL
 class Desenvolvedor(Usuario.Usuario):    
     def criaDesenvolvedor(self, nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, habilidade, experiencia, tag):
-
-        
         values = (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, habilidade, experiencia, tag)
         tipo = True
-        #print(lista_dados)
         Database.connect(self)
         Database.insert(self, values, tipo)
         

@@ -1,8 +1,11 @@
 import Usuario
+from Database import Database
 class Empresa(Usuario.Usuario):
-    def criaEmpresa(self, cnpj, email, telefone, conta, senha, razao_social, area_negocio):
-        self.cursor.execute(f'INSERT INTO empresa (CNPJ, razao_social, area_negocio, email, telefone, conta_bancaria, login, senha) VALUES ({cnpj}, {razao_social}, {area_negocio}, {email}, {telefone}, {conta}, {senha})')
-        self.con.commit() # INSERT REALIZADO
+    def criaEmpresa(self, cnpj, razao_social, email, telefone, conta, senha, area_negocio):
+        values = (cnpj, razao_social, email, telefone, conta, senha, area_negocio)
+        tipo = False
+        Database.connect(self)
+        Database.insert(self, values, tipo)
 
     def getRazaoSocial(self):
         self.cursor.execute(f'SELECT razao_social FROM empresa WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
