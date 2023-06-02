@@ -8,13 +8,21 @@ body{
     background-color: #EAEAEA;
 }
 
+<<<<<<< HEAD
 #h1_home{
+=======
+h1 {
+>>>>>>> b8f891cdceeb54695f3d3b2ee052b434943072ed
 color:#141034;
 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
 text-align: center;
 padding-left: 200px;
 padding-right: 200px;
+<<<<<<< HEAD
 padding-top: 100px;
+=======
+padding-top: 50px;
+>>>>>>> b8f891cdceeb54695f3d3b2ee052b434943072ed
 font-family: 'Roboto Mono', monospace;
 
 }
@@ -53,11 +61,16 @@ font-size: 40px;
 text-shadow: 4px 4px 8px #141034;
 }
 
+<<<<<<< HEAD
 #qs {
+=======
+p {
+>>>>>>> b8f891cdceeb54695f3d3b2ee052b434943072ed
 color:#141034;
 font-size: 18px;
 font-family: 'Cormorant', serif;
 text-align: center;
+<<<<<<< HEAD
 padding-top: 120px;
 }
 
@@ -339,4 +352,7 @@ align-self: center;
   margin-bottom: 15px;
   font-weight: bold;
   
+=======
+padding-top: 140px;
+>>>>>>> b8f891cdceeb54695f3d3b2ee052b434943072ed
 }
