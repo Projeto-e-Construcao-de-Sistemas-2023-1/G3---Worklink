@@ -7,7 +7,7 @@ import requests
 from datetime import datetime as dt
 
 emp = Empresa()
-dev = Desenvolvedor()
+dev = Desenvolvedor() #
 dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
                      'senha', 'pleno', 'gigantesca', 'python')
 emp.criaEmpresa('08292637000100', 'Teste.LTDA', 'empresa@outlook.com', '(21)986598574', '12345678901', 'senha', 'agronegocio')
