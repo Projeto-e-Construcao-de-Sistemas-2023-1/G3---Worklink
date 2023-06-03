@@ -1,46 +1,36 @@
-<!DOCTYPE html>
-<html>
+html lang="pt-br">
 <head>
-  <link rel="stylesheet" type="text/css" href="styles/stylesLogin.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<script src='https://www.google.com/recaptcha/api.js'></script> 
+<title>Formulário do reCAPTCHA</title>
 </head>
 <body>
-  <div class="container">
-    <h1>Login</h1>
-    <form method="post"  action="/login">
-      <div class="form-group">
-        <label for="email">E-mail:</label>
-        <input type="text" id="email" name="email" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" required>
-      </div>
+  <form id="register" action="" method="post">
+      <label for="name">Nome:</label>
+      <input type="text" name="name" id="name" />
 
-      <div>
-        <h3>
-          ReCaptcha
-        </h3>
-        <script>
-          function onSubmit(token) {
-            document.getElementById("demo-form").submit();
-          }
-        </script>
-        <button class="g-recaptcha btn btn-primary" 
-        data-sitekey="{{ site_key }}" 
-        data-callback='onSubmit' 
-        data-action='submit'>Submit</button>
-        <script src="https://www.google.com/recaptcha/api.js"></script>
-      </div>
-
-      <div class="form-group">
-        <input type="submit" value="Entrar" action="/processar">
-      </div>
-    </form>
-
-    <div class="register-options">
-      <a href="RegisterDesenvolvedor.html" class="register-developer">Registrar Conta de Desenvolvedor</a>
-      <a href="RegisterEmpresa.html" class="register-company">Registrar Nova Conta de Empresa</a>
-    </div>
-  </div>
-</body>
+      <label for="email">E-mail:</label>
+      <input type="email" name="email" id="email" />
+      <button type="submit">Enviar</button>
+      <div id='recaptcha' class="g-recaptcha" data-sitekey="6LcizEwmAAAAACdARylt3xKuxKoKsZnDG-NNKBE2" data-callback="sendForm" data-size="visible"></div>
+  </form>
+  <script type="text/javascript">
+    let form = document.querySelector('#register');
+    form.addEventListener('submit',  e => {
+        e.preventDefault();
+        let name = document.querySelector('#name');
+        let email = document.querySelector('#email');
+        if(!name.value || !email.value) {
+            alert('Nome e Email são Obrigatorios');
+            } else{
+            grecaptcha.execute();
+        }       
+        });
+    function sendForm(){
+        alert("reCAPTCHA funcionou");
+    }
+  </script>
+  </body>
 </html>

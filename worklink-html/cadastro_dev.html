@@ -8,15 +8,14 @@
     <link rel="stylesheet" href="style.css">
 <style>
 body {
-  background-color: #141034;
+  background-image: url('imagens wl/form_grupo.jpg');
+  background-size: cover;
 }
 </style>
 </head>
 <body>
   <div class="container_form">
-
-    <img id = "cadastro-dev" src="imagens wl/cadastro-desenvolvedor.png" alt="cadastro-desenvolvedor logo" >
-
+    <h1>Criar conta como desenvolvedor</h1>
     <form class="form" action="#" method="post">
         
         <div class="form_grupo">
@@ -28,61 +27,69 @@ body {
           <label for="sobrenome" class="form_label">Sobrenome</label>
           <input type="text" name="sobrenome" class="form_input" id="nome" placeholder="Sobrenome" required>
       </div>
-        
+
+      <div class="form_grupo">
+        <label for="CPF" class="form_label">CPF</label>
+        <input type="text" name="CPF" class="form_input" id="CPF" placeholder="CPF" required>
+    </div>
+
         <div class="form_grupo">
             <label for="e-mail" class="form_label">Email</label>
             <input type="email" name="email" class="form_input" id="email" placeholder="seuemail@email.com" required>
         </div>
         
-        <div class="form_grupo">
-            <label for="datanascimento" class="form_label">Data de Nascimento</label>
-            <input type="date" name="datanascimento" class="form_input" id="datanascimento" placeholder="Data de Nascimento" required>
-        </div>        
 
         <div class="form_grupo">
             
-            <label for="estadocivil" class="text">Estado civil</label>
+            <label for="estadocivil" class="text">Gênero</label>
             <select name="estadocivil" class="dropdown" required>
                 
                 <option selected disabled class="form_select_option" value="">Selecione</option>
-                <option value="Solteiro" class="form_select_option">Solteiro(a)</option>
-                <option value="Casado" class="form_select_option">Casado(a) </option>
-                <option value="Divorciado" class="form_select_option">Divorciado(a)</option>                    
-                <option value="Viúvo" class="form_select_option">Viúvo(a)</option>                    
+                <option value="Feminino" class="form_select_option">Feminino</option>
+                <option value="Masculino" class="form_select_option">Masculino</option>
+                <option value="Não-Binário" class="form_select_option">Não-Binário</option>                    
+                <option value="Outro" class="form_select_option">Outro</option>                    
             
             </select>
 
-        </div>
+        </div>   
 
         <div class="form_grupo">
+          <label for="datanascimento" class="form_label">Data de Nascimento</label>
+          <input type="date" name="datanascimento" class="form_input" id="datanascimento" placeholder="Data de Nascimento" required>
+      </div>        
 
-            <span class="legenda">Gênero:</span>
+      <div class="form_grupo">
+        <label for="Telefone" class="form_label">Telefone</label>
+        <input type="text" name="Telefone" class="form_input" id="Telefone" placeholder="Telefone" required>
+    </div>
 
-            <div class="radio-btn">
-              <input type="radio" class="form_new_input" id="feminino" name="sexo" value="Feminino" required="required">
-              <label for="feminino" class="radio_label form_label"> <span class="radio_new_btn"></span> Feminino</label>
-            </div>
-            
-            <div class="radio-btn">
-                <input type="radio" class="form_new_input" id="masculino" name="sexo" value="Masculino" required="required">
-                <label for="masculino" class="radio_label form_label"> <span class="radio_new_btn"></span> Masculino</label>
-            </div>
+    <div class="form_grupo">
+      <label for="Conta" class="form_label">Conta bancária (xxxx/xxxxx-x)</label>
+      <input type="text" name="Conta" class="form_input" id="Conta" placeholder="Conta" required>
+  </div>
 
-            <div class="radio-btn">
-              <input type="radio" class="form_new_input" id="não-binário" name="sexo" value="Não-binário" required="required">
-              <label for="não-binário" class="radio_label form_label"> <span class="radio_new_btn"></span>Não-binário</label>
-          </div>
+  <div class="form_grupo">
+     <label for="Senha" class="forn_label">Senha</label>
+     <input type="password" name="Senha" class="form_input" id="Senha" placeholder="Senha" required>
+</div>
+        
+        <div class="form_message">
+                
+          <label for="message" class="form_message_label">Habilidade:</label>
+          <textarea name="experiencia" id="experiencia"  maxlength="100" style="resize: none; height: 35px; width: 270px;" class="form_input message_input" required></textarea>
 
-          <div class="radio-btn">
-            <input type="radio" class="form_new_input" id="outro" name="sexo" value="Outro" required="required">
-            <label for="outro" class="radio_label form_label"> <span class="radio_new_btn"></span>Outro</label>
-        </div>
+      </div>
 
-        </div>
-      
+      <div class="form_message">
+                
+        <label for="message" class="form_message_label">Experiência:</label>
+        <textarea name="experiencia" id="experiencia"  maxlength="300" style="resize: none; height: 35px; width: 270px;" class="form_input message_input" required></textarea>
+
+    </div>
 
         <div class="form_grupo">
-
+          
             <span class="legenda">Tags</span>
 
             <div class="check-btn">
@@ -173,17 +180,11 @@ body {
 <label for="Flutter" class="form_label check_label"><span class="check_new_btn"></span>Flutter</label>
 </div>
 
-            <div class="form_message">
-                
-                <label for="message" class="form_message_label">Experiência:</label>
-                <textarea name="experiencia" id="experiencia" cols="30" rows="3" class="form_input message_input" required></textarea>
-
-            </div>
 
             <div class="submit">
 
               <input type="hidden" name="acao" value="enviar">
-              <button type="submit" name="Submit" class="submit_btn" >Cadastrar</button>
+              <button type="submit" name="Submit" class="submit_btn" >Cadastrar-se</button>
             
             </div>
     </form>
