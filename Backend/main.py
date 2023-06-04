@@ -29,9 +29,15 @@ def logindev():
         return render_template('index.html')  # criar pagina de erro com para nova tentativa
         # Printar erro
         pass
+@app.route('/registerDesenvolvedor', methods=['POST'])
+def regdev():
+   return render_template('RegisterDesenvolvedor.html')
+  
+  @app.route('/registerEmpresa', methods=['POST'])
+def regdev():
+   return render_template('RegisterEmpresa.html')
 
-
-@app.route('/loginempresa', methods=['POST'])
+@app.route('/loginEmpresa', methods=['POST'])
 def loginemp():
     email = request.form.get('email')
     password = request.form.get('password')
