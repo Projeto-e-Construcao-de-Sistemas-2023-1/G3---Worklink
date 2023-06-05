@@ -33,7 +33,7 @@ def logindev():
 def regdev():
    return render_template('RegisterDesenvolvedor.html')
   
-  @app.route('/registerEmpresa', methods=['POST'])
+@app.route('/registerEmpresa', methods=['POST'])
 def regdev():
    return render_template('RegisterEmpresa.html')
 
