@@ -11,7 +11,7 @@ class Database:
         self.cursor.execute(f'UPDATE {tabela} SET {coluna} = "{dado}" WHERE email = "{email}"')
         self.con.commit() # UPDATE REALIZADO
     def delete(self, tabela, email):
-        self.cursor.execute(f'DELETE FROM {tabela} WHERE email = {email}')
+        self.cursor.execute(f'DELETE FROM {tabela} WHERE email = "{email}"')
         self.con.commit() 
     def select(self, coluna, dado, tabela):
         pass

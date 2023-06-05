@@ -79,7 +79,6 @@ class Desenvolvedor(Usuario.Usuario):
         Database.connect(self)
         Database.update(self, 'tag', tag, 'DESENVOLVEDOR', email)
     
-    
     #def candidataProjeto(self, projeto):
         # INSERIR NO BD O PROJETO QUE O CARA SE CANDIDATOU
     #    pass

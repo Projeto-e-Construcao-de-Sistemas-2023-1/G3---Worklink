@@ -41,14 +41,12 @@ class Usuario:
             exit()
         else:
             self.editaUsuario()
-    def deletaUsuario(self, email):
-        try:
-            self.cursor.execute(f'DELETE FROM usuario WHERE email = {email}')
-            self.con.commit() 
-            return True # PRINTAR NA TELA QUE O USUARIO FOI DELETADO COM SUCESSO
-        except Exception as e:
-            print(e)
-            return False # PRINTAR ERRO NA DELEÇÃO    
+    def deletaUsuario(self, email, tipo): # Passar tipo = True para DESENVOLVEDOR | tipo = False para EMPRESA
+        Database.connect(self)
+        if tipo == True:
+            Database.delete(self, 'DESENVOLVEDOR', email)
+        else:
+            Database.delete('EMPRESA', email)
     def iniciaSessao(self, email, senha):
         global sessao_ativa
         self.email = email # Grava email do usuario logado para futuras consultas
