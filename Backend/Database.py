@@ -7,9 +7,8 @@ class Database:
             query = """ INSERT INTO EMPRESA (cnpj, razao_social, email, telefone, conta_bancaria, senha, area_negocio) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
         self.cursor.execute(query, values)
         self.con.commit() # INSERT REALIZADO
-
     def update(self, coluna, dado, tabela, email):
-        self.cursor.execute(f'UPDATE {tabela} SET {coluna} = {dado} WHERE email = "{email}"')
+        self.cursor.execute(f'UPDATE {tabela} SET {coluna} = "{dado}" WHERE email = "{email}"')
         self.con.commit() # UPDATE REALIZADO
     def delete(self, tabela, email):
         self.cursor.execute(f'DELETE FROM {tabela} WHERE email = {email}')
