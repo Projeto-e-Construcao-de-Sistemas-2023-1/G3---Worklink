@@ -1,43 +1,29 @@
 # Arquivo main para testes de funcionalidades das classes e do BD
 from Desenvolvedor import Desenvolvedor
 from Empresa import Empresa
-from flask import Flask, render_template, redirect, request, requests, abort, url_for
+from Database import Database
+from flask import Flask, render_template, redirect, request, abort, url_for
+import requests
+from datetime import datetime as dt
 
 app = Flask(__name__, template_folder="templates")
 
 emp = Empresa()
 dev = Desenvolvedor()
-dev.conectaBD()
-dev.criaDesenvolvedor('dev@email.com', '21989212222', '123456789', '12345', 'desenvolvedor', 'pleno', 'nb', 'java',
-                      '12345678900', '12/12/1995')
-
+dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
+                      'senha', 'pleno', 'gigantesca', 'python')
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('home.html')
 
 
 @app.route('/loginDesenvolvedor', methods=['POST'])
 def logindev():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    if dev.iniciaSessao(email, password) == True:
-        return render_template('feed.html')
-        # Avançar de página
-        print('Passei!')
-        pass
-    else:
-        print('Erro')
-        return render_template('index.html')  # criar pagina de erro com para nova tentativa
-        # Printar erro
-        pass
-@app.route('/registerDesenvolvedor', methods=['POST'])
-def regdev():
-   return render_template('RegisterDesenvolvedor.html')
-  
-@app.route('/registerEmpresa', methods=['POST'])
-def regdev():
-   return render_template('RegisterEmpresa.html')
+    secret_response = request.form['g-recaptcha-response']
+    verify_response = requests.post(url=f'{VERIFY_URL}?secret={SECRET_KEY}&response={secret_response}')
+    print(verify_response)
+
 
 @app.route('/loginEmpresa', methods=['POST'])
 def loginemp():
@@ -53,7 +39,7 @@ def loginemp():
         return render_template('index.html')  # criar pagina de erro com para nova tentativa
         # Printar erro
         pass
-    return redirect('/')  # aqui o final do antigo cofigo
+    return redirect('/')  # aqui o final do antigo codigo
 
 
 @app.route("/sign-user-in", methods=['POST'])
@@ -75,7 +61,6 @@ if __name__ == "__main__":
     app.run()
 
 
-
-SITE_KEY = "6LeKBj8mAAAAAA3jCMVID2PjUUYmIM1TYOIKf3Ei"
-SECRET_KEY = "6LeKBj8mAAAAAAIsJpHljREaS2EPF8y5uw2frJHA"
-VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify"
+# SITE_KEY = "6LeKBj8mAAAAAA3jCMVID2PjUUYmIM1TYOIKf3Ei"
+# SECRET_KEY = "6LeKBj8mAAAAAAIsJpHljREaS2EPF8y5uw2frJHA"
+# VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify"
