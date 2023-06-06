@@ -13,8 +13,8 @@ class Database:
     def delete(self, tabela, email):
         self.cursor.execute(f'DELETE FROM {tabela} WHERE email = "{email}"')
         self.con.commit() 
-    def select(self, coluna, dado, tabela, tipo): # Se coluna = '0' -> seleciona tudo da tabela sobre aquele dado
-        self.cursor.execute(f'SELECT {coluna} FROM {tabela} WHERE {tipo} = "{dado}"')
+    def select(self, dado, tabela, tipo): # Se coluna = '0' -> seleciona tudo da tabela sobre aquele dado
+        self.cursor.execute(f'SELECT * FROM {tabela} WHERE {tipo} = "{dado}"')
         self.con.commit()
         self.cursor.fetchall()
     def connect(self):

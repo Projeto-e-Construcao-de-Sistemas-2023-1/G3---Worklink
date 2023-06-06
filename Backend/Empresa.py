@@ -31,12 +31,10 @@ class Empresa(Usuario.Usuario):
         self.cursor.execute(f'SELECT razao_social FROM empresa WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
         self.con.commit()
         return str(self.cursor.fetchall())
-    
     def getCnpj(self):
         self.cursor.execute(f'SELECT CNPJ FROM empresa WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
         self.con.commit()
         return str(self.cursor.fetchall())
-    
     def getAreaNegocio(self):
         self.cursor.execute(f'SELECT area_negocio FROM empresa WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
         self.con.commit()

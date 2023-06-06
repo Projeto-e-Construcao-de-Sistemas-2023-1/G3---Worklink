@@ -61,7 +61,8 @@ class Usuario:
     def finalizaSessao(self):
         global sessao_ativa # Só rodar o site do usuário se a sessão estiver ativa FALAR COM JHONNY
         sessao_ativa = False
-    def pesquisaUsuario(self):
-        self.cursor.execute(f'SELECT * FROM desenvolvedor JOIN empresa')
+    def pesquisaUsuario(self, nome):
+        Database.connect()
+        self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR JOIN EMPRESA WHERE DESENVOVEDOR.nome = "{nome}" OR EMPRESA.razao_social "{nome}"')
         self.con.commit()
         return str(self.cursor.fetchall()) # MOSTRAR OS REGISTROS NA TELA DO FRONT END
