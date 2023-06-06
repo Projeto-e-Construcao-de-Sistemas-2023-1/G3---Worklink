@@ -12,8 +12,7 @@ CREATE TABLE DESENVOLVEDOR (
         telefone VARCHAR(14) NOT NULL,
 		conta_bancaria VARCHAR(11) NOT NULL,
 		senha VARCHAR(50) NOT NULL,
-		habilidade VARCHAR(50) NOT NULL,
-		experiencia VARCHAR(300),
+		descricao VARCHAR(300),
 		status_desenvolvedor BIT(1),
 		tag_desenvolvedor VARCHAR(30) 
 
@@ -63,3 +62,11 @@ CREATE TABLE DESENVOLVEDOR_PROJETO (
 		cod_projeto INT,
 		FOREIGN KEY (cod_projeto) REFERENCES PROJETO(cod_projeto)
 );
+
+CREATE TABLE DESENVOLVEDOR_EMPRESA (
+		cod_desenvolvedor_empresa INT AUTO_INCREMENT PRIMARY KEY,
+		cod_desenvolvedor INT,
+		FOREIGN KEY (cod_desenvolvedor) REFERENCES DESENVOLVEDOR(cod_desenvolvedor),
+		cod_empresa INT,
+		FOREIGN KEY (cod_empresa) REFERENCES PROJETO(cod_empresa)
+);  
