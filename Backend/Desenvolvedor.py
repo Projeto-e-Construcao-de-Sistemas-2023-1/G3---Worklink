@@ -1,17 +1,8 @@
-<<<<<<<< HEAD:Backend/Desenvolvedor.py
 import Usuario
 from Database import Database
 # OS GETTERS VÃO SER CONSULTAS NO BANCO DE DADOS PEDINDO AQUELA VARIAVEL
 class Desenvolvedor(Usuario.Usuario):    
     def criaDesenvolvedor(self, nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, habilidade, experiencia, tag):
-========
-import Usuario, pymysql
-# OS GETTERS VÃO SER CONSULTAS NO BANCO DE DADOS PEDINDO AQUELA VARIAVEL
-class Desenvolvedor(Usuario.Usuario):    
-    def criaDesenvolvedor(self, email, telefone, agencia, conta, login, senha):#, nome, CPF, data_nascimento):
-        self.criaUsuario(self, email, telefone, agencia, conta, login, senha)
-        # Fazer também os inserts no BD de nome, CPF e data_nascimento
->>>>>>>> origin/julia:Desenvolvedor.py
 
         
         values = (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, habilidade, experiencia, tag)
@@ -21,7 +12,6 @@ class Desenvolvedor(Usuario.Usuario):
         Database.insert(self, values, tipo)
         
     def getNome(self):
-<<<<<<<< HEAD:Backend/Desenvolvedor.py
         self.cursor.execute(f'SELECT nome FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
         self.con.commit() 
         return str(self.cursor.fetchall())
@@ -50,43 +40,26 @@ class Desenvolvedor(Usuario.Usuario):
         self.cursor.execute(f'SELECT sobrenome FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
         self.con.commit()
         return str(self.cursor.fetchall())
-========
-        # CONSULTA NO BD PEDINDO O NOME (DANDO O EMAIL)
-        # SELECT NOME FROM DEVS WHERE EMAIL = XXXX
-        pass
->>>>>>>> origin/julia:Desenvolvedor.py
 
-    def setDescricao(self, descricao):
-        # INSERT DA DESCRIÇÃO NO BD
-        pass
-
-    def getDescricao(self):
-        #SELECT DESCRIÇÃO FROM DEVS WHERE EMAIL = XXXX
-        pass
+    def setHabilidade(self, habilidade):
+        self.cursor.execute(f'UPDATE desenvolvedor SET habilidade = {habilidade} WHERE email = "{self.email}"')
+        self.con.commit()
+        return True
 
     def setNome(self, nome):
-        # INSERT NO NOME DO CARA
-        pass
-    
-    def setTags(self, tag):
-        # COLOCAR NO BANCO DE DADOS ESSA TAG NOVA
-        pass
+        self.cursor.execute(f'UPDATE desenvolvedor SET nome = {nome} WHERE email = "{self.email}"')
+        self.con.commit()
+        return True
 
-    def getCPF(self):
-        # SELECT CPF FROM DEVS WHERE EMAIL = XXXX
-        pass
+    def setSobrenome(self, sobrenome):
+        self.cursor.execute(f'UPDATE desenvolvedor SET sobrenome = {sobrenome} WHERE email = "{self.email}"')
+        self.con.commit()
+        return True
     
-    def setCPF(self, CPF):
-        # MUDAR O CPF DO CARA NO BD
-        pass
-    
-    def getDataNascimento(self):
-        # SELECT DATA_NASC FROM DEVS WHERE EMAIL = XXXX
-        pass
-    
-    def setDataNascimento(self, data_nascimento):
-        # MUDAR A DATA_NASC DO CARA NO BD
-        pass
+    def setGenero(self, genero):
+        self.cursor.execute(f'UPDATE desenvolvedor SET genero = {genero} WHERE email = "{self.email}"')
+        self.con.commit()
+        return True
     
     #def candidataProjeto(self, projeto):
         # INSERIR NO BD O PROJETO QUE O CARA SE CANDIDATOU
@@ -125,4 +98,3 @@ class Desenvolvedor(Usuario.Usuario):
 
     
     
-
