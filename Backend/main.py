@@ -6,16 +6,15 @@ from flask import Flask, render_template, redirect, request, abort, url_for
 import requests
 from datetime import datetime as dt
 
-app = Flask(__name__, template_folder="templates")
-
 emp = Empresa()
 dev = Desenvolvedor()
 dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
                       'senha', 'pleno', 'gigantesca', 'python')
+app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('index.html')
 
 
 @app.route('/loginDesenvolvedor', methods=['POST'])
@@ -25,7 +24,7 @@ def logindev():
     print(verify_response)
 
 
-@app.route('/loginEmpresa', methods=['POST'])
+@app.route('/loginempresa', methods=['POST'])
 def loginemp():
     email = request.form.get('email')
     password = request.form.get('password')
@@ -39,7 +38,7 @@ def loginemp():
         return render_template('index.html')  # criar pagina de erro com para nova tentativa
         # Printar erro
         pass
-    return redirect('/')  # aqui o final do antigo codigo
+    return redirect('/')  # aqui o final do antigo cofigo
 
 
 @app.route("/sign-user-in", methods=['POST'])
@@ -57,10 +56,7 @@ def sign_in_user():
 
     return redirect(url_for('home'))
 
-if __name__ == "__main__":
-    app.run()
 
-
-# SITE_KEY = "6LeKBj8mAAAAAA3jCMVID2PjUUYmIM1TYOIKf3Ei"
-# SECRET_KEY = "6LeKBj8mAAAAAAIsJpHljREaS2EPF8y5uw2frJHA"
-# VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify"
+SITE_KEY = "6LeKBj8mAAAAAA3jCMVID2PjUUYmIM1TYOIKf3Ei"
+SECRET_KEY = "6LeKBj8mAAAAAAIsJpHljREaS2EPF8y5uw2frJHA"
+VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify"

@@ -1,31 +1,17 @@
-import Usuario
+import Usuario, pymysql
 class Empresa(Usuario.Usuario):
-    def criaEmpresa(self, cnpj, email, telefone, conta, senha, razao_social, area_negocio):
-        self.cursor.execute(f'INSERT INTO empresa (CNPJ, razao_social, area_negocio, email, telefone, conta_bancaria, login, senha) VALUES ({cnpj}, {razao_social}, {area_negocio}, {email}, {telefone}, {conta}, {senha})')
-        self.con.commit() # INSERT REALIZADO
-
+   
+    def criaEmpresa(self, email, telefone, agencia, conta, login, senha, razao_social):
+        self.criaUsuario(self, email, telefone, agencia, conta, login, senha)
+        # Fazer insert da razao social
+    
     def getRazaoSocial(self):
-        self.cursor.execute(f'SELECT razao_social FROM empresa WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
+        #SELECT RAZAO_SOC FROM EMPRESA WHERE EMAIL = XXXX
+        pass
     
-    def getCnpj(self):
-        self.cursor.execute(f'SELECT CNPJ FROM empresa WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
-    
-    
-    
-    def getAreaNegocio(self):
-        self.cursor.execute(f'SELECT area_negocio FROM empresa WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
-    
-    
-    
-    #def setRazaoSocial(self, razao_social):
+    def setRazaoSocial(self, razao_social):
         #SELECT RAZAO_SOC FROM EMPRESA WHERE EMAIL = XXXX -- UPDATE
-    #    pass
+        pass
     #def publicarProjeto(self, projeto):
     #    self.projetos.append(projeto)
     
@@ -37,11 +23,10 @@ class Empresa(Usuario.Usuario):
     #def seguirDesenvolvedor(self, desenvolvedor):
     #    self.desenvolvedores_seguidos.append(desenvolvedor)
     
-    def pesquisarDesenvolvedores(self):
-        self.cursor.execute(f'SELECT * FROM desenvolvedor') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
-    
+    def pesquisarDesenvolvedores(self, tags):
+        # SELECT * FROM DEVS WHERE ?
+        pass
+        #return desenvolvedores_encontrados
     
     #def inserirDinheiroCarteira(self, valor):
     #    self.saldo_carteira += valor
