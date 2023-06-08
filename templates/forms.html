@@ -1,0 +1,99 @@
+//templates/form.html
+<html>
+<head> 
+<title>Register</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+</head>
+<body>
+<div class="container"> <center><h3>How to add ReCaptcha to Flask App using Flask-reCaptcha</h3></center> 
+<div class="row main" style="padding-top:50px;">
+ <div class="main-login main-center">
+ <h5>Sign up once and watch demos.</h5>
+        <p>
+         {% with messages = get_flashed_messages() %}
+           {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-primary">
+             <strong>{{ message }}</strong>
+           </div>
+          {% endfor %}
+           {% endif %}
+         {% endwith %}
+        </p>
+<form method="POST" action="{{ url_for('submit') }}"> 
+    <div class="form-group">
+  <label for="name" class="cols-sm-2 control-label">Your Name</label>
+  <div class="cols-sm-10">
+   <div class="input-group">
+    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+    <input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
+   </div>
+  </div>
+ </div>
+ <div class="form-group">
+  <label for="email" class="cols-sm-2 control-label">Your Email</label>
+  <div class="cols-sm-10">
+   <div class="input-group">
+    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+    <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+   </div>
+  </div>
+ </div>     
+    {{ recaptcha }} <br/>
+    <input type="submit" value="submit" class="btn btn-primary btn-lg btn-block login-button">
+</form>
+</div>
+</div>
+</div>
+<style>
+.form-group{
+ margin-bottom: 15px;
+}
+ 
+label{
+ margin-bottom: 15px;
+}
+input,
+input::-webkit-input-placeholder {
+    font-size: 11px;
+    padding-top: 3px;
+}
+.main-login{
+  background-color: #f5f5f5;
+    padding:50px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+ 
+}
+span.input-group-addon i {
+    color: #009edf;
+    font-size: 17px;padding:10px;
+}
+.form-control {
+    height: auto!important;
+padding: 8px 12px !important;
+}
+.input-group {
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
+}
+.main-center{
+  margin-top: 30px;
+  margin: 0 auto;
+  max-width: 400px;
+    padding: 10px 40px;
+    text-shadow: none;
+ -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+ 
+}
+</style>
+</body>
+</html> 

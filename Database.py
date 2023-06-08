@@ -1,53 +1,26 @@
 import mysql.connector
-from tabulate import tabulate
-
-
 class Database:
-    def __init__(self):
-        self.connection = None
+    def insert(self, values, tipo):
+        if tipo == True: # Indica que é um desenvolvedor
+            query = """ INSERT INTO DESENVOLVEDOR (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta_bancaria, senha, habilidade, experiencia, tag_desenvolvedor) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        else:
+            query = """ INSERT INTO EMPRESA (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta_bancaria, senha, habilidade, experiencia, tag_desenvolvedor) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        self.cursor.execute(query, values)
+        self.con.commit() # INSERT REALIZADO
 
+    def update(self, coluna, dado, tabela, email):
+        self.cursor.execute(f'UPDATE {tabela} SET {coluna} = {dado} WHERE email = "{email}"')
+        self.con.commit() # UPDATE REALIZADO
+    def delete(self, tabela, email):
+        self.cursor.execute(f'DELETE FROM {tabela} WHERE email = {email}')
+        self.con.commit() 
+    def select(self, coluna, dado, tabela):
+        pass
     def connect(self):
-        self.connection = mysql.connector.connect(
-            host='localhost',
-            database='db-worklink',
-            user='root',
-            password='pjSq2023@') 
-        #if self.connection.is_connected():
-        # print('Conexão estabelecida.')
-
-    def close(self):
-        if self.connection.is_connected():
-            self.connection.close()
-            print('Conexão encerrada.')
-
-    def ler_query(self, query):
-        cursor = self.connection.cursor()
-        cursor.execute(query)
-        #self.connection.commit()
-        result = cursor.fetchall()
-        if len(result) > 0:
-            headers = [desc[0] for desc in cursor.description]  # Obter os nomes das colunas
-            table = [list(row) for row in result]  # Converter os resultados em uma lista de listas
-            print("Registros na tabela:")
-            print(tabulate(table, headers=headers, tablefmt="grid"))
-        else:
-            print("Nenhum registro encontrado na tabela.")
-            #print(result)
-            cursor.close()
-            return result
-    
-    def criar_query(self, query, values):
-        cursor = self.connection.cursor()
-        cursor.execute(query, values)
-        self.connection.commit()
-        result = cursor.fetchall()
-        if len(result) > 0:
-            headers = [desc[0] for desc in cursor.description]  # Obter os nomes das colunas
-            table = [list(row) for row in result]  # Converter os resultados em uma lista de listas
-            print("Registros na tabela:")
-            print(tabulate(table, headers=headers, tablefmt="grid"))
-        else:
-            print("Nenhum registro encontrado na tabela.")
-            #print(result)
-            cursor.close()
-            return result
+        self.con = mysql.connector.connect(
+        host='35.247.225.250',
+        database='db_worklink',
+        user='root',
+        password='pjSq2023@') # BD acessado!!!
+        if self.con.is_connected():
+            self.cursor = self.con.cursor()
