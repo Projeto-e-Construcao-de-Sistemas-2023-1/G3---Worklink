@@ -7,16 +7,38 @@ class Database:
             query = """ INSERT INTO EMPRESA (cnpj, razao_social, email, telefone, conta_bancaria, senha, area_negocio) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
         self.cursor.execute(query, values)
         self.con.commit() # INSERT REALIZADO
+
     def update(self, coluna, dado, tabela, email):
         self.cursor.execute(f'UPDATE {tabela} SET {coluna} = "{dado}" WHERE email = "{email}"')
         self.con.commit() # UPDATE REALIZADO
+
     def delete(self, tabela, email):
         self.cursor.execute(f'DELETE FROM {tabela} WHERE email = "{email}"')
         self.con.commit() 
-    def select(self, dado, tabela, tipo): # Se coluna = '0' -> seleciona tudo da tabela sobre aquele dado
-        self.cursor.execute(f'SELECT * FROM {tabela} WHERE {tipo} = "{dado}"')
+
+    def select(self, tabela, tipo, email): # Se coluna = '0' -> seleciona tudo da tabela sobre aquele dado
+        self.cursor.execute(f'SELECT {tipo} FROM {tabela} WHERE email = "{email}"')
         self.con.commit()
-        self.cursor.fetchall()
+        return self.cursor.fetchall()
+    
+    def autenticaUsuario(self, email, senha):
+        self.cursor.execute(f'SELECT * FROM desenvolvedor JOIN empresa WHERE email = {email} AND senha = {senha}') # Tenta achar o cara com essas credenciais
+        self.con.commit()
+        if self.cursor.fetchone():
+            return True # Logado com sucesso 
+        else:
+            return False # Credenciais inválidas
+        
+    def pesquisaUsuario(self, nome):
+        self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR JOIN EMPRESA WHERE DESENVOVEDOR.nome = "{nome}" OR EMPRESA.razao_social "{nome}"')
+        self.con.commit()
+        return self.cursor.fetchall() # MOSTRAR OS REGISTROS NA TELA DO FRONT END
+    
+    def pesquisaDesenvolvedor(self, nome):
+        self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR WHERE nome = "{nome}"')
+        self.con.commit()
+        return self.cursor.fetchall() # MOSTRAR OS REGISTROS NA TELA DO FRONT END
+
     def connect(self):
         self.con = mysql.connector.connect(
         host='35.247.225.250',

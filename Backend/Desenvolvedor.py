@@ -9,72 +9,103 @@ class Desenvolvedor(Usuario.Usuario):
         Database.insert(self, values, tipo)
 
     # GETTERS
-
     def getNome(self):
-        self.cursor.execute(f'SELECT nome FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit() 
-        return str(self.cursor.fetchall())
-    
-    def getGenero(self):
-        self.cursor.execute(f'SELECT genero FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
-    
-    def getHabilidade(self):
-        self.cursor.execute(f'SELECT habilidade FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
-    
-    def getCpf(self):
-        self.cursor.execute(f'SELECT CPF FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
-    
-    def getDataNascimento(self):
-        self.cursor.execute(f'SELECT data_nascimento FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
+        Database.connect(self)
+        return Database.select('DESENVOLVEDOR', 'nome', self.email)
     
     def getSobrenome(self):
-        self.cursor.execute(f'SELECT sobrenome FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
+        Database.connect(self)
+        return Database.select('DESENVOLVEDOR', 'sobrenome', self.email)
+    
+    def getCPF(self):
+        Database.connect(self)
+        return Database.select('DESENVOLVEDOR', 'CPF', self.email)
+    
+    def getEmail(self):
+        Database.connect(self)
+        return Database.select('DESENVOLVEDOR', 'email', self.email)
+    
+    def getGenero(self):
+        Database.connect(self)
+        return Database.select('DESENVOLVEDOR', 'genero', self.email)
+    
+    def getDataNascimento(self):
+        Database.connect(self)
+        return Database.select('DESENVOLVEDOR', 'data_nascimento', self.email)
+    
+    def getTelefone(self):
+        Database.connect(self)
+        return Database.select('DESENVOLVEDOR', 'telefone', self.email)
+    
+    def getConta(self):
+        Database.connect(self)
+        return Database.select('DESENVOLVEDOR', 'conta_bancaria', self.email)
+    
+    def getNome(self):
+        Database.connect(self)
+        return Database.select('DESENVOLVEDOR', 'nome', self.email)
+    
+    def getSenha(self):
+        Database.connect(self)
+        return Database.select('DESENVOLVEDOR', 'senha', self.email)
+    
+    def getHabilidade(self):
+        Database.connect(self)
+        return Database.select('DESENVOLVEDOR', 'habilidade', self.email)
+    
+    def getExperiencia(self):
+        Database.connect(self)
+        return Database.select('DESENVOLVEDOR', 'experiencia', self.email)
+    
+    def getTag(self):
+        Database.connect(self)
+        return Database.select('DESENVOLVEDOR', 'tag', self.email)
     
     # SETTERS
-
     def setNome(self, nome, email):
         Database.connect(self)
         Database.update(self, 'nome', nome, 'DESENVOLVEDOR', email)
+
     def setSobrenome(self, sobrenome, email):
         Database.connect(self)
         Database.update(self, 'sobrenome', sobrenome, 'DESENVOLVEDOR', email)
+
     def setCpf(self, CPF, email):
         Database.connect(self)
         Database.update(self, 'CPF', CPF, 'DESENVOLVEDOR', email)
+
     def setEmail(self, email_novo, email):
         Database.connect(self)
         Database.update(self, 'email', email_novo, 'DESENVOLVEDOR', email)
+
     def setGenero(self, genero, email):
         Database.connect(self)
         Database.update(self, 'genero', genero, 'DESENVOLVEDOR', email)
+
     def setDataNascimento(self, data_nascimento, email):
         Database.connect(self)
         Database.update(self, 'data_nascimento', data_nascimento, 'DESENVOLVEDOR', email)
+
     def setTelefone(self, telefone, email):
         Database.connect(self)
         Database.update(self, 'telefone', telefone, 'DESENVOLVEDOR', email)
+
     def setConta(self, conta, email):
         Database.connect(self)
         Database.update(self, 'conta_bancaria', conta, 'DESENVOLVEDOR', email)
+        
     def setSenha(self, senha, email):
         Database.connect(self)
         Database.update(self, 'senha', senha, 'DESENVOLVEDOR', email)
+
     def setHabilidade(self, habilidade, email):
         Database.connect(self)
         Database.update(self, 'habilidade', habilidade, 'DESENVOLVEDOR', email)
+
     def setExperiencia(self, experiencia, email):
         Database.connect(self)
         Database.update(self, 'experiencia', experiencia, 'DESENVOLVEDOR', email)
+
     def setTag(self, tag, email):
         Database.connect(self)
         Database.update(self, 'tag', tag, 'DESENVOLVEDOR', email)
