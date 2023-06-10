@@ -22,7 +22,7 @@ class Database:
         return self.cursor.fetchall()
     
     def autenticaUsuario(self, email, senha):
-        self.cursor.execute(f'SELECT * FROM desenvolvedor JOIN empresa WHERE email = {email} AND senha = {senha}') # Tenta achar o cara com essas credenciais
+        self.cursor.execute(f'SELECT * FROM desenvolvedor JOIN empresa WHERE email = "{email}" AND senha = "{senha}"') # Tenta achar o cara com essas credenciais
         self.con.commit()
         if self.cursor.fetchone():
             return True # Logado com sucesso 
