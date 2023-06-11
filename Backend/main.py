@@ -1,10 +1,10 @@
 # Arquivo main para testes de funcionalidades das classes e do BD
-#from Desenvolvedor import Desenvolvedor
-#from Empresa import Empresa
+from Desenvolvedor import Desenvolvedor
+from Empresa import Empresa
 #from Database import Database
 from flask import Flask, render_template, redirect, request, abort, url_for
 import requests
-from datetime import datetime as dt
+#from datetime import datetime as dt
 
 app = Flask(__name__, template_folder="templates")
 
@@ -17,39 +17,27 @@ app = Flask(__name__, template_folder="templates")
 def home():
     return render_template('home.html')
 
-
-@app.route('/authlogin', methods=['GET'])
-def authlog():
-    email = request.form.get('e-mail')
+@app.route('/authlogin', methods=['POST'])
+def authlogin():
+    email = request.form.get('email')
     password = request.form.get('password')
     print(email)
     print(password)
+    return render_template('teste.html', email=email, password=password)
     #if dev.iniciaSessao(email, password) == True:
         #return render_template('feed.html')
-        # Avançar de página
+        #Avançar de página
         #print('Passei!')
         #pass
     #else:
         #print('Erro')
         #return render_template('index.html')  # criar pagina de erro com para nova tentativa
-        # Printar erro
+        #Printar erro
         #pass
 
 @app.route('/login', methods=['GET'])
 def login():
    return render_template('login.html')
-
-@app.route('/teste', methods=['GET'])
-def teste():
-   return render_template('loginEmpresa.html')
-
-@app.route('/signup_developer', methods=['GET'])
-def regdev():
-   return render_template('RegisterDesenvolvedor.html')
-  
-@app.route('/signup_enterprise', methods=['GET'])
-def regEmp():
-   return render_template('RegisterEmpresa.html')
 
 @app.route('/loginEmpresa', methods=['POST'])
 def loginemp():
@@ -67,7 +55,36 @@ def loginemp():
         pass
     return redirect('/')  # aqui o final do antigo cofigo
 
+@app.route('/signup_developer', methods=['POST'])
+def regdev():
+    nome = request.form.get('nome')
+    cpf = request.form.get('cpf')
+    email = request.form.get('cpf')
+    dataNascimento = request.form.get('dataNascimento')
+    telefone = request.form.get('telefone')
+    novaSenha = request.form.get('novaSenha')
+    rNovaSenha = request.form.get('rNovaSenha')
+    return render_template('login.html')
 
+@app.route('/signup_enterprise', methods=['GET'])
+def regEmp():
+    cpf = request.form.get('cnpj')
+    razaoSocial = request.form.get('razaoSocial')
+    email = request.form.get('email')
+    pais = request.form.get('pais')
+    telefone = request.form.get('telefone')
+    novaSenha = request.form.get('novaSenha')
+    rNovaSenha = request.form.get('rNovaSenha')
+    return render_template('login.html')
+
+@app.route('/criarProjeto', methods=['POST'])
+def regdev():
+    nomeProjeto = request.form.get('nomeProjeto')
+    nunDev = request.form.get('nunDev')
+    tag = request.form.get('tag')
+    descricao = request.form.get('descricao')
+    return render_template('feed.html')
+  
 @app.route("/sign-user-in", methods=['POST'])
 def sign_in_user():
     secret_response = request.form['g-recaptcha-response']
