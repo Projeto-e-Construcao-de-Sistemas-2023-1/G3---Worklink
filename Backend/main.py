@@ -1,17 +1,17 @@
 # Arquivo main para testes de funcionalidades das classes e do BD
 from Desenvolvedor import Desenvolvedor
 from Empresa import Empresa
-#from Database import Database
+from Database import Database
 from flask import Flask, render_template, redirect, request, abort, url_for
 import requests
-#from datetime import datetime as dt
+from datetime import datetime as dt
 
 app = Flask(__name__, template_folder="templates")
 
-#emp = Empresa()
-#dev = Desenvolvedor()
-#dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
-#                     'senha', 'pleno', 'gigantesca', 'python')
+emp = Empresa()
+dev = Desenvolvedor()
+dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
+                     'senha', 'pleno', 'python')
 
 @app.route('/')
 def home():
@@ -23,21 +23,15 @@ def authlogin():
     password = request.form.get('password')
     print(email)
     print(password)
-    return render_template('teste.html', email=email, password=password)
-    #if dev.iniciaSessao(email, password) == True:
-        #return render_template('feed.html')
-        #Avançar de página
-        #print('Passei!')
-        #pass
-    #else:
-        #print('Erro')
-        #return render_template('index.html')  # criar pagina de erro com para nova tentativa
-        #Printar erro
-        #pass
+    if dev.iniciaSessao(email, password) == True:
+        return render_template('feed.html')
+    else:
+        print('Erro')
+        return render_template('index.html')  # criar pagina de erro com para nova tentativa
 
 @app.route('/login', methods=['GET'])
 def login():
-   return render_template('login.html')
+   return render_template('teste.html')
 
 @app.route('/loginEmpresa', methods=['POST'])
 def loginemp():
@@ -54,18 +48,28 @@ def loginemp():
         # Printar erro
         pass
     return redirect('/')  # aqui o final do antigo cofigo
-
+@app.route('/signup_dev', methods=['GET'])
+def regdv():
+    return render_template('RegisterDesenvolvedor.html') 
 @app.route('/signup_developer', methods=['POST'])
 def regdev():
-    nome = request.form.get('nome')
-    cpf = request.form.get('cpf')
-    email = request.form.get('cpf')
-    dataNascimento = request.form.get('dataNascimento')
-    telefone = request.form.get('telefone')
-    novaSenha = request.form.get('novaSenha')
-    rNovaSenha = request.form.get('rNovaSenha')
-    return render_template('login.html')
-
+        nome = request.form.get('nome')
+        sobrenome = request.form.get( 'sobrenome')
+        cpf = request.form.get('cpf')
+        email = request.form.get('email')
+        genero = request.form.get('genero')
+        data_nascimento = request.form.get('dataNascimento')
+        telefone = request.form.get('telefone')
+        conta = request.form.get('conta')
+        password = request.form.get('novaSenha')
+        confirm_password = request.form.get('rNovaSenha')
+        descricao = request.form.get('descricao')
+        tag = request.form.get('tag')
+    #funcao para o backend
+        dev.criaDesenvolvedor(nome, sobrenome, cpf, email, genero, data_nascimento, telefone, conta,
+                     password, descricao, tag)
+        return render_template('teste.html') 
+    
 @app.route('/signup_enterprise', methods=['GET'])
 def regEmp():
     cpf = request.form.get('cnpj')
@@ -78,7 +82,7 @@ def regEmp():
     return render_template('login.html')
 
 @app.route('/criarProjeto', methods=['POST'])
-def regdev():
+def criarProjeto():
     nomeProjeto = request.form.get('nomeProjeto')
     nunDev = request.form.get('nunDev')
     tag = request.form.get('tag')
