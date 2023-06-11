@@ -5,12 +5,18 @@
 </head>
 <body>
 <h1>Formulário</h1>
-<form action="/authlogin" id="authlogin" method="POST">
+<form action="/signup_developer" id="authlogin" method="POST">
     <label for="nome">email:</label>
     <input type="text" id="email" name="email" required>
     <br>
-    <p>Nome: {{ email }}</p>
-    <p>Email: {{ password }}</p>
+    <p>Nome: {{ nome }}</p>
+    <p>cpf: {{ cpf }}</p>
+    <p>email: {{ email }}</p>
+    <p>data de nascimento: {{ data_nascimento }}</p>
+    <p>senha: {{ password }}</p>
+    <p>telefone: {{ telefone }}</p>
+    <p>password: {{ password }}</p>
+    <p>comfirmar senha: {{ confirm_password }}</p>
     <label for="password">password:</label>
     <input type="password" id="password" name="password" required>
     <br>
