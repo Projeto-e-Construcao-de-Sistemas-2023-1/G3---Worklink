@@ -2,8 +2,8 @@ import Usuario
 from Database import Database
 # OS GETTERS VÃO SER CONSULTAS NO BANCO DE DADOS PEDINDO AQUELA VARIAVEL
 class Desenvolvedor(Usuario.Usuario):    
-    def criaDesenvolvedor(self, nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, habilidade, experiencia, tag):
-        values = (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, habilidade, experiencia, tag)
+    def criaDesenvolvedor(self, nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, descricao, tag):
+        values = (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, descricao, tag)
         tipo = True
         Database.connect(self)
         Database.insert(self, values, tipo)
@@ -49,13 +49,9 @@ class Desenvolvedor(Usuario.Usuario):
         Database.connect(self)
         return Database.select('DESENVOLVEDOR', 'senha', self.email)
     
-    def getHabilidade(self):
+    def getDescricao(self):
         Database.connect(self)
-        return Database.select('DESENVOLVEDOR', 'habilidade', self.email)
-    
-    def getExperiencia(self):
-        Database.connect(self)
-        return Database.select('DESENVOLVEDOR', 'experiencia', self.email)
+        return Database.select('DESENVOLVEDOR', 'descricao', self.email)
     
     def getTag(self):
         Database.connect(self)
