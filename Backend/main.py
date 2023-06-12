@@ -1,17 +1,18 @@
 # Arquivo main para testes de funcionalidades das classes e do BD
 from Desenvolvedor import Desenvolvedor
-from Empresa import Empresa
-from Database import Database
+#from Empresa import Empresa
+#from Database import Database
 from flask import Flask, render_template, redirect, request, abort, url_for
 import requests
-from datetime import datetime as dt
+#from datetime import datetime as dt
 
 app = Flask(__name__, template_folder="templates")
 
-emp = Empresa()
-dev = Desenvolvedor()
-dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
-                     'senha', 'pleno', 'python')
+#emp = Empresa()
+#emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
+#dev = Desenvolvedor()
+#dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
+#                     'senha', 'pleno', 'python')
 
 @app.route('/')
 def home():
@@ -51,6 +52,12 @@ def loginemp():
 @app.route('/signup_dev', methods=['GET'])
 def regdv():
     return render_template('RegisterDesenvolvedor.html') 
+
+@app.route('/signup_emp', methods=['GET'])
+def regem():
+    return render_template('RegisterEmpresa.html') 
+
+
 @app.route('/signup_developer', methods=['POST'])
 def regdev():
         nome = request.form.get('nome')
@@ -58,27 +65,31 @@ def regdev():
         cpf = request.form.get('cpf')
         email = request.form.get('email')
         genero = request.form.get('genero')
-        data_nascimento = request.form.get('dataNascimento')
+        data_nascimento = request.form.get('data_nascimento')
         telefone = request.form.get('telefone')
         conta = request.form.get('conta')
-        password = request.form.get('novaSenha')
-        confirm_password = request.form.get('rNovaSenha')
+        senha = request.form.get('senha')
+        rNovaSenha = request.form.get('rNovaSenha')
         descricao = request.form.get('descricao')
         tag = request.form.get('tag')
     #funcao para o backend
-        dev.criaDesenvolvedor(nome, sobrenome, cpf, email, genero, data_nascimento, telefone, conta,
-                     password, descricao, tag)
-        return render_template('teste.html') 
+        #dev.criaDesenvolvedor(nome, sobrenome, cpf, email, genero, data_nascimento, telefone, conta,
+        #            password, descricao, tag)
+        
+        return render_template('login.html') 
     
-@app.route('/signup_enterprise', methods=['GET'])
+@app.route('/signup_enterprise', methods=['POST'])
 def regEmp():
-    cpf = request.form.get('cnpj')
-    razaoSocial = request.form.get('razaoSocial')
-    email = request.form.get('email')
-    pais = request.form.get('pais')
+    cnpj = request.form.get('cnpj')
+    razao_social = request.form.get('razao_social')
+    email = request.form.get('conta')
     telefone = request.form.get('telefone')
-    novaSenha = request.form.get('novaSenha')
-    rNovaSenha = request.form.get('rNovaSenha')
+    conta = request.form.get('email')
+    senha = request.form.get('senha')
+    confirm_password = request.form.get('confirm_password')
+    area_negocio = request.form.get('area_negocio')
+    #funcao para o backend
+    #emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
     return render_template('login.html')
 
 @app.route('/criarProjeto', methods=['POST'])
