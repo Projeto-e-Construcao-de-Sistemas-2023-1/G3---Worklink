@@ -14,10 +14,28 @@ app = Flask(__name__, template_folder="templates")
 #dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
 #                     'senha', 'pleno', 'python')
 
+#Rotas 
 @app.route('/')
 def home():
     return render_template('home.html')
 
+@app.route('/signup_dev', methods=['GET'])
+def regdv():
+    return render_template('RegisterDesenvolvedor.html') 
+
+@app.route('/signup_emp', methods=['GET'])
+def regem():
+    return render_template('RegisterEmpresa.html') 
+
+@app.route('/login', methods=['GET'])
+def login():
+   return render_template('login.html')
+
+@app.route('/criar_Projeto', methods=['GET']):
+def criar_projeto():
+    return render_template('criarProjeto.html')
+
+#metodos 
 @app.route('/authlogin', methods=['POST'])
 def authlogin():
     email = request.form.get('email')
@@ -29,10 +47,6 @@ def authlogin():
     else:
         print('Erro')
         return render_template('index.html')  # criar pagina de erro com para nova tentativa
-
-@app.route('/login', methods=['GET'])
-def login():
-   return render_template('teste.html')
 
 @app.route('/loginEmpresa', methods=['POST'])
 def loginemp():
@@ -49,14 +63,6 @@ def loginemp():
         # Printar erro
         pass
     return redirect('/')  # aqui o final do antigo cofigo
-@app.route('/signup_dev', methods=['GET'])
-def regdv():
-    return render_template('RegisterDesenvolvedor.html') 
-
-@app.route('/signup_emp', methods=['GET'])
-def regem():
-    return render_template('RegisterEmpresa.html') 
-
 
 @app.route('/signup_developer', methods=['POST'])
 def regdev():
