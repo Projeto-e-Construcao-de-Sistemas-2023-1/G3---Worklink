@@ -31,7 +31,7 @@ def regem():
 def login():
    return render_template('login.html')
 
-@app.route('/criar_Projeto', methods=['GET']):
+@app.route('/criar_Projeto', methods=['GET'])
 def criar_projeto():
     return render_template('criarProjeto.html')
 
