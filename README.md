@@ -3,9 +3,9 @@
 ## Minimundo
 WorkLink é uma plataforma para empresas e desenvolvedores freelancers, onde empresas postam trabalhos que precisam ser feitos e desenvolvedores se candidatam a esses trabalhos. Tais desenvolvedores trabalham de forma independente, oferecendo seus serviços de desenvolvimento a empresas em troca de remuneração acordada entre as partes. 
 
-Na plataforma, as empresas se cadastram com nome e CNPJ e criam seus perfis, destacando sua área de negócio e projetos em aberto, que contam com suas especificações, como tags, prazos, requisitos técnicos e orçamento disponível. Os desenvolvedores, por sua vez, cadastram-se com nome, CPF, email, telefone e data de nascimento e criam seus próprios perfis, destacando suas habilidades através de tags que eles marcam em seu perfil (como java, front-end, full-stack, etc.), experiência no ramo e projetos feitos, para que as empresas possam encontrar o talento certo para o trabalho. Nesse sentido, empresas podem seguir desenvolvedores e vice-versa.
+Na plataforma, as empresas se cadastram com nome e CNPJ e criam seus perfis, destacando sua área de negócio e projetos em aberto, que contam com suas especificações, como hashtags, prazos, requisitos técnicos e orçamento disponível. Os desenvolvedores, por sua vez, cadastram-se com nome, CPF, email, telefone e data de nascimento e criam seus próprios perfis, destacando suas habilidades através de hashtags que eles marcam em seu perfil (como java, front-end, full-stack, etc.), experiência no ramo e projetos feitos, para que as empresas possam encontrar o talento certo para o trabalho. Nesse sentido, empresas podem seguir desenvolvedores e vice-versa.
 
- Além dos perfis, a plataforma conta com um feed geral para navegação dos desenvolvedores de projetos de empresas que eles seguem, onde eles podem ver trabalhos requisitados em tempo real. Assim que os trabalhos são postados pelas empresas, os desenvolvedores podem se candidatar aos trabalhos que acham que se encaixam em suas habilidades e experiência se eles possuírem uma tag em comum com as tags do projeto. As empresas podem então revisar as inscrições e escolher o freelancer que melhor se adequa às suas necessidades.
+ Além dos perfis, a plataforma conta com um feed geral para navegação dos desenvolvedores de projetos de empresas que eles seguem, onde eles podem ver trabalhos requisitados em tempo real. Assim que os trabalhos são postados pelas empresas, os desenvolvedores podem se candidatar aos trabalhos que acham que se encaixam em suas habilidades e experiência se eles possuírem uma tag em comum com as hashtags do projeto. As empresas podem então revisar as inscrições e escolher o freelancer que melhor se adequa às suas necessidades.
 
 O feed geral também conta com filtros, para ajudar os desenvolvedores a encontrar o trabalho que desejam.
 
@@ -27,12 +27,12 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | RF04 | O sistema deve permitir manter usuário. |
 | RF05 | O sistema deve permitir que empresas publiquem projetos que estão em andamento ou que precisam ser iniciados em um feed geral, definindo prazos, requisitos técnicos e orçamento disponível. |
 | RF06 | O sistema deve exibir no perfil dos desenvolvedores em quais projetos eles estão atualmente trabalhando. |
-| RF07 | O sistema deve permitir que os desenvolvedores escolham tags que mostrem quais são suas proficiências e área de atuação, além de um campo de descrição nas páginas dos usuários em que eles podem escrever. |
+| RF07 | O sistema deve permitir que os desenvolvedores escolham hashtags que mostrem quais são suas proficiências e área de atuação, além de um campo de descrição nas páginas dos usuários em que eles podem escrever. |
 | RF08 | O sistema deve permitir aos desenvolvedores seguirem empresas e vice-versa. |
 | RF09 | O sistema deve permitir a candidaturas de desenvolvedores a projetos de empresas. |
 | RF10 | O sistema deve permitir que as empresas aceitem desenvolvedores para seus projetos. |
 | RF11 | O sistema deve apresentar um feed geral para os desenvolvedores com os projetos apresentados pelas empresas. |
-| RF12 | O sistema deve permitir que o desenvolvedor filtre os projetos apresentados no feed geral pelas tags, ou mostrar apenas projetos publicados por empresas que ele segue. |
+| RF12 | O sistema deve permitir que o desenvolvedor filtre os projetos apresentados no feed geral pelas hashtags, ou mostrar apenas projetos publicados por empresas que ele segue. |
 | RF13 | O sistema deve permitir à empresa inserir dinheiro em sua própria carteira virtual. |
 | RF14 | O sistema deve permitir a transação de fundos entre empresa e desenvolvedor. |
 | RF15 | O sistema deve permitir marcar reuniões em calendário para conversas entre empresas e desenvolvedores. |
@@ -70,7 +70,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | CDU08 | Encerrar sessão. |
 | CDU09 | Seguir usuário. |
 | CDU10 | Candidatar-se a um projeto. |
-| CDU11 | Definir Tags. |
+| CDU11 | Definir Hashtags. |
 | CDU12 | Filtrar feed. |
 | CDU13 | Sacar dinheiro. |
 | CDU14 | Cancelar candidatura. |
@@ -112,7 +112,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Ator | Desenvolvedor |
 | Pré-Condições | O ator está com sessão em andamento |
 | Trigger | O ator seleciona a opção “Perfil” em sua tela de usuário. |
-| Fluxo Principal | 1 - O sistema exibe os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Tags”, além dos projetos do ator, na tela. |
+| Fluxo Principal | 1 - O sistema exibe os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Hashtags”, além dos projetos do ator, na tela. |
 | Fluxos Alternativos | N/A |
 | Extensões | N/A. |
 | Pós-Condições | Os dados do ator são exibidos na tela. |
@@ -127,25 +127,25 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Ator | Desenvolvedor |
 | Pré-Condições | O ator está com sessão em andamento |
 | Trigger | O ator seleciona a opção “Editar Perfil” em sua tela de usuário. |
-| Fluxo Principal | 1 - O sistema exibe na tela os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Tags” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do ator. |
+| Fluxo Principal | 1 - O sistema exibe na tela os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Hastags” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do ator. |
 | Fluxos Alternativos | <strong>A1. Dados inválidos</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
 | Pós-Condições | Os dados do ator são alterados. |
 | Regras de negócios | RN5 - O usuário não pode alterar CPF ou CNPJ. |
 
-### Caso 1.4: Desativar Desenvolvedor
+### Caso 1.4: Deletar Desenvolvedor
 
-| 01.4 | Desativar Desenvolvedor |
+| 01.4 | Deletar Desenvolvedor |
 | --- | --- |
-| Nome | Desativar Desenvolvedor |
-| Objetivo | Desativar conta do desenvolvedor |
+| Nome | Deletar Desenvolvedor |
+| Objetivo | Deletar conta do desenvolvedor |
 | Ator | Desenvolvedor |
 | Pré-Condições | O ator possui cadastro |
-| Trigger | O ator seleciona a opção “Excluir conta” em sua tela de usuário. |
-| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 - O ator confirma a desativação de conta. [A1] <br> 3 - O sistema verifica possíveis pendências e desativa a conta. [A2] |
-| Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Não” na pergunta de deleção de conta.</strong> <br> 1 - O ator não confirma a desativação. <br> 2 - Voltar para o passo 1. <br><br ><strong>2 - O ator tem alguma pendência no sistema.</strong> <br> 1 - O sistema exibe mensagem informando que a conta não pode ser desativada. <br> 2 - Voltar para o passo 1. |
+| Trigger | O ator seleciona a opção “Deletar conta” em sua tela de usuário. |
+| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 - O ator confirma a deleção de conta. [A1] <br> 3 - O sistema verifica possíveis pendências e deleta a conta. [A2] |
+| Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Não” na pergunta de deleção de conta.</strong> <br> 1 - O ator não confirma a deleção. <br> 2 - Voltar para o passo 1. <br><br ><strong>2 - O ator tem alguma pendência no sistema.</strong> <br> 1 - O sistema exibe mensagem informando que a conta não pode ser deletada. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
-| Pós-Condições | A conta do ator é desativada. |
+| Pós-Condições | A conta do ator é deletada. |
 | Regras de negócios | N/A |
 
 ### Caso 2.1: Cadastrar Empresa
@@ -193,19 +193,19 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pós-Condições | Os dados do ator são alterados. |
 | Regras de negócios | RN5 - O usuário não pode alterar CPF ou CNPJ. |
 
-### Caso 2.4: Desativar Empresa
+### Caso 2.4: Deletar  Empresa
 
-| 02.4 | Desativar Empresa |
+| 02.4 | Deletar Empresa |
 | --- | --- |
-| Nome | Desativar Empresa |
-| Objetivo | Desativar conta da empresa |
+| Nome | Deletar Empresa |
+| Objetivo | Deletar conta da empresa |
 | Ator | Empresa |
 | Pré-Condições | O ator possui cadastro |
 | Trigger | O ator seleciona a opção “Excluir conta” em sua tela de usuário. |
-| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 - O ator confirma a desativação de conta. [A1] <br> 3 - O sistema verifica possíveis pendências e desativa a conta. [A2] |
+| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 - O ator confirma a deleção de conta. [A1] <br> 3 - O sistema verifica possíveis pendências e deleta a conta. [A2] |
 | Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Não” na pergunta de deleção de conta.</strong> <br> 1 - O ator não confirma a desativação. <br> 2 - Voltar para o passo 1. <br><br> <strong> 2 - O ator tem alguma pendência no sistema.</strong> <br> 1 - O sistema exibe mensagem informando que a conta não pode ser desativada. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
-| Pós-Condições | A conta do ator é desativada. |
+| Pós-Condições | A conta do ator é deletada. |
 | Regras de negócios | N/A |
 
 ### Caso 3: Iniciar Sessão
@@ -215,12 +215,12 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Nome | Iniciar Sessão |
 | Objetivo | Iniciar sessão do usuário |
 | Ator | Usuário |
-| Pré-Condições | Ator com cadastro |
-| Trigger | Ator entra no endpoint de sessão do sistema |
-| Fluxo Principal | 1 - O sistema exibe na tela os campos “Entrar como Desenvolvedor” e “Entrar como Empresa”. <br> 2 - Ator seleciona a opção desejada. <br> 3 - Sistema exibe os campos "Email" e "Senha" para serem preenchidos. <br> 4 - Ator preenche os campos e seleciona a opção "Entrar". <br> 5 - Sistema checar se o ator tem cadastro, realiza autenticação e permite acesso. |
-| Fluxos Alternativos |  N/A |
+| Pré-Condições | O ator possui cadastro. |
+| Trigger | O ator entra na tela de sessão do sistema. |
+| Fluxo Principal | 1 - O sistema exibe na tela os campos “Entrar como Desenvolvedor” e “Entrar como Empresa”. <br> 2 - Ator seleciona a opção desejada. <br> 3 - Sistema exibe os campos "Email" e "Senha" para serem preenchidos. <br> 4 - Ator preenche os campos e seleciona a opção "Entrar". [A1] <br> 5 - Sistema checar se o ator tem cadastro, realiza autenticação e permite acesso. |
+| Fluxos Alternativos | <strong>A1. Dados Inválidos</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
-| Pós-Condições | Ator autenticado. |
+| Pós-Condições | O ator está autenticado. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
 
 ### Caso 4: Encerrar Sessão
@@ -230,13 +230,13 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Nome | Encerrar Sessão |
 | Objetivo | Encerrar sessão do usuário |
 | Ator | Usuário |
-| Pré-Condições | Ator com sessão em andamento. |
-| Trigger | Ator seleciona a opção “Sair”. |
-| Fluxo Principal | 1 - Sistema desautentica ator. |
-| Fluxos Alternativos | N/A |
+| Pré-Condições | O ator possui sessão em andamento. |
+| Trigger | O ator seleciona a opção “Sair”. |
+| Fluxo Principal | 1 - O sistema exibe uma mensagem para confirmação de encerramento de sessão. <br> 2 - O ator confirma o encerramento da sessão. <br> 3 - O sistema desconecta o ator e retorna para página de login. |
+| Fluxos Alternativos | <strong>A1. Usuário não confirma o encerramento.</strong> <br> 1 - O sistema retorna para página inicial. |
 | Extensões | N/A. |
-| Pós-Condições | Ator na tela de login. |
-| Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
+| Pós-Condições | O ator está na tela de sessão. |
+| Regras de negócios | N/A. |
 
 ### Caso 5: Marcar Reunião
 
@@ -245,12 +245,12 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Nome | Marcar Reunião |
 | Objetivo | Desenvolvedor e empresa se reunirem para comunicação |?
 | Ator | Usuário |
-| Pré-Condições | Ator com sessão em andamento. |
-| Trigger | Ator seleciona a opção “Marcar Reunião”. |
-| Fluxo Principal | 1 - Sistema exibe campos “Nome”, “Email” e “Horário” para serem preenchidos. <br> 2 - Ator preenche os campos.[A1][A2] <br> 3 - Sistema envia um aviso de reunião para a pessoa solicitada. |
-| Fluxos Alternativos |  <strong>A1. Sistema não consegue autenticar o nome preenchido.</strong> <br> 1 - Sistema exibe a mensagem de nome não cadastrado. <br> 2- Voltar para o passo 2. <br><br> <strong>A2. Sistema não consegue autenticar email.</strong> <br> 1 - Sistema exibe mensagem de email não cadastrado. <br> 2- Voltar para o passo 2. |
+| Pré-Condições | O ator está com sessão em andamento. |
+| Trigger | O ator seleciona a opção “Marcar Reunião”. |
+| Fluxo Principal | 1 - O sistema exibe campos “Nome”, “Email” e “Horário” para serem preenchidos. <br> 2 - O ator preenche os campos.[A1][A2] <br> 3 - O sistema envia um aviso de reunião para a pessoa solicitada. |
+| Fluxos Alternativos |  <strong>A1. O sistema não consegue autenticar o nome preenchido.</strong> <br> 1 - O sistema exibe a mensagem de nome não cadastrado. <br> 2- Voltar para o passo 2. <br><br> <strong>A2. O sistema não consegue autenticar email.</strong> <br> 1 - O sistema exibe mensagem de email não cadastrado. <br> 2 - Voltar para o passo 2. |
 | Extensões | N/A. |
-| Pós-Condições | Ator recebe notificação da reunião. |
+| Pós-Condições | O ator recebe notificação da reunião. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
 
 ### Caso 6.1: Criar Projeto
@@ -262,8 +262,8 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Ator | Empresa |
 | Pré-Condições | O ator está com sessão em andamento |
 | Trigger | O ator seleciona o botão “Criar Novo Projeto” em sua tela de usuário |
-| Fluxo Principal | 1 - O sistema exibe a tela com campos “Nome do Projeto”, “Descrição”, “Número de desenvolvedores” e “Tags” para serem preenchidos. <br> 2 - O ator preenche os campos e clica na opção “Publicar Projeto”. [A1] <br> 3 - O sistema cria e publica o novo projeto da empresa. |
-| Fluxos Alternativos | <strong>A1. Campos “Nome do Projeto”, “Número de Desenvolvedores” ou “Tags” estão vazios</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Fluxo Principal | 1 - O sistema exibe a tela com campos “Nome do Projeto”, “Descrição”, “Número de desenvolvedores” e “Hashtags” para serem preenchidos. <br> 2 - O ator preenche os campos e clica na opção “Publicar Projeto”. [A1] <br> 3 - O sistema cria e publica o novo projeto da empresa. |
+| Fluxos Alternativos | <strong>A1. Os cmpos “Nome do Projeto”, “Número de Desenvolvedores” ou “Hashtags” estão vazios</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
 | Pós-Condições | O ator cria um novo projeto em seu perfil. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
@@ -277,7 +277,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Ator | Empresa |
 | Pré-Condições | O ator está com sessão em andamento |
 | Trigger | O ator seleciona a opção “Ver mais” em um projeto |
-| Fluxo Principal | 1 - O sistema exibe os detalhes do projeto desejado, como nome, descrição, tags e desenvolvedores. |
+| Fluxo Principal | 1 - O sistema exibe os detalhes do projeto desejado, como nome, descrição, hashtags e desenvolvedores. |
 | Fluxos Alternativos | N/A |
 | Extensões | N/A. |
 | Pós-Condições | O ator visualiza detalhes do projeto. |
@@ -292,8 +292,8 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Ator | Empresa |
 | Pré-Condições | O ator está com sessão em andamento |
 | Trigger | O ator seleciona o botão “Editar Projeto” em um projeto |
-| Fluxo Principal | 1 - O sistema exibe tela com campos “Nome do projeto”, “Descrição”, “Número de desenvolvedores” e “Tags” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do projeto. |
-| Fluxos Alternativos | <strong>A1. Campos “Nome do Projeto”, “Número de Desenvolvedores” ou “Tags” estão vazios</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Fluxo Principal | 1 - O sistema exibe tela com campos “Nome do projeto”, “Descrição”, “Número de desenvolvedores” e “Hashtags” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do projeto. |
+| Fluxos Alternativos | <strong>A1. Campos “Nome do Projeto”, “Número de Desenvolvedores” ou “Hashtags” estão vazios</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
 | Pós-Condições | Os dados do projeto do ator são alterados. |
 | Regras de negócios | N/A |
@@ -320,13 +320,58 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Nome | Escolher Desenvolvedor |
 | Objetivo | Escolher o(s) desenvolvedor(es) que participará/participarão do projeto. |
 | Ator | Empresa |
-| Pré-Condições | Projeto publicado possui candidaturas de desenvolvedores. |
-| Trigger | Ator clica no botão “Selecionar desenvolvedores” na aba do projeto. |
-| Fluxo Principal | 1 - Sistema exibe na tela uma lista com nome e descrição de todos os desenvolvedores que se candidataram ao projeto.[A1] <br> 2 - Ator clica no botão “Escolher Desenvolvedor” ao lado do desenvolvedor desejado. <br> 3 - Sistema exibe a opção “Confirmar Desenvolvedores” após o número de desenvolvedores para o projeto ser totalizado. <br> 4 - Ator clica no botão “Confirmar Desenvolvedores”. |
-| Fluxos Alternativos |  <strong>A1.  Projeto não possui candidaturas de desenvolvedores.</strong> <br> 1 - Sistema exibe a mensagem “Projeto não possui desenvolvedores candidatados, tente novamente mais tarde.” <br> 2- Voltar para o passo 1. |
+| Pré-Condições | O projeto publicado possui candidaturas de desenvolvedores. |
+| Trigger | O ator clica no botão “Selecionar desenvolvedores” na aba do projeto. |
+| Fluxo Principal | 1 - O sistema exibe na tela uma lista com nome e descrição de todos os desenvolvedores que se candidataram ao projeto.[A1] <br> 2 - O ator clica no botão “Escolher Desenvolvedor” ao lado do desenvolvedor desejado. <br> 3 - O sistema exibe a opção “Confirmar Desenvolvedores” após o número de desenvolvedores para o projeto ser totalizado. <br> 4 - Ator clica no botão “Confirmar Desenvolvedores”. |
+| Fluxos Alternativos |  <strong>A1. O projeto não possui candidaturas de desenvolvedores.</strong> <br> 1 - O sistema exibe a mensagem “Projeto não possui desenvolvedores candidatados, tente novamente mais tarde.” <br> 2- Voltar para o passo 1. |
 | Extensões | N/A. |
-| Pós-Condições | Desenvolvedores para o projeto são confirmados. |
+| Pós-Condições | Os desenvolvedores para o projeto são confirmados. |
 | Regras de negócios | RN1 - Um desenvolvedor deve ter, no mínimo, 1 tag em comum com o projeto para poder se candidatar à ele. |
+
+### Caso 8: Pesquisar Usuário
+
+| 08 | Pesquisar Usuário |
+| --- | --- |
+| Nome | Pesquisar Usuário |
+| Objetivo | Pesquisar um usuário |
+| Ator | Usuário |
+| Pré-Condições | O ator está com sessão em andamento |
+| Trigger | O ator clica no botão de lupa após inserir o nome de um usuário na barra de pesquisa. |
+| Fluxo Principal | 1 - O sistema exibe na tela uma lista com nome dos usuários pelo nome pesquisado na barra de pesquisa, com um botão de “Ver mais” ao lado de cada usuário. [A1] |
+| Fluxos Alternativos | <strong>A1.Não há usuários com o nome pesquisado.</strong> <br> 1 - O sistema exibe a mensagem “Sua pesquisa não encontrou usuários, por favor tente novamente.” <br> 2 - Voltar para o passo 1. |
+| Extensões | N/A. |
+| Pós-Condições | Os usuários pesquisados são mostrados na tela. |
+| Regras de negócios | N/A |
+
+### Caso 9: Seguir Usuário
+
+| 09 | Seguir Usuário |
+| --- | --- |
+| Nome | Seguir Usuário |
+| Objetivo | Seguir um usuário |
+| Ator | Usuário |
+| Pré-Condições | O ator está no perfil do usuário. |
+| Trigger | O ator clica no botão “Seguir” no usuário. |
+| Fluxo Principal | 1 - O sistema registra a ação do ator e muda o botão para “Seguindo”. |
+| Fluxos Alternativos | N/A |
+| Extensões | N/A |
+| Pós-Condições | O ator está seguindo o usuário. |
+| Regras de negócios | N/A |
+
+### Caso 10: Realizar Recaptcha
+
+| 10 | Realizar Recaptcha |
+| --- | --- |
+| Nome | Realizar Recaptcha |
+| Objetivo | Passar pela verificação do Recaptcha para iniciar sessão. |
+| Ator | Usuário |
+| Pré-Condições | O ator tem cadastro. |
+| Trigger | O ator entra na tela de sessão do sistema. |
+| Fluxo Principal | 1 - O sistema exibe o Recaptcha na tela. <br> 2 - O ator clica no Recaptcha e o preenche. <br> 3 - O sistema verifica a pontuação do ator e confirma o preenchimento. |
+| Fluxos Alternativos | N/A. |
+| Extensões | N/A. |
+| Pós-Condições | O Recaptcha está preenchido. |
+| Regras de negócios | N/A. |
 
 ## Diagrama de Classes
 
