@@ -31,7 +31,7 @@ def regem():
 def login():
    return render_template('login.html')
 
-@app.route('/criar_Projeto', methods=['GET']):
+@app.route('/criar_Projeto', methods=['GET'])
 def criar_projeto():
     return render_template('criarProjeto.html')
 
@@ -47,22 +47,6 @@ def authlogin():
     else:
         print('Erro')
         return render_template('index.html')  # criar pagina de erro com para nova tentativa
-
-@app.route('/loginEmpresa', methods=['POST'])
-def loginemp():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    if emp.iniciaSessao(email, password) == True:
-        return render_template('feed.html')
-        # Avançar de página
-        print('Passei!')
-        pass
-    else:
-        print('Erro')
-        return render_template('index.html')  # criar pagina de erro com para nova tentativa
-        # Printar erro
-        pass
-    return redirect('/')  # aqui o final do antigo cofigo
 
 @app.route('/signup_developer', methods=['POST'])
 def regdev():
