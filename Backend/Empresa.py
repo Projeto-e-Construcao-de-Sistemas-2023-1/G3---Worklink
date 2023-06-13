@@ -40,30 +40,37 @@ class Empresa(Usuario.Usuario):
     def setCnpj(self, cnpj, email):
         Database.connect(self)
         Database.update(self, 'CNPJ', cnpj, 'EMPRESA', email)
+        return True
 
     def setRazaoSocial(self, razao_social, email):
         Database.connect(self)
         Database.update(self, 'razao_social', razao_social, 'EMPRESA', email)
+        return True
 
     def setEmail(self, email_novo, email):
         Database.connect(self)
         Database.update(self, 'email', email_novo, 'EMPRESA', email)
+        return True
 
     def setTelefone(self, telefone, email):
         Database.connect(self)
         Database.update(self, 'telefone', telefone, 'EMPRESA', email)
+        return True
 
     def setConta(self, conta, email):
         Database.connect(self)
         Database.update(self, 'conta_bancaria', conta, 'EMPRESA', email)
+        return True
 
     def setSenha(self, senha, email):
         Database.connect(self)
         Database.update(self, 'senha', senha, 'EMPRESA', email)
+        return True
 
     def setAreaNegocio(self, area_negocio, email):
         Database.connect(self)
         Database.update(self, 'area_negocio', area_negocio, 'EMPRESA', email)
+        return True
 
     #def setRazaoSocial(self, razao_social):
         #SELECT RAZAO_SOC FROM EMPRESA WHERE EMAIL = XXXX -- UPDATE

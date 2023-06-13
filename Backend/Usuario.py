@@ -8,13 +8,13 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
             Database.delete('EMPRESA', email)
     def iniciaSessao(self, email, senha):
         Database.connect(self)
-        if Database.autenticarUsuario(email, senha) == True:
+        if Database.autenticaUsuario(self, email, senha):
             self.email = email # Grava email do usuario logado para futuras consultas
-            return Database.autenticaUsuario(email, senha) # vai vir como True ou False
+            return True # vai vir como True ou False
         else:
-            return Database.autenticaUsuario(email, senha)
+            return False
     def finalizaSessao(self):
         pass # Apenas no front end
     def pesquisaUsuario(self, nome):
-        Database.connect()
-        return Database.pesquisaUsuario(nome)
+        Database.connect(self)
+        return Database.pesquisaUsuario(self, nome)

@@ -10,7 +10,8 @@ app = Flask(__name__, template_folder= "templates", static_folder= "styles")
 
 emp = Empresa()
 dev = Desenvolvedor()
-resposta = dev.iniciaSessao('dev@outlook.com', 'senha')
+#resposta = dev.iniciaSessao('dev@outlook.csom', 'senha') # Funcionando
+resposta = dev.setSenha('senha_nova', 'dev@outlook.com')
 print(resposta)
 #dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
 #                   'senha', 'pleno', 'gigantesca', 'python')
