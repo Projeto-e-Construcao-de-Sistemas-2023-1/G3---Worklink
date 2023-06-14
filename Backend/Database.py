@@ -22,21 +22,25 @@ class Database:
         return self.cursor.fetchall()
     
     def autenticaUsuario(self, email, senha):
-        #try:
-            self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR JOIN EMPRESA WHERE DESENVOLVEDOR.email = "{email}" AND DESENVOLVEDOR.senha = "{senha}" OR EMPRESA.email = "{email}" AND EMPRESA.senha = "{senha}"') # Tenta achar o cara com essas credenciais
-            self.con.commit()
-            if self.cursor.fetchall():
-                return True # Logado com sucesso 
-            else:
-                return False # Credenciais inválidas
-        #except:
-            return False
-        
+        self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR JOIN EMPRESA WHERE DESENVOLVEDOR.email = "{email}" AND DESENVOLVEDOR.senha = "{senha}" OR EMPRESA.email = "{email}" AND EMPRESA.senha = "{senha}"') # Tenta achar o cara com essas credenciais
+        self.con.commit()
+        if self.cursor.fetchall():
+            return True # Logado com sucesso 
+        else:
+            return False # Credenciais inválidas
+
     def pesquisaUsuario(self, nome):
         self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR JOIN EMPRESA WHERE nome = "{nome}" OR razao_social = "{nome}"')
         self.con.commit()
         return self.cursor.fetchall() # MOSTRAR OS REGISTROS NA TELA DO FRONT END
     
+    def verificaUsuario(self, email):
+        self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR WHERE email = "{email}"')
+        self.con.commit()
+        if self.cursor.fetchall():
+            return True # É Desenvolvedor
+        else:
+            return False # É empresa
     def pesquisaDesenvolvedor(self, nome):
         self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR WHERE nome = "{nome}"')
         self.con.commit()
