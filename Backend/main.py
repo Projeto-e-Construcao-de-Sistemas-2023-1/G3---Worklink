@@ -1,16 +1,16 @@
 # Arquivo main para testes de funcionalidades das classes e do BD
 from Desenvolvedor import Desenvolvedor
-#from Empresa import Empresa
-#from Database import Database
+from Empresa import Empresa
+from Database import Database
 from flask import Flask, render_template, redirect, request, abort, url_for
 import requests
-#from datetime import datetime as dt
+from datetime import datetime as dt
 
 app = Flask(__name__, template_folder="templates")
-
-#emp = Empresa()
+emailsessao=''
+emp = Empresa()
 #emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
-#dev = Desenvolvedor()
+dev = Desenvolvedor()
 #dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
 #                     'senha', 'pleno', 'python')
 
@@ -18,6 +18,10 @@ app = Flask(__name__, template_folder="templates")
 @app.route('/')
 def home():
     return render_template('home.html')
+
+@app.route('/editar_perfil', methods=['GET'])
+def editarp():
+    return render_template('editar_perfil.html') 
 
 @app.route('/signup_dev', methods=['GET'])
 def regdv():
@@ -36,22 +40,25 @@ def criar_projeto():
     return render_template('criarProjeto.html')
 
 #metodos 
+
 @app.route('/authlogin', methods=['POST'])
 def authlogin():
     email = request.form.get('email')
     password = request.form.get('password')
-    print(email)
-    print(password)
+    
     if dev.iniciaSessao(email, password) == True:
-        return render_template('feed.html')
+        print(email)
+        emailsessao=email
+        #funcao pesquisar email na tabela de dev
+        return render_template('pagina_inicial.html')
     else:
         print('Erro')
-        return render_template('index.html')  # criar pagina de erro com para nova tentativa
+        return render_template('home.html')  # criar pagina de erro com para nova tentativa
 
 @app.route('/signup_developer', methods=['POST'])
 def regdev():
         nome = request.form.get('nome')
-        sobrenome = request.form.get( 'sobrenome')
+        sobrenome = request.form.get('sobrenome')
         cpf = request.form.get('cpf')
         email = request.form.get('email')
         genero = request.form.get('genero')
@@ -59,28 +66,28 @@ def regdev():
         telefone = request.form.get('telefone')
         conta = request.form.get('conta')
         senha = request.form.get('senha')
-        rNovaSenha = request.form.get('rNovaSenha')
+        #rNovaSenha = request.form.get('rNovaSenha')
         descricao = request.form.get('descricao')
         tag = request.form.get('tag')
     #funcao para o backend
-        #dev.criaDesenvolvedor(nome, sobrenome, cpf, email, genero, data_nascimento, telefone, conta,
-        #            password, descricao, tag)
-        
-        return render_template('login.html') 
+        dev.criaDesenvolvedor(nome, sobrenome, cpf, email, genero, data_nascimento, telefone, conta, senha, descricao, tag)
+        print(email)
+        print(senha)
+        return render_template('home.html') 
     
 @app.route('/signup_enterprise', methods=['POST'])
 def regEmp():
     cnpj = request.form.get('cnpj')
     razao_social = request.form.get('razao_social')
-    email = request.form.get('conta')
+    email = request.form.get('email')
     telefone = request.form.get('telefone')
-    conta = request.form.get('email')
+    conta = request.form.get('conta')
     senha = request.form.get('senha')
-    confirm_password = request.form.get('confirm_password')
+    #confirm_password = request.form.get('confirm_password')
     area_negocio = request.form.get('area_negocio')
     #funcao para o backend
-    #emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
-    return render_template('login.html')
+    emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
+    return render_template('home.html')
 
 @app.route('/criarProjeto', methods=['POST'])
 def criarProjeto():
