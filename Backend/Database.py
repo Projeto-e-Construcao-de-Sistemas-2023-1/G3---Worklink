@@ -2,9 +2,9 @@ import mysql.connector
 class Database:
     def insert(self, values, tipo):
         if tipo == True: # Indica que é um desenvolvedor
-            query = """ INSERT INTO DESENVOLVEDOR (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta_bancaria, senha, habilidade, experiencia, tag_desenvolvedor) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            query = """ INSERT INTO DESENVOLVEDOR (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta_bancaria, senha, descricao, tag_desenvolvedor) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         else:
-            query = """ INSERT INTO EMPRESA (cnpj, razao_social, email, telefone, conta_bancaria, senha, area_negocio) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+            query = """ INSERT INTO EMPRESA (CNPJ, razao_social, email, telefone, conta_bancaria, senha, area_negocio) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
         self.cursor.execute(query, values)
         self.con.commit() # INSERT REALIZADO
 
@@ -22,15 +22,18 @@ class Database:
         return self.cursor.fetchall()
     
     def autenticaUsuario(self, email, senha):
-        self.cursor.execute(f'SELECT * FROM desenvolvedor JOIN empresa WHERE email = "{email}" AND senha = "{senha}"') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        if self.cursor.fetchone():
-            return True # Logado com sucesso 
-        else:
-            return False # Credenciais inválidas
+        #try:
+            self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR JOIN EMPRESA WHERE DESENVOLVEDOR.email = "{email}" AND DESENVOLVEDOR.senha = "{senha}" OR EMPRESA.email = "{email}" AND EMPRESA.senha = "{senha}"') # Tenta achar o cara com essas credenciais
+            self.con.commit()
+            if self.cursor.fetchall():
+                return True # Logado com sucesso 
+            else:
+                return False # Credenciais inválidas
+        #except:
+            return False
         
     def pesquisaUsuario(self, nome):
-        self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR JOIN EMPRESA WHERE DESENVOVEDOR.nome = "{nome}" OR EMPRESA.razao_social "{nome}"')
+        self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR JOIN EMPRESA WHERE nome = "{nome}" OR razao_social = "{nome}"')
         self.con.commit()
         return self.cursor.fetchall() # MOSTRAR OS REGISTROS NA TELA DO FRONT END
     
@@ -46,4 +49,4 @@ class Database:
         user='root',
         password='pjSq2023@') # BD acessado!!!
         if self.con.is_connected():
-            self.cursor = self.con.cursor()
+            self.cursor = self.con.cursor(buffered= True)

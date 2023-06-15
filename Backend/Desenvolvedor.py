@@ -61,50 +61,62 @@ class Desenvolvedor(Usuario.Usuario):
     def setNome(self, nome, email):
         Database.connect(self)
         Database.update(self, 'nome', nome, 'DESENVOLVEDOR', email)
+        return True
 
     def setSobrenome(self, sobrenome, email):
         Database.connect(self)
         Database.update(self, 'sobrenome', sobrenome, 'DESENVOLVEDOR', email)
+        return True
 
     def setCpf(self, CPF, email):
         Database.connect(self)
         Database.update(self, 'CPF', CPF, 'DESENVOLVEDOR', email)
+        return True
 
     def setEmail(self, email_novo, email):
         Database.connect(self)
         Database.update(self, 'email', email_novo, 'DESENVOLVEDOR', email)
+        return True
 
     def setGenero(self, genero, email):
         Database.connect(self)
         Database.update(self, 'genero', genero, 'DESENVOLVEDOR', email)
+        return True
 
     def setDataNascimento(self, data_nascimento, email):
         Database.connect(self)
         Database.update(self, 'data_nascimento', data_nascimento, 'DESENVOLVEDOR', email)
+        return True
 
     def setTelefone(self, telefone, email):
         Database.connect(self)
         Database.update(self, 'telefone', telefone, 'DESENVOLVEDOR', email)
+        return True
 
     def setConta(self, conta, email):
         Database.connect(self)
         Database.update(self, 'conta_bancaria', conta, 'DESENVOLVEDOR', email)
+        return True
         
     def setSenha(self, senha, email):
         Database.connect(self)
         Database.update(self, 'senha', senha, 'DESENVOLVEDOR', email)
+        return True
 
     def setHabilidade(self, habilidade, email):
         Database.connect(self)
         Database.update(self, 'habilidade', habilidade, 'DESENVOLVEDOR', email)
+        return True
 
     def setExperiencia(self, experiencia, email):
         Database.connect(self)
         Database.update(self, 'experiencia', experiencia, 'DESENVOLVEDOR', email)
+        return True
 
     def setTag(self, tag, email):
         Database.connect(self)
         Database.update(self, 'tag', tag, 'DESENVOLVEDOR', email)
+        return True
     
     #def candidataProjeto(self, projeto):
         # INSERIR NO BD O PROJETO QUE O CARA SE CANDIDATOU
@@ -140,3 +152,7 @@ class Desenvolvedor(Usuario.Usuario):
 
     #def avaliaEmpresa(self, empresa, avaliacao):
     #    empresa.avaliacoes.append(avaliacao)
+
+    
+    
+
