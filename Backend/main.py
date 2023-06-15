@@ -50,7 +50,7 @@ def authlogin():
         print(email)
         emailsessao=email
         #funcao pesquisar email na tabela de dev
-        return render_template('pagina_inicial.html')
+        return render_template('pagina_inicial.html', emailsessao=dev.getNome(email))
     else:
         print('Erro')
         return render_template('home.html')  # criar pagina de erro com para nova tentativa
