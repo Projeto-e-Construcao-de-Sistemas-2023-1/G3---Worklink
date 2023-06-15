@@ -1,0 +1,54 @@
+
+<!doctype html>
+<html lang="pt-br" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Entre · WorkLink</title> 
+    <link rel="shortcut icon" href="static/Wl.ico"type="image/x-icon">
+    <link rel="stylesheet" href="static/style.css">
+    <style>
+      body{
+        margin-top: 200px;
+        text-align: center;
+        border-radius: 10px;
+      }
+      #field{
+        padding: 8px;
+    border-radius: 5px;
+    border-color: white;
+    padding-right: 62px;
+    font-family: 'Oswald', sans-serif;
+      }
+      label{
+        font-family: 'Oswald', sans-serif;
+        font-size: 14px;
+      }
+    
+    </style>
+</head>
+<body>
+  
+    <img id = "img-login" class="mb-4" src="static/logo-completa.jpg" alt="" >
+
+    <div class="form_grupo">
+      <label for="e-mail" >Email</label>
+      <input id="field" type="email" name="email" id="email" placeholder="seuemail@email.com" required>
+  </div>
+  <div class="form_grupo">
+    <label for="Senha" >Senha</label>
+    <input id="field" type="password" name="Senha" id="Senha" placeholder="Senha" required>
+</div>
+
+    <div style="padding-bottom: 20px;"">
+      <label>
+        <input type="checkbox" value="lembrar-me"> Lembrar-me
+      </label>
+    </div>
+    <button id = "entrar" type="submit" onclick="window.location.href='pagina_inicial.html'">Entrar</button>
+    <p class="text-body-secondary">&copy;2023</p>
+  </form>
+</main>
+
+  </body>
+</html>
