@@ -10,31 +10,31 @@ class Empresa(Usuario.Usuario):
     # GETTERS
     def getCnpj(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'CNPJ', email)
+        return Database.select(self, 'EMPRESA', 'CNPJ', email)
     
     def getRazaoSocial(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'razao_social', email)
+        return Database.select(self, 'EMPRESA', 'razao_social', email)
     
     def getEmail(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'email', email)
+        return Database.select(self, 'EMPRESA', 'email', email)
     
     def getTelefone(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'telefone', email)
+        return Database.select(self, 'EMPRESA', 'telefone', email)
     
     def getConta(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'conta_bancaria', email)
+        return Database.select(self, 'EMPRESA', 'conta_bancaria', email)
     
     def getSenha(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'senha', email)
+        return Database.select(self, 'EMPRESA', 'senha', email)
     
     def getAreaNegocio(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'area_negocio', email)
+        return Database.select(self, 'EMPRESA', 'area_negocio', email)
     
     # SETTERS
     def setCnpj(self, cnpj, email):
