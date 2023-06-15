@@ -2,10 +2,10 @@ import Usuario
 from Database import Database
 # OS GETTERS VÃO SER CONSULTAS NO BANCO DE DADOS PEDINDO AQUELA VARIAVEL
 class Desenvolvedor(Usuario.Usuario):    
-    def criaDesenvolvedor(self, nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, habilidade, experiencia, tag):
+    def criaDesenvolvedor(self, nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, tag):
 
         
-        values = (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, habilidade, experiencia, tag)
+        values = (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, tag)
         tipo = True
         #print(lista_dados)
         Database.connect(self)
@@ -41,10 +41,10 @@ class Desenvolvedor(Usuario.Usuario):
         self.con.commit()
         return str(self.cursor.fetchall())
 
-    def setHabilidade(self, habilidade):
-        self.cursor.execute(f'UPDATE desenvolvedor SET habilidade = {habilidade} WHERE email = "{self.email}"')
-        self.con.commit()
-        return True
+    # def setHabilidade(self, habilidade):
+    #     self.cursor.execute(f'UPDATE desenvolvedor SET habilidade = {habilidade} WHERE email = "{self.email}"')
+    #     self.con.commit()
+    #     return True
 
     def setNome(self, nome):
         self.cursor.execute(f'UPDATE desenvolvedor SET nome = {nome} WHERE email = "{self.email}"')

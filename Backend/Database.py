@@ -2,9 +2,9 @@ import mysql.connector
 class Database:
     def insert(self, values, tipo):
         if tipo == True: # Indica que é um desenvolvedor
-            query = """ INSERT INTO DESENVOLVEDOR (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta_bancaria, senha, habilidade, experiencia, tag_desenvolvedor) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            query = """ INSERT INTO DESENVOLVEDOR (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta_bancaria, senha, tag_desenvolvedor) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         else:
-            query = """ INSERT INTO EMPRESA (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta_bancaria, senha, habilidade, experiencia, tag_desenvolvedor) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            query = """ INSERT INTO EMPRESA (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta_bancaria, senha, tag_desenvolvedor) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         self.cursor.execute(query, values)
         self.con.commit() # INSERT REALIZADO
 

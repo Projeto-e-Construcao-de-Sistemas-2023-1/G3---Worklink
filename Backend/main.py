@@ -2,6 +2,7 @@
 from Desenvolvedor import Desenvolvedor
 from Empresa import Empresa
 from Database import Database
+import S2_lib as evt
 from flask import Flask, render_template, redirect, request, abort, url_for
 import requests
 from datetime import datetime as dt
@@ -10,8 +11,8 @@ app = Flask(__name__, template_folder="templates")
 
 emp = Empresa()
 dev = Desenvolvedor()
-dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
-                      'senha', 'pleno', 'gigantesca', 'python')
+# dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
+#                       'senha', 'python')
 
 @app.route('/')
 def home():
@@ -25,7 +26,7 @@ def logindev():
     print(verify_response)
 
 
-@app.route('/loginempresa', methods=['POST'])
+@app.route('/loginEmpresa', methods=['GET', 'POST'])
 def loginemp():
     email = request.form.get('email')
     password = request.form.get('password')
@@ -56,6 +57,10 @@ def sign_in_user():
     return redirect(url_for('home'))
 
     return redirect(url_for('home'))
+
+@app.route("/calendario", methods=["GET", "POST"])
+def index():
+  return render_template("S4A_calendar.html")
 
 if __name__ == "__main__":
     app.run()
