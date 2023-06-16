@@ -20,6 +20,23 @@ class Usuario:
         Database.connect(self)
         return Database.pesquisaUsuario(self, nome)
     
+    def Follow(self, id):
+        Database.connect(self)
+        if Database.checkFollow(self, self.id, id):
+            return True  
+        else:
+            Database.Follow(self, self.id, id)
+            return True 
+
+    def Unfollow(self, id):
+        Database.connect(self)
+        if Database.checkFollow(self, self.id, id):
+            Database.Unfollow(self, self.id, id)
+            return True  
+        else:
+            return True
+    
+    
     #Cod Antigo
     # def criaUsuario(email, telefone, login, senha): # O id vai ser necessário no back-end e no BD?
     #     print('usuario criado com sucesso!')

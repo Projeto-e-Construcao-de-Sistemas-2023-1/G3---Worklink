@@ -50,3 +50,16 @@ class Database:
         password='pjSq2023@') # BD acessado!!!
         if self.con.is_connected():
             self.cursor = self.con.cursor(buffered= True)
+
+    def checkFollow(self, idSeguidor, idSeguido):
+        self.cursor.execute('SELECT COUNT(*) FROM tabelaDeSeguidores WHERE seguidor = ? AND seguido = ?', (idSeguidor, idSeguido))
+        count = self.cursor.fetchone()[0]
+        return count > 0
+
+    def Unfollow(self, idSeguidor, idSeguido):
+        self.cursor.execute('DELETE FROM tabelaDeSeguidores WHERE seguidor = ? AND seguido = ?', (idSeguidor, idSeguido))
+        self.conn.commit()
+
+    def Follow(self, idSeguidor, idSeguido):
+        self.cursor.execute('INSERT INTO tabelaDeSeguidores (seguidor, seguido) VALUES (?, ?)', (idSeguidor, idSeguido))
+        self.conn.commit()

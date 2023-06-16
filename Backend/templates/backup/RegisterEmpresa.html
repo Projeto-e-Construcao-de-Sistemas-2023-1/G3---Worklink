@@ -6,7 +6,7 @@
 <body>
   <div class="container">
     <h1>Criar Conta de Empresa</h1>
-    <form id="register" action="/signup_enterprise" method="post">
+    <form>
       <div class="form-group">
         <label for="cnpj">CNPJ:</label>
         <input type="text" id="cnpj" name="cnpj" required>
@@ -14,10 +14,6 @@
       <div class="form-group">
         <label for="razao_social">Razão Social:</label>
         <input type="text" id="razao_social" name="razao_social" required>
-      </div>
-      <div class="form-group">
-        <label for="conta">Conta:</label>
-        <input type="text" id="conta" name="conta" required>
       </div>
       <div class="form-group">
         <label for="email">E-mail:</label>
@@ -29,15 +25,15 @@
       </div>
       <div class="form-group">
         <label for="password">Senha:</label>
-        <input type="password" id="password" name="senha" required>
+        <input type="password" id="password" name="password" required>
       </div>
       <div class="form-group">
         <label for="confirm_password">Confirmar Senha:</label>
-        <input type="password" id="confirm_password" name="rNovaSenha" required>
+        <input type="password" id="confirm_password" name="confirm_password" required>
       </div>
       <div class="form-group">
-        <label for="pais">Area de Negocio:</label>
-        <input type="text" id="pais" name="area_negocio" required>
+        <label for="pais">País:</label>
+        <input type="text" id="pais" name="pais" required>
       </div>
       <div class="form-group">
         <input type="submit" value="Criar Conta">
@@ -45,7 +41,7 @@
     </form>
 
     <div class="login-link">
-      <a href="/login">Voltar para a tela de login</a>
+      <a href="login.html">Voltar para a tela de login</a>
     </div>
   </div>
 </body>

@@ -9,28 +9,6 @@
       padding: 10px;
       margin-bottom: 10px;
     }
-
-    .btnSeguir {
-      background-color: #3498db;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .btnSeguir:hover {
-      background-color: #2980b9;
-    } 
-
-    .btnSeguir.seguindo {
-      background-color: #27ae60;
-    }
-
-    .btnSeguir.seguindo:hover {
-      background-color: #219653;
-    }
   </style>
 </head>
 <body>
@@ -46,38 +24,7 @@
   <!-- Botões de Edição -->
   <a href="editar_empresa.html">Editar Perfil</a>
   <a href="calendario_empresa.html">Ver Calendário</a>
-
-  <div>
-    <button id="btnSeguir"  class="btnSeguir" onclick="seguirUsuario()">Seguir</button>
-  <script>
-    function seguirUsuario() {
-      var btnSeguir = document.getElementById("btnSeguir");
-      
-      if (btnSeguir.innerText === "Seguir") {
-        axios.post('/follow', { usuarioId: 'Id' })
-          .then(function(response) {
-            if (response.data.success) {
-              btnSeguir.innerText = "Seguindo";
-            }
-          })
-          .catch(function(error) {
-            console.error(error);
-          });
-      } else {
-        axios.post('/unfollow', { usuarioId: 'Id' })
-          .then(function(response) {
-            if (response.data.success) {
-              btnSeguir.innerText = "Seguir";
-            }
-          })
-          .catch(function(error) {
-            console.error(error);
-          });
-      }
-    }
-    </script>
-  </div>
-
+  
   <!-- Lista de Projetos em Andamento -->
   <h2>Projetos em Andamento</h2>
   <div class="project-card">
