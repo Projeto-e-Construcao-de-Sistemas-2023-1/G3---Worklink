@@ -13,7 +13,7 @@ emp = Empresa()
 dev = Desenvolvedor()
 #dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
 #                     'senha', 'pleno', 'python')
-
+db = Database()
 #Rotas 
 @app.route('/')
 def home():
@@ -53,6 +53,15 @@ def authlogin():
     else:
         print('Erro')
         return render_template('home.html')  # criar pagina de erro com para nova tentativa
+
+@app.route('/pesquisa_usuario', methods=['POST'])
+def pesquisaUser():
+    pesquisa_user = request.form.get('pesquisa_user')
+    
+    if db.verificaUsuario(pesquisa_user) == True:
+        return render_template('pagina_inicial.html', nome=db.getNome(pesquisa_user), sobrenome=dev.getSobrenome(email), descricao=dev.getDescricao(email))
+    else:
+        return render_template('pagina_inicial.html', nome=dev.getNome(email), sobrenome=dev.getSobrenome(email), descricao=dev.getDescricao(email))
 
 @app.route('/signup_developer', methods=['POST'])
 def regdev():
