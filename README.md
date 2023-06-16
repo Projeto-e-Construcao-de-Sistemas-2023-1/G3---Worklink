@@ -80,7 +80,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | CDU16 | Encerrar inscrições. |
 | CDU17 | Inserir dinheiro na carteira virtual. |
 | CDU18 | Realizar transação. |
-| CDU19 | Copiar link de compartilhamento de perfi |
+| CDU19 | Copiar link de compartilhamento de perfil |
 | CDU20 | Redefinir senha. |
 
 
