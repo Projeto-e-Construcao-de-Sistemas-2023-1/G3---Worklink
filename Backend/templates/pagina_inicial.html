@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<title>Página Inicial · WorkLink</title>
-	<link rel="stylesheet" type="text/css" href="static/stylePagina.css">
+	<link rel="stylesheet" type="text/css" href="../static/stylePagina.css">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-	<link rel="shortcut icon" href="static/Wl.ico"type="image/x-icon">
+	<link rel="shortcut icon" href="../static/Wl.ico"type="image/x-icon">
 
 	<script src="https://kit.fontawesome.com/e6223f541e.js" crossorigin="anonymous"></script>
 
-	<script defer src="script.js"></script>
+	<script defer src="../static/script.js"></script>
 </head>
 <body id="pi">
 
@@ -23,8 +23,8 @@
 
 	<nav class="navbar navbar-expand-lg navbar-dark no-pad" style="background-color: #EAEAEA" id="header">
 		<div class="container">
-            <img src="static/logo-sem-fundo-boneco.png" width = "30px" height="30px" alt="Logo WorkLink boneco">
-            <img id="wlpi" src="static/logo-worklink.png" width = "160px" height="30px" alt="Logo WorkLink" onclick="window.location.href='pagina_inicial.html'">
+            <img src="../static/logo-sem-fundo-boneco.png" width = "30px" height="30px" alt="Logo WorkLink boneco">
+            <img id="wlpi" src="../static/logo-worklink.png" width = "160px" height="30px" alt="Logo WorkLink" onclick="window.location.href='/authlogin#'">
 			
 	  		<form class="form-inline">
 	  			<span><div class="input-icons"> 
@@ -65,7 +65,7 @@
 	    			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align: center; font-size: 12px; color: #8eb521; padding-left: 420px; padding-right: 2rem;"onMouseOver="this.style.color='#a4cc37" onMouseOut="this.style.color='#8eb521'"><i class="fa fa-user-circle fa-2x"></i><br>Me</a>
 	    		
 	    			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="dropdown-item-color" style = "margin-left: 400px">
-		          		<a class="dropdown-item" href="perfil_dev.html"><img id="profile-pic" src="static/ada.PNG" alt="profile"></i><b>Ver Perfil</b></a></a>
+		          		<a class="dropdown-item" href="perfil_dev.html"><!--<img id="profile-pic" src="../static/ada.PNG" alt="profile">--><i class="fa fa-user-circle fa-4x"></i><b>Ver Perfil</b></a></a>
 		          		
 		          		<div style="height: 30px; background-color: #f1f8e4" class="dropdown-divide">Conta</div>
 		          		
@@ -102,8 +102,8 @@
 					</div>
 						
 					<div id="profile-picture">
-						<img class="img-xs rounded-circle" src="static/ada.PNG" alt="" style="margin-right: 8px;">
-						
+						<!-- <img class="img-xs rounded-circle" src="" alt="" style="margin-right: 8px;"> -->
+							<i class="fa fa-user-circle fa-4x"></i>
 						<br><br>
 						
 						<h6 style="color: black;">
@@ -120,7 +120,7 @@
 							<!-- <a href="#">Publicações que possam interessar</a>
 							<br>
 							-->
-							<a href="#">Conexões</a>
+							<a href="#">Seguidores mútuos</a>
 					</div>
 <!--
 					<div class="secondary-info">
@@ -227,7 +227,7 @@
 					</div>
 					<div id="show-account-name">
 						<a href="#">
-							<img class="img-xs rounded-circle" src="static/carol-shaw.jpeg" alt="" style="width: 60px; height: 60px; margin-top: 12px; margin-right: 5px;">
+							<img class="img-xs rounded-circle" src="../static/carol-shaw.jpeg" alt="" style="width: 60px; height: 60px; margin-top: 12px; margin-right: 5px;">
 							<div style="display: inline-table;">
 								<b style="color: black;">Carol Shaw</b>&nbsp; #ProgramadoraDeJogos
 								<br>
@@ -244,7 +244,7 @@
 					</div>
 
 					<div id="post-picture">
-						<img src="static/3d-tic-tac-toe.PNG" width="540px" height="300px" alt="3d tic tac toe">
+						<img src="../static/3d-tic-tac-toe.PNG" width="540px" height="300px" alt="3d tic tac toe">
 					</div>	
 
 					<div id="likes">
@@ -293,7 +293,7 @@
 
 					<div id="show-account-name">
 						<a href="#">
-							<img class="img-xs rounded-circle" src="static/alan-turing.jpg" alt="" style="width: 60px; height: 60px; margin-top: 12px; margin-right: 5px;">
+							<img class="img-xs rounded-circle" src="../static/alan-turing.jpg" alt="" style="width: 60px; height: 60px; margin-top: 12px; margin-right: 5px;">
 							<div style="display: inline-table;">
 								<b style="color: black;">Alan Turing Enterprise</b>&nbsp; #Computabilidade 
 								<br>
@@ -318,7 +318,7 @@
 					<div id="candidatar">
 						<span>
 							<button type="button" class="btn">
-								<img src="static/btn-candidatar.png" alt="" height="28px" width="28px">
+								<img src="../static/btn-candidatar.png" alt="" height="28px" width="28px">
 								Candidatar-se ao Projeto
 							</button>
 						</span>
@@ -330,7 +330,7 @@
 				<div class="common-properties" id="show-post-container2">
 					<div id="show-account-name">
 						<a href="#">
-							<img class="img-xs rounded-circle" src="static/twitter.jpeg" alt="" style="width: 60px; height: 60px; margin-top: 12px; margin-right: 5px;">
+							<img class="img-xs rounded-circle" src="../static/twitter.jpeg" alt="" style="width: 60px; height: 60px; margin-top: 12px; margin-right: 5px;">
 							<div style="display: inline-table;">
 								<b style="color: black;">Twitter, Inc.</b>&nbsp; #socialmedia
 								<br>
@@ -355,7 +355,7 @@
 					<div id="candidatar">
 						<span>
 							<button type="button" class="btn">
-								<img src="static/btn-candidatar.png" alt="" height="28px" width="28px">
+								<img src="../static/btn-candidatar.png" alt="" height="28px" width="28px">
 								Candidatar-se ao Projeto
 							</button>
 						</span>
@@ -466,7 +466,7 @@
 				<br>
 -->
 				<aside class="common-properties" id="advertisement">
-					<img src="static/freelancer.jpg" style="width: 288px; height: 288px">
+					<img src="../static/freelancer.jpg" style="width: 288px; height: 288px">
 				</aside>
 				
 			</div>
