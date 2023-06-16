@@ -10,7 +10,7 @@ app = Flask(__name__, template_folder= "templates", static_folder= "styles")
 
 emp = Empresa()
 dev = Desenvolvedor()
-resposta = dev.getCPF('jose@gmail.com')
+resposta = dev.getNome('joao@gmail.com')
 #resposta = dev.pesquisaUsuario(nome = 'jose', tipo = True) # TRUE PARA DESENVOLVEDOR // FALSE PARA EMPRESA
 print(resposta)
 #print(resposta) # Realizar slice nas variaveis
