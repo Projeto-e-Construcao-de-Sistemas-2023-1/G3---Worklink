@@ -62,17 +62,21 @@ def criar_projeto():
 
 @app.route('/authlogin', methods=['POST'])
 def authlogin():
+    recaptchaForm = Widgets()
     email = request.form.get('email')
     password = request.form.get('password')
     
-    if dev.iniciaSessao(email, password) == True:
-        print(email)
-        emailsessao=email
-        #funcao pesquisar email na tabela de dev
-        return render_template('pagina_inicial.html', emailsessao=dev.getNome(email))
-    else:
+    if dev.iniciaSessao(email, password) == False:
         print('Erro')
         return render_template('home.html')  # criar pagina de erro com para nova tentativa
+    elif dev.iniciaSessao(email, password) == True and (recaptchaForm.validate() == False):
+        flash("Por favor, marque o reCAPTCHA.")
+    elif dev.iniciaSessao(email, password) == True and recaptchaForm.validate():
+        flash("reCAPTCHA verificado com sucesso!")
+        #return redirect('/home')
+        print(email)
+        #funcao pesquisar email na tabela de dev
+        return render_template('pagina_inicial.html', nome=dev.getNome(email), sobrenome=dev.getSobrenome(email), descricao=dev.getDescricao(email))
 
 @app.route('/signup_developer', methods=['POST'])
 def regdev():
