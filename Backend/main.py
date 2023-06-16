@@ -10,7 +10,7 @@ app = Flask(__name__, template_folder= "templates", static_folder= "styles")
 
 emp = Empresa()
 dev = Desenvolvedor()
-resposta = dev.iniciaSessao('jose@gmail.com', '12345') # Funcionando
+resposta = dev.pesquisaUsuario(nome = 'jose', tipo = True) # Funcionando
 print(resposta)
 #print(resposta) # Realizar slice nas variaveis
 #dev.toClipboard('habibs')

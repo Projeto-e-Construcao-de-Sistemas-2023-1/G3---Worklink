@@ -29,9 +29,13 @@ class Database:
         else:
             return False # Credenciais inválidas
 
-    def pesquisaUsuario(self, nome):
-        self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR JOIN EMPRESA WHERE nome = "{nome}" OR razao_social = "{nome}"')
-        self.con.commit()
+    def pesquisaUsuario(self, nome, tipo):
+        if tipo == True: # TRUE PARA DEV
+            self.cursor.execute(f'SELECT DESENVOLVEDOR.nome, DESENVOLVEDOR.descricao FROM DESENVOLVEDOR WHERE nome = "{nome}"')
+            self.con.commit()
+        else: # FALSE PARA EMPRESA
+            self.cursor.execute(f'SELECT EMPRESA.razao_social, EMPRESA.area_negocio FROM EMPRESA WHERE nome = "{nome}"')
+            self.con.commit()
         return self.cursor.fetchall() # MOSTRAR OS REGISTROS NA TELA DO FRONT END
     
     def verificaUsuario(self, email):
