@@ -291,7 +291,7 @@ img {
 		          		<a class="dropdown-item" href="#">Ajuda<a> 	
 		          		<a class="dropdown-item" href="#">Linguagem<a>
 
-		          		<a class="dropdown-item" href="home.html" style="border-top: solid 0.03rem lightgrey;">Sair</a>
+		          		<a class="dropdown-item" href="/" style="border-top: solid 0.03rem lightgrey;">Sair</a>
 						
 	          		</div>
 					
@@ -313,7 +313,7 @@ img {
                             <div class="cover-body d-flex justify-content-between align-items-center">
                                 <div>
                                     <img class="profile-pic" src="static/ada.PNG" alt="profile">
-                                    <span class="profile-name">Ada Lovelace</span>
+                                    <span class="profile-name">{{ usuario.nome }}</span>
                                 </div>
                                 <div class="d-none d-md-block">
                                     <button id="edit"  onclick="window.location.href='/editar_perfil'">
@@ -402,7 +402,7 @@ img {
                             </div>
                             <div class="mt-3">
                                 <label>E-mail</label>
-                                <p class="text-muted">me@email.com</p>
+                                <p class="text-muted">{{ usuario.getEmail }}</p>
                             </div>
 
                         </div>

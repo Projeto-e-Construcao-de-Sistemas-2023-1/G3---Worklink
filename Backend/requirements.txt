@@ -10,3 +10,4 @@ mysql-connector==2.2.9
 mysqlclient==2.1.1    
 Werkzeug==2.3.4
 requests
+pyperclip

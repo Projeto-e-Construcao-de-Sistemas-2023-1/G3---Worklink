@@ -15,6 +15,7 @@
 
 	<script src="https://kit.fontawesome.com/e6223f541e.js" crossorigin="anonymous"></script>
 
+	<script defer src="script.js"></script>
 </head>
 <body id="pi">
 
@@ -23,7 +24,7 @@
 	<nav class="navbar navbar-expand-lg navbar-dark no-pad" style="background-color: #EAEAEA" id="header">
 		<div class="container">
             <img src="static/logo-sem-fundo-boneco.png" width = "30px" height="30px" alt="Logo WorkLink boneco">
-            <img id="wlpi" src="static/logo-worklink.png" width = "160px" height="30px" alt="Logo WorkLink">
+            <img id="wlpi" src="static/logo-worklink.png" width = "160px" height="30px" alt="Logo WorkLink" onclick="window.location.href='pagina_inicial.html'">
 			
 	  		<form class="form-inline">
 	  			<span><div class="input-icons"> 
@@ -77,7 +78,7 @@
 		          		<a class="dropdown-item" href="#">Publicações e atividades</a>
 		          		<a class="dropdown-item" href="#">Job posting account<a> 	
 							-->
-						<a class="dropdown-item" href="/" style="border-top: solid 0.03rem lightgrey;">Sair</a>
+						<a class="dropdown-item" href="home.html" style="border-top: solid 0.03rem lightgrey;">Sair</a>
 						
 	          		</div>
 					
@@ -141,7 +142,7 @@
 		  				</a>
 		  				
 		  				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="dropdown-item-color" style="width: 216px;">
-							<a class="dropdown-item" href="#" style="font-size: 12px;"><i class="fa fa-hashtag"></i>&emsp;Machine Learning</a>
+							<a id ="ml-show"class="dropdown-item" href="#" style="font-size: 12px;"><i class="fa fa-hashtag"></i>&emsp;Machine Learning</a>
 							<a class="dropdown-item" href="#" style="font-size: 12px;"><i class="fa fa-hashtag"></i>&emsp;JavaScript</a>
 							<a class="dropdown-item" href="#" style="font-size: 12px;"><i class="fa fa-hashtag"></i>&emsp;C#</a>
 							<a class="dropdown-item" href="#" style="font-size: 12px;"><i class="fa fa-hashtag"></i>&emsp;Python</a>
@@ -220,10 +221,9 @@
 
 				<div class="common-properties" id="show-post-container">
 					<div id="show-comment-on-post">
-						<b style="color: black;">Sua conexão&nbsp;</b>comentou essa publicação
+						<b style="color: black;">Alguém que você segue&nbsp;</b>comentou essa publicação
 						
 					</div>
-					
 					<div id="show-account-name">
 						<a href="#">
 							<img class="img-xs rounded-circle" src="static/carol-shaw.jpeg" alt="" style="width: 60px; height: 60px; margin-top: 12px; margin-right: 5px;">
@@ -288,8 +288,81 @@
 					</div>
 				</div>
 
-			</div>	
-			
+				<div class="common-properties" id="show-post-container2">
+
+					<div id="show-account-name">
+						<a href="#">
+							<img class="img-xs rounded-circle" src="static/alan-turing.jpg" alt="" style="width: 60px; height: 60px; margin-top: 12px; margin-right: 5px;">
+							<div style="display: inline-table;">
+								<b style="color: black;">Alan Turing Enterprise</b>&nbsp; #Computabilidade 
+								<br>
+								<p>Pai da computação </p>
+								<p>8h <i class="fas fa-globe"></i></p>
+							</div>
+						</a>
+					</div>
+
+					<div id="caption">
+						<strong><p>Projeto:</strong> Sistema de Reconhecimento de Padrões</p> 
+
+						<strong><p>Quantidade de desenvolvedores:</strong> 6</p>
+
+						<strong><p>Remuneração:</strong> R$90.000</p>
+
+						<strong><p>Tempo de contrato:</strong> 6 meses </p>
+						<p>Estou solicitando o desenvolvimento de um sistema inovador de reconhecimento de padrões, baseado nos princípios pioneiros da máquina de Turing. O objetivo é criar um sistema capaz de identificar padrões em dados complexos, como imagens ou sequências de texto. <br>O sistema deve ser construído utilizando técnicas avançadas de aprendizado de máquina, utilizando algoritmos de aprendizado supervisionado ou não supervisionado. Será necessário treinar um modelo de machine learning para que ele seja capaz de reconhecer e categorizar padrões em dados de entrada.</p>
+						<strong><p>#MachineLearning #MáquinaDeTuring </p></strong>
+					</div>
+
+					<div id="candidatar">
+						<span>
+							<button type="button" class="btn">
+								<img src="static/btn-candidatar.png" alt="" height="28px" width="28px">
+								Candidatar-se ao Projeto
+							</button>
+						</span>
+				
+					</div>
+				</div>
+
+
+				<div class="common-properties" id="show-post-container2">
+					<div id="show-account-name">
+						<a href="#">
+							<img class="img-xs rounded-circle" src="static/twitter.jpeg" alt="" style="width: 60px; height: 60px; margin-top: 12px; margin-right: 5px;">
+							<div style="display: inline-table;">
+								<b style="color: black;">Twitter, Inc.</b>&nbsp; #socialmedia
+								<br>
+								<p>Passarinho azul</p>
+								<p>2d <i class="fas fa-globe"></i></p>
+							</div>
+						</a>
+					</div>
+
+					<div id="caption">
+						<strong><p>Projeto:</strong>ViralRetweetBot</p> 
+
+						<strong><p>Quantidade de desenvolvedores:</strong> 2</p>
+
+						<strong><p>Remuneração:</strong> R$50.000</p>
+
+						<strong><p>Tempo de contrato:</strong> 2 meses </p>
+						<p>Precisamos de um bot que seja projetado para identificar e retweetar automaticamente os tweets virais do dia, compartilhando conteúdo popular e relevante com seus seguidores, realizando o monitoramento, a seleção e a diversidade dos tópicos.</p>
+						<strong><p>#bot #automação #MachineLearning </p></strong>
+					</div>
+
+					<div id="candidatar">
+						<span>
+							<button type="button" class="btn">
+								<img src="static/btn-candidatar.png" alt="" height="28px" width="28px">
+								Candidatar-se ao Projeto
+							</button>
+						</span>
+				
+					</div>
+				</div>
+
+		</div>
 
 			<!-- ------------------------------------------ rigth elements ------------------------------------------ -->
 			
