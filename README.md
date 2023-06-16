@@ -375,7 +375,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ## Diagrama de Classes
 
-<img src="https://github.com/Projeto-e-Construcao-de-Sistemas-2023-1/G3---Worklink/blob/main/Documentos/Class%20Diagram0.jpg" alt="Diagrama de classes JPEG">
+<img src="https://github.com/Projeto-e-Construcao-de-Sistemas-2023-1/G3---Worklink/blob/main/Documentos/Print%20Diagrama%20Classe%20PNG.png" alt="Diagrama de classes PNG">
  
 ## Integrações
  
