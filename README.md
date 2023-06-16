@@ -26,7 +26,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | RF03 | O sistema deve permitir login de usuário mediante e-mail e senha cadastrados. |
 | RF04 | O sistema deve permitir manter usuário. |
 | RF05 | O sistema deve permitir que empresas publiquem projetos que estão em andamento ou que precisam ser iniciados em um feed geral, definindo prazos, requisitos técnicos e orçamento disponível. |
-| RF06 | O sistema deve exibir no perfil dos desenvolvedores em quais projetos eles estão atualmente trabalhando. |
+| RF06 | O sistema deve permitir a exibição no perfil dos desenvolvedores em quais projetos eles estão atualmente trabalhando. |
 | RF07 | O sistema deve permitir que os desenvolvedores escolham hashtags que mostrem quais são suas proficiências e área de atuação, além de um campo de descrição nas páginas dos usuários em que eles podem escrever. |
 | RF08 | O sistema deve permitir aos desenvolvedores seguirem empresas e vice-versa. |
 | RF09 | O sistema deve permitir a candidaturas de desenvolvedores a projetos de empresas. |
@@ -51,10 +51,13 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | ID | Descrição |
 | --- | --- |
 | RN1 | Um desenvolvedor deve ter, no mínimo, 1 tag em comum com o projeto para poder se candidatar à ele. |
-| RN2 | Usuário só pode acessar o sistema mediante cadastro. |
+| RN2 | Um Usuário só pode acessar o sistema mediante cadastro. |
 | RN3 | Uma empresa só poderá contratar desenvolvedores se possuir um valor na carteira maior ou igual ao valor a ser pago pelo projeto. |
-| RN4 | Uma vez que o status do Projeto for “Em desenvolvimento”, a empresa não poderá deletar o projeto. |
-| RN5 | O usuário não pode alterar CPF ou CNPJ.  |
+| RN4 | A empresa não poderá deletar o projeto após estar "Em Desenvolvimento". |
+| RN5 | O usuário não pode alterar CPF ou CNPJ após o cadastro. |
+| RN6 | O usuário não poderá deletar a conta caso tenha projetos ativos. |
+| RN7 | Somente empresas podem realizar criação de projetos. |
+| RN8 | Uma empresa não poderá editar o projeto caso algum desenvolvedor tenha se candidatado. |
 
 ## Casos de Uso
 
@@ -70,17 +73,17 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | CDU08 | Encerrar sessão. |
 | CDU09 | Seguir usuário. |
 | CDU10 | Candidatar-se a um projeto. |
-| CDU11 | Definir Hashtags. |
-| CDU12 | Filtrar feed. |
-| CDU13 | Sacar dinheiro. |
-| CDU14 | Cancelar candidatura. |
-| CDU15 | Manter projeto. |
-| CDU16 | Escolher desenvolvedor. |
-| CDU17 | Encerrar inscrições. |
-| CDU18 | Inserir dinheiro na carteira virtual. |
-| CDU19 | Realizar transação. |
-| CDU20 | Completar descrição. |
-| CDU21 | Redefinir senha. |
+| CDU11 | Filtrar feed. |
+| CDU12 | Sacar dinheiro. |
+| CDU13 | Cancelar candidatura. |
+| CDU14 | Manter projeto. |
+| CDU15 | Escolher desenvolvedor. |
+| CDU16 | Encerrar inscrições. |
+| CDU17 | Inserir dinheiro na carteira virtual. |
+| CDU18 | Realizar transação. |
+| CDU19 | Copiar link de compartilhamento de perfi |
+| CDU20 | Redefinir senha. |
+
 
 ## Diagrama de Casos de Uso
 
@@ -262,11 +265,11 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Ator | Empresa |
 | Pré-Condições | O ator está com sessão em andamento |
 | Trigger | O ator seleciona o botão “Criar Novo Projeto” em sua tela de usuário |
-| Fluxo Principal | 1 - O sistema exibe a tela com campos “Nome do Projeto”, “Descrição”, “Número de desenvolvedores” e “Hashtags” para serem preenchidos. <br> 2 - O ator preenche os campos e clica na opção “Publicar Projeto”. [A1] <br> 3 - O sistema cria e publica o novo projeto da empresa. |
-| Fluxos Alternativos | <strong>A1. Os cmpos “Nome do Projeto”, “Número de Desenvolvedores” ou “Hashtags” estão vazios</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Fluxo Principal | 1 - O sistema exibe a tela com campos “Nome do Projeto”, “Descrição”, “Número de desenvolvedores”, “Hashtag”, “Remuneração” e “Tempo de Contrato”. <br> 2 - O ator preenche os campos e clica na opção “Publicar Projeto”. [A1] <br> 3 - O sistema cria e publica o novo projeto da empresa. |
+| Fluxos Alternativos | <strong>A1.  Os campos “Nome do Projeto”, “Número de Desenvolvedores” ou “Hashtags” estão inválidos</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
 | Pós-Condições | O ator cria um novo projeto em seu perfil. |
-| Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
+| Regras de negócios | RN7 - Somente empresas podem realizar criação de projetos. |
 
 ### Caso 6.2: Visualizar Projeto
 
@@ -277,7 +280,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Ator | Empresa |
 | Pré-Condições | O ator está com sessão em andamento |
 | Trigger | O ator seleciona a opção “Ver mais” em um projeto |
-| Fluxo Principal | 1 - O sistema exibe os detalhes do projeto desejado, como nome, descrição, hashtags e desenvolvedores. |
+| Fluxo Principal | 1 -O sistema exibe o “Nome do Projeto”, “Nome da empresa responsável pelo projeto”, “Descrição”, “Número de desenvolvedores necessários”, “Hashtag”, “Remuneração” e “Tempo de Contrato” e “Vagas disponíveis. |
 | Fluxos Alternativos | N/A |
 | Extensões | N/A. |
 | Pós-Condições | O ator visualiza detalhes do projeto. |
@@ -292,26 +295,26 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Ator | Empresa |
 | Pré-Condições | O ator está com sessão em andamento |
 | Trigger | O ator seleciona o botão “Editar Projeto” em um projeto |
-| Fluxo Principal | 1 - O sistema exibe tela com campos “Nome do projeto”, “Descrição”, “Número de desenvolvedores” e “Hashtags” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do projeto. |
-| Fluxos Alternativos | <strong>A1. Campos “Nome do Projeto”, “Número de Desenvolvedores” ou “Hashtags” estão vazios</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Fluxo Principal | 1 - O sistema exibe tela com campos “Nome do Projeto”, “Descrição”, “Número de desenvolvedores”, “Hashtag”, “Remuneração” e “Tempo de Contrato” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do projeto. |
+| Fluxos Alternativos | <strong>A1. Campos “Nome do Projeto”, “Número de Desenvolvedores” ou “Hashtags” estão inválidos </strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
 | Pós-Condições | Os dados do projeto do ator são alterados. |
-| Regras de negócios | N/A |
+| Regras de negócios | RN8 - A empresa não poderá editar o projeto caso algum desenvolvedor tenha se candidatado. |
 
-### Caso 6.4: Desativar Projeto
+### Caso 6.4: Deletar Projeto
 
-| 01 | Desativar Projeto |
+| 01 | Deletar Projeto |
 | --- | --- |
-| Nome | Desativar Projeto |
-| Objetivo | Desativar projeto da empresa |
+| Nome | Deletar Projeto |
+| Objetivo | Deletar projeto da empresa |
 | Ator | Empresa |
 | Pré-Condições | O ator possui um projeto criado |
-| Trigger | O ator seleciona o botão “Excluir Projeto” em um projeto. |
+| Trigger | O ator seleciona o botão “Deletar Projeto” em um projeto. |
 | Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 -O ator confirma a desativação do projeto. [A1] <br> 3 - O sistema verifica possíveis pendências e desativa o projeto. [A2] |
 | Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Não” na pergunta de deleção de conta.</strong> <br> 1 - O ator não confirma a desativação. <br> 2 - Voltar para o passo 1. <br><br ><strong>2 - Status do Projeto é “Em desenvolvimento”.</strong> <br> 1 - O sistema exibe mensagem informando que o projeto não pode ser desativado. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
 | Pós-Condições | O ator desativa o projeto de seu perfil. |
-| Regras de negócios | N/A |
+| Regras de negócios | RN4 - A empresa não poderá deletar o projeto após estar "Em Desenvolvimento" |
 
 ### Caso 7: Escolher Desenvolvedor
 
@@ -373,6 +376,36 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pós-Condições | O Recaptcha está preenchido. |
 | Regras de negócios | N/A. |
 
+### Caso 11: Filtrar Feed
+
+| 11 | Filtrar Feed |
+| --- | --- |
+| Nome | Filtrar Feed |
+| Objetivo | Filtrar Feed e acordo com as hashtags |
+| Ator | Usuário |
+| Pré-Condições | O ator estar com sessão em andamento |
+| Trigger | O ator seleciona a opção “Tags em altas” ou “Tags Seguidas”. |
+| Fluxo Principal | 1 - O sistema filtra e exibe todos os projetos que têm as hashtags selecionadas pelo ator. |
+| Fluxos Alternativos | N/A. |
+| Extensões | N/A. |
+| Pós-Condições | Feed filtrado com as hashtags desejadas. |
+| Regras de negócios | N/A. |
+
+### Caso 12: Redefinir Senha
+
+| 12 | Redefinir Senha |
+| --- | --- |
+| Nome | Redefinir Senha |
+| Objetivo | Alterar a senha |
+| Ator | Usuário |
+| Pré-Condições | O usuário tem cadastro. |
+| Trigger | Usuário seleciona a opção “Redefinir Senha”. |
+| Fluxo Principal | 1 - O sistema exibe o campo de “Senha” e “Confirmar Senha”. <br> 2 - O ator preenche os campos e confirma. <br> 3 - O sistema registra a ação do ator e redireciona para a página de perfil do usuário. |
+| Fluxos Alternativos | N/A. |
+| Extensões | N/A. |
+| Pós-Condições | A senha foi alterada. |
+| Regras de negócios | N/A. |
+
 ## Diagrama de Classes
 
 <img src="https://github.com/Projeto-e-Construcao-de-Sistemas-2023-1/G3---Worklink/blob/main/Documentos/Print%20Diagrama%20Classe%20PNG.png" alt="Diagrama de classes PNG">
@@ -383,6 +416,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | --- | --- |
 | reCAPTCHA | Verifica se o usuário que está iniciando sessão é um humano. |
 | Google Calendar API | API de Calendário para visualizar datas e marcar reuniões. |
+| email.mime | Envio de email para redefinição de senha. |
  
 ## Slides e Entregas
  
