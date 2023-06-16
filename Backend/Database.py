@@ -19,7 +19,8 @@ class Database:
     def select(self, tabela, tipo, email): # Se coluna = '0' -> seleciona tudo da tabela sobre aquele dado
         self.cursor.execute(f'SELECT {tipo} FROM {tabela} WHERE email = "{email}"')
         self.con.commit()
-        return self.cursor.fetchall()
+        tupla = self.cursor.fetchone()
+        return tupla[0]
     
     def autenticaUsuario(self, email, senha):
         self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR JOIN EMPRESA WHERE DESENVOLVEDOR.email = "{email}" AND DESENVOLVEDOR.senha = "{senha}" OR EMPRESA.email = "{email}" AND EMPRESA.senha = "{senha}"') # Tenta achar o cara com essas credenciais
