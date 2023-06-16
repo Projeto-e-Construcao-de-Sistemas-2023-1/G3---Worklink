@@ -2,9 +2,11 @@
 from Desenvolvedor import Desenvolvedor
 from Empresa import Empresa
 from Database import Database
-from flask import Flask, render_template, redirect, request, abort, url_for
+from flask import Flask, render_template, redirect, request, abort, url_for, jsonify, flash
 import requests
 from datetime import datetime as dt
+from flask_wtf import FlaskForm, RecaptchaField 
+import Usuario
 
 app = Flask(__name__, template_folder="templates")
 emailsessao=''
@@ -14,6 +16,14 @@ dev = Desenvolvedor()
 #dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
 #                     'senha', 'pleno', 'python')
 db = Database()
+
+app.config["SECRET_KEY"] = "mysecretkey"
+app.config["RECAPTCHA_PUBLIC_KEY"] = '6Lfi1XcmAAAAAG6go6mUbSpX_01xHunP7wgn9StD'
+app.config["RECAPTCHA_PRIVATE_KEY"] = '6Lfi1XcmAAAAANyI3-604hr8oKpQkRuH1A0XI9kw'
+
+class Widgets(FlaskForm):
+    recaptcha = RecaptchaField()
+
 #Rotas 
 @app.route('/')
 def home():
@@ -33,7 +43,8 @@ def regem():
 
 @app.route('/login', methods=['GET'])
 def login():
-   return render_template('login.html')
+    form = Widgets()    
+    return render_template('login.html', form=form)
 
 @app.route('/criar_Projeto', methods=['GET'])
 def criar_projeto():
@@ -43,16 +54,21 @@ def criar_projeto():
 
 @app.route('/authlogin', methods=['POST'])
 def authlogin():
+    recaptchaForm = Widgets()
     email = request.form.get('email')
     password = request.form.get('password')
     
-    if dev.iniciaSessao(email, password) == True:
+    if dev.iniciaSessao(email, password) == False:
+        print('Erro')
+        return render_template('home.html')  # criar pagina de erro com para nova tentativa
+    elif dev.iniciaSessao(email, password) == True and (recaptchaForm.validate() == False):
+        flash("Por favor, marque o reCAPTCHA.")
+    elif dev.iniciaSessao(email, password) == True and recaptchaForm.validate():
+        flash("reCAPTCHA verificado com sucesso!")
+        #return redirect('/home')
         print(email)
         #funcao pesquisar email na tabela de dev
         return render_template('pagina_inicial.html', nome=dev.getNome(email), sobrenome=dev.getSobrenome(email), descricao=dev.getDescricao(email))
-    else:
-        print('Erro')
-        return render_template('home.html')  # criar pagina de erro com para nova tentativa
 
 @app.route('/pesquisa_usuario', methods=['POST'])
 def pesquisaUser():
@@ -105,25 +121,21 @@ def criarProjeto():
     descricao = request.form.get('descricao')
     return render_template('feed.html')
   
-@app.route("/sign-user-in", methods=['POST'])
-def sign_in_user():
-    secret_response = request.form['g-recaptcha-response']
-    print(request.form)
-    verify_response = requests.post(url=f'{VERIFY_URL}?secret={SECRET_KEY}&response={secret_response}')
+@app.route('/follow', methods=['POST'])
+def follow():
+    Id = request.json['Id']
+    Usuario.Follow(Id)
+    return jsonify(success=True)
 
-    print(verify_response)
 
-    if verify_response['success'] == False:
-        abort(401)
-
-    return redirect(url_for('home'))
-
-    return redirect(url_for('home'))
-
+@app.route('/unfollow', methods=['POST'])
+def unfollow():
+    Id = request.json['Id']
+    Usuario.Unfollow(Id)
+    return jsonify(success=True)
 
 if __name__ == "__main__":
     app.run()
 
-SITE_KEY = "6LeKBj8mAAAAAA3jCMVID2PjUUYmIM1TYOIKf3Ei"
-SECRET_KEY = "6LeKBj8mAAAAAAIsJpHljREaS2EPF8y5uw2frJHA"
+
 VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify"

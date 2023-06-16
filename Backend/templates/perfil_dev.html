@@ -24,23 +24,43 @@
             font-size: 12px;
         }
         #edit {
-    display: flex;
-    text-align: center;
-    padding: 8px 16px;
-    background-color: #ABDB2A;
-    color: white;
-    font-family: sans-serif;
-    font-size: 15px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    margin-bottom: 30px;
+            display: flex;
+            text-align: center;
+            padding: 8px 16px;
+            background-color: #ABDB2A;
+            color: white;
+            font-family: sans-serif;
+            font-size: 15px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            margin-bottom: 30px;
         }
         #edit:hover {
-    background-color: #8eb521;
-   
-  }
+            background-color: #8eb521;
+        }
+        .btnSeguir {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btnSeguir:hover {
+      background-color: #2980b9;
+    } 
+
+    .btnSeguir.seguindo {
+      background-color: #27ae60;
+    }
+
+    .btnSeguir.seguindo:hover {
+      background-color: #219653;
+    }
   
   #edit:active {
     background-color: #7DAE1A;
@@ -326,6 +346,7 @@ img {
                                 </div>
                             </div>
                         </div>
+
                         <div class="header-links">
                             <ul class="links d-flex align-items-center mt-3 mt-md-0">
                                 <li class="header-link-item d-flex align-items-center active">
@@ -349,6 +370,38 @@ img {
                                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                     </svg>
                                     <a class="pt-1px d-none d-md-block" href="#">Conexões<span class="text-muted tx-12"> 3,765</span></a>
+                                </li>
+                                <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
+                                    <div>
+                                        <button id="btnSeguir" class="btnSeguir" onclick="seguirUsuario()">Seguir</button>
+                                        <script>
+                                          function seguirUsuario() {
+                                            var btnSeguir = document.getElementById("btnSeguir");
+                                            
+                                            if (btnSeguir.innerText === "Seguir") {
+                                              axios.post('/follow', { usuarioId: 'Id' })
+                                                .then(function(response) {
+                                                  if (response.data.success) {
+                                                    btnSeguir.innerText = "Seguindo";
+                                                  }
+                                                })
+                                                .catch(function(error) {
+                                                  console.error(error);
+                                                });
+                                            } else {
+                                              axios.post('/unfollow', { usuarioId: 'Id' })
+                                                .then(function(response) {
+                                                  if (response.data.success) {
+                                                    btnSeguir.innerText = "Seguir";
+                                                  }
+                                                })
+                                                .catch(function(error) {
+                                                  console.error(error);
+                                                });
+                                            }
+                                          }
+                                          </script>
+                                      </div>
                                 </li>
 
                                
