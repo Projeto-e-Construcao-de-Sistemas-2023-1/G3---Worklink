@@ -8,62 +8,69 @@ class Empresa(Usuario.Usuario):
         Database.insert(self, values, tipo)
 
     # GETTERS
-    def getCnpj(self):
+    def getCnpj(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'CNPJ', self.email)
+        return Database.select(self, 'EMPRESA', 'CNPJ', email)
     
-    def getRazaoSocial(self):
+    def getRazaoSocial(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'razao_social', self.email)
+        return Database.select(self, 'EMPRESA', 'razao_social', email)
     
-    def getEmail(self):
+    def getEmail(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'email', self.email)
+        return Database.select(self, 'EMPRESA', 'email', email)
     
-    def getTelefone(self):
+    def getTelefone(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'telefone', self.email)
+        return Database.select(self, 'EMPRESA', 'telefone', email)
     
-    def getConta(self):
+    def getConta(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'conta_bancaria', self.email)
+        return Database.select(self, 'EMPRESA', 'conta_bancaria', email)
     
-    def getSenha(self):
+    def getSenha(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'senha', self.email)
+        return Database.select(self, 'EMPRESA', 'senha', email)
     
-    def getAreaNegocio(self):
+    def getAreaNegocio(self, email):
         Database.connect(self)
-        return Database.select('EMPRESA', 'area_negocio', self.email)
+        return Database.select(self, 'EMPRESA', 'area_negocio', email)
     
     # SETTERS
     def setCnpj(self, cnpj, email):
         Database.connect(self)
         Database.update(self, 'CNPJ', cnpj, 'EMPRESA', email)
+        return True
 
     def setRazaoSocial(self, razao_social, email):
         Database.connect(self)
         Database.update(self, 'razao_social', razao_social, 'EMPRESA', email)
+        return True
 
     def setEmail(self, email_novo, email):
         Database.connect(self)
         Database.update(self, 'email', email_novo, 'EMPRESA', email)
+        return True
 
     def setTelefone(self, telefone, email):
         Database.connect(self)
         Database.update(self, 'telefone', telefone, 'EMPRESA', email)
+        return True
 
     def setConta(self, conta, email):
         Database.connect(self)
         Database.update(self, 'conta_bancaria', conta, 'EMPRESA', email)
+        return True
 
     def setSenha(self, senha, email):
         Database.connect(self)
         Database.update(self, 'senha', senha, 'EMPRESA', email)
+        return True
 
     def setAreaNegocio(self, area_negocio, email):
         Database.connect(self)
         Database.update(self, 'area_negocio', area_negocio, 'EMPRESA', email)
+        return True
 
     #def setRazaoSocial(self, razao_social):
         #SELECT RAZAO_SOC FROM EMPRESA WHERE EMAIL = XXXX -- UPDATE

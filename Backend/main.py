@@ -48,9 +48,8 @@ def authlogin():
     
     if dev.iniciaSessao(email, password) == True:
         print(email)
-        emailsessao=email
         #funcao pesquisar email na tabela de dev
-        return render_template('pagina_inicial.html')
+        return render_template('pagina_inicial.html', nome=dev.getNome(email), sobrenome=dev.getSobrenome(email), descricao=dev.getDescricao(email))
     else:
         print('Erro')
         return render_template('home.html')  # criar pagina de erro com para nova tentativa
