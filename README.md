@@ -258,7 +258,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ### Caso 6.1: Criar Projeto
 
-| 01 | Criar Projeto |
+| 6.1 | Criar Projeto |
 | --- | --- |
 | Nome | Criar Projeto |
 | Objetivo | Criar um novo projeto da empresa |
@@ -273,7 +273,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ### Caso 6.2: Visualizar Projeto
 
-| 01 | Visualizar  Projeto |
+| 6.2 | Visualizar  Projeto |
 | --- | --- |
 | Nome | Visualizar Projeto |
 | Objetivo | Visualizar detalhes de um projeto feito pela empresa |
@@ -288,7 +288,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ### Caso 6.3: Editar Projeto
 
-| 01 | Editar Projeto |
+| 6.3 | Editar Projeto |
 | --- | --- |
 | Nome | Editar Projeto |
 | Objetivo | Editar dados do projeto da empresa |
@@ -303,7 +303,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 
 ### Caso 6.4: Deletar Projeto
 
-| 01 | Deletar Projeto |
+| 6.4 | Deletar Projeto |
 | --- | --- |
 | Nome | Deletar Projeto |
 | Objetivo | Deletar projeto da empresa |
