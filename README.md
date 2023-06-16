@@ -44,7 +44,6 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | --- | --- | --- |
 | RNF1 | Segurança | O sistema deve ter um reCAPTCHA no login de usuário. |
 | RNF2 | Compatibilidade | O sistema deve ser compatível com as versões atualizadas do Google Chrome. |
-| RNF3 | Compatibilidade | Verificação de CPF/CEP.  |
 
 ## Regras de Negócio
 
