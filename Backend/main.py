@@ -10,10 +10,10 @@ app = Flask(__name__, template_folder= "templates", static_folder= "styles")
 
 emp = Empresa()
 dev = Desenvolvedor()
-#resposta = dev.iniciaSessao('dev@outlook.csom', 'senha') # Funcionando
-#resposta = dev.getNome('joao@gmail')
+resposta = dev.iniciaSessao('jose@gmail.com', '12345') # Funcionando
+print(resposta)
 #print(resposta) # Realizar slice nas variaveis
-dev.toClipboard('habibs')
+#dev.toClipboard('habibs')
 
 #dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
 #                   'senha', 'pleno', 'gigantesca', 'python')

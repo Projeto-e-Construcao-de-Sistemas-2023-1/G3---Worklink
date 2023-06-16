@@ -48,7 +48,7 @@ class Database:
 
     def connect(self):
         self.con = mysql.connector.connect(
-        host='35.247.225.250',
+        host='35.198.19.238',
         database='db_worklink',
         user='root',
         password='pjSq2023@') # BD acessado!!!
