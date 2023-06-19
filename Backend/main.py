@@ -10,15 +10,15 @@ app = Flask(__name__, template_folder= "templates", static_folder= "styles")
 
 emp = Empresa()
 dev = Desenvolvedor()
-resposta = dev.getNome('joao@gmail.com')
+#resposta = dev.pesquisaUsuario('jose', True)
 #resposta = dev.pesquisaUsuario(nome = 'jose', tipo = True) # TRUE PARA DESENVOLVEDOR // FALSE PARA EMPRESA
-print(resposta)
+#print(resposta)
 #print(resposta) # Realizar slice nas variaveis
 #dev.toClipboard('habibs')
 
 #dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
-#                   'senha', 'pleno', 'gigantesca', 'python')
-#emp.criaEmpresa('08292637000100', 'Teste.LTDA', 'empresa@outlook.com', '(21)986598574', '12345678901', 'senha', 'agronegocio')
+#                   'senha', 'pleno', 'python')
+emp.criaEmpresa('08292637000100', 'Teste.LTDA', 'empresa@outlook.com', '(21)986598574', '12345678901', 'senha', 'agronegocio')
 #dev.deletaUsuario('dev@outlook.com', True)
 
 
