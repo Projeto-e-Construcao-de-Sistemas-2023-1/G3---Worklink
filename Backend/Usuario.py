@@ -1,6 +1,5 @@
 from Database import Database
 import pyperclip
-import sqlite3
 class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
     def deletaUsuario(self, email, tipo): # Passar tipo = True para DESENVOLVEDOR | tipo = False para EMPRESA
         Database.connect(self)
@@ -20,7 +19,7 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
     def finalizaSessao(self):
         pass # Apenas no front end
 
-    def verificaUsuario(self, email):
+    def verificaUsuario(self, email):  
         Database.connect(self)
         return Database.verificaUsuario(self, email)
     
@@ -31,19 +30,10 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
         Database.connect(self)
         return Database.pesquisaUsuario(self, nome)
     
-    def Follow(self, id):
+    def searchUsuario(self, pesquisa_user):
         Database.connect(self)
-        if Database.checkFollow(self, self.id, id):
-            return True  
-        else:
-            Database.Follow(self, self.id, id)
-            return True 
-
-    def Unfollow(self, id):
+        return Database.verificaUsuarioNome(self, pesquisa_user)
+        
+    def sessao(self, email):
         Database.connect(self)
-        if Database.checkFollow(self, self.id, id):
-            Database.Unfollow(self, self.id, id)
-            return True  
-        else:
-            return True
-    
+        return (email)

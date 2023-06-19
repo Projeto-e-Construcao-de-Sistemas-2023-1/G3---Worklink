@@ -19,7 +19,8 @@ class Database:
     def select(self, tabela, tipo, email): # Se coluna = '0' -> seleciona tudo da tabela sobre aquele dado
         self.cursor.execute(f'SELECT {tipo} FROM {tabela} WHERE email = "{email}"')
         self.con.commit()
-        return self.cursor.fetchall()
+        tupla = self.cursor.fetchone()
+        return tupla[0]
     
     def autenticaUsuario(self, email, senha):
         self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR JOIN EMPRESA WHERE DESENVOLVEDOR.email = "{email}" AND DESENVOLVEDOR.senha = "{senha}" OR EMPRESA.email = "{email}" AND EMPRESA.senha = "{senha}"') # Tenta achar o cara com essas credenciais
@@ -29,9 +30,13 @@ class Database:
         else:
             return False # Credenciais inválidas
 
-    def pesquisaUsuario(self, nome):
-        self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR JOIN EMPRESA WHERE nome = "{nome}" OR razao_social = "{nome}"')
-        self.con.commit()
+    def pesquisaUsuario(self, nome, tipo):
+        if tipo == True: # TRUE PARA DEV
+            self.cursor.execute(f'SELECT DESENVOLVEDOR.nome, DESENVOLVEDOR.descricao FROM DESENVOLVEDOR WHERE nome = "{nome}"')
+            self.con.commit()
+        else: # FALSE PARA EMPRESA
+            self.cursor.execute(f'SELECT EMPRESA.razao_social, EMPRESA.area_negocio FROM EMPRESA WHERE nome = "{nome}"')
+            self.con.commit()
         return self.cursor.fetchall() # MOSTRAR OS REGISTROS NA TELA DO FRONT END
     
     def verificaUsuario(self, email):
@@ -46,6 +51,14 @@ class Database:
         self.con.commit()
         return self.cursor.fetchall() # MOSTRAR OS REGISTROS NA TELA DO FRONT END
 
+    def verificaUsuarioNome(self, nome):
+        self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR WHERE nome = "{nome}"')
+        self.con.commit()
+        if self.cursor.fetchall():
+            return True # É Desenvolvedor
+        else:
+            return False # É empresa
+
     def connect(self):
         self.con = mysql.connector.connect(
         host='35.198.19.238',
@@ -54,16 +67,3 @@ class Database:
         password='pjSq2023@') # BD acessado!!!
         if self.con.is_connected():
             self.cursor = self.con.cursor(buffered= True)
-
-    def checkFollow(self, idSeguidor, idSeguido):
-        self.cursor.execute('SELECT COUNT(*) FROM tabelaDeSeguidores WHERE seguidor = ? AND seguido = ?', (idSeguidor, idSeguido))
-        count = self.cursor.fetchone()[0]
-        return count > 0
-
-    def Unfollow(self, idSeguidor, idSeguido):
-        self.cursor.execute('DELETE FROM tabelaDeSeguidores WHERE seguidor = ? AND seguido = ?', (idSeguidor, idSeguido))
-        self.conn.commit()
-
-    def Follow(self, idSeguidor, idSeguido):
-        self.cursor.execute('INSERT INTO tabelaDeSeguidores (seguidor, seguido) VALUES (?, ?)', (idSeguidor, idSeguido))
-        self.conn.commit()

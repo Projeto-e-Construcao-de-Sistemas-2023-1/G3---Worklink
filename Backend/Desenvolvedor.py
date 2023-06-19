@@ -68,6 +68,11 @@ class Desenvolvedor(Usuario.Usuario):
         Database.update(self, 'sobrenome', sobrenome, 'DESENVOLVEDOR', email)
         return True
 
+    def setDescricao(self, descricao, email):
+        Database.connect(self)
+        Database.update(self, 'descricao', descricao, 'DESENVOLVEDOR', email)
+        return True
+
     def setCpf(self, CPF, email):
         Database.connect(self)
         Database.update(self, 'CPF', CPF, 'DESENVOLVEDOR', email)
