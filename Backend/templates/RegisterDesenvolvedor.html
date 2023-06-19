@@ -1,48 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-  <link rel="stylesheet" type="text/css" href="static/stylesRegisterDesenvolvedor.css">
+  <link rel="stylesheet" type="text/css" href="styles/stylesRegisterDesenvolvedor.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Criar Conta de Desenvolvedor</h1>
-    <form>
-      <div class="form-group">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+  <div class="container_form">
+    <h1>Criar conta como desenvolvedor</h1>
+    <form class="form" action="/signup_developer" method="post">
+        
+        <div class="form_grupo">
+            <label for="nome" class="form_label">Nome</label>
+            <input type="text" name="nome" class="form_input" id="nome" placeholder="Nome" required>
+        </div>
+
+        <div class="form_grupo">
+          <label for="sobrenome" class="form_label">Sobrenome</label>
+          <input type="text" name="sobrenome" class="form_input" id="nome" placeholder="Sobrenome" required>
       </div>
-      <div class="form-group">
-        <label for="cpf">CPF/MEI:</label>
-        <input type="text" id="cpf" name="cpf" required>
+
+      <div class="form_grupo">
+        <label for="CPF" class="form_label">CPF</label>
+        <input type="text" name="cpf" class="form_input" id="CPF" placeholder="CPF" required>
+    </div>
+
+        <div class="form_grupo">
+            <label for="e-mail" class="form_label">Email</label>
+            <input type="email" name="email" class="form_input" id="email" placeholder="seuemail@email.com" required>
+        </div>
+        
+
+        <div class="form_grupo">
+            
+            <label for="estadocivil" class="text">Gênero</label>
+            <select name="genero" class="dropdown" required>
+                
+                <option selected disabled class="form_select_option" value="">Selecione</option>
+                <option value="Feminino" class="form_select_option">Feminino</option>
+                <option value="Masculino" class="form_select_option">Masculino</option>
+                <option value="Não-Binário" class="form_select_option">Não-Binário</option>                    
+                <option value="Outro" class="form_select_option">Outro</option>                    
+            
+            </select>
+
+        </div>   
+
+        <div class="form_grupo">
+          <label for="datanascimento" class="form_label">Data de Nascimento</label>
+          <input type="date"  min= "1940-12-31" max="2006-12-31" name="data_nascimento" class="form_input" id="datanascimento" placeholder="Data de Nascimento" required>
+      </div>        
+
+      <div class="form_grupo">
+        <label for="Telefone" class="form_label">Telefone</label>
+        <input type="text" name="telefone" class="form_input" id="Telefone" placeholder="Telefone" required>
+    </div>
+
+    <div class="form_grupo">
+      <label for="Conta" class="form_label">Conta bancária (xxxx/xxxxx-x)</label>
+      <input type="text" name="conta" class="form_input" id="Conta" placeholder="Conta" required>
+  </div>
+
+  <div class="form_grupo">
+     <label for="Senha" class="forn_label">Senha</label>
+     <input type="password" name="senha" class="form_input" id="Senha" placeholder="Senha" required>
+</div>
+        <div class="form_message">
+                
+          <label for="message" class="form_message_label">Descrição:</label>
+          <textarea name="descricao" id="experiencia"  maxlength="100" style="resize: none; height: 35px; width: 270px;" class="form_input message_input" required></textarea>
+
       </div>
-      <div class="form-group">
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      <div class="form-group">
-        <label for="data_nascimento">Data de Nascimento:</label>
-        <input type="date" id="data_nascimento" name="data_nascimento" required>
-      </div>
-      <div class="form-group">
-        <label for="telefone">Telefone/WhatsApp:</label>
-        <input type="text" id="telefone" name="telefone" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Nova Senha:</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <div class="form-group">
-        <label for="confirm_password">Confirmar Nova Senha:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required>
-      </div>
-      <div class="form-group">
-        <input type="submit" value="Criar Conta">
-      </div>
+
+    <div class="form_message">
+                
+      <label for="message" class="form_message_label">Hashtags:</label>
+      <textarea name="tag" id="tag"  maxlength="300" style="resize: none; height: 35px; width: 270px;" class="form_input message_input" required></textarea>
+
+  </div>
+
+            <div class="submit">
+
+              <input type="hidden" name="acao" value="enviar">
+              <button type="submit" name="Submit" class="submit_btn"  onclick="window.location.href='/'">Cadastrar-se</button>
+            
+            </div>
     </form>
 
-    <div class="login-link">
-      <a href="login.html">Voltar para a tela de login</a>
-    </div>
-  </div>
+</div><!--container_form-->
+    </body>
 </body>
 </html>
