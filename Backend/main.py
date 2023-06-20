@@ -15,40 +15,72 @@ dev = Desenvolvedor()
 #dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
 #                     'senha', 'pleno', 'python')
 db = Database()
-us = Usuario()
+app.config["SECRET_KEY"] = "mysecretkey"
+app.config["RECAPTCHA_PUBLIC_KEY"] = '6Lfi1XcmAAAAAG6go6mUbSpX_01xHunP7wgn9StD'
+app.config["RECAPTCHA_PRIVATE_KEY"] = '6Lfi1XcmAAAAANyI3-604hr8oKpQkRuH1A0XI9kw'
+
+class Widgets(FlaskForm):
+    recaptcha = RecaptchaField()
 #Rotas 
 @app.route('/')
 def home():
     return render_template('home.html')
 
+@app.route('/editar_perfil', methods=['GET'])
+def editarp():
+    return render_template('editar_perfil.html') 
+
+@app.route('/signup_dev', methods=['GET'])
+def regdv():
+    return render_template('RegisterDesenvolvedor.html') 
+
+@app.route('/signup_emp', methods=['GET'])
+def regem():
+    return render_template('RegisterEmpresa.html') 
+
+@app.route('/login', methods=['GET'])
+def login():
+   return render_template('login.html')
+
+@app.route('/perfil', methods=['GET'])
+def perfildev():
+   return render_template('perfil_dev.html')
 
 @app.route('/criar_Projeto', methods=['GET'])
 def criar_projeto():
     return render_template('criarProjeto.html')
 
+@app.route('/paginainicial', methods=['GET'])
+def paginainicial():
+    return render_template('pagina_inicial.html')
 #metodos 
 
-@app.route('/authlogin', methods=['POST'])
-def authlogin():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    us.sessao(email)
-    if dev.iniciaSessao(email, password) == True:
-        #funcao pesquisar email na tabela de dev
-        return render_template('pagina_inicial.html', nome=dev.getNome(email), sobrenome=dev.getSobrenome(email), descricao=dev.getDescricao(email))
-    else:
-        print('Erro')
-        return render_template('home.html')  # criar pagina de erro com para nova tentativa
-emailsessao=dev.getNome
+# @app.route('/authlogin', methods=['POST', 'GET'])
+# def authlogin():
+#    if request.method == 'POST':
+#         email = request.form.get('email')
+#         password = request.form.get('password')
+#         print(email)
+#         if dev.iniciaSessao(email, password) == True:
+#             #funcao pesquisar email na tabela de dev
+#             dev.capturaEmail(email)
+#             form = Widgets()
+#             return render_template('pagina_inicial.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao())
+#         else:
+#             print('Erro')
+#             return render_template('home.html')  # criar pagina de erro com para nova tentativa
+#     else:
+#         return render_template('home.html')
+    
 @app.route('/pesquisa_usuario', methods=['post'])
 def pesquisaUser():
     pesquisa_user = request.form.get('pesquisa_user')
     print(pesquisa_user)
     
-    if us.verificaUsuario(pesquisa_user) == True:
-        return render_template('resultado_pesquisa.html', nome=dev.getNome(pesquisa_user), descricao=dev.getDescricao(pesquisa_user))
-    #else:
-    #   return render_template('resultado_pesquisa.html', nome=emp.getRazaoSocial(pesquisa_user), descricao=emp.getAreaNegocio(pesquisa_user))
+    # if us.verificaUsuario(pesquisa_user) == True:
+    #     return render_template('resultado_pesquisa.html', nome=dev.getNome(pesquisa_user), descricao=dev.getDescricao(pesquisa_user))
+    # #else:
+    # #   return render_template('resultado_pesquisa.html', nome=emp.getRazaoSocial(pesquisa_user), descricao=emp.getAreaNegocio(pesquisa_user))
 
 @app.route('/signup_developer', methods=['POST'])
 def regdev():
@@ -86,27 +118,14 @@ def regEmp():
 
 @app.route('/delete_conta', methods=['POST'])
 def delete_conta():
-    emailsessao = session.get('emailsessao')
-    if db.verificaUsuario(emailsessao)==True:
-        tabela=('DESENVOLVEDOR')
-    else:
-        tabela=('EMPRESA')
-        
-    db.delete(tabela, emailsessao)
+    db.delete(dev.getEmail)
+    return render_template('home.html')
 
 @app.route('/edita_perfil', methods=['POST'])
 def edita_perfil():
     name = request.form.get('name')
     sobrenome = request.form.get('sobrenome')
     descricao = request.form.get('descricao')
-    print(name)
-    print(emailsessao)
-    print(sobrenome)
-    print(descricao)
-    dev.setNome(name, emailsessao)
-    dev.setSobrenome(sobrenome, emailsessao)
-    dev.setDescricao(descricao, emailsessao)
-
     return render_template('perfil_dev.html')
 
 @app.route('/criarProjeto', methods=['POST'])
@@ -116,26 +135,6 @@ def criarProjeto():
     tag = request.form.get('tag')
     descricao = request.form.get('descricao')
     return render_template('perfil_dev.html')
-  
-@app.route("/sign-user-in", methods=['POST'])
-def sign_in_user():
-    secret_response = request.form['g-recaptcha-response']
-    print(request.form)
-    verify_response = requests.post(url=f'{VERIFY_URL}?secret={SECRET_KEY}&response={secret_response}')
-
-    print(verify_response)
-
-    if verify_response['success'] == False:
-        abort(401)
-
-    return redirect(url_for('home'))
-
-    return redirect(url_for('home'))
-
 
 if __name__ == "__main__":
     app.run()
-
-SITE_KEY = "6LeKBj8mAAAAAA3jCMVID2PjUUYmIM1TYOIKf3Ei"
-SECRET_KEY = "6LeKBj8mAAAAAAIsJpHljREaS2EPF8y5uw2frJHA"
-VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify"
