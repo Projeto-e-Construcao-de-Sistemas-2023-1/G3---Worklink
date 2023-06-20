@@ -103,14 +103,9 @@ class Desenvolvedor(Usuario.Usuario):
         Database.update(self, 'senha', senha, 'DESENVOLVEDOR', self.email)
         return True
 
-    def setHabilidade(self, habilidade):
+    def setDescricao(self, descricao):
         Database.connect(self)
-        Database.update(self, 'habilidade', habilidade, 'DESENVOLVEDOR', self.email)
-        return True
-
-    def setExperiencia(self, experiencia):
-        Database.connect(self)
-        Database.update(self, 'experiencia', experiencia, 'DESENVOLVEDOR', self.email)
+        Database.update(self, 'descricao', descricao, 'DESENVOLVEDOR', self.email)
         return True
 
     def setTag(self, tag):
