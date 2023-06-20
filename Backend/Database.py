@@ -2,7 +2,7 @@ import mysql.connector
 class Database:
     def insert(self, values, tipo):
         if tipo == True: # Indica que é um desenvolvedor
-            query = """ INSERT INTO DESENVOLVEDOR (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta_bancaria, senha, descricao, tag_desenvolvedor) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            query = """ INSERT INTO DESENVOLVEDOR (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta_bancaria, senha, descricao, tag_desenvolvedor) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         else:
             query = """ INSERT INTO EMPRESA (cnpj, razao_social, email, telefone, conta_bancaria, senha, area_negocio) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
         self.cursor.execute(query, values)
@@ -50,14 +50,6 @@ class Database:
         self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR WHERE nome = "{nome}"')
         self.con.commit()
         return self.cursor.fetchall() # MOSTRAR OS REGISTROS NA TELA DO FRONT END
-
-    def verificaUsuarioNome(self, nome):
-        self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR WHERE nome = "{nome}"')
-        self.con.commit()
-        if self.cursor.fetchall():
-            return True # É Desenvolvedor
-        else:
-            return False # É empresa
 
     def connect(self):
         self.con = mysql.connector.connect(
