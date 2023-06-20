@@ -44,22 +44,22 @@ class Database:
 
     def connect(self):
         self.con = mysql.connector.connect(
-        host='35.247.225.250',
+        host='35.198.19.238',
         database='db_worklink',
         user='root',
         password='pjSq2023@') # BD acessado!!!
         if self.con.is_connected():
             self.cursor = self.con.cursor(buffered= True)
 
-    def checkFollow(self, idSeguidor, idSeguido):
-        self.cursor.execute('SELECT COUNT(*) FROM tabelaDeSeguidores WHERE seguidor = ? AND seguido = ?', (idSeguidor, idSeguido))
+    def checkFollow(self, emailSeguidor, emailSeguido):
+        self.cursor.execute('SELECT COUNT(*) FROM SEGUINDO WHERE email_seguidor = ? AND email_seguido = ?', (emailSeguidor, emailSeguido))
         count = self.cursor.fetchone()[0]
         return count > 0
 
-    def Unfollow(self, idSeguidor, idSeguido):
-        self.cursor.execute('DELETE FROM tabelaDeSeguidores WHERE seguidor = ? AND seguido = ?', (idSeguidor, idSeguido))
+    def Unfollow(self, emailSeguidor, emailSeguido):
+        self.cursor.execute('DELETE FROM SEGUINDO WHERE email_seguidor = ? AND email_seguido = ?', (emailSeguidor, emailSeguido))
         self.conn.commit()
 
-    def Follow(self, idSeguidor, idSeguido):
-        self.cursor.execute('INSERT INTO tabelaDeSeguidores (seguidor, seguido) VALUES (?, ?)', (idSeguidor, idSeguido))
+    def Follow(self, emailSeguidor, emailSeguido):
+        self.cursor.execute('INSERT INTO SEGUINDO (email_seguidor, email_seguido) VALUES (?, ?)', (emailSeguidor, emailSeguido))
         self.conn.commit()
