@@ -16,6 +16,14 @@ dev = Desenvolvedor()
 #                     'senha', 'pleno', 'python')
 db = Database()
 us = Usuario()
+
+app.config["SECRET_KEY"] = "123456"
+app.config["RECAPTCHA_PUBLIC_KEY"] = '6Lfi1XcmAAAAAG6go6mUbSpX_01xHunP7wgn9StD'
+app.config["RECAPTCHA_PRIVATE_KEY"] = '6Lfi1XcmAAAAANyI3-604hr8oKpQkRuH1A0XI9kw'
+
+class Widgets(FlaskForm):
+    recaptcha = RecaptchaField()
+
 #Rotas 
 @app.route('/')
 def home():
@@ -35,7 +43,8 @@ def regem():
 
 @app.route('/login', methods=['GET'])
 def login():
-   return render_template('login.html')
+   form = Widgets()
+   return render_template('login.html', form=form)
 
 @app.route('/perfil', methods=['GET'])
 def perfildev():
@@ -136,12 +145,11 @@ def criarProjeto():
     descricao = request.form.get('descricao')
     return render_template('perfil_dev.html')
   
-@app.route("/sign-user-in", methods=['POST'])
-def sign_in_user():
-    secret_response = request.form['g-recaptcha-response']
-    print(request.form)
-    verify_response = requests.post(url=f'{VERIFY_URL}?secret={SECRET_KEY}&response={secret_response}')
-
+@app.route('/follow', methods=['POST'])
+def follow():
+    Id = request.json['Id']
+    Usuario.Follow(Id)
+    return jsonify(success=True)
 
 @app.route('/unfollow', methods=['POST'])
 def unfollow():
@@ -157,6 +165,4 @@ def index():
 if __name__ == "__main__":
     app.run()
 
-SITE_KEY = "6LeKBj8mAAAAAA3jCMVID2PjUUYmIM1TYOIKf3Ei"
-SECRET_KEY = "6LeKBj8mAAAAAAIsJpHljREaS2EPF8y5uw2frJHA"
 VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify"

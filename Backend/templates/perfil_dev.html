@@ -350,6 +350,39 @@ img {
                                     </svg>
                                     <a class="pt-1px d-none d-md-block" href="#">Conexões<span class="text-muted tx-12"> 3,765</span></a>
                                 </li>
+                                <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
+                                    <div>
+                                        <button id="btnSeguir" class="btnSeguir" onclick="seguirUsuario()">Seguir</button>
+                                        <script>
+                                          function seguirUsuario() {
+                                            var btnSeguir = document.getElementById("btnSeguir");
+                                            
+                                            if (btnSeguir.innerText === "Seguir") {
+                                              axios.post('/follow', { usuarioId: 'Id' })
+                                                .then(function(response) {
+                                                  if (response.data.success) {
+                                                    btnSeguir.innerText = "Seguindo";
+                                                  }
+                                                })
+                                                .catch(function(error) {
+                                                  console.error(error);
+                                                });
+                                            } else {
+                                              axios.post('/unfollow', { usuarioId: 'Id' })
+                                                .then(function(response) {
+                                                  if (response.data.success) {
+                                                    btnSeguir.innerText = "Seguir";
+                                                  }
+                                                })
+                                                .catch(function(error) {
+                                                  console.error(error);
+                                                });
+                                            }
+                                          }
+                                          </script>
+                                      </div>
+                                </li>
+
 
                                
                             </ul>
