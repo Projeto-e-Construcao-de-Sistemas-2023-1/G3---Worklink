@@ -3,7 +3,8 @@ from Desenvolvedor import Desenvolvedor
 from Empresa import Empresa
 from Database import Database
 from Usuario import Usuario
-from flask import Flask, render_template, redirect, request, abort, url_for, session 
+from flask import Flask, render_template, redirect, request, abort, url_for 
+from flask_wtf import FlaskForm, RecaptchaField
 import requests
 from datetime import datetime as dt
 
@@ -38,9 +39,23 @@ def regdv():
 def regem():
     return render_template('RegisterEmpresa.html') 
 
-@app.route('/login', methods=['GET'])
+@app.route('/authlogin', methods=['GET', 'POST'])
 def login():
-   return render_template('login.html')
+    if request.method == 'GET':
+        form = Widgets()
+        return render_template('login.html', form=form)
+    else:
+        email = request.form.get('email')
+        password = request.form.get('password')
+        print(email)
+        if dev.iniciaSessao(email, password) == True:
+            #funcao pesquisar email na tabela de dev
+            dev.capturaEmail(email)
+            form = Widgets()
+            return render_template('pagina_inicial.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao())
+        else:
+            print('Erro')
+            return render_template('home.html')  # criar pagina de erro com para nova tentativa  
 
 @app.route('/perfil', methods=['GET'])
 def perfildev():
