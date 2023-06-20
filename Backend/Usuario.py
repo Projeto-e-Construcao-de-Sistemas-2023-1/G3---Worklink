@@ -19,9 +19,9 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
     def finalizaSessao(self):
         pass # Apenas no front end
 
-    def verificaUsuario(self, email):
+    def verificaUsuario(self):
         Database.connect(self)
-        return Database.verificaUsuario(self, email)
+        return Database.verificaUsuario(self, self.email)
     
     def toClipboard(self, texto):
         pyperclip.copy(texto)
