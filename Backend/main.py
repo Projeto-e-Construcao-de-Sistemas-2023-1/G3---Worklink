@@ -5,7 +5,6 @@ from Usuario import Usuario
 from flask import Flask, render_template, redirect, request, abort, url_for, session 
 import requests
 from flask_wtf import FlaskForm, RecaptchaField 
-import Usuario
 from Desenvolvedor import Desenvolvedor
 
 app = Flask(__name__, template_folder="templates")
