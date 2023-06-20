@@ -3,7 +3,7 @@ from Desenvolvedor import Desenvolvedor
 from Empresa import Empresa
 from Database import Database
 from Usuario import Usuario
-from flask import Flask, render_template, redirect, request, abort, url_for, session 
+from flask import Flask, render_template, redirect, request, abort, url_for, g
 import requests
 from datetime import datetime as dt
 
@@ -51,7 +51,7 @@ def criar_projeto():
 def authlogin():
     email = request.form.get('email')
     password = request.form.get('password')
-    us.sessao(email)
+    g.dados = email
     if dev.iniciaSessao(email, password) == True:
         #funcao pesquisar email na tabela de dev
         return render_template('pagina_inicial.html', nome=dev.getNome(email), sobrenome=dev.getSobrenome(email), descricao=dev.getDescricao(email))
@@ -105,12 +105,11 @@ def regEmp():
 
 @app.route('/delete_conta', methods=['POST'])
 def delete_conta():
-    emailsessao = session.get('emailsessao')
+    emailsessao = getattr(g)
     if db.verificaUsuario(emailsessao)==True:
         tabela=('DESENVOLVEDOR')
     else:
         tabela=('EMPRESA')
-        
     db.delete(tabela, emailsessao)
 
 @app.route('/edita_perfil', methods=['POST'])
@@ -118,6 +117,7 @@ def edita_perfil():
     name = request.form.get('name')
     sobrenome = request.form.get('sobrenome')
     descricao = request.form.get('descricao')
+    emailsessao = getattr(g, None)
     print(name)
     print(emailsessao)
     print(sobrenome)
