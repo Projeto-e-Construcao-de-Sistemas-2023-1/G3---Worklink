@@ -26,6 +26,9 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
     def toClipboard(self, texto):
         pyperclip.copy(texto)
     
+    def capturaEmail(self, email):
+        self.email = email
+
     def pesquisaUsuario(self, nome, tipo):
         Database.connect(self)
         return Database.pesquisaUsuario(self, nome, tipo)
