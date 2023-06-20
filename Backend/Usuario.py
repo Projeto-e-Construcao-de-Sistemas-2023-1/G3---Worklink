@@ -1,12 +1,12 @@
 from Database import Database
 import pyperclip
 class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
-    def deletaUsuario(self, email, tipo): # Passar tipo = True para DESENVOLVEDOR | tipo = False para EMPRESA
+    def deletaUsuario(self): # Passar tipo = True para DESENVOLVEDOR | tipo = False para EMPRESA
         Database.connect(self)
-        if tipo == True:
-            Database.delete(self, 'DESENVOLVEDOR', email)
+        if self.tipo == True:
+            Database.delete(self, 'DESENVOLVEDOR', self.email)
         else:
-            Database.delete('EMPRESA', email)
+            Database.delete('EMPRESA', self.email)
             
     def iniciaSessao(self, email, senha):
         Database.connect(self)
@@ -21,7 +21,7 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
 
     def verificaUsuario(self):
         Database.connect(self)
-        return Database.verificaUsuario(self, self.email)
+        self.tipo = Database.verificaUsuario(self, self.email)
     
     def toClipboard(self, texto):
         pyperclip.copy(texto)
