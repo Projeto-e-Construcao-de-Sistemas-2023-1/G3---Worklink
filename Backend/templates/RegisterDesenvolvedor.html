@@ -7,6 +7,11 @@
     <title>Cadastro Desenvolvedor · WorkLink</title>
     <link rel="shortcut icon" href="imagens wl/Wl.ico"type="image/x-icon">
     <link rel="stylesheet" href="static/style.css">
+    <script>
+      function showAlert() {
+alert("Conta criada com sucesso!");
+}
+</script>
 <style>
 body {
 background-color: #141034;
@@ -90,7 +95,7 @@ background-color: #141034;
             <div class="submit">
 
               <input type="hidden" name="acao" value="enviar">
-              <button type="submit" name="Submit" class="submit_btn"  onclick="window.location.href='/'">Cadastrar-se</button>
+              <button type="submit" name="Submit" class="submit_btn" onclick= "'showAlert()'" onclick="window.location.href='/'">Cadastrar-se</button>
             
             </div>
     </form>
