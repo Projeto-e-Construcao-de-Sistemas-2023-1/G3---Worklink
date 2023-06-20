@@ -237,6 +237,23 @@ body {
     padding: 0;
     margin: 0 5px 8px;
     min-height: 50px !important;
+
+}
+
+#show-post-container2 {
+	width: 100%;
+	margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    margin: 0 5px 8px;
+    min-height: 50px !important;	
+}
+
+.hide{
+	display: none;
+}
+#candidatar{
+text-align: center;
 }
 
 #show-comment-on-post {

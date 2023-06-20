@@ -15,82 +15,59 @@
       }
       #field{
         padding: 8px;
+<<<<<<< HEAD
         border-radius: 5px;
         border-color: white;
         padding-right: 62px;
         font-family: 'Oswald', sans-serif;
+=======
+    border-radius: 5px;
+    border-color: white;
+    padding-right: 62px;
+    font-family: 'Oswald', sans-serif;
+>>>>>>> 2dff46e1a7315436a1093fa6793d5369d56a5ca1
       }
       label{
         font-family: 'Oswald', sans-serif;
         font-size: 14px;
       }
+<<<<<<< HEAD
       .recaptcha {
         display: flex;
         width: 100%;
         justify-content: space-around;
         margin: 10px 0px
       }
+=======
+>>>>>>> 2dff46e1a7315436a1093fa6793d5369d56a5ca1
     
     </style>
 </head>
 <body>
+<<<<<<< HEAD
   
+=======
+  <form action="/authlogin" method="post">
+>>>>>>> 2dff46e1a7315436a1093fa6793d5369d56a5ca1
     <img id = "img-login" class="mb-4" src="static/logo-completa.jpg" alt="" >
 
     <div class="form_grupo">
       <label for="e-mail" >Email</label>
       <input id="field" type="email" name="email" id="email" placeholder="seuemail@email.com" required>
-  </div>
-  <div class="form_grupo">
-    <label for="Senha" >Senha</label>
-    <input id="field" type="password" name="Senha" id="Senha" placeholder="Senha" required>
-  </div>
+    </div>
+    <div class="form_grupo">
+      <label for="Senha" >Senha</label>
+      <input id="field" type="password" name="password" id="Senha" placeholder="Senha" required>
+    </div>
 
-
+    <div style="padding-bottom: 20px;">
       <label>
         <input type="checkbox" value="lembrar-me"> Lembrar-me
       </label>
-      <form method="POST" action="/login">
-        <div class="recaptcha"> 
-          {{ form.recaptcha }}
-        </div>
-        
-        <div class="messages">
-          {% with messages = get_flashed_messages() %}
-            {% if messages %}
-              <ul class="messages-list">
-                {% for message in messages %}
-                  <li>{{ message }}</li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-          {% endwith %}
-        </div>
-        
-        <button id="entrar" type="submit">Entrar</button>
-      </form>
+    </div>
+    <button id = "entrar" type="submit" onclick="window.location.href='/authlogin'">Entrar</button>
     <p class="text-body-secondary">&copy;2023</p>
   </form>
-  <script 
-    src="https://www.google.com/recaptcha/api.js" async defer>
-  </script>
-  <script>
-    grecaptcha.ready(function() {
-      grecaptcha.execute('sua_chave_do_site', {action: 'nome_da_acao'}).then(function(token) {
-        // O reCaptcha foi carregado e pode ser usado
-      });
-    });
-  </script>
-  <script>
-    <!--Autenticar usuario aqui-->
-    document.getElementById("entrar").addEventListener("click", function(event) {
-      event.preventDefault(); 
-      if (grecaptcha.getResponse().length === 0) 
-        alert("Por favor, marque a caixa de verificação reCaptcha.");
-      else 
-        window.location.href = "feed.html";
-    });
-  </script>
 </main>
 
   </body>
