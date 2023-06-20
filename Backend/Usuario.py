@@ -1,4 +1,5 @@
 from Database import Database
+<<<<<<< HEAD
 class Usuario:
     def getEmail(self):
         return str(self.email)
@@ -67,3 +68,43 @@ class Usuario:
         self.cursor.execute(f'SELECT * FROM desenvolvedor JOIN empresa')
         self.con.commit()
         return str(self.cursor.fetchall()) # MOSTRAR OS REGISTROS NA TELA DO FRONT END
+=======
+import pyperclip
+class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
+    def deletaUsuario(self, email, tipo): # Passar tipo = True para DESENVOLVEDOR | tipo = False para EMPRESA
+        Database.connect(self)
+        if tipo == True:
+            Database.delete(self, 'DESENVOLVEDOR', email)
+        else:
+            Database.delete('EMPRESA', email)
+            
+    def iniciaSessao(self, email, senha):
+        Database.connect(self)
+        if Database.autenticaUsuario(self, email, senha):
+            self.email = email # Grava email do usuario logado para futuras consultas
+            return True # vai vir como True ou False
+        else:
+            return False
+        
+    def finalizaSessao(self):
+        pass # Apenas no front end
+
+    def verificaUsuario(self, email):  
+        Database.connect(self)
+        return Database.verificaUsuario(self, email)
+    
+    def toClipboard(self, texto):
+        pyperclip.copy(texto)
+    
+    def pesquisaUsuario(self, nome):
+        Database.connect(self)
+        return Database.pesquisaUsuario(self, nome)
+    
+    def searchUsuario(self, pesquisa_user):
+        Database.connect(self)
+        return Database.verificaUsuarioNome(self, pesquisa_user)
+        
+    def sessao(self, email):
+        Database.connect(self)
+        return (email)
+>>>>>>> 65ac48e8794cd093ab268ffb8c08e14f7e2f1252
