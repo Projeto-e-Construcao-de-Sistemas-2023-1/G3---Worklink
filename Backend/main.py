@@ -56,9 +56,10 @@ def login():
         
         elif dev.iniciaSessao(email, password):
             dev.capturaEmail(email)
+            dev.verificaUsuario()
             return redirect(url_for('feed'))
         else:
-            flash('Email ou senha incorretos.')
+            flash('***EMAIL OU SENHA INCORRETOS***')
             return redirect(url_for('login'))
 
 @app.route('/perfil', methods=['GET'])
@@ -113,9 +114,9 @@ def regEmp():
     emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
     return render_template('home.html')
 
-@app.route('/delete_conta', methods=['POST'])
+@app.route('/delete_conta', methods=['GET'])
 def delete_conta():
-    db.delete(dev.getEmail)
+    dev.deletaUsuario()
     return render_template('home.html')
 
 @app.route('/edita_perfil', methods=['POST'])
