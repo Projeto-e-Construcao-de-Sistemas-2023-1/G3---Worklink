@@ -2,11 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for, abort, jso
 from Empresa import Empresa
 from Database import Database
 from Usuario import Usuario
-from flask import Flask, render_template, redirect, request, abort, url_for 
+from Desenvolvedor import Desenvolvedor
 from flask_wtf import FlaskForm, RecaptchaField
 import requests
-from flask_wtf import FlaskForm, RecaptchaField 
-from Desenvolvedor import Desenvolvedor
+from datetime import datetime as dt
 
 app = Flask(__name__, template_folder="templates")
 emailsessao=''
@@ -41,21 +40,32 @@ def regem():
 
 @app.route('/authlogin', methods=['GET', 'POST'])
 def login():
+    form = Widgets()
     if request.method == 'GET':
-        form = Widgets()
+        # form = Widgets()
         return render_template('login.html', form=form)
     else:
         email = request.form.get('email')
         password = request.form.get('password')
-        print(email)
-        if dev.iniciaSessao(email, password) == True:
-            #funcao pesquisar email na tabela de dev
+        # form = Widgets()
+        if not email or not password:
+            flash('Por favor, preencha todos os campos.')
+            return redirect(url_for('login'))
+        
+        elif 'g-recaptcha-response' not in request.form:
+            flash('Por favor, marque a caixa de verificação reCaptcha.')
+            return redirect(url_for('login'))
+        
+        elif dev.iniciaSessao(email, password):
+        #elif form.validate():
+            # Funcao pesquisar email na tabela de dev
             dev.capturaEmail(email)
-            form = Widgets()
+            #return render_template('pagina_inicial.html')
             return render_template('pagina_inicial.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao())
         else:
-            print('Erro')
-            return render_template('home.html')  # criar pagina de erro com para nova tentativa  
+        # Invalid email or password
+            flash('Email ou senha incorretos.')
+            return redirect(url_for('login'))
 
 @app.route('/perfil', methods=['GET'])
 def perfildev():
