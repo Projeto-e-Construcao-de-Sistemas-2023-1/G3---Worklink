@@ -110,7 +110,7 @@ class Desenvolvedor(Usuario.Usuario):
 
     def setTag(self, tag):
         Database.connect(self)
-        Database.update(self, 'tag', tag, 'DESENVOLVEDOR', self.email)
+        Database.update(self, 'tag_desenvolvedor', tag, 'DESENVOLVEDOR', self.email)
         return True
     
     #def candidataProjeto(self, projeto):
