@@ -28,7 +28,8 @@ def home():
 
 @app.route('/editar_perfil', methods=['GET'])
 def editarp():
-    return render_template('editar_perfil.html') 
+    return render_template('editar_perfil.html', nome=dev.getNome(), contabancaria=dev.getConta(), sobrenome=dev.getSobrenome(), 
+                           telefone=dev.getTelefone(), descricao=dev.getDescricao()) 
 
 @app.route('/signup_dev', methods=['GET'])
 def regdv():
@@ -98,7 +99,7 @@ def regdev():
         dev.criaDesenvolvedor(nome, sobrenome, cpf, email, genero, data_nascimento, telefone, conta, senha, descricao, tag)
         print(email)
         print(senha)
-        return render_template('home.html') 
+        return redirect(url_for('home'))
     
 @app.route('/signup_enterprise', methods=['POST'])
 def regEmp():
@@ -124,7 +125,23 @@ def edita_perfil():
     name = request.form.get('name')
     sobrenome = request.form.get('sobrenome')
     descricao = request.form.get('descricao')
-    return render_template('perfil_dev.html')
+    contabancaria = request.form.get('contabancaria')
+    telefone = request.form.get('telefone')
+    hashtags = request.form.get('hashtags')
+    genero = request.form.get('genero')
+    password = request.form.get('password')
+
+
+    dev.setNome(name)
+    dev.setSobrenome(sobrenome)
+    dev.setDescricao(descricao)
+    dev.setConta(contabancaria)
+    dev.setTelefone(telefone)
+    dev.setGenero(genero)
+    dev.setTag(hashtags)
+    dev.setSenha(password)
+
+    return redirect(url_for('perfildev'))
 
 @app.route('/criarProjeto', methods=['POST'])
 def criarProjeto():
