@@ -314,7 +314,7 @@ img {
                                 <div>
                                    <!-- <img class="profile-pic" src="../static/ada.PNG" alt="profile">-->
                                     <i class="fa fa-user-circle fa-4x"></i>
-                                    <span class="profile-name">{{ nome }}</span>
+                                    <span class="profile-name">{{ nome }} {{ sobrenome }}</span>
                                 </div>
                                 <div class="d-none d-md-block">
                                     <button id="edit"  onclick="window.location.href='/editar_perfil'">
@@ -392,7 +392,7 @@ img {
                                     </div>
                                 </div>
                             </div>
-                            <p>Matemática e escritora, nos meus tempos vagos gosto de desenvolver algoritimos.</p>
+                            <p>{{ descricao }}</p>
                             <div class="mt-3">
                                 <label>Projetos Ativos</label>
                                 <p class="text-muted">2</p>
@@ -418,9 +418,10 @@ img {
                                 <div class="card-header">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center">
-                                            <img class="img-xs rounded-circle" src="../static/ada.PNG" alt="" style="margin-right: 8px;">
+                                            <!-- <img class="img-xs rounded-circle" src="../static/ada.PNG" alt="" style="margin-right: 8px;"> -->
+                                            <i class="fa fa-user-circle fa-4x" style="margin-right: 8px;"></i>
                                             <div>
-                                                <b style="color: black;">{{ nome }}</b>&nbsp; {{ tag }}
+                                                <b style="color: black;">{{ nome }} {{ sobrenome }}</b>&nbsp; {{ tag }}
                                                 <br>
                                                 <p id="pzinho">{{ descricao }}</p>
                                                 <p id="pzinho" style="margin-top: 0px;">1h <i class="fas fa-globe"></i></p>
@@ -440,9 +441,9 @@ img {
                                 </div>
                                
                                 <div class="card-body">
-                                    <p class="mb-3 tx-14">Hoje, gostaria de compartilhar com vocês um projeto revolucionário no qual tenho trabalhado incansavelmente ao lado do brilhante matemático <strong>Charles Babbage</strong>. Juntos, estamos construindo a Máquina Analítica, um dispositivo que promete mudar o curso da história e abrir novos horizontes para a humanidade! 💡🚀</p>
+                                    <p class="mb-3 tx-14">Apenas entreguei um novo recurso épico no prazo! 💪🚀 O trabalho árduo e a dedicação compensam sempre. Adoro quando o código funciona perfeitamente e traz sorrisos aos usuários. Continuarei desenvolvendo com paixão e buscando soluções inovadoras.</p>
                                     <br>
-                                    <strong>#algorítmos #programação #lógica</strong>
+                                    <strong>#Desenvolvedor #AmoProgramar</strong>
                                     <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt="">
                                 </div>
                                 <div id="like-option">

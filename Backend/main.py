@@ -65,7 +65,7 @@ def login():
 
 @app.route('/perfil', methods=['GET'])
 def perfildev():
-   return render_template('perfil_dev.html')
+   return render_template('perfil_dev.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao(), email=dev.getEmail())
 
 @app.route('/criar_Projeto', methods=['GET'])
 def criar_projeto():
