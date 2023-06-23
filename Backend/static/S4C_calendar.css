@@ -9,7 +9,7 @@
     overflow-x: hidden;
   }
   :root {
-    --bg-color-a: #3b39af; /* page header + form label */
+    --bg-color-a: #ABDB2A; /* page header + form label */
     --bg-color-b: #404040; /* calendar header */
     --bg-color-c: #d73a3a; /* buttons */
   }

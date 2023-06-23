@@ -54,9 +54,9 @@ var cal = {
       // (C2) MONTH & YEAR SELECTOR
       let now = new Date(), nowMth = now.getMonth() + 1;
       for (let [i,n] of Object.entries({
-        1 : "January", 2 : "Febuary", 3 : "March", 4 : "April",
-        5 : "May", 6 : "June", 7 : "July", 8 : "August",
-        9 : "September", 10 : "October", 11 : "November", 12 : "December"
+        1 : "Janeiro", 2 : "Fevereiro", 3 : "Março", 4 : "Abril",
+        5 : "Maio", 6 : "Junho", 7 : "Julho", 8 : "Agosto",
+        9 : "Setembro", 10 : "Outubro", 11 : "Novembro", 12 : "Dezembro"
       })) {
         let opt = document.createElement("option");
         opt.value = i;
@@ -77,8 +77,8 @@ var cal = {
       cal.hfDel.onclick = cal.del;
   
       // (C4) DRAW DAY NAMES
-      let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      if (cal.mon) { days.push("Sun"); } else { days.unshift("Sun"); }
+      let days = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
+      if (cal.mon) { days.push("Dom"); } else { days.unshift("Dom"); }
       for (let d of days) {
         let cell = document.createElement("div");
         cell.className = "calCell";
@@ -260,7 +260,7 @@ var cal = {
   
       // (H2) DATE CHECK
       if (new Date(data.s) > new Date(data.e)) {
-        alert("Start date cannot be later than end date!");
+        alert("A data de início não pode ser após a data de fim!");
         return false;
       }
   

@@ -6,6 +6,7 @@ from Desenvolvedor import Desenvolvedor
 from flask_wtf import FlaskForm, RecaptchaField
 import requests
 from datetime import datetime as dt
+import S2_lib as evt
 
 app = Flask(__name__, template_folder="templates")
 emailsessao=''
@@ -58,6 +59,10 @@ def login():
         elif dev.iniciaSessao(email, password):
             dev.capturaEmail(email)
             dev.verificaUsuario()
+            #if dev.verificaUsuario():
+            #   dev.getCodigo()
+            #else
+            #   emp.getCodigo()
             return redirect(url_for('feed'))
         else:
             flash('***EMAIL OU SENHA INCORRETOS***')
@@ -166,6 +171,12 @@ def unfollow():
 @app.route("/calendario", methods=["GET", "POST"])
 def index():
   return render_template("S4A_calendar.html")
+
+@app.route("/get/", methods=["POST"])
+def get():
+  data = dict(request.form)
+  events = evt.get(int(data["month"]), int(data["year"]))
+  return "{}" if events is None else events
 
 
 if __name__ == "__main__":
