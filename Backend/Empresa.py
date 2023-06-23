@@ -19,7 +19,6 @@ class Empresa(Usuario.Usuario):
     def getEmail(self):
         Database.connect(self)
         return Database.select(self, 'EMPRESA', 'email', self.email)
-<<<<<<< HEAD
 
     def getCodigo(self):
         Database.connect(self)
@@ -40,23 +39,6 @@ class Empresa(Usuario.Usuario):
     
     def getAreaNegocio(self):
         Database.connect(self)
-=======
-    
-    def getTelefone(self):
-        Database.connect(self)
-        return Database.select(self, 'EMPRESA', 'telefone', self.email)
-    
-    def getConta(self):
-        Database.connect(self)
-        return Database.select(self, 'EMPRESA', 'conta_bancaria', self.email)
-    
-    def getSenha(self):
-        Database.connect(self)
-        return Database.select(self, 'EMPRESA', 'senha', self.email)
-    
-    def getAreaNegocio(self):
-        Database.connect(self)
->>>>>>> origin/rafael
         return Database.select(self, 'EMPRESA', 'area_negocio', self.email)
     
     # SETTERS
