@@ -397,12 +397,27 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Nome | Redefinir Senha |
 | Objetivo | Alterar a senha |
 | Ator | Usuário |
-| Pré-Condições | O usuário tem cadastro. |
-| Trigger | Usuário seleciona a opção “Redefinir Senha”. |
+| Pré-Condições | O ator tem cadastro. |
+| Trigger | O ator seleciona a opção “Redefinir Senha”. |
 | Fluxo Principal | 1 - O sistema exibe o campo de “Senha” e “Confirmar Senha”. <br> 2 - O ator preenche os campos e confirma. <br> 3 - O sistema registra a ação do ator e redireciona para a página de perfil do usuário. |
 | Fluxos Alternativos | N/A. |
 | Extensões | N/A. |
 | Pós-Condições | A senha foi alterada. |
+| Regras de negócios | N/A. |
+
+### Caso 13: Navegar por calendário
+
+| 13 | Navegar por calendário |
+| --- | --- |
+| Nome | Navegar por calendário |
+| Objetivo | Visualizar os dias do ano e reuniões marcadas |
+| Ator | Usuário |
+| Pré-Condições | O ator estar com sessão em andamento. |
+| Trigger | O ator seleciona a opção “Calendário” na sua tela de perfil. |
+| Fluxo Principal | 1 - O sistema exibe o calendário do ator, com os dias do mês atual e suas reuniões marcadas. |
+| Fluxos Alternativos | N/A. |
+| Extensões | N/A. |
+| Pós-Condições | O calendário é exibido na tela do ator. |
 | Regras de negócios | N/A. |
 
 ## Diagrama de Classes
