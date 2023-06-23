@@ -358,7 +358,7 @@ img {
                                             var btnSeguir = document.getElementById("btnSeguir");
                                             
                                             if (btnSeguir.innerText === "Seguir") {
-                                              axios.post('/follow', { usuarioId: 'Id' })
+                                              axios.post('/follow', { cod: 'cod' })
                                                 .then(function(response) {
                                                   if (response.data.success) {
                                                     btnSeguir.innerText = "Seguindo";
@@ -368,7 +368,7 @@ img {
                                                   console.error(error);
                                                 });
                                             } else {
-                                              axios.post('/unfollow', { usuarioId: 'Id' })
+                                              axios.post('/unfollow', { usuario: usuario })
                                                 .then(function(response) {
                                                   if (response.data.success) {
                                                     btnSeguir.innerText = "Seguir";

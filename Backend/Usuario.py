@@ -32,3 +32,35 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
     def pesquisaUsuario(self, nome, tipo):
         Database.connect(self)
         return Database.pesquisaUsuario(self, nome, tipo)
+    
+    def Follow(self, seguidor, seguido, tipoSeguidor, tipoSeguido):
+        Database.connect(self)
+        if self.verificaUsuario(self):
+            tipo = 'dev'
+        tipo = 'emp'
+        if verificaUsuario(cod):
+            tipoSeguido = 'dev'
+        tipoSeguido = 'emp'
+        if Database.checkFollow(self, self.cod, codSgd, tipoSgr, tipoSgd):
+            return False  
+            #Ja segue
+        else:
+            Database.Follow(self, self.cod, codSgd, tipoSgr, tipoSgd)
+            return True 
+            #começou a seguir
+
+    def Unfollow(self, cod, tipo):
+        Database.connect(self)
+        if self.verificaUsuario(self):
+            tipo = 'dev'
+        tipo = 'emp'
+        if verificaUsuario(cod):
+            tipoSeguido = 'dev'
+        tipoSeguido = 'emp'
+        if Database.checkFollow(self, self.cod, cod, tipo, tipoSeguido):
+            Database.Unfollow(self, self.cod, cod)
+            return True  
+            #deu unfollow
+        else:
+            return False
+            #nao estava seguindo

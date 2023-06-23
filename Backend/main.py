@@ -42,12 +42,10 @@ def regem():
 def login():
     form = Widgets()
     if request.method == 'GET':
-        # form = Widgets()
         return render_template('login.html', form=form)
     else:
         email = request.form.get('email')
         password = request.form.get('password')
-        # form = Widgets()
         if not email or not password:
             flash('Por favor, preencha todos os campos.')
             return redirect(url_for('login'))
@@ -57,13 +55,10 @@ def login():
             return redirect(url_for('login'))
         
         elif dev.iniciaSessao(email, password):
-        #elif form.validate():
-            # Funcao pesquisar email na tabela de dev
             dev.capturaEmail(email)
-            #return render_template('pagina_inicial.html')
+            return redirect(url_for('paginainicial'))
             return render_template('pagina_inicial.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao())
         else:
-        # Invalid email or password
             flash('Email ou senha incorretos.')
             return redirect(url_for('login'))
 
@@ -79,23 +74,6 @@ def criar_projeto():
 def paginainicial():
     return render_template('pagina_inicial.html')
 #metodos 
-
-# @app.route('/authlogin', methods=['POST', 'GET'])
-# def authlogin():
-#    if request.method == 'POST':
-#         email = request.form.get('email')
-#         password = request.form.get('password')
-#         print(email)
-#         if dev.iniciaSessao(email, password) == True:
-#             #funcao pesquisar email na tabela de dev
-#             dev.capturaEmail(email)
-#             form = Widgets()
-#             return render_template('pagina_inicial.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao())
-#         else:
-#             print('Erro')
-#             return render_template('home.html')  # criar pagina de erro com para nova tentativa
-#     else:
-#         return render_template('home.html')
     
 @app.route('/pesquisa_usuario', methods=['post'])
 def pesquisaUser():
@@ -163,7 +141,8 @@ def criarProjeto():
   
 @app.route('/follow', methods=['POST'])
 def follow():
-    Id = request.json['Id']
+    cod = request.json['cod']
+    tipo = request.json['tipo']
     Usuario.Follow(Id)
     return jsonify(success=True)
 
