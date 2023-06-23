@@ -19,7 +19,11 @@ class Empresa(Usuario.Usuario):
     def getEmail(self):
         Database.connect(self)
         return Database.select(self, 'EMPRESA', 'email', self.email)
-    
+
+    def getCodigo(self):
+        Database.connect(self)
+        return Database.select(self, 'DESENVOLVEDOR', 'cod_empresa', self.email)
+
     def getTelefone(self):
         Database.connect(self)
         return Database.select(self, 'EMPRESA', 'telefone', self.email)
