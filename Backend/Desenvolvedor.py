@@ -55,6 +55,7 @@ class Desenvolvedor(Usuario.Usuario):
     
     def getCodigo(self):
         Database.connect(self)
+        self.codigo = Database.select(self, 'DESENVOLVEDOR', 'cod_desenvolvedor', self.email)
         return Database.select(self, 'DESENVOLVEDOR', 'cod_desenvolvedor', self.email)
 
     def getTag(self):
