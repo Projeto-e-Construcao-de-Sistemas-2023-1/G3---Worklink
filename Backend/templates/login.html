@@ -1,36 +1,79 @@
-html lang="pt-br">
+<!doctype html>
+<html lang="pt-br" data-bs-theme="auto">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<script src='https://www.google.com/recaptcha/api.js'></script> 
-<title>Formulário do reCAPTCHA</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entre · WorkLink</title> 
+  <link rel="shortcut icon" href="static/Wl.ico" type="image/x-icon">
+  <link rel="stylesheet" href="static/style.css">
+  <style>
+    body {
+      margin-top: 200px;
+      text-align: center;
+      border-radius: 10px;
+    }
+    #field {
+      padding: 8px;
+      border-radius: 5px;
+      border-color: white;
+      padding-right: 62px;
+      font-family: 'Oswald', sans-serif;
+    }
+    label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+    }
+    .recaptcha {
+      display: flex;
+      width: 100%;
+      justify-content: space-around;
+      margin: 10px 0px;
+    }
+  </style>
 </head>
 <body>
-  <form id="register" action="" method="post">
-      <label for="name">Nome:</label>
-      <input type="text" name="name" id="name" />
-
-      <label for="email">E-mail:</label>
-      <input type="email" name="email" id="email" />
-      <button type="submit">Enviar</button>
-      <div id='recaptcha' class="g-recaptcha" data-sitekey="6LcizEwmAAAAACdARylt3xKuxKoKsZnDG-NNKBE2" data-callback="sendForm" data-size="visible"></div>
+  <form action="/authlogin" method="post">
+    <img id="img-login" class="mb-4" src="static/logo-completa.jpg" alt="">
+    
+    <div class="form_grupo">
+      <label for="email">Email</label>
+      <input id="field" type="email" name="email" id="email" placeholder="seuemail@email.com" required>
+    </div>
+    <div class="form_grupo">
+      <label for="password">Senha</label>
+      <input id="field" type="password" name="password" id="password" placeholder="Senha" required>
+    </div>
+    
+    <div class="recaptcha">
+      {{ form.recaptcha }}
+    </div>
+    
+    <div class="messages">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class="messages-list">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+    
+    <button id="entrar" type="submit">Entrar</button>
+    <p class="text-body-secondary">&copy;2023</p>
   </form>
-  <script type="text/javascript">
-    let form = document.querySelector('#register');
-    form.addEventListener('submit',  e => {
-        e.preventDefault();
-        let name = document.querySelector('#name');
-        let email = document.querySelector('#email');
-        if(!name.value || !email.value) {
-            alert('Nome e Email são Obrigatorios');
-            } else{
-            grecaptcha.execute();
-        }       
-        });
-    function sendForm(){
-        alert("reCAPTCHA funcionou");
-    }
+  
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script>
+    document.getElementById("entrar").addEventListener("click", function(event) {
+      event.preventDefault(); 
+      if (grecaptcha.getResponse().length === 0) {
+        alert("Por favor, marque a caixa de verificação reCaptcha.");
+      } else {
+      this.closest("form").submit();
+      }
+    });
   </script>
-  </body>
+</body>
 </html>

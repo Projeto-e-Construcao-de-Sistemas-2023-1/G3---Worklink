@@ -67,3 +67,40 @@ class Database:
         password='pjSq2023@') # BD acessado!!!
         if self.con.is_connected():
             self.cursor = self.con.cursor(buffered= True)
+
+    def checkFollow(self, codSeguidor, codSeguido, tipoSeguido, tipoSeguidor):
+        if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 
+             self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND  seguidoEmpresa = ?', (codSeguidor, codSeguido))
+        elif tipoSeguidor == 'dev' and tipoSeguido == 'dev':
+             self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND  seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
+        elif tipoSeguidor == 'emp' and tipoSeguido == 'dev':
+             self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorEmpresa = ? AND  seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
+        else: 
+        #elif tipoSeguidor =='emp' and tipoSeguido =='emp':
+             self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorEmpresa = ? AND  seguidoEmpresa = ?', (codSeguidor, codSeguido))
+        count = self.cursor.fetchone()[0]
+        return count > 0
+
+    def Unfollow(self, codSeguidor, codSeguido, tipoSeguido, tipoSeguidor):
+        if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 
+             self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND seguidoEmpresa = ?', (codSeguidor, codSeguido))
+        elif tipoSeguidor == 'dev' and tipoSeguido == 'dev':
+             self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
+        elif tipoSeguidor == 'emp' and tipoSeguido == 'dev':
+             self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorEmpresa = ? AND seguidoDesenvolvedor = ?' (codSeguidor, codSeguido))
+        else:
+        #elif tipoSeguidor =='emp' and tipoSeguido =='emp':
+             self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorEmpresa = ? AND seguidoEmpresa = ?', (codSeguidor, codSeguido))
+        self.conn.commit()
+
+    def Follow(self, codSeguidor, codSeguido, tipoSeguidor, tipoSeguido):
+        if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 
+             self.cursor.execute('INSERT INTO SEGUIDORES (seguidorDesenvolvedor, seguidoEmpresa) VALUES (?, ?)', (codSeguidor, codSeguido))
+        elif tipoSeguidor == 'dev' and tipoSeguido == 'dev':
+             self.cursor.execute('INSERT INTO SEGUIDORES (seguidorDesenvolvedor, seguidoDesenvolvedor) VALUES (?, ?)', (codSeguidor, codSeguido))
+        elif tipoSeguidor == 'emp' and tipoSeguido == 'dev':
+             self.cursor.execute('INSERT INTO SEGUIDORES (seguidorEmpresa, seguidoDesenvolvedor) VALUES (?, ?)', (codSeguidor, codSeguido))
+        else:
+        #elif tipoSeguidor =='emp' and tipoSeguido =='emp':
+             self.cursor.execute('INSERT INTO SEGUIDORES (seguidorEmpresa, seguidoEmpresa) VALUES (?, ?)', (codSeguidor, codSeguido))
+        self.conn.commit()
