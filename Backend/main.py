@@ -29,7 +29,7 @@ def home():
 @app.route('/editar_perfil', methods=['GET'])
 def editarp():
     return render_template('editar_perfil.html', nome=dev.getNome(), contabancaria=dev.getConta(), sobrenome=dev.getSobrenome(), 
-                           telefone=dev.getTelefone(), descricao=dev.getDescricao()) 
+                           telefone=dev.getTelefone(), descricao=dev.getDescricao(), tag=dev.getTag()) 
 
 @app.route('/signup_dev', methods=['GET'])
 def regdv():
@@ -65,7 +65,7 @@ def login():
 
 @app.route('/perfil', methods=['GET'])
 def perfildev():
-   return render_template('perfil_dev.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao(), email=dev.getEmail())
+   return render_template('perfil_dev.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao(), email=dev.getEmail(), tag=dev.getTag())
 
 @app.route('/criar_Projeto', methods=['GET'])
 def criar_projeto():
@@ -127,10 +127,10 @@ def edita_perfil():
     descricao = request.form.get('descricao')
     contabancaria = request.form.get('contabancaria')
     telefone = request.form.get('telefone')
-    hashtags = request.form.get('hashtags')
+    tag = request.form.get('tag')
     genero = request.form.get('genero')
     password = request.form.get('password')
-
+  
 
     dev.setNome(name)
     dev.setSobrenome(sobrenome)
@@ -138,7 +138,7 @@ def edita_perfil():
     dev.setConta(contabancaria)
     dev.setTelefone(telefone)
     dev.setGenero(genero)
-    dev.setTag(hashtags)
+    dev.setTag(tag)
     dev.setSenha(password)
 
     return redirect(url_for('perfildev'))

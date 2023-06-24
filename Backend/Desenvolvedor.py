@@ -55,7 +55,7 @@ class Desenvolvedor(Usuario.Usuario):
     
     def getTag(self):
         Database.connect(self)
-        return Database.select(self, 'DESENVOLVEDOR', 'tag', self.email)
+        return Database.select(self, 'DESENVOLVEDOR', 'tag_desenvolvedor', self.email)
     
     # SETTERS
     def setNome(self, nome):
