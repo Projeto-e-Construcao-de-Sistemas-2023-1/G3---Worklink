@@ -22,6 +22,7 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
     def verificaUsuario(self):
         Database.connect(self)
         self.tipo = Database.verificaUsuario(self, self.email)
+        return self.tipo
     
     def toClipboard(self, texto):
         pyperclip.copy(texto)
