@@ -15,8 +15,7 @@ class Evento():
 
     def atualizaEvento(self,inicio, fim, texto, cor, fundo, id):
         Database.connect(self)
-        values = (inicio, fim, texto, cor, fundo, id)
-        Database.updateEvent(self, values, id)
+        Database.updateEvent(self, inicio, fim, texto, cor, fundo, id)
 
     def deletaEvento(self, id):
         Database.connect(self)

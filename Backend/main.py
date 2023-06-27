@@ -14,7 +14,8 @@ emp = Empresa()
 #emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
 dev = Desenvolvedor()
 evt = Evento()
-resposta = evt.getEvento(7, 2023, 6, True)
+#resposta = evt.getEvento(7, 2023, 6, True)
+evt.atualizaEvento('2023-09-15', '2023-09-18', 'teste de atualizacao', '#000000', '#fffdbd', 1)
 
 #dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
 #                     'senha', 'pleno', 'python')

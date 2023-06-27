@@ -68,10 +68,10 @@ class Database:
         self.cursor.execute(query, values)
         self.con.commit() # INSERT REALIZADO
     
-    def updateEvent(self, values, id):
-        query = "UPDATE `events` SET `start`=?, `end`=?, `text`=?, `color`=?, `bg`=? WHERE `id`=?"
-        data = data + (id,)
-        self.cursor.execute(query, values)
+    def updateEvent(self, inicio, fim, texto, cor, fundo, id):
+        data = (inicio, fim, texto, cor, fundo, id)
+        self.cursor.execute(f"UPDATE events SET start='{inicio}', end='{fim}', text='{texto}', color='{cor}', bg='{fundo}' WHERE id='{id}'")
+        data = data + (id,) # Dando problema
         self.con.commit() # INSERT REALIZADO
 
     def deleteEvent(self, id):
