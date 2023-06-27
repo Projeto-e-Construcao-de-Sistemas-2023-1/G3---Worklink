@@ -3,8 +3,9 @@ from Empresa import Empresa
 from Database import Database
 from Usuario import Usuario
 from Desenvolvedor import Desenvolvedor
-from flask_wtf import FlaskForm, RecaptchaField
-import requests
+from Evento import Evento
+#from flask_wtf import FlaskForm, RecaptchaField
+#import requests
 from datetime import datetime as dt
 
 app = Flask(__name__, template_folder="templates")
@@ -12,6 +13,9 @@ emailsessao=''
 emp = Empresa()
 #emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
 dev = Desenvolvedor()
+evt = Evento()
+resposta = evt.getEvento(7, 2023, 6, True)
+
 #dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
 #                     'senha', 'pleno', 'python')
 db = Database()
