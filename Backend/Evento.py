@@ -11,7 +11,7 @@ class Evento():
     def criaEventoEmp(self, inicio, fim, texto, cor, fundo, id_emp, tipo):
         Database.connect()
         values = (inicio, fim, texto, cor, fundo, id_emp)
-        Database.insertEvent(self, values)
+        Database.insertEvent(self, values, tipo)
 
     def atualizaEvento(self,inicio, fim, texto, cor, fundo, id):
         Database.connect()
