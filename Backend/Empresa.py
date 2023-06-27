@@ -24,6 +24,11 @@ class Empresa(Usuario.Usuario):
         Database.connect(self)
         return Database.select(self, 'EMPRESA', 'telefone', self.email)
     
+    def getCodigo(self):
+        Database.connect(self)
+        self.codigo = Database.select(self, 'DESENVOLVEDOR', 'cod_desenvolvedor', self.email)
+        return Database.select(self, 'DESENVOLVEDOR', 'cod_empresa', self.email)
+    
     def getConta(self):
         Database.connect(self)
         return Database.select(self, 'EMPRESA', 'conta_bancaria', self.email)

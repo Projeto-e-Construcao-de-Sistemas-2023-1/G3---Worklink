@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, abort, jsonify, flash
+from flask import Flask, render_template, request, redirect, url_for, abort, jsonify, flash, make_response
 from Empresa import Empresa
 from Database import Database
 from Usuario import Usuario
@@ -6,12 +6,15 @@ from Desenvolvedor import Desenvolvedor
 from flask_wtf import FlaskForm, RecaptchaField
 import requests
 from datetime import datetime as dt
-import S2_lib as evt
+from Evento import Evento
+import sys
 
 app = Flask(__name__, template_folder="templates")
 emailsessao=''
 emp = Empresa()
-#emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
+evt = Evento()
+# evt.criaEventoDev('2023/07/12', '2023/07/13', 'Teste de Evento', '#000000', '#ffdbdb', 6, True)
+# evt.criaEventoDev('2023/06/28', '2023/06/29', 'Teste de Evento', '#000000', '#ffdbdb', 6, True)
 dev = Desenvolvedor()
 #dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
 #                     'senha', 'pleno', 'python')
@@ -59,10 +62,12 @@ def login():
         elif dev.iniciaSessao(email, password):
             dev.capturaEmail(email)
             dev.verificaUsuario()
-            #if dev.verificaUsuario():
-            #   dev.getCodigo()
-            #else
-            #   emp.getCodigo()
+            if dev.verificaUsuario():
+               dev.getCodigo()
+               print(dev.getCodigo())
+            else:
+               emp.getCodigo()
+               print(emp.getCodigo())
             return redirect(url_for('feed'))
         else:
             flash('***EMAIL OU SENHA INCORRETOS***')
@@ -174,9 +179,29 @@ def index():
 
 @app.route("/get/", methods=["POST"])
 def get():
+    data = dict(request.form)
+    print((data["month"]))
+    if dev.verificaUsuario():
+        # events = evt.getEvento(6, 26, 6, True)
+        events = evt.getEvento(int(data["month"]), int(data["year"]), dev.getCodigo(), True)
+    else:
+        events = evt.getEvento(int(data["month"]), int(data["year"]), emp.getCodigo(), False)
+    print(events)
+    return "{}" if events is None else events
+
+@app.route("/save/", methods=["POST"])
+def save():
   data = dict(request.form)
-  events = evt.get(int(data["month"]), int(data["year"]))
-  return "{}" if events is None else events
+  ok = evt.save(data["s"], data["e"], data["t"], data["c"], data["b"], data["id"] if "id" in data else None)
+  msg = "OK" if ok else sys.last_value
+  return make_response(msg, 200)
+
+@app.route("/delete/", methods=["POST"])
+def delete():
+  data = dict(request.form)
+  ok = evt.delete(data["id"])
+  msg = "OK" if ok else sys.last_value
+  return make_response(msg, 200)
 
 
 if __name__ == "__main__":
