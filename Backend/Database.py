@@ -75,7 +75,7 @@ class Database:
         self.con.commit() # INSERT REALIZADO
 
     def deleteEvent(self, id):
-        self.cursor.execute("DELETE FROM `events` WHERE `id`=?", (id,))
+        self.cursor.execute(f'DELETE FROM events WHERE id= "{id}"')
         self.con.commit()
 
     # -- TENTATIVA DE GET EVENTO
@@ -87,11 +87,9 @@ class Database:
         start = dateYM + "01 00:00:00"
         end = dateYM + daysInMonth + " 23:59:59"
         if tipo: # -- Para DEV
-            self.cursor.execute("SELECT * FROM `events` WHERE (`idDev` = ? AND (`start` BETWEEN ? AND ?) OR (`end` BETWEEN ? AND ?) OR (`start` <= ? AND `end` >= ?))",
-        (id_user,start, end, start, end, start, end))
-        else: # -- Para EMP
-            self.cursor.execute("SELECT * FROM `events` WHERE (`idEmp` = ? AND (`start` BETWEEN ? AND ?) OR (`end` BETWEEN ? AND ?) OR (`start` <= ? AND `end` >= ?))",
-        (id_user, start, end, start, end, start, end))
+            self.cursor.execute(f'SELECT * FROM events WHERE (idDev = "{id_user}" AND (start BETWEEN "{start}" AND "{end}") OR (end BETWEEN "{start}" AND "{end}") OR (start <= "{start}" AND end >= "{end}"))')
+        else:
+            self.cursor.execute(f'SELECT * FROM events WHERE (idEmp = "{id_user}" AND (start BETWEEN "{start}" AND "{end}") OR (end BETWEEN "{start}" AND "{end}") OR (start <= "{start}" AND end >= "{end}"))')  
         rows = self.cursor.fetchall()
         if len(rows)==0:
             return None
