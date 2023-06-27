@@ -1,4 +1,5 @@
 import mysql.connector
+from calendar import monthrange
 class Database:
     def insert(self, values, tipo):
         if tipo == True: # Indica que é um desenvolvedor
@@ -58,6 +59,51 @@ class Database:
         self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR WHERE nome = "{nome}"')
         self.con.commit()
         return self.cursor.fetchall() # MOSTRAR OS REGISTROS NA TELA DO FRONT END
+
+    def insertEvent(self, values, tipo):
+        if tipo:
+            query = "INSERT INTO `events` (`start`, `end`, `text`, `color`, `bg`, `idDev`) VALUES (%s,%s,%s,%s,%s,%s)"
+        else:
+            query = "INSERT INTO `events` (`start`, `end`, `text`, `color`, `bg`, `idEmp`) VALUES (%s,%s,%s,%s,%s,%s)"
+        self.cursor.execute(query, values)
+        self.con.commit() # INSERT REALIZADO
+    
+    def updateEvent(self, values, id):
+        query = "UPDATE `events` SET `start`=?, `end`=?, `text`=?, `color`=?, `bg`=? WHERE `id`=?"
+        data = data + (id,)
+        self.cursor.execute(query, values)
+        self.con.commit() # INSERT REALIZADO
+
+    def deleteEvent(self, id):
+        self.cursor.execute("DELETE FROM `events` WHERE `id`=?", (id,))
+        self.con.commit()
+
+    # -- TENTATIVA DE GET EVENTO
+
+    def getEvent(self, month, year, id_user, tipo):
+        daysInMonth = str(monthrange(year, month)[1])
+        month = month if month>10 else "0" + str(month)
+        dateYM = str(year) + "-" + str(month) + "-"
+        start = dateYM + "01 00:00:00"
+        end = dateYM + daysInMonth + " 23:59:59"
+        if tipo: # -- Para DEV
+            self.cursor.execute("SELECT * FROM `events` WHERE (`idDev` = ? AND (`start` BETWEEN ? AND ?) OR (`end` BETWEEN ? AND ?) OR (`start` <= ? AND `end` >= ?))",
+        (id_user,start, end, start, end, start, end))
+        else: # -- Para EMP
+            self.cursor.execute("SELECT * FROM `events` WHERE (`idEmp` = ? AND (`start` BETWEEN ? AND ?) OR (`end` BETWEEN ? AND ?) OR (`start` <= ? AND `end` >= ?))",
+        (id_user, start, end, start, end, start, end))
+        rows = self.cursor.fetchall()
+        if len(rows)==0:
+            return None
+        data = {}
+        for r in rows:
+            data[r[0]] = {
+            "Início" : r[3], "Fim" : r[4],
+            "Cor" : r[6], "Background" : r[7],
+            "Texto" : r[5]
+            }
+        return data
+
 
     def connect(self):
         self.con = mysql.connector.connect(
