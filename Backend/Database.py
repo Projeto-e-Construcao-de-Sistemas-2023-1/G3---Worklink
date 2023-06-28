@@ -96,9 +96,9 @@ class Database:
         data = {}
         for r in rows:
             data[r[0]] = {
-            "Início" : r[3], "Fim" : r[4],
-            "Cor" : r[6], "Background" : r[7],
-            "Texto" : r[5]
+            "s" : r[3], "e" : r[4],
+            "c" : r[6], "b" : r[7],
+            "t" : r[5]
             }
         return data
 
