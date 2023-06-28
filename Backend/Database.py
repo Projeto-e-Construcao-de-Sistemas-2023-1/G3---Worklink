@@ -87,9 +87,9 @@ class Database:
         start = dateYM + "01 00:00:00"
         end = dateYM + daysInMonth + " 23:59:59"
         if tipo: # -- Para DEV
-            self.cursor.execute(f'SELECT * FROM events WHERE (idDev = "{id_user}" AND (start BETWEEN "{start}" AND "{end}") OR (end BETWEEN "{start}" AND "{end}") OR (start <= "{start}" AND end >= "{end}"))')
+            self.cursor.execute(f'SELECT * FROM events WHERE (idDev = "{id_user}" AND ((start BETWEEN "{start}" AND "{end}") OR (end BETWEEN "{start}" AND "{end}") OR (start <= "{start}" AND end >= "{end}")))')
         else:
-            self.cursor.execute(f'SELECT * FROM events WHERE (idEmp = "{id_user}" AND (start BETWEEN "{start}" AND "{end}") OR (end BETWEEN "{start}" AND "{end}") OR (start <= "{start}" AND end >= "{end}"))')  
+            self.cursor.execute(f'SELECT * FROM events WHERE (idEmp = "{id_user}" AND ((start BETWEEN "{start}" AND "{end}") OR (end BETWEEN "{start}" AND "{end}") OR (start <= "{start}" AND end >= "{end}")))')  
         rows = self.cursor.fetchall()
         if len(rows)==0:
             return None
