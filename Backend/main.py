@@ -195,7 +195,7 @@ def save():
     else:
         ok = evt.criaEventoEmp(data["s"], data["e"], data["t"], data["c"], data["b"], emp.getCodigo(), False)
     msg = "OK" 
-    return 'Reunião salva com sucesso!'
+    return 'Reunião criada com sucesso!'
     # if ok:
     #     return make_response(msg, 500)
 
@@ -204,7 +204,7 @@ def delete():
   data = dict(request.form)
   ok = evt.deletaEvento(data["id"])
   msg = "OK"
-  return 'Reunião salva com sucesso!' 
+  return 'Reunião excluída com sucesso!' 
 #   if ok:
 #     #else sys.last_value
 #     return make_response(msg, 500)

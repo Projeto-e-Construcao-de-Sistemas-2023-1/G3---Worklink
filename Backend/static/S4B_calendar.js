@@ -275,7 +275,7 @@ var cal = {
     },
   
     // (I) DELETE EVENT
-    del : () => { if (confirm("Delete Event?")) {
+    del : () => { if (confirm("Excluir reunião?")) {
       cal.ajax("delete", { id : parseInt(cal.hfID.value) }, res => {
         if (res=="OK") {
           cal.hFormWrap.close();

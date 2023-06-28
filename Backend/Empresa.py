@@ -26,8 +26,8 @@ class Empresa(Usuario.Usuario):
     
     def getCodigo(self):
         Database.connect(self)
-        self.codigo = Database.select(self, 'DESENVOLVEDOR', 'cod_desenvolvedor', self.email)
-        return Database.select(self, 'DESENVOLVEDOR', 'cod_empresa', self.email)
+        self.codigo = Database.select(self, 'EMPRESA', 'cod_empresa', self.email)
+        return Database.select(self, 'EMPRESA', 'cod_empresa', self.email)
     
     def getConta(self):
         Database.connect(self)
