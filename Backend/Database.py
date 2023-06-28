@@ -9,12 +9,20 @@ class Database:
         self.con.commit() # INSERT REALIZADO
 
     def update(self, coluna, dado, tabela, email):
+        self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=0;')
+        self.con.commit()
         self.cursor.execute(f'UPDATE {tabela} SET {coluna} = "{dado}" WHERE email = "{email}"')
         self.con.commit() # UPDATE REALIZADO
+        self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=1;')
+        self.con.commit()
 
     def delete(self, tabela, email):
+        self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=0;')
+        self.con.commit()
         self.cursor.execute(f'DELETE FROM {tabela} WHERE email = "{email}"')
-        self.con.commit() 
+        self.con.commit()
+        self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=1;')
+        self.con.commit()
 
     def select(self, tabela, tipo, email): # Se coluna = '0' -> seleciona tudo da tabela sobre aquele dado
         self.cursor.execute(f'SELECT {tipo} FROM {tabela} WHERE email = "{email}"')
