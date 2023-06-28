@@ -68,14 +68,14 @@ class Database:
         self.cursor.execute(query, values)
         self.con.commit() # INSERT REALIZADO
     
-    def updateEvent(self, values, id):
-        query = "UPDATE `events` SET `start`=?, `end`=?, `text`=?, `color`=?, `bg`=? WHERE `id`=?"
-        data = data + (id,)
-        self.cursor.execute(query, values)
+    def updateEvent(self, inicio, fim, texto, cor, fundo, id):
+        data = (inicio, fim, texto, cor, fundo, id)
+        self.cursor.execute(f"UPDATE events SET start='{inicio}', end='{fim}', text='{texto}', color='{cor}', bg='{fundo}' WHERE id='{id}'")
+        data = data + (id,) # Dando problema
         self.con.commit() # INSERT REALIZADO
 
     def deleteEvent(self, id):
-        self.cursor.execute("DELETE FROM `events` WHERE `id`=?", (id,))
+        self.cursor.execute(f'DELETE FROM events WHERE id= "{id}"')
         self.con.commit()
 
     # -- TENTATIVA DE GET EVENTO
@@ -87,20 +87,18 @@ class Database:
         start = dateYM + "01 00:00:00"
         end = dateYM + daysInMonth + " 23:59:59"
         if tipo: # -- Para DEV
-            self.cursor.execute(f'SELECT * FROM events WHERE (idDev = "{id_user}" AND (start BETWEEN "{start}" AND "{end}") OR (end BETWEEN "{start}" AND "{end}") OR (start <= "{start}" AND end >= "{end}"))')
+            self.cursor.execute(f'SELECT * FROM events WHERE (idDev = "{id_user}" AND ((start BETWEEN "{start}" AND "{end}") OR (end BETWEEN "{start}" AND "{end}") OR (start <= "{start}" AND end >= "{end}")))')
         else:
-            self.cursor.execute(f'SELECT * FROM events WHERE (idEmp = "{id_user}" AND (start BETWEEN "{start}" AND "{end}") OR (end BETWEEN "{start}" AND "{end}") OR (start <= "{start}" AND end >= "{end}"))')
+            self.cursor.execute(f'SELECT * FROM events WHERE (idEmp = "{id_user}" AND ((start BETWEEN "{start}" AND "{end}") OR (end BETWEEN "{start}" AND "{end}") OR (start <= "{start}" AND end >= "{end}")))')  
         rows = self.cursor.fetchall()
-        print(rows)
         if len(rows)==0:
             return None
         data = {}
         for r in rows:
             data[r[0]] = {
-            "idDev" : r[1], "idEmp" : r[2],
-            "Início" : r[3], "Fim" : r[4],
-            "Cor" : r[6], "Background" : r[7],
-            "Texto" : r[5]
+            "s" : r[3], "e" : r[4],
+            "c" : r[6], "b" : r[7],
+            "t" : r[5]
             }
         return data
 
@@ -114,18 +112,18 @@ class Database:
         if self.con.is_connected():
             self.cursor = self.con.cursor(buffered= True)
 
-    def checkFollow(self, codSeguidor, codSeguido, tipoSeguido, tipoSeguidor):
-        if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 
-             self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND  seguidoEmpresa = ?', (codSeguidor, codSeguido))
-        elif tipoSeguidor == 'dev' and tipoSeguido == 'dev':
-             self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND  seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
-        elif tipoSeguidor == 'emp' and tipoSeguido == 'dev':
-             self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorEmpresa = ? AND  seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
-        else: 
-        #elif tipoSeguidor =='emp' and tipoSeguido =='emp':
-             self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorEmpresa = ? AND  seguidoEmpresa = ?', (codSeguidor, codSeguido))
-        count = self.cursor.fetchone()[0]
-        return count > 0
+    # def checkFollow(self, codSeguidor, codSeguido, tipoSeguido, tipoSeguidor):
+    #     if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 
+    #          self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND  seguidoEmpresa = ?', (codSeguidor, codSeguido))
+    #     elif tipoSeguidor == 'dev' and tipoSeguido == 'dev':
+    #          self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND  seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
+    #     elif tipoSeguidor == 'emp' and tipoSeguido == 'dev':
+    #          self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorEmpresa = ? AND  seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
+    #     else: 
+    #     #elif tipoSeguidor =='emp' and tipoSeguido =='emp':
+    #          self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorEmpresa = ? AND  seguidoEmpresa = ?', (codSeguidor, codSeguido))
+    #     count = self.cursor.fetchone()[0]
+    #     return count > 0
 
     # def Unfollow(self, codSeguidor, codSeguido, tipoSeguido, tipoSeguidor):
     #     if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 

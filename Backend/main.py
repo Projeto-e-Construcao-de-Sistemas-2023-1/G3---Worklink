@@ -180,28 +180,34 @@ def index():
 @app.route("/get/", methods=["POST"])
 def get():
     data = dict(request.form)
-    print((data["month"]))
     if dev.verificaUsuario():
-        # events = evt.getEvento(6, 26, 6, True)
         events = evt.getEvento(int(data["month"]), int(data["year"]), dev.getCodigo(), True)
     else:
         events = evt.getEvento(int(data["month"]), int(data["year"]), emp.getCodigo(), False)
-    print(events)
+    # print(events)
     return "{}" if events is None else events
 
 @app.route("/save/", methods=["POST"])
 def save():
-  data = dict(request.form)
-  ok = evt.save(data["s"], data["e"], data["t"], data["c"], data["b"], data["id"] if "id" in data else None)
-  msg = "OK" if ok else sys.last_value
-  return make_response(msg, 200)
+    data = dict(request.form)
+    if dev.verificaUsuario():
+        ok = evt.criaEventoDev(data["s"], data["e"], data["t"], data["c"], data["b"], dev.getCodigo(), True)
+    else:
+        ok = evt.criaEventoEmp(data["s"], data["e"], data["t"], data["c"], data["b"], emp.getCodigo(), False)
+    msg = "OK" 
+    return 'Reunião salva com sucesso!'
+    # if ok:
+    #     return make_response(msg, 500)
 
 @app.route("/delete/", methods=["POST"])
 def delete():
   data = dict(request.form)
-  ok = evt.delete(data["id"])
-  msg = "OK" if ok else sys.last_value
-  return make_response(msg, 200)
+  ok = evt.deletaEvento(data["id"])
+  msg = "OK"
+  return 'Reunião salva com sucesso!' 
+#   if ok:
+#     #else sys.last_value
+#     return make_response(msg, 500)
 
 
 if __name__ == "__main__":
