@@ -13,9 +13,33 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 	<link rel="shortcut icon" href="../static/Wl.ico"type="image/x-icon">
-
+   
 	<script src="https://kit.fontawesome.com/e6223f541e.js" crossorigin="anonymous"></script>
+    <script defer src="../static/script.js"></script>
     <style>
+        #follow-button {
+    color: #141034;
+    font-family: "Helvetica";
+    font-size: 10pt;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #141034;
+    border-radius: 3px;
+    /* width: 85px; 
+    height: 30px;*/
+    top: 50px;
+    left: 50px;
+    transition: all 0.3s cubic-bezier(0.59, 0.57, 0, 1.3);
+}
+
+#follow-button.seguindo {
+  background-color: #cee393;
+  font-size: 12px;
+}
+
+#follow-button.seguir {
+  font-size: 12px;
+}
         #post-perfil{
             color: #ABDB2A;
         }
@@ -339,6 +363,7 @@ img {
                                    <!-- <img class="profile-pic" src="../static/ada.PNG" alt="profile">-->
                                     <i class="fa fa-user-circle fa-4x"></i>
                                     <span class="profile-name">{{ nome }} {{ sobrenome }}</span>
+                                    <button id="follow-button" onclick="alterarTexto()">Seguir</button>
                                 </div>
                                 <div class="d-none d-md-block">
                                     <button id="edit"  onclick="window.location.href='/editar_perfil'">
