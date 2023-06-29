@@ -3,10 +3,21 @@ class Database:
     def insert(self, values, tipo):
         if tipo == True: # Indica que é um desenvolvedor
             query = """ INSERT INTO DESENVOLVEDOR (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta_bancaria, senha, descricao, tag_desenvolvedor) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            self.cursor.execute(query, values)
+            self.con.commit() # INSERT REALIZADO
+            cod_desenvolvedor = self.cursor.lastrowid
+            query_saldo = """INSERT INTO SALDO_DESENVOLVEDOR (cod_desenvolvedor, saldo) VALUES (%s, %s)"""
+            self.cursor.execute(query_saldo, (cod_desenvolvedor, 0))
+            self.con.commit()  # Inserção na tabela SALDO_DESENVOLVEDOR
         else:
-            query = """ INSERT INTO EMPRESA (cnpj, razao_social, email, telefone, conta_bancaria, senha, area_negocio) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
-        self.cursor.execute(query, values)
-        self.con.commit() # INSERT REALIZADO
+            query = """INSERT INTO EMPRESA (cnpj, razao_social, email, telefone, conta_bancaria, senha, area_negocio) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+            self.cursor.execute(query, values)
+            self.con.commit()  # Inserção na tabela EMPRESA
+            cod_empresa = self.cursor.lastrowid
+            query_saldo = """INSERT INTO SALDO_EMPRESA (cod_empresa, saldo) VALUES (%s, %s)"""
+            self.cursor.execute(query_saldo, (cod_empresa, 0))
+            self.con.commit()  # Inserção na tabela SALDO_EMPRESA
+
 
     def update(self, coluna, dado, tabela, email):
         self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=0;')
@@ -104,3 +115,53 @@ class Database:
         #elif tipoSeguidor =='emp' and tipoSeguido =='emp':
              self.cursor.execute('INSERT INTO SEGUIDORES (seguidorEmpresa, seguidoEmpresa) VALUES (?, ?)', (codSeguidor, codSeguido))
         self.conn.commit()
+
+    def inserir_dinheiro(self, tipoUsuario, codUsuario, valor):
+        cursor = self.con.cursor()
+        if tipoUsuario == 'empresa':
+            update_query = "UPDATE SALDO_EMPRESA SET saldo = saldo + %s WHERE cod_empresa = %s"
+        elif tipoUsuario == 'desenvolvedor':
+            update_query = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo + %s WHERE cod_desenvolvedor = %s"
+        else:
+            return False
+        cursor.execute(update_query, (valor, codUsuario))
+        self.con.commit()
+        return True
+    
+    def verificar_saldo(self, tipo, codigo):
+        cursor = self.con.cursor()
+        if tipo == 'empresa':
+            saldo_query = "SELECT saldo FROM SALDO_EMPRESA WHERE cod_empresa = %s"
+        elif tipo == 'desenvolvedor':
+            saldo_query = "SELECT saldo FROM SALDO_DESENVOLVEDOR WHERE cod_desenvolvedor = %s"
+        else:
+            return None
+        cursor.execute(saldo_query, (codigo,))
+        result = cursor.fetchone()
+        if result is not None:
+            return result[0]
+        else:
+            return None
+
+    def sacar_dinheiro(self, tipoUsuario, codUsuario, valor):
+        cursor = self.con.cursor()
+        if tipoUsuario == 'empresa':
+            update_query = "UPDATE SALDO_EMPRESA SET saldo = saldo - %s WHERE cod_empresa = %s"
+        elif tipoUsuario == 'desenvolvedor':
+            update_query = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo - %s WHERE cod_desenvolvedor = %s"
+        else:
+            return False
+        cursor.execute(update_query, (valor, codUsuario))
+        self.con.commit()
+        return True
+
+    def realizar_transacao(self, codEmpresa, codDesenvolvedor, valor, descricao):
+        cursor = self.con.cursor()
+        insert_query = "INSERT INTO TRANSACOES (descricao, valor, empresa_pagante, desenvolvedor_recebedor) VALUES (%s, %s, %s, %s)"
+        cursor.execute(insert_query, (descricao, valor, codEmpresa, codDesenvolvedor))
+        update_query_SALDO_EMPRESA = "UPDATE SALDO_EMPRESA SET saldo = saldo - %s WHERE cod_empresa = %s"
+        cursor.execute(update_query_SALDO_EMPRESA, (valor, codEmpresa))
+        update_query_SALDO_DESENVOLVEDOR = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo + %s WHERE cod_desenvolvedor = %s"
+        cursor.execute(update_query_SALDO_DESENVOLVEDOR, (valor, codDesenvolvedor))
+        self.con.commit()
+        return True

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minha Carteira</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 5px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .saldo {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minha Carteira</h1>
+
+    <h2>Sacar</h2>
+    <form action="/saque" method="POST">
+        <label for="tipoUsuario">Tipo de Usuário:</label>
+        <input type="text" name="tipoUsuario" id="tipoUsuario">
+
+        <label for="codUsuario">Código do Usuário:</label>
+        <input type="text" name="codUsuario" id="codUsuario">
+
+        <label for="valor">Valor:</label>
+        <input type="text" name="valor" id="valor">
+
+        <input type="submit" value="Sacar">
+    </form>
+
+    <h2>Depositar</h2>
+    <form action="/deposito" method="POST">
+        <label for="tipoUsuario">Tipo de Usuário:</label>
+        <input type="text" name="tipoUsuario" id="tipoUsuario">
+
+        <label for="codUsuario">Código do Usuário:</label>
+        <input type="text" name="codUsuario" id="codUsuario">
+
+        <label for="valor">Valor:</label>
+        <input type="text" name="valor" id="valor">
+
+        <input type="submit" value="Depositar">
+    </form>
+
+    <h2>Realizar Transação</h2>
+    <form action="/transacao" method="POST">
+
+        <label for="codEmp">Código do Pagador:</label>
+        <input type="text" name="codEmp" id="codEmp">
+
+        <label for="codDev">Código do Recebedor:</label>
+        <input type="text" name="codDev" id="codDev">
+
+        <label for="valor">Valor:</label>
+        <input type="text" name="valor" id="valor">
+
+        <label for="descricao">Descrição:</label>
+        <input type="text" name="descricao" id="descricao">
+
+        <input type="submit" value="Realizar Transação">
+    </form>
+
+    <div class="saldo">
+        Saldo Atual: R$ <span id="saldoAtual"></span>
+    </div>
+
+    <script>
+        // Função para buscar o saldo atual da carteira do usuário
+        function getSaldoAtual() {
+            // Fazer uma requisição para o backend para buscar o saldo atual
+            // Aqui você pode usar uma biblioteca como o Axios ou o fetch para fazer a requisição
+            // Exemplo usando o Axios:
+            axios.get('/saldoAtual')
+                .then(response => {
+                    // Atualizar o elemento HTML com o saldo atual retornado do backend
+                    document.getElementById('saldoAtual').innerText = response.data.saldo;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+        // Chamar a função para buscar o saldo atual assim que a página carregar
+        window.addEventListener('load', getSaldoAtual);
+    </script>
+</body>
+</html>
