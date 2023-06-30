@@ -59,7 +59,7 @@ def login():
         elif dev.iniciaSessao(email, password):
             global tipo # tipo == True desenvolvedor. tipo == false Empresa
             tipo=dev.verificaUsuario()
-            if tipo == True:
+            if tipo:
                 dev.capturaEmail(email)
                 return redirect(url_for('feed'))
             else:
