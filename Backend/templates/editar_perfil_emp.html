@@ -271,7 +271,7 @@
                 </div>
                 <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                   <div class="text-center text-sm-left mb-2 mb-sm-0">
-                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">Ada Lovelace</h4>
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{ nome }}</h4>
                     <div class="mt-2">
                       <button id="botao" type="button">
                         <i class="fa fa-fw fa-camera"></i>
@@ -297,23 +297,19 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Razão Social</label>
-                              <input class="form-control" type="text" name="name" placeholder="Ada" value="Ada">
+                              <input class="form-control" type="text" name="razaosocial" placeholder="Razão social" value="{{ razaosocial }}">
                             </div>
                         
                             <div class="form-group">
                                 <label>Conta Bancária</label>
-                                <input class="form-control" type="text" name="Conta Bancária" placeholder="xxxxx/xxxxx-x">
+                                <input class="form-control" type="text" name="contabancária" placeholder="xxxxx/xxxxx-x" value="{{ contabancaria }}">
                               </div>
                           </div>
                           <div class="col">
                             <div class="form-group">
                                 <div class="form-group">
                                     <label>Telefone</label>
-                                    <input class="form-control" type="text" name="telefone" placeholder="Telefone">
-                                  </div>
-                                  <div class="form-group">
-                                    <label>Hashtags</label>
-                                    <input class="form-control" type="text" name="Hashtags" placeholder="#tech">
+                                    <input class="form-control" type="text" name="telefone" placeholder="Telefone" value="{{ telefone }}">
                                   </div>
                               </div>
                           </div>
@@ -323,7 +319,7 @@
                           <div class="col mb-3">
                             <div class="form-group">
                               <label>Área de Negócio</label>
-                              <textarea class="form-control" rows="5" placeholder="Área de negócio"></textarea>
+                              <textarea class="form-control" name="areanegocio"rows="5" placeholder="Área de negócio">{{ descricao }}</textarea>
                             </div>
                           </div>
                         </div>
@@ -344,7 +340,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Nova senha</label>
-                              <input class="form-control" type="password" placeholder="••••••••••••">
+                              <input class="form-control" name="password" type="password" placeholder="••••••••••••">
                             </div>
                           </div>
                         </div>
@@ -362,7 +358,7 @@
                     </div>
                     <div class="row">
                       <div class="col d-flex justify-content-end">
-                        <button id="botao" type="submit">Salvar alterações</button>
+                        <button action="/edita_perfil" method="post" id="botao" type="submit">Salvar alterações</button>
                       </div>
                     </div>
                     

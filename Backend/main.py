@@ -15,6 +15,7 @@ dev = Desenvolvedor()
 #dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
 #                     'senha', 'pleno', 'python')
 db = Database()
+us=Usuario()
 app.config["SECRET_KEY"] = "mysecretkey"
 app.config["RECAPTCHA_PUBLIC_KEY"] = '6Lfi1XcmAAAAAG6go6mUbSpX_01xHunP7wgn9StD'
 app.config["RECAPTCHA_PRIVATE_KEY"] = '6Lfi1XcmAAAAANyI3-604hr8oKpQkRuH1A0XI9kw'
@@ -56,16 +57,24 @@ def login():
             return redirect(url_for('login'))
         
         elif dev.iniciaSessao(email, password):
-            dev.capturaEmail(email)
-            dev.verificaUsuario()
-            return redirect(url_for('feed'))
+            global tipo # tipo == True desenvolvedor. tipo == false Empresa
+            tipo=dev.verificaUsuario()
+            if tipo == True:
+                dev.capturaEmail(email)
+                return redirect(url_for('feed'))
+            else:
+                emp.capturaEmail(email)
+                return redirect(url_for('feed'))
         else:
             flash('***EMAIL OU SENHA INCORRETOS***')
             return redirect(url_for('login'))
 
 @app.route('/perfil', methods=['GET'])
-def perfildev():
-   return render_template('perfil_dev.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao(), email=dev.getEmail())
+def perfil():
+   if tipo == True:
+        return render_template('perfil_dev.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao(), email=dev.getEmail())
+   else:
+       return render_template('perfil_emp.html', nome=emp.getRazaoSocial(), descricao=emp.getAreaNegocio(), email=emp.getEmail())
 
 @app.route('/criar_Projeto', methods=['GET'])
 def criar_projeto():
@@ -73,7 +82,11 @@ def criar_projeto():
 
 @app.route('/feed', methods=['GET'])
 def feed():
-    return render_template('pagina_inicial.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao())
+    if tipo == True:
+        return render_template('pagina_inicial.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao())
+    else:
+        return render_template('pagina_inicial.html', nome=emp.getRazaoSocial(), descricao=emp.getAreaNegocio())
+
 #metodos 
     
 @app.route('/pesquisa_usuario', methods=['post'])
@@ -122,26 +135,41 @@ def delete_conta():
 
 @app.route('/edita_perfil', methods=['POST'])
 def edita_perfil():
-    name = request.form.get('name')
-    sobrenome = request.form.get('sobrenome')
-    descricao = request.form.get('descricao')
-    contabancaria = request.form.get('contabancaria')
-    telefone = request.form.get('telefone')
-    hashtags = request.form.get('hashtags')
-    genero = request.form.get('genero')
-    password = request.form.get('password')
+    if tipo == True:
+        name = request.form.get('name')
+        sobrenome = request.form.get('sobrenome')
+        descricao = request.form.get('descricao')
+        contabancaria = request.form.get('contabancaria')
+        telefone = request.form.get('telefone')
+        hashtags = request.form.get('hashtags')
+        genero = request.form.get('genero')
+        password = request.form.get('password')
 
+        dev.setNome(name)
+        dev.setSobrenome(sobrenome)
+        dev.setDescricao(descricao)
+        dev.setConta(contabancaria)
+        dev.setTelefone(telefone)
+        dev.setGenero(genero)
+        dev.setTag(hashtags)
+        dev.setSenha(password)
 
-    dev.setNome(name)
-    dev.setSobrenome(sobrenome)
-    dev.setDescricao(descricao)
-    dev.setConta(contabancaria)
-    dev.setTelefone(telefone)
-    dev.setGenero(genero)
-    dev.setTag(hashtags)
-    dev.setSenha(password)
+        return redirect(url_for('perfil'))
 
-    return redirect(url_for('perfildev'))
+    else:
+        contabancaria = request.form.get('contabancaria')
+        telefone = request.form.get('telefone')
+        password = request.form.get('password')
+        areanegocio = request.form.get('areanegocio')
+        razaosocial = request.form.get('razaosocial')
+
+        emp.getRazaoSocial(razaosocial)
+        emp.setConta(contabancaria)
+        emp.setTelefone(telefone)
+        emp.setAreaNegocio(areanegocio)
+        emp.setSenha(password)
+
+        return redirect(url_for('perfil'))
 
 @app.route('/criarProjeto', methods=['POST'])
 def criarProjeto():
