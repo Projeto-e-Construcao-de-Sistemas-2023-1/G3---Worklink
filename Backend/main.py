@@ -6,10 +6,13 @@ from Desenvolvedor import Desenvolvedor
 from flask_wtf import FlaskForm, RecaptchaField
 import requests
 from datetime import datetime as dt
+from Evento import Evento
+import sys
 
 app = Flask(__name__, template_folder="templates")
 emailsessao=''
 emp = Empresa()
+evt = Evento()
 #emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
 dev = Desenvolvedor()
 #dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
@@ -199,6 +202,77 @@ def unfollow():
 @app.route("/calendario", methods=["GET", "POST"])
 def index():
   return render_template("S4A_calendar.html")
+
+@app.route("/get/", methods=["POST"])
+def get():
+    data = dict(request.form)
+    if dev.verificaUsuario():
+        events = evt.getEvento(int(data["month"]), int(data["year"]), dev.getCodigo(), True)
+    else:
+        events = evt.getEvento(int(data["month"]), int(data["year"]), emp.getCodigo(), False)
+    # print(events)
+    return "{}" if events is None else events
+
+@app.route("/save/", methods=["POST"])
+def save():
+    data = dict(request.form)
+    if dev.verificaUsuario():
+        ok = evt.criaEventoDev(data["s"], data["e"], data["t"], data["c"], data["b"], dev.getCodigo(), True)
+    else:
+        ok = evt.criaEventoEmp(data["s"], data["e"], data["t"], data["c"], data["b"], emp.getCodigo(), False)
+    msg = "OK" 
+    return 'Reunião criada com sucesso!'
+    # if ok:
+    #     return make_response(msg, 500)
+
+@app.route("/delete/", methods=["POST"])
+def delete():
+  data = dict(request.form)
+  ok = evt.deletaEvento(data["id"])
+  msg = "OK"
+  return 'Reunião excluída com sucesso!' 
+#   if ok:
+#     #else sys.last_value
+#     return make_response(msg, 500)
+
+@app.route('/deposito', methods=['POST'])
+def deposito():
+    tipoUsuario = request.form.get('tipoUsuario')
+    codUsuario = request.form.get('codUsuario')
+    valor = request.form.get('valor')
+    valor = valor.replace(',', '.')
+    if Usuario().Depositar(tipoUsuario, codUsuario, valor):
+        return jsonify({'message': 'Deposito realizado com sucesso'}), 200
+    else:
+        return jsonify({'message': 'Erro ao realizar depósito'}), 400
+
+@app.route('/saque', methods=['POST'])
+def saque():
+    tipoUsuario = request.form.get('tipoUsuario')
+    codUsuario = request.form.get('codUsuario')
+    valor = request.form.get('valor')
+    valor = valor.replace(',', '.')
+    if Usuario().Sacar(tipoUsuario, codUsuario, valor):
+        return jsonify({'message': 'Saque realizado com sucesso'}), 200
+    else:
+        return jsonify({'message': 'Erro ao realizar saque'}), 400
+
+@app.route('/transacao', methods=['POST'])
+def transacao():
+    codEmpresa = request.form.get('codEmp')
+    codDesenvolvedor = request.form.get('codDev')
+    valor = request.form.get('valor')
+    valor = valor.replace(',', '.')
+    descricao = request.form.get('descricao')
+    if Usuario().realizarTransacao(codEmpresa, codDesenvolvedor, valor, descricao):
+        return jsonify({'message': 'Transacao realizado com sucesso'}), 200
+    else:
+        return jsonify({'message': 'Erro ao realizar transacao'}), 400
+
+
+@app.route('/carteira', methods=['GET'])
+def carteira():
+    return render_template('carteira.html')
 
 
 if __name__ == "__main__":
