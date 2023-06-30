@@ -4,10 +4,20 @@ class Database:
     def insert(self, values, tipo):
         if tipo == True: # Indica que é um desenvolvedor
             query = """ INSERT INTO DESENVOLVEDOR (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta_bancaria, senha, descricao, tag_desenvolvedor) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            self.cursor.execute(query, values)
+            self.con.commit() # INSERT REALIZADO
+            cod_desenvolvedor = self.cursor.lastrowid
+            query_saldo = """INSERT INTO SALDO_DESENVOLVEDOR (cod_desenvolvedor, saldo) VALUES (%s, %s)"""
+            self.cursor.execute(query_saldo, (cod_desenvolvedor, 0))
+            self.con.commit()  # Inserção na tabela SALDO_DESENVOLVEDOR
         else:
             query = """ INSERT INTO EMPRESA (cnpj, razao_social, email, telefone, conta_bancaria, senha, area_negocio) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
-        self.cursor.execute(query, values)
-        self.con.commit() # INSERT REALIZADO
+            self.cursor.execute(query, values)
+            self.con.commit() # INSERT REALIZADO
+            cod_empresa = self.cursor.lastrowid
+            query_saldo = """INSERT INTO SALDO_EMPRESA (cod_empresa, saldo) VALUES (%s, %s)"""
+            self.cursor.execute(query_saldo, (cod_empresa, 0))
+            self.con.commit()  # Inserção na tabela SALDO_EMPRESA
 
     def update(self, coluna, dado, tabela, email):
         self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=0;')
