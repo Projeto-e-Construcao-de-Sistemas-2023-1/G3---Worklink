@@ -4,6 +4,7 @@ from Database import Database
 from Usuario import Usuario
 from Desenvolvedor import Desenvolvedor
 from Evento import Evento
+from Projeto import Projeto
 #from flask_wtf import FlaskForm, RecaptchaField
 #import requests
 from datetime import datetime as dt
@@ -14,6 +15,11 @@ emp = Empresa()
 #emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
 dev = Desenvolvedor()
 evt = Evento()
+pjt = Projeto()
+pjt.criaProjeto(1, 'teste', 23445, '29/07/2023', 'teste', 'teste', 'teste', 'teste')
+db = Database()
+db.connect()
+db.autenticaUsuario('foode@gmail.com', '12345')
 #resposta = evt.getEvento(7, 2023, 6, True)
 evt.atualizaEvento('2023-09-15', '2023-09-18', 'teste de atualizacao', '#000000', '#fffdbd', 1)
 
