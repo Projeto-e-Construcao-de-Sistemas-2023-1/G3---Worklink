@@ -112,39 +112,89 @@ class Database:
         if self.con.is_connected():
             self.cursor = self.con.cursor(buffered= True)
 
-    # def checkFollow(self, codSeguidor, codSeguido, tipoSeguido, tipoSeguidor):
-    #     if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 
-    #          self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND  seguidoEmpresa = ?', (codSeguidor, codSeguido))
-    #     elif tipoSeguidor == 'dev' and tipoSeguido == 'dev':
-    #          self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND  seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
-    #     elif tipoSeguidor == 'emp' and tipoSeguido == 'dev':
-    #          self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorEmpresa = ? AND  seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
-    #     else: 
-    #     #elif tipoSeguidor =='emp' and tipoSeguido =='emp':
-    #          self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorEmpresa = ? AND  seguidoEmpresa = ?', (codSeguidor, codSeguido))
-    #     count = self.cursor.fetchone()[0]
-    #     return count > 0
+    def checkFollow(self, codSeguidor, codSeguido, tipoSeguido, tipoSeguidor):
+        if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 
+             self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND  seguidoEmpresa = ?', (codSeguidor, codSeguido))
+        elif tipoSeguidor == 'dev' and tipoSeguido == 'dev':
+             self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND  seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
+        elif tipoSeguidor == 'emp' and tipoSeguido == 'dev':
+             self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorEmpresa = ? AND  seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
+        else: 
+        #elif tipoSeguidor =='emp' and tipoSeguido =='emp':
+             self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorEmpresa = ? AND  seguidoEmpresa = ?', (codSeguidor, codSeguido))
+        count = self.cursor.fetchone()[0]
+        return count > 0
 
-    # def Unfollow(self, codSeguidor, codSeguido, tipoSeguido, tipoSeguidor):
-    #     if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 
-    #          self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND seguidoEmpresa = ?', (codSeguidor, codSeguido))
-    #     elif tipoSeguidor == 'dev' and tipoSeguido == 'dev':
-    #          self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
-    #     elif tipoSeguidor == 'emp' and tipoSeguido == 'dev':
-    #          self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorEmpresa = ? AND seguidoDesenvolvedor = ?' (codSeguidor, codSeguido))
-    #     else:
-    #     #elif tipoSeguidor =='emp' and tipoSeguido =='emp':
-    #          self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorEmpresa = ? AND seguidoEmpresa = ?', (codSeguidor, codSeguido))
-    #     self.conn.commit()
+    def Unfollow(self, codSeguidor, codSeguido, tipoSeguido, tipoSeguidor):
+        if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 
+             self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND seguidoEmpresa = ?', (codSeguidor, codSeguido))
+        elif tipoSeguidor == 'dev' and tipoSeguido == 'dev':
+             self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
+        elif tipoSeguidor == 'emp' and tipoSeguido == 'dev':
+             self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorEmpresa = ? AND seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
+        else:
+        #elif tipoSeguidor =='emp' and tipoSeguido =='emp':
+             self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorEmpresa = ? AND seguidoEmpresa = ?', (codSeguidor, codSeguido))
+        self.conn.commit()
 
-    # def Follow(self, codSeguidor, codSeguido, tipoSeguidor, tipoSeguido):
-    #     if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 
-    #          self.cursor.execute('INSERT INTO SEGUIDORES (seguidorDesenvolvedor, seguidoEmpresa) VALUES (?, ?)', (codSeguidor, codSeguido))
-    #     elif tipoSeguidor == 'dev' and tipoSeguido == 'dev':
-    #          self.cursor.execute('INSERT INTO SEGUIDORES (seguidorDesenvolvedor, seguidoDesenvolvedor) VALUES (?, ?)', (codSeguidor, codSeguido))
-    #     elif tipoSeguidor == 'emp' and tipoSeguido == 'dev':
-    #          self.cursor.execute('INSERT INTO SEGUIDORES (seguidorEmpresa, seguidoDesenvolvedor) VALUES (?, ?)', (codSeguidor, codSeguido))
-    #     else:
-    #     #elif tipoSeguidor =='emp' and tipoSeguido =='emp':
-    #          self.cursor.execute('INSERT INTO SEGUIDORES (seguidorEmpresa, seguidoEmpresa) VALUES (?, ?)', (codSeguidor, codSeguido))
-    #     self.conn.commit()
+    def Follow(self, codSeguidor, codSeguido, tipoSeguidor, tipoSeguido):
+        if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 
+             self.cursor.execute('INSERT INTO SEGUIDORES (seguidorDesenvolvedor, seguidoEmpresa) VALUES (?, ?)', (codSeguidor, codSeguido))
+        elif tipoSeguidor == 'dev' and tipoSeguido == 'dev':
+             self.cursor.execute('INSERT INTO SEGUIDORES (seguidorDesenvolvedor, seguidoDesenvolvedor) VALUES (?, ?)', (codSeguidor, codSeguido))
+        elif tipoSeguidor == 'emp' and tipoSeguido == 'dev':
+             self.cursor.execute('INSERT INTO SEGUIDORES (seguidorEmpresa, seguidoDesenvolvedor) VALUES (?, ?)', (codSeguidor, codSeguido))
+        else:
+        #elif tipoSeguidor =='emp' and tipoSeguido =='emp':
+             self.cursor.execute('INSERT INTO SEGUIDORES (seguidorEmpresa, seguidoEmpresa) VALUES (?, ?)', (codSeguidor, codSeguido))
+        self.conn.commit()
+
+    def inserir_dinheiro(self, tipoUsuario, codUsuario, valor):
+        cursor = self.con.cursor()
+        if tipoUsuario == 'empresa':
+            update_query = "UPDATE SALDO_EMPRESA SET saldo = saldo + %s WHERE cod_empresa = %s"
+        elif tipoUsuario == 'desenvolvedor':
+            update_query = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo + %s WHERE cod_desenvolvedor = %s"
+        else:
+            return False
+        cursor.execute(update_query, (valor, codUsuario))
+        self.con.commit()
+        return True
+    
+    def verificar_saldo(self, tipo, codigo):
+        cursor = self.con.cursor()
+        if tipo == 'empresa':
+            saldo_query = "SELECT saldo FROM SALDO_EMPRESA WHERE cod_empresa = %s"
+        elif tipo == 'desenvolvedor':
+            saldo_query = "SELECT saldo FROM SALDO_DESENVOLVEDOR WHERE cod_desenvolvedor = %s"
+        else:
+            return None
+        cursor.execute(saldo_query, (codigo,))
+        result = cursor.fetchone()
+        if result is not None:
+            return result[0]
+        else:
+            return None
+
+    def sacar_dinheiro(self, tipoUsuario, codUsuario, valor):
+        cursor = self.con.cursor()
+        if tipoUsuario == 'empresa':
+            update_query = "UPDATE SALDO_EMPRESA SET saldo = saldo - %s WHERE cod_empresa = %s"
+        elif tipoUsuario == 'desenvolvedor':
+            update_query = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo - %s WHERE cod_desenvolvedor = %s"
+        else:
+            return False
+        cursor.execute(update_query, (valor, codUsuario))
+        self.con.commit()
+        return True
+
+    def realizar_transacao(self, codEmpresa, codDesenvolvedor, valor, descricao):
+        cursor = self.con.cursor()
+        insert_query = "INSERT INTO TRANSACOES (descricao, valor, empresa_pagante, desenvolvedor_recebedor) VALUES (%s, %s, %s, %s)"
+        cursor.execute(insert_query, (descricao, valor, codEmpresa, codDesenvolvedor))
+        update_query_SALDO_EMPRESA = "UPDATE SALDO_EMPRESA SET saldo = saldo - %s WHERE cod_empresa = %s"
+        cursor.execute(update_query_SALDO_EMPRESA, (valor, codEmpresa))
+        update_query_SALDO_DESENVOLVEDOR = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo + %s WHERE cod_desenvolvedor = %s"
+        cursor.execute(update_query_SALDO_DESENVOLVEDOR, (valor, codDesenvolvedor))
+        self.con.commit()
+        return True
