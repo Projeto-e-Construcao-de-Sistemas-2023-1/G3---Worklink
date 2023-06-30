@@ -74,14 +74,12 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | CDU10 | Candidatar-se a um projeto. |
 | CDU11 | Filtrar feed. |
 | CDU12 | Sacar dinheiro. |
-| CDU13 | Cancelar candidatura. |
-| CDU14 | Manter projeto. |
-| CDU15 | Escolher desenvolvedor. |
-| CDU16 | Encerrar inscrições. |
-| CDU17 | Inserir dinheiro na carteira virtual. |
-| CDU18 | Realizar transação. |
-| CDU19 | Copiar link de compartilhamento de perfil |
-| CDU20 | Redefinir senha. |
+| CDU13 | Manter projeto. |
+| CDU14 | Escolher desenvolvedor. |
+| CDU15 | Inserir dinheiro na carteira virtual. |
+| CDU16 | Realizar transação. |
+| CDU17 | Copiar link de compartilhamento de perfil |
+| CDU18 | Redefinir senha. |
 
 
 ## Diagrama de Casos de Uso
@@ -390,7 +388,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pós-Condições | O ator desativa o projeto de seu perfil. |
 | Regras de negócios | RN4 - A empresa não poderá deletar o projeto após estar "Em Desenvolvimento" |
 
-### Caso 15: Escolher Desenvolvedor
+### Caso 14: Escolher Desenvolvedor
 
 | 15 | Escolher Desenvolvedor |
 | --- | --- |
@@ -405,7 +403,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pós-Condições | Os desenvolvedores para o projeto são confirmados. |
 | Regras de negócios | RN1 - Um desenvolvedor deve ter, no mínimo, 1 tag em comum com o projeto para poder se candidatar à ele. |
 
-### Caso 20: Redefinir Senha
+### Caso 18: Redefinir Senha
 
 | 20 | Redefinir Senha |
 | --- | --- |
@@ -430,7 +428,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | --- | --- |
 | reCAPTCHA | Verifica se o usuário que está iniciando sessão é um humano. |
 | Google Calendar API | API de Calendário para visualizar datas e marcar reuniões. |
-| email.mime | Envio de email para redefinição de senha. |
+| Verificação de CEP | Verificar o CEP das empresas. |
  
 ## Slides e Entregas
  
