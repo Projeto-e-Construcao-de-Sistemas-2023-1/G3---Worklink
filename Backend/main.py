@@ -244,7 +244,7 @@ def deposito():
     if Usuario().Depositar(tipoUsuario, codUsuario, valor):
         return jsonify({'message': 'Deposito realizado com sucesso'}), 200
     else:
-        return jsonify({'message': 'Erro ao realizar depósito'}), 400
+        return jsonify({'message': 'Erro ao realizar deposito'}), 400
 
 @app.route('/saque', methods=['POST'])
 def saque():

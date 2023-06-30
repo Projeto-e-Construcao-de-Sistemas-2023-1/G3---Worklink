@@ -143,8 +143,8 @@ class Database:
         cursor = self.con.cursor()
         if tipoUsuario == 'empresa':
             update_query = "UPDATE SALDO_EMPRESA SET saldo = saldo + %s WHERE cod_empresa = %s"
-        elif tipoUsuario == 'desenvolvedor':
-            update_query = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo + %s WHERE cod_desenvolvedor = %s"
+        # elif tipoUsuario == 'desenvolvedor':
+        #     update_query = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo + %s WHERE cod_desenvolvedor = %s"
         else:
             return False
         cursor.execute(update_query, (valor, codUsuario))
