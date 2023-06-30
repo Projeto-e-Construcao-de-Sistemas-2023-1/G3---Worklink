@@ -29,8 +29,13 @@ def home():
 
 @app.route('/editar_perfil', methods=['GET'])
 def editarp():
-    return render_template('editar_perfil.html', nome=dev.getNome(), contabancaria=dev.getConta(), sobrenome=dev.getSobrenome(), 
-                           telefone=dev.getTelefone(), descricao=dev.getDescricao()) 
+    if tipo == True:
+        return render_template('editar_perfil.html', nome=dev.getNome(), contabancaria=dev.getConta(), sobrenome=dev.getSobrenome(), 
+                           telefone=dev.getTelefone(), descricao=dev.getDescricao())
+    
+    else:
+        return render_template('editar_perfil_emp.html', razaosocial=emp.getRazaoSocial(), contabancaria=emp.getConta(), 
+                           telefone=emp.getTelefone(), descricao=emp.getAreaNegocio())
 
 @app.route('/signup_dev', methods=['GET'])
 def regdv():
@@ -59,7 +64,7 @@ def login():
         elif dev.iniciaSessao(email, password):
             global tipo # tipo == True desenvolvedor. tipo == false Empresa
             tipo=dev.verificaUsuario()
-            if tipo == True:
+            if tipo:
                 dev.capturaEmail(email)
                 return redirect(url_for('feed'))
             else:
@@ -74,7 +79,7 @@ def perfil():
    if tipo == True:
         return render_template('perfil_dev.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao(), email=dev.getEmail())
    else:
-       return render_template('perfil_emp.html', nome=emp.getRazaoSocial(), descricao=emp.getAreaNegocio(), email=emp.getEmail())
+       return render_template('perfil_dev.html', nome=emp.getRazaoSocial(), descricao=emp.getAreaNegocio(), email=emp.getEmail())
 
 @app.route('/criar_Projeto', methods=['GET'])
 def criar_projeto():
@@ -163,7 +168,7 @@ def edita_perfil():
         areanegocio = request.form.get('areanegocio')
         razaosocial = request.form.get('razaosocial')
 
-        emp.getRazaoSocial(razaosocial)
+        emp.setRazaoSocial(razaosocial)
         emp.setConta(contabancaria)
         emp.setTelefone(telefone)
         emp.setAreaNegocio(areanegocio)
