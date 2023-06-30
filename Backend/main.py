@@ -272,7 +272,11 @@ def transacao():
 
 @app.route('/carteira', methods=['GET'])
 def carteira():
-    return render_template('carteira.html')
+    if tipo:
+        saldo = Usuario().verificarSaldo('desenvolvedor', dev.getCodigo())
+    else:
+        saldo = Usuario().verificarSaldo('empresa', emp.getCodigo())
+    return render_template('carteira.html', saldo=saldo)
 
 
 if __name__ == "__main__":

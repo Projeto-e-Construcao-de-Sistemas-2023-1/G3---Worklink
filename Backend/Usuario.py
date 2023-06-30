@@ -99,3 +99,8 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
             Database.realizar_transacao(self, codEmpresa, codDesenvolvedor, valor, descricao)
             return True
             return jsonify({'message': 'Transação realizada com sucesso'}), 200
+    
+    def verificarSaldo(self, tipoUsuario, codUsuario):
+        Database.connect(self)
+        saldo = Database.verificar_saldo(self, tipoUsuario, codUsuario)
+        return saldo
