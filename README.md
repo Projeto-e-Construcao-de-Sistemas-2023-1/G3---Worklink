@@ -76,7 +76,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | CDU12 | Sacar dinheiro. |
 | CDU13 | Manter projeto. |
 | CDU14 | Escolher desenvolvedor. |
-| CDU15 | Inserir dinheiro na carteira virtual. |
+| CDU15 | Depositar dinheiro. |
 | CDU16 | Realizar transação. |
 | CDU17 | Copiar link de compartilhamento de perfil |
 | CDU18 | Redefinir senha. |
