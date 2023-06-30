@@ -33,7 +33,11 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
 
     def pesquisaUsuario(self, nome, tipo):
         Database.connect(self)
+        print(Database.pesquisaUsuario(self, nome, tipo))
         return Database.pesquisaUsuario(self, nome, tipo)
+    # def pesquisaUsuario(self, nome, tipo):
+    #     Database.connect(self)
+    #     return self.db.pesquisaUsuario(nome, tipo)
     
     def Follow(self, seguidor, seguido, tipoSeguidor, tipoSeguido):
         Database.connect(self)

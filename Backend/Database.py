@@ -50,13 +50,29 @@ class Database:
             return False # Credenciais inválidas
 
     def pesquisaUsuario(self, nome, tipo):
-        if tipo == True: # TRUE PARA DEV
-            self.cursor.execute(f'SELECT DESENVOLVEDOR.nome, DESENVOLVEDOR.descricao FROM DESENVOLVEDOR WHERE nome = "{nome}"')
+        if tipo:  # True para desenvolvedor
+            self.cursor.execute('SELECT DESENVOLVEDOR.nome, DESENVOLVEDOR.sobrenome, DESENVOLVEDOR.cod_desenvolvedor FROM DESENVOLVEDOR WHERE nome LIKE %s', (f'%{nome}%',))
             self.con.commit()
-        else: # FALSE PARA EMPRESA
-            self.cursor.execute(f'SELECT EMPRESA.razao_social, EMPRESA.area_negocio FROM EMPRESA WHERE nome = "{nome}"')
+        else:  # False para empresa
+            self.cursor.execute('SELECT EMPRESA.razao_social, EMPRESA.area_negocio, EMPRESA.cod_empresa FROM EMPRESA WHERE nome LIKE %s', (f'%{nome}%',))
             self.con.commit()
-        return self.cursor.fetchall() # MOSTRAR OS REGISTROS NA TELA DO FRONT END
+        return self.cursor.fetchall()
+
+    # def pesquisaUsuario(self, nome, tipo):
+    #     #cursor = self.con.cursor(dictionary=True)
+    #     if tipo:  # True para desenvolvedor
+    #         #cursor.execute("SELECT * FROM DESENVOLVEDOR WHERE nome LIKE %s", (f"%{nome}%",))
+    #         self.cursor.execute(f'SELECT DESENVOLVEDOR.nome, DESENVOLVEDOR.sobrenome, DESENVOLVEDOR.cod_desenvolvedor FROM DESENVOLVEDOR WHERE nome = "{nome}"')
+    #         self.con.commit()
+    #     else:  # False para empresa
+    #         #cursor.execute("SELECT * FROM EMPRESA WHERE nome LIKE %s", (f"%{nome}%",))
+    #         self.cursor.execute(f'SELECT EMPRESA.razao_social, EMPRESA.area_negocio, EMPRESA.cod_empresa FROM EMPRESA WHERE nome = "{nome}"')
+    #         self.con.commit()
+    #     return self.cursor.fetchall()
+        # results = cursor.fetchall()
+        # self.con.commit()
+        # cursor.close()
+        # return results
     
     def verificaUsuario(self, email):
         self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR WHERE email = "{email}"')
@@ -65,6 +81,7 @@ class Database:
             return True # É Desenvolvedor
         else:
             return False # É empresa
+        
     def pesquisaDesenvolvedor(self, nome):
         self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR WHERE nome = "{nome}"')
         self.con.commit()

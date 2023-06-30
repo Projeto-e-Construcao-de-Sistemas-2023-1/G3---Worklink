@@ -76,10 +76,13 @@ def feed():
     return render_template('pagina_inicial.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao())
 #metodos 
     
-@app.route('/pesquisa_usuario', methods=['post'])
-def pesquisaUser():
-    pesquisa_user = request.form.get('pesquisa_user')
-    print(pesquisa_user)
+@app.route('/pesquisa_usuario', methods=['GET'])
+def pesquisaUsuario():
+    nome = request.form.get('nome')
+    tipo = True
+    resultado = Usuario().pesquisaUsuario(nome, tipo)
+    return jsonify(resultado)
+    #print(resultado)
     
 @app.route('/signup_developer', methods=['POST'])
 def regdev():
@@ -180,7 +183,11 @@ def transacao():
     valor = request.form.get('valor')
     valor = valor.replace(',', '.')
     descricao = request.form.get('descricao')
-    return Usuario().realizarTransacao(codEmpresa, codDesenvolvedor, valor, descricao)
+    if Usuario().realizarTransacao(codEmpresa, codDesenvolvedor, valor, descricao):
+        return jsonify({'message': 'Transacao realizado com sucesso'}), 200
+    else:
+        return jsonify({'message': 'Erro ao realizar transacao'}), 400
+
 
 @app.route('/carteira', methods=['GET'])
 def carteira():
