@@ -89,7 +89,7 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
 
     def realizarTransacao(self, codEmpresa, codDesenvolvedor, valor, descricao):
         Database.connect(self)
-        saldoEmpresa = Database.verificar_saldo(self, 'empresa', codEmpresa)
+        saldoEmpresa = Database.verificar_saldo(self, False, codEmpresa)
         valorDecimal = Decimal(valor)
         if saldoEmpresa is None or saldoEmpresa < valorDecimal:
             return False

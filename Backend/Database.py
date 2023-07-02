@@ -151,7 +151,7 @@ class Database:
 
     def inserir_dinheiro(self, tipoUsuario, codUsuario, valor):
         cursor = self.con.cursor()
-        if tipoUsuario == 'empresa':
+        if tipoUsuario == False:
             update_query = "UPDATE SALDO_EMPRESA SET saldo = saldo + %s WHERE cod_empresa = %s"
         # elif tipoUsuario == 'desenvolvedor':
         #     update_query = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo + %s WHERE cod_desenvolvedor = %s"
@@ -163,9 +163,9 @@ class Database:
     
     def verificar_saldo(self, tipo, codigo):
         cursor = self.con.cursor()
-        if tipo == 'empresa':
+        if tipo == False:
             saldo_query = "SELECT saldo FROM SALDO_EMPRESA WHERE cod_empresa = %s"
-        elif tipo == 'desenvolvedor':
+        elif tipo == True:
             saldo_query = "SELECT saldo FROM SALDO_DESENVOLVEDOR WHERE cod_desenvolvedor = %s"
         else:
             return None
@@ -178,9 +178,9 @@ class Database:
 
     def sacar_dinheiro(self, tipoUsuario, codUsuario, valor):
         cursor = self.con.cursor()
-        if tipoUsuario == 'empresa':
+        if tipoUsuario == False:
             update_query = "UPDATE SALDO_EMPRESA SET saldo = saldo - %s WHERE cod_empresa = %s"
-        elif tipoUsuario == 'desenvolvedor':
+        elif tipoUsuario == True:
             update_query = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo - %s WHERE cod_desenvolvedor = %s"
         else:
             return False

@@ -13,10 +13,7 @@ app = Flask(__name__, template_folder="templates")
 emailsessao=''
 emp = Empresa()
 evt = Evento()
-#emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
 dev = Desenvolvedor()
-#dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
-#                     'senha', 'pleno', 'python')
 db = Database()
 us=Usuario()
 app.config["SECRET_KEY"] = "mysecretkey"
@@ -237,8 +234,11 @@ def delete():
 
 @app.route('/deposito', methods=['POST'])
 def deposito():
-    tipoUsuario = request.form.get('tipoUsuario')
-    codUsuario = request.form.get('codUsuario')
+    tipoUsuario = tipo
+    if tipoUsuario:
+        codUsuario = dev.getCodigo()
+    else:
+        codUsuario = emp.getCodigo()
     valor = request.form.get('valor')
     valor = valor.replace(',', '.')
     if Usuario().Depositar(tipoUsuario, codUsuario, valor):
@@ -248,8 +248,11 @@ def deposito():
 
 @app.route('/saque', methods=['POST'])
 def saque():
-    tipoUsuario = request.form.get('tipoUsuario')
-    codUsuario = request.form.get('codUsuario')
+    tipoUsuario = tipo
+    if tipoUsuario:
+        codUsuario = dev.getCodigo()
+    else:
+        codUsuario = emp.getCodigo()
     valor = request.form.get('valor')
     valor = valor.replace(',', '.')
     if Usuario().Sacar(tipoUsuario, codUsuario, valor):
@@ -259,7 +262,7 @@ def saque():
 
 @app.route('/transacao', methods=['POST'])
 def transacao():
-    codEmpresa = request.form.get('codEmp')
+    codEmpresa = emp.getCodigo()
     codDesenvolvedor = request.form.get('codDev')
     valor = request.form.get('valor')
     valor = valor.replace(',', '.')
@@ -273,9 +276,9 @@ def transacao():
 @app.route('/carteira', methods=['GET'])
 def carteira():
     if tipo:
-        saldo = Usuario().verificarSaldo('desenvolvedor', dev.getCodigo())
+        saldo = Usuario().verificarSaldo(True, dev.getCodigo())
     else:
-        saldo = Usuario().verificarSaldo('empresa', emp.getCodigo())
+        saldo = Usuario().verificarSaldo(False, emp.getCodigo())
     return render_template('carteira.html', saldo=saldo)
 
 
