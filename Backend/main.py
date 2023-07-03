@@ -127,11 +127,20 @@ def regEmp():
     telefone = request.form.get('telefone')
     conta = request.form.get('conta')
     senha = request.form.get('senha')
+    cep = request.form.get('cep')
     #confirm_password = request.form.get('confirm_password')
     area_negocio = request.form.get('area_negocio')
-    #funcao para o backend
-    emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
-    return render_template('home.html')
+
+    link = f'https://viacep.com.br/ws/{cep}/json/'
+
+    requisicao = requests.get(link)
+
+    if requisicao.status_code == 200:
+        #funcao para o backend
+        emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio, cep)
+        return render_template('home.html')
+    else:
+       return jsonify({'message': 'CEP Invalido!'}), 400
 
 @app.route('/delete_conta', methods=['GET'])
 def delete_conta():

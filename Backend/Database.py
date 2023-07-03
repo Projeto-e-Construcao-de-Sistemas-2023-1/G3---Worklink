@@ -11,7 +11,7 @@ class Database:
             self.cursor.execute(query_saldo, (cod_desenvolvedor, 0))
             self.con.commit()  # Inserção na tabela SALDO_DESENVOLVEDOR
         else:
-            query = """ INSERT INTO EMPRESA (cnpj, razao_social, email, telefone, conta_bancaria, senha, area_negocio) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+            query = """ INSERT INTO EMPRESA (cnpj, razao_social, email, telefone, conta_bancaria, senha, area_negocio, cep) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
             self.cursor.execute(query, values)
             self.con.commit() # INSERT REALIZADO
             cod_empresa = self.cursor.lastrowid

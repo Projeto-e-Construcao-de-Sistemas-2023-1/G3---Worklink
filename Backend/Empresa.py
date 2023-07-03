@@ -1,8 +1,8 @@
 import Usuario
 from Database import Database
 class Empresa(Usuario.Usuario):
-    def criaEmpresa(self, cnpj, razao_social, email, telefone, conta, senha, area_negocio):
-        values = (cnpj, razao_social, email, telefone, conta, senha, area_negocio)
+    def criaEmpresa(self, cnpj, razao_social, email, telefone, conta, senha, area_negocio, cep):
+        values = (cnpj, razao_social, email, telefone, conta, senha, area_negocio, cep)
         tipo = False
         Database.connect(self)
         Database.insert(self, values, tipo)
