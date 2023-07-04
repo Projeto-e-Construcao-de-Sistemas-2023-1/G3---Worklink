@@ -224,8 +224,10 @@ def save():
     data = dict(request.form)
     if dev.verificaUsuario():
         ok = evt.criaEventoDev(data["s"], data["e"], data["t"], data["c"], data["b"], dev.getCodigo(), True)
+        us.enviarEmailReuniaoCriada(dev.getEmail())
     else:
         ok = evt.criaEventoEmp(data["s"], data["e"], data["t"], data["c"], data["b"], emp.getCodigo(), False)
+        us.enviarEmailReuniaoCriada(emp.getEmail())
     msg = "OK" 
     return 'Reunião criada com sucesso!'
     # if ok:
@@ -235,6 +237,10 @@ def save():
 def delete():
   data = dict(request.form)
   ok = evt.deletaEvento(data["id"])
+  if dev.verificaUsuario():
+      us.enviarEmailReuniaoExcluida(dev.getEmail())
+  else:
+      us.enviarEmailReuniaoExcluida(emp.getEmail())
   msg = "OK"
   return 'Reunião excluída com sucesso!' 
 #   if ok:

@@ -2,6 +2,9 @@ from flask import jsonify, flash
 from Database import Database
 from decimal import Decimal
 import pyperclip
+import smtplib
+import email.message
+
 class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
     def deletaUsuario(self): # Passar tipo = True para DESENVOLVEDOR | tipo = False para EMPRESA
         Database.connect(self)
@@ -104,3 +107,43 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
         Database.connect(self)
         saldo = Database.verificar_saldo(self, tipoUsuario, codUsuario)
         return saldo
+
+    def enviarEmailReuniaoCriada(self, emailUser): 
+
+        corpo_email = """
+        <p>Olá! Sua reunião foi marcada com sucesso!</p>
+        """
+
+        msg = email.message.Message()
+        msg['Subject'] = "Reunião Marcada!"
+        msg['From'] = 'worklink012@gmail.com'
+        msg['To'] = emailUser
+        password = 'dczxgidwrlzgiuar' 
+        msg.add_header('Content-Type', 'text/html')
+        msg.set_payload(corpo_email )
+
+        s = smtplib.SMTP('smtp.gmail.com: 587')
+        s.starttls()
+        # Login Credentials for sending the mail
+        s.login(msg['From'], password)
+        s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
+    
+    def enviarEmailReuniaoExcluida(self, emailUser): 
+
+        corpo_email = """
+        <p>Olá! Sua reunião foi excluída com sucesso!</p>
+        """
+
+        msg = email.message.Message()
+        msg['Subject'] = "Reunião Excluída!"
+        msg['From'] = 'worklink012@gmail.com'
+        msg['To'] = emailUser
+        password = 'dczxgidwrlzgiuar' 
+        msg.add_header('Content-Type', 'text/html')
+        msg.set_payload(corpo_email )
+
+        s = smtplib.SMTP('smtp.gmail.com: 587')
+        s.starttls()
+        # Login Credentials for sending the mail
+        s.login(msg['From'], password)
+        s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
