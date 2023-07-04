@@ -102,7 +102,6 @@ class Database:
             }
         return data
 
-
     def connect(self):
         self.con = mysql.connector.connect(
         host='35.198.19.238',

@@ -1,5 +1,5 @@
 from Database import Database
-from Empresa import Empresa
+#from Empresa import Empresa
 # OS GETTERS VÃO SER CONSULTAS NO BANCO DE DADOS PEDINDO AQUELA VARIAVEL
 class Projeto():    
     def criaProjeto(self, cod_empresa,especificacao, valor_orcamento, prazo, requisito_tecnico, status_projeto, tag_projeto, nome_projeto):
@@ -9,149 +9,70 @@ class Projeto():
         Database.insertProjeto(self, values)
 
     # GETTERS
-    def getEspecificacao(self):
+    def getEspecificacaoProjeto(self, cod_empresa, nome_projeto):
         Database.connect(self)
-        return Database.selectProjeto(self, 'especificacao, ')
+        return Database.selectProjeto(self, 'especificacao',cod_empresa, nome_projeto)
     
-    def getSobrenome(self):
+    def getOrcamentoProjeto(self, cod_empresa, nome_projeto):
         Database.connect(self)
-        return Database.select(self, 'DESENVOLVEDOR', 'sobrenome', self.email)
+        return Database.selectProjeto(self, 'valor_orcamento',cod_empresa, nome_projeto)
     
-    def getCPF(self):
+    def getPrazoProjeto(self, cod_empresa, nome_projeto):
         Database.connect(self)
-        return Database.select(self, 'DESENVOLVEDOR', 'CPF', self.email)
+        return Database.selectProjeto(self, 'prazo',cod_empresa, nome_projeto)
     
-    def getEmail(self):
+    def getRequisitoProjeto(self, cod_empresa, nome_projeto):
         Database.connect(self)
-        return Database.select(self, 'DESENVOLVEDOR', 'email', self.email)
+        return Database.selectProjeto(self, 'requisito_tecnico',cod_empresa, nome_projeto)
     
-    def getGenero(self):
+    def getStatusProjeto(self, cod_empresa, nome_projeto):
         Database.connect(self)
-        return Database.select(self, 'DESENVOLVEDOR', 'genero', self.email)
+        return Database.selectProjeto(self, 'status_projeto',cod_empresa, nome_projeto)
     
-    def getDataNascimento(self):
+    def getTagProjeto(self, cod_empresa, nome_projeto):
         Database.connect(self)
-        return Database.select(self, 'DESENVOLVEDOR', 'data_nascimento', self.email)
+        return Database.selectProjeto(self, 'tag_projeto',cod_empresa, nome_projeto)
     
-    def getTelefone(self):
+    def getNomeProjeto(self, cod_empresa, nome_projeto):
         Database.connect(self)
-        return Database.select(self, 'DESENVOLVEDOR', 'telefone', self.email)
-    
-    def getConta(self):
-        Database.connect(self)
-        return Database.select(self, 'DESENVOLVEDOR', 'conta_bancaria', self.email)
-    
-    def getNome(self):
-        Database.connect(self)
-        return Database.select(self, 'DESENVOLVEDOR', 'nome', self.email)
-    
-    def getSenha(self):
-        Database.connect(self)
-        return Database.select(self, 'DESENVOLVEDOR', 'senha', self.email)
-    
-    def getDescricao(self):
-        Database.connect(self)
-        return Database.select(self, 'DESENVOLVEDOR', 'descricao', self.email)
-    
-    def getCodigo(self):
-        Database.connect(self)
-        self.codigo = Database.select(self, 'DESENVOLVEDOR', 'cod_desenvolvedor', self.email)
-        return Database.select(self, 'DESENVOLVEDOR', 'cod_desenvolvedor', self.email)
-
-    def getTag(self):
-        Database.connect(self)
-        return Database.select(self, 'DESENVOLVEDOR', 'tag', self.email)
+        return Database.selectProjeto(self, 'nome_projeto',cod_empresa, nome_projeto)
     
     # SETTERS - ADICIONAR NOME_PROJETO COMO PARAMETRO RECEBIDO
-    def setNome(self, nome):
+    def setEspecificacaoProjeto(self, espec, cod_empresa, nome_projeto) :
         Database.connect(self)
-        Database.update(self, 'nome', nome, 'DESENVOLVEDOR', self.email)
+        Database.update(self, 'especificacao', espec, cod_empresa, nome_projeto)
         return True
 
-    def setSobrenome(self, sobrenome):
+    def setOrcamentoProjeto(self, espec, cod_empresa, nome_projeto) :
         Database.connect(self)
-        Database.update(self, 'sobrenome', sobrenome, 'DESENVOLVEDOR', self.email)
+        Database.update(self, 'valor_orcamento', espec, cod_empresa, nome_projeto)
         return True
 
-    def setCpf(self, CPF):
+    def setPrazoProjeto(self, espec, cod_empresa, nome_projeto) :
         Database.connect(self)
-        Database.update(self, 'CPF', CPF, 'DESENVOLVEDOR', self.email)
+        Database.update(self, 'prazo', espec, cod_empresa, nome_projeto)
         return True
 
-    def setEmail(self, email_novo):
+    def setRequisitoProjeto(self, espec, cod_empresa, nome_projeto) :
         Database.connect(self)
-        Database.update(self, 'email', email_novo, 'DESENVOLVEDOR', self.email)
-        return True
-
-    def setGenero(self, genero):
-        Database.connect(self)
-        Database.update(self, 'genero', genero, 'DESENVOLVEDOR', self.email)
-        return True
-
-    def setDataNascimento(self, data_nascimento):
-        Database.connect(self)
-        Database.update(self, 'data_nascimento', data_nascimento, 'DESENVOLVEDOR', self.email)
-        return True
-
-    def setTelefone(self, telefone):
-        Database.connect(self)
-        Database.update(self, 'telefone', telefone, 'DESENVOLVEDOR', self.email)
-        return True
-
-    def setConta(self, conta):
-        Database.connect(self)
-        Database.update(self, 'conta_bancaria', conta, 'DESENVOLVEDOR', self.email)
-        return True
-        
-    def setSenha(self, senha):
-        Database.connect(self)
-        Database.update(self, 'senha', senha, 'DESENVOLVEDOR', self.email)
-        return True
-
-    def setDescricao(self, descricao):
-        Database.connect(self)
-        Database.update(self, 'descricao', descricao, 'DESENVOLVEDOR', self.email)
-        return True
-
-    def setTag(self, tag):
-        Database.connect(self)
-        Database.update(self, 'tag_desenvolvedor', tag, 'DESENVOLVEDOR', self.email)
+        Database.update(self, 'requisito_tecnico', espec, cod_empresa, nome_projeto)
         return True
     
-    #def candidataProjeto(self, projeto):
-        # INSERIR NO BD O PROJETO QUE O CARA SE CANDIDATOU
-    #    pass
-    
-    #def visualizaProjetos(self, status):
-    #    for projeto in self.projetos:
-    #        if projeto.status == status:
-    #            print(projeto)
-    
-    #def segueEmpresa(self, empresa):
-    #    self.empresas_seguidas.append(empresa)
-    
-    #def pesquisaProjetos(self, tags):
-    #    projetos_encontrados = []
-    #    for projeto in self.projetos:
-    #        if any(tag in projeto.tags for tag in tags):
-    #            projetos_encontrados.append(projeto)
-    #    return projetos_encontrados
-    
-    #def guardaDinheiroCarteira(self, valor):
-    #    self.saldo_carteira += valor
-    
-    #def marcaReuniao(self, empresa, data, hora):
-    #    reuniao = Reuniao(empresa, data, hora) # Usar integração com Calendar
-    #    self.reunioes_agendadas.append(reuniao)
-    
-    #def pesquisaEmpresa(self, razao_social):
-    #    for empresa in self.empresas:
-    #        if empresa.razao_social == razao_social:
-    #            return empresa
-    #    return None
+    def setStatusProjeto(self, espec, cod_empresa, nome_projeto) :
+        Database.connect(self)
+        Database.update(self, 'status_projeto', espec, cod_empresa, nome_projeto)
+        return True
 
-    #def avaliaEmpresa(self, empresa, avaliacao):
-    #    empresa.avaliacoes.append(avaliacao)
+    def setTagProjeto(self, espec, cod_empresa, nome_projeto) :
+        Database.connect(self)
+        Database.update(self, 'tag_projeto', espec, cod_empresa, nome_projeto)
+        return True
 
-    
-    
+    def setNomeProjeto(self, espec, cod_empresa, nome_projeto) :
+        Database.connect(self)
+        Database.update(self, 'nome_projeto', espec, cod_empresa, nome_projeto)
+        return True
+
+    def deletaProjeto(self, cod_empresa, nome_projeto):
+        Database.connect(self)
+        Database.deleteProjeto(cod_empresa, nome_projeto)
