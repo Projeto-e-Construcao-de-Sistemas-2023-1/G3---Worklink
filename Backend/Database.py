@@ -224,3 +224,46 @@ class Database:
         cursor.execute(update_query_SALDO_DESENVOLVEDOR, (valor, codDesenvolvedor))
         self.con.commit()
         return True
+    
+    # -- CRUD PROJETO
+    def insertProjeto(self, values):
+        query = """ INSERT INTO `PROJETO` (`cod_empresa`, `especificacao`, `valor_orcamento`, `prazo`, `requisito_tecnico`, `status_projeto`, `tag_projeto`, `nome_projeto`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
+        self.cursor.execute(query, values)
+        self.con.commit() # INSERT REALIZADO
+
+    def updateProjeto(self, coluna, dado, cod_empresa, nome_projeto):
+        self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=0;')
+        self.con.commit()
+        self.cursor.execute(f'UPDATE PROJETO SET {coluna} = "{dado}" WHERE cod_empresa = "{cod_empresa}" AND nome_projeto = "{nome_projeto}"')
+        self.con.commit() # UPDATE REALIZADO
+        self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=1;')
+        self.con.commit()
+
+    def deleteProjeto(self, cod_empresa, nome_projeto):
+        self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=0;')
+        self.con.commit()
+        self.cursor.execute(f'DELETE FROM PROJETO WHERE cod_empresa = "{cod_empresa}" AND nome_projeto = "{nome_projeto}"')
+        self.con.commit()
+        self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=1;')
+        self.con.commit()
+
+    def selectProjeto(self, coluna, cod_empresa, nome_projeto): # Receber nome_projeto via input1
+        self.cursor.execute(f'SELECT {coluna} FROM PROJETO WHERE cod_empresa = "{cod_empresa}" AND nome_projeto = "{nome_projeto}"')
+        self.con.commit()
+        tupla = self.cursor.fetchone()
+        return tupla[0]
+    
+    def listaProjetos(self, cod_empresa):
+        self.cursor.execute(f'SELECT * FROM PROJETO WHERE cod_empresa = "{cod_empresa}"')
+        self.con.commit()
+        tupla = self.cursor.fetchall()
+        return tupla
+
+    def connect(self):
+        self.con = mysql.connector.connect(
+        host='35.198.19.238',
+        database='db_worklink',
+        user='root',
+        password='pjSq2023@') # BD acessado!!!
+        if self.con.is_connected():
+            self.cursor = self.con.cursor(buffered= True)

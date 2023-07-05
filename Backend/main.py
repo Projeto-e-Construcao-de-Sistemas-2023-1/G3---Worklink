@@ -8,6 +8,7 @@ import requests
 from datetime import datetime as dt
 from Evento import Evento
 import sys
+from Projeto import Projeto
 
 app = Flask(__name__, template_folder="templates")
 emailsessao=''
@@ -16,6 +17,7 @@ evt = Evento()
 dev = Desenvolvedor()
 db = Database()
 us=Usuario()
+pjt = Projeto()
 app.config["SECRET_KEY"] = "mysecretkey"
 app.config["RECAPTCHA_PUBLIC_KEY"] = '6Lfi1XcmAAAAAG6go6mUbSpX_01xHunP7wgn9StD'
 app.config["RECAPTCHA_PRIVATE_KEY"] = '6Lfi1XcmAAAAANyI3-604hr8oKpQkRuH1A0XI9kw'
@@ -143,7 +145,8 @@ def regEmp():
         emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio, cep)
         return render_template('home.html')
     else:
-       return jsonify({'message': 'CEP Invalido!'}), 400
+        flash("CEP inválido!")
+        return redirect(url_for('regem'))
 
 @app.route('/delete_conta', methods=['GET'])
 def delete_conta():
@@ -211,10 +214,10 @@ def save():
     data = dict(request.form)
     if dev.verificaUsuario():
         ok = evt.criaEventoDev(data["s"], data["e"], data["t"], data["c"], data["b"], dev.getCodigo(), True)
-        us.enviarEmailReuniaoCriada(dev.getEmail())
+        us.enviarEmailReuniaoCriada(dev.getEmail(), dev.getNome(), data["s"])
     else:
         ok = evt.criaEventoEmp(data["s"], data["e"], data["t"], data["c"], data["b"], emp.getCodigo(), False)
-        us.enviarEmailReuniaoCriada(emp.getEmail())
+        us.enviarEmailReuniaoCriada(emp.getEmail(), emp.getRazaoSocial(), data["s"])
     msg = "OK" 
     return 'Reunião criada com sucesso!'
     # if ok:
@@ -225,9 +228,9 @@ def delete():
   data = dict(request.form)
   ok = evt.deletaEvento(data["id"])
   if dev.verificaUsuario():
-      us.enviarEmailReuniaoExcluida(dev.getEmail())
+      us.enviarEmailReuniaoExcluida(dev.getEmail(), dev.getNome(), data["s"])
   else:
-      us.enviarEmailReuniaoExcluida(emp.getEmail())
+      us.enviarEmailReuniaoExcluida(emp.getEmail(), emp.getRazaoSocial(), data["s"])
   msg = "OK"
   return 'Reunião excluída com sucesso!' 
 #   if ok:
@@ -244,11 +247,9 @@ def deposito():
     valor = request.form.get('valor')
     valor = valor.replace(',', '.')
     if Usuario().Depositar(tipoUsuario, codUsuario, valor):
-        flash('Deposito realizado com sucesso!')
-        #return jsonify({'message': 'Deposito realizado com sucesso'}), 200
+        return jsonify({'message': 'Deposito realizado com sucesso'}), 200
     else:
-        flash('Erro ao realizar deposito')
-        #return jsonify({'message': 'Erro ao realizar deposito'}), 400
+        return jsonify({'message': 'Erro ao realizar deposito'}), 400
 
 @app.route('/saque', methods=['POST'])
 def saque():
@@ -260,11 +261,9 @@ def saque():
     valor = request.form.get('valor')
     valor = valor.replace(',', '.')
     if Usuario().Sacar(tipoUsuario, codUsuario, valor):
-        flash('Saque realizado com sucesso!')
-        #return jsonify({'message': 'Saque realizado com sucesso'}), 200
+        return jsonify({'message': 'Saque realizado com sucesso'}), 200
     else:
-        flash('Erro ao realizar saque.')
-        #return jsonify({'message': 'Erro ao realizar saque'}), 400
+        return jsonify({'message': 'Erro ao realizar saque'}), 400
 
 @app.route('/transacao', methods=['POST'])
 def transacao():
@@ -274,11 +273,9 @@ def transacao():
     valor = valor.replace(',', '.')
     descricao = request.form.get('descricao')
     if Usuario().realizarTransacao(codEmpresa, codDesenvolvedor, valor, descricao):
-        flash('Transação realizado com sucesso!')
-        #return jsonify({'message': 'Transacao realizado com sucesso'}), 200
+        return jsonify({'message': 'Transacao realizado com sucesso'}), 200
     else:
-        flash('Erro ao realizar transação.')
-        #return jsonify({'message': 'Erro ao realizar transacao'}), 400
+        return jsonify({'message': 'Erro ao realizar transacao'}), 400
 
 
 @app.route('/carteira', methods=['GET'])
