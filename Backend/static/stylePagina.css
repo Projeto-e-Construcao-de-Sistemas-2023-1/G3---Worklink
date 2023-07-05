@@ -9,7 +9,7 @@ body {
 	margin: 10px;
 }
 
-#search {
+#searchInput {
     height: 34px;
     background-color: #d8e1c0;
     width: 100%;
@@ -23,6 +23,42 @@ body {
     padding-left: 40px;
     border: 0;
 }
+.search-results {
+    position: absolute;
+    top: 100%;
+    /* left: 0; */
+    z-index: 999;
+    background-color: #f9f9f9;
+    /* border: 1px solid #ccc; */
+     width: 11%; 
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    padding: 10px;
+  }
+  .search-container {
+	position: relative;
+	display: inline-block;
+  }
+
+  .search-results.show {
+	display: block;
+  }
+
+  .search-results ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+  }
+
+  .search-results li {
+	margin-bottom: 5px;
+	cursor: pointer;
+  }
+
+  .search-results li:hover {
+	background-color: #e3e3e3;
+  }
 
 .input-icons i { 
     position: absolute; 
