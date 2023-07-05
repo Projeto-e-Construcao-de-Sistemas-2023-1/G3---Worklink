@@ -6,6 +6,8 @@ from Desenvolvedor import Desenvolvedor
 from flask_wtf import FlaskForm, RecaptchaField
 import requests
 from datetime import datetime as dt
+from Evento import Evento
+import sys
 
 app = Flask(__name__, template_folder="templates")
 emailsessao=''
@@ -189,40 +191,6 @@ def criarProjeto():
     descricao = request.form.get('descricao')
     return render_template('perfil_dev.html')
 
-@app.route('/deposito', methods=['POST'])
-def deposito():
-    tipoUsuario = request.form.get('tipoUsuario')
-    codUsuario = request.form.get('codUsuario')
-    valor = request.form.get('valor')
-    valor = valor.replace(',', '.')
-    if Usuario().Depositar(tipoUsuario, codUsuario, valor):
-        return jsonify({'message': 'Deposito realizado com sucesso'}), 200
-    else:
-        return jsonify({'message': 'Erro ao realizar depósito'}), 400
-
-@app.route('/saque', methods=['POST'])
-def saque():
-    tipoUsuario = request.form.get('tipoUsuario')
-    codUsuario = request.form.get('codUsuario')
-    valor = request.form.get('valor')
-    valor = valor.replace(',', '.')
-    if Usuario().Sacar(tipoUsuario, codUsuario, valor):
-        return jsonify({'message': 'Saque realizado com sucesso'}), 200
-    else:
-        return jsonify({'message': 'Erro ao realizar saque'}), 400
-
-@app.route('/transacao', methods=['POST'])
-def transacao():
-    codEmpresa = request.form.get('codEmp')
-    codDesenvolvedor = request.form.get('codDev')
-    valor = request.form.get('valor')
-    valor = valor.replace(',', '.')
-    descricao = request.form.get('descricao')
-    if Usuario().realizarTransacao(codEmpresa, codDesenvolvedor, valor, descricao):
-        return jsonify({'message': 'Transacao realizado com sucesso'}), 200
-    else:
-        return jsonify({'message': 'Erro ao realizar transacao'}), 400
-
 @app.route("/get/", methods=["POST"])
 def get():
     data = dict(request.form)
@@ -309,11 +277,6 @@ def carteira():
     else:
         saldo = Usuario().verificarSaldo(False, emp.getCodigo())
     return render_template('carteira.html', saldo=saldo)
-
-
-@app.route('/carteira', methods=['GET'])
-def carteira():
-    return render_template('carteira.html')
 
 @app.route('/listarusuarios', methods=['GET'])
 def listar_usuarios():
