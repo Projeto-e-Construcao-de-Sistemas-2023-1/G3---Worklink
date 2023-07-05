@@ -62,12 +62,17 @@ def login():
             return redirect(url_for('login'))
         
         elif dev.iniciaSessao(email, password):
-            dev.capturaEmail(email)
-            dev.verificaUsuario()
-            return redirect(url_for('feed'))
+            global tipo # tipo == True desenvolvedor. tipo == false Empresa
+            tipo=dev.verificaUsuario()
+            if tipo:
+                dev.capturaEmail(email)
+                return redirect(url_for('feed'))
+            else:
+                emp.capturaEmail(email)
+                return redirect(url_for('feed'))
         else:
-            print('Erro')
-            return render_template('home.html')  # criar pagina de erro com para nova tentativa  
+            flash('***EMAIL OU SENHA INCORRETOS***')
+            return redirect(url_for('login')) 
 
 @app.route('/perfil', methods=['GET'])
 def perfil():
@@ -239,9 +244,11 @@ def deposito():
     valor = request.form.get('valor')
     valor = valor.replace(',', '.')
     if Usuario().Depositar(tipoUsuario, codUsuario, valor):
-        return jsonify({'message': 'Deposito realizado com sucesso'}), 200
+        flash('Deposito realizado com sucesso!')
+        #return jsonify({'message': 'Deposito realizado com sucesso'}), 200
     else:
-        return jsonify({'message': 'Erro ao realizar deposito'}), 400
+        flash('Erro ao realizar deposito')
+        #return jsonify({'message': 'Erro ao realizar deposito'}), 400
 
 @app.route('/saque', methods=['POST'])
 def saque():
@@ -253,9 +260,11 @@ def saque():
     valor = request.form.get('valor')
     valor = valor.replace(',', '.')
     if Usuario().Sacar(tipoUsuario, codUsuario, valor):
-        return jsonify({'message': 'Saque realizado com sucesso'}), 200
+        flash('Saque realizado com sucesso!')
+        #return jsonify({'message': 'Saque realizado com sucesso'}), 200
     else:
-        return jsonify({'message': 'Erro ao realizar saque'}), 400
+        flash('Erro ao realizar saque.')
+        #return jsonify({'message': 'Erro ao realizar saque'}), 400
 
 @app.route('/transacao', methods=['POST'])
 def transacao():
@@ -265,9 +274,11 @@ def transacao():
     valor = valor.replace(',', '.')
     descricao = request.form.get('descricao')
     if Usuario().realizarTransacao(codEmpresa, codDesenvolvedor, valor, descricao):
-        return jsonify({'message': 'Transacao realizado com sucesso'}), 200
+        flash('Transação realizado com sucesso!')
+        #return jsonify({'message': 'Transacao realizado com sucesso'}), 200
     else:
-        return jsonify({'message': 'Erro ao realizar transacao'}), 400
+        flash('Erro ao realizar transação.')
+        #return jsonify({'message': 'Erro ao realizar transacao'}), 400
 
 
 @app.route('/carteira', methods=['GET'])
