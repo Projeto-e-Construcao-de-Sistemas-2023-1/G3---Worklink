@@ -193,5 +193,9 @@ def transacao():
 def carteira():
     return render_template('carteira.html')
 
+@app.route('/listarusuarios', methods=['GET'])
+def listar_usuarios():
+    usuarios_tupla = Usuario.pesquisaUsuario()
+
 if __name__ == "__main__":
     app.run()
