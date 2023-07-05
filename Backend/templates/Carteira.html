@@ -127,11 +127,11 @@
     <div class="card mb-3" style="max-width: 350px;">
       <div class="row g-0">
         <div class="col-md-4">
-          <img src="logo-carteira.png" class="" alt="hh" height="150px" width="150px" style="text-align: center;">
+          <img src="../static/logo-carteira.png" class="" alt="hh" height="150px" width="150px" style="text-align: center;">
         </div>
         <div class="col-md-8">
           <div class="card-body" style="padding-left: 30px; padding-top: 70px;">
-            <p class="card-text" style="font-size: 20px;">Saldo: R$</p>
+            <p class="card-text" style="font-size: 20px;">Saldo: R$ {{ saldo }}</p>
           </div>
         </div>
       </div>
@@ -145,12 +145,12 @@
 
     
     <form id="formSacar" action="/saque" method="POST" style="display: none; margin: 10px;">
-        <label for="tipoUsuario">Tipo de Usuário:</label>
+        <!-- <label for="tipoUsuario">Tipo de Usuário:</label>
         
         <input class="form-control" type="text" name="tipoUsuario" id="tipoUsuario">
 
         <label for="codUsuario">Código do Usuário:</label>
-        <input class="form-control" type="text" name="codUsuario" id="codUsuario">
+        <input class="form-control" type="text" name="codUsuario" id="codUsuario"> -->
 
         <label for="valor">Valor:</label>
         <input class="form-control" type="text" name="valor" id="valor">
@@ -161,11 +161,11 @@
 
     
     <form id="formDepositar" action="/deposito" method="POST" style="display: none;">
-        <label for="tipoUsuario">Tipo de Usuário:</label>
+        <!-- <label for="tipoUsuario">Tipo de Usuário:</label>
         <input class="form-control" type="text" name="tipoUsuario" id="tipoUsuario">
 
         <label for="codUsuario">Código do Usuário:</label>
-        <input class="form-control" type="text" name="codUsuario" id="codUsuario">
+        <input class="form-control" type="text" name="codUsuario" id="codUsuario"> -->
 
         <label for="valor">Valor:</label>
         <input class="form-control" type="text" name="valor" id="valor">
@@ -176,8 +176,8 @@
    
     <form id="formTransacao" action="/transacao" method="POST" style="display: none;">
 
-        <label for="codEmp">Código do Pagador:</label>
-        <input class="form-control" type="text" name="codEmp" id="codEmp">
+        <!-- <label for="codEmp">Código do Pagador:</label>
+        <input class="form-control" type="text" name="codEmp" id="codEmp"> -->
 
         <label for="codDev">Código do Recebedor:</label>
         <input class="form-control" type="text" name="codDev" id="codDev">

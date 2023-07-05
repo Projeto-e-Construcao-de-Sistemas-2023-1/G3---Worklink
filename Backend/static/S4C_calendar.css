@@ -9,9 +9,34 @@
     overflow-x: hidden;
   }
   :root {
-    --bg-color-a: #3b39af; /* page header + form label */
+    --bg-color-a: #ABDB2A; /* page header + form label */
     --bg-color-b: #404040; /* calendar header */
     --bg-color-c: #d73a3a; /* buttons */
+  }
+  
+  #edit {
+      text-align: center;
+      padding: 8px 16px;
+      background-color: #141034;
+      color: white;
+      font-family: sans-serif;
+      font-size: 15px;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      /* margin-bottom: 30px; */
+      /* margin-left: 15px; */
+      margin-right: 700px;
+  }
+        #edit:hover {
+    background-color: #271f67;
+   
+  }
+  
+  #edit:active {
+    background-color: #141034;
+    box-shadow: none;
   }
   
   /* (B) PERIOD SELECTOR */

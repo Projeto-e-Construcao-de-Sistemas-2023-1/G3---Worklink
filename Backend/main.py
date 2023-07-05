@@ -10,11 +10,10 @@ from datetime import datetime as dt
 app = Flask(__name__, template_folder="templates")
 emailsessao=''
 emp = Empresa()
-#emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
+evt = Evento()
 dev = Desenvolvedor()
-#dev.criaDesenvolvedor('desenvolvedor', 'senior', '19828347589', 'dev@outlook.com', 'masculino', '2000/12/12', '(21)8573487509', '12345678901',
-#                     'senha', 'pleno', 'python')
 db = Database()
+us=Usuario()
 app.config["SECRET_KEY"] = "mysecretkey"
 app.config["RECAPTCHA_PUBLIC_KEY"] = '6Lfi1XcmAAAAAG6go6mUbSpX_01xHunP7wgn9StD'
 app.config["RECAPTCHA_PRIVATE_KEY"] = '6Lfi1XcmAAAAANyI3-604hr8oKpQkRuH1A0XI9kw'
@@ -28,8 +27,13 @@ def home():
 
 @app.route('/editar_perfil', methods=['GET'])
 def editarp():
-    return render_template('editar_perfil.html', nome=dev.getNome(), contabancaria=dev.getConta(), sobrenome=dev.getSobrenome(), 
-                           telefone=dev.getTelefone(), descricao=dev.getDescricao()) 
+    if tipo == True:
+        return render_template('editar_perfil.html', nome=dev.getNome(), contabancaria=dev.getConta(), sobrenome=dev.getSobrenome(), 
+                           telefone=dev.getTelefone(), descricao=dev.getDescricao())
+    
+    else:
+        return render_template('editar_perfil_emp.html', razaosocial=emp.getRazaoSocial(), contabancaria=emp.getConta(), 
+                           telefone=emp.getTelefone(), descricao=emp.getAreaNegocio())
 
 @app.route('/signup_dev', methods=['GET'])
 def regdv():
@@ -57,15 +61,18 @@ def login():
         
         elif dev.iniciaSessao(email, password):
             dev.capturaEmail(email)
-            form = Widgets()
-            return render_template('pagina_inicial.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao())
+            dev.verificaUsuario()
+            return redirect(url_for('feed'))
         else:
             print('Erro')
             return render_template('home.html')  # criar pagina de erro com para nova tentativa  
 
 @app.route('/perfil', methods=['GET'])
-def perfildev():
-   return render_template('perfil_dev.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao(), email=dev.getEmail())
+def perfil():
+   if tipo == True:
+        return render_template('perfil_dev.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao(), email=dev.getEmail())
+   else:
+       return render_template('perfil_dev.html', nome=emp.getRazaoSocial(), descricao=emp.getAreaNegocio(), email=emp.getEmail())
 
 @app.route('/criar_Projeto', methods=['GET'])
 def criar_projeto():
@@ -73,7 +80,11 @@ def criar_projeto():
 
 @app.route('/feed', methods=['GET'])
 def feed():
-    return render_template('pagina_inicial.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao())
+    if tipo == True:
+        return render_template('pagina_inicial.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao())
+    else:
+        return render_template('pagina_inicial.html', nome=emp.getRazaoSocial(), descricao=emp.getAreaNegocio())
+
 #metodos 
     
 @app.route('/pesquisa_usuario', methods=['GET'])
@@ -112,11 +123,20 @@ def regEmp():
     telefone = request.form.get('telefone')
     conta = request.form.get('conta')
     senha = request.form.get('senha')
+    cep = request.form.get('cep')
     #confirm_password = request.form.get('confirm_password')
     area_negocio = request.form.get('area_negocio')
-    #funcao para o backend
-    emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio)
-    return render_template('home.html')
+
+    link = f'https://viacep.com.br/ws/{cep}/json/'
+
+    requisicao = requests.get(link)
+
+    if requisicao.status_code == 200:
+        #funcao para o backend
+        emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio, cep)
+        return render_template('home.html')
+    else:
+       return jsonify({'message': 'CEP Invalido!'}), 400
 
 @app.route('/delete_conta', methods=['GET'])
 def delete_conta():
@@ -125,26 +145,41 @@ def delete_conta():
 
 @app.route('/edita_perfil', methods=['POST'])
 def edita_perfil():
-    name = request.form.get('name')
-    sobrenome = request.form.get('sobrenome')
-    descricao = request.form.get('descricao')
-    contabancaria = request.form.get('contabancaria')
-    telefone = request.form.get('telefone')
-    hashtags = request.form.get('hashtags')
-    genero = request.form.get('genero')
-    password = request.form.get('password')
+    if tipo == True:
+        name = request.form.get('name')
+        sobrenome = request.form.get('sobrenome')
+        descricao = request.form.get('descricao')
+        contabancaria = request.form.get('contabancaria')
+        telefone = request.form.get('telefone')
+        hashtags = request.form.get('hashtags')
+        genero = request.form.get('genero')
+        password = request.form.get('password')
 
+        dev.setNome(name)
+        dev.setSobrenome(sobrenome)
+        dev.setDescricao(descricao)
+        dev.setConta(contabancaria)
+        dev.setTelefone(telefone)
+        dev.setGenero(genero)
+        dev.setTag(hashtags)
+        dev.setSenha(password)
 
-    dev.setNome(name)
-    dev.setSobrenome(sobrenome)
-    dev.setDescricao(descricao)
-    dev.setConta(contabancaria)
-    dev.setTelefone(telefone)
-    dev.setGenero(genero)
-    dev.setTag(hashtags)
-    dev.setSenha(password)
+        return redirect(url_for('perfil'))
 
-    return redirect(url_for('perfildev'))
+    else:
+        contabancaria = request.form.get('contabancaria')
+        telefone = request.form.get('telefone')
+        password = request.form.get('password')
+        areanegocio = request.form.get('areanegocio')
+        razaosocial = request.form.get('razaosocial')
+
+        emp.setRazaoSocial(razaosocial)
+        emp.setConta(contabancaria)
+        emp.setTelefone(telefone)
+        emp.setAreaNegocio(areanegocio)
+        emp.setSenha(password)
+
+        return redirect(url_for('perfil'))
 
 @app.route('/criarProjeto', methods=['POST'])
 def criarProjeto():
@@ -187,6 +222,93 @@ def transacao():
         return jsonify({'message': 'Transacao realizado com sucesso'}), 200
     else:
         return jsonify({'message': 'Erro ao realizar transacao'}), 400
+
+@app.route("/get/", methods=["POST"])
+def get():
+    data = dict(request.form)
+    if dev.verificaUsuario():
+        events = evt.getEvento(int(data["month"]), int(data["year"]), dev.getCodigo(), True)
+    else:
+        events = evt.getEvento(int(data["month"]), int(data["year"]), emp.getCodigo(), False)
+    # print(events)
+    return "{}" if events is None else events
+
+@app.route("/save/", methods=["POST"])
+def save():
+    data = dict(request.form)
+    if dev.verificaUsuario():
+        ok = evt.criaEventoDev(data["s"], data["e"], data["t"], data["c"], data["b"], dev.getCodigo(), True)
+        us.enviarEmailReuniaoCriada(dev.getEmail())
+    else:
+        ok = evt.criaEventoEmp(data["s"], data["e"], data["t"], data["c"], data["b"], emp.getCodigo(), False)
+        us.enviarEmailReuniaoCriada(emp.getEmail())
+    msg = "OK" 
+    return 'Reunião criada com sucesso!'
+    # if ok:
+    #     return make_response(msg, 500)
+
+@app.route("/delete/", methods=["POST"])
+def delete():
+  data = dict(request.form)
+  ok = evt.deletaEvento(data["id"])
+  if dev.verificaUsuario():
+      us.enviarEmailReuniaoExcluida(dev.getEmail())
+  else:
+      us.enviarEmailReuniaoExcluida(emp.getEmail())
+  msg = "OK"
+  return 'Reunião excluída com sucesso!' 
+#   if ok:
+#     #else sys.last_value
+#     return make_response(msg, 500)
+
+@app.route('/deposito', methods=['POST'])
+def deposito():
+    tipoUsuario = tipo
+    if tipoUsuario:
+        codUsuario = dev.getCodigo()
+    else:
+        codUsuario = emp.getCodigo()
+    valor = request.form.get('valor')
+    valor = valor.replace(',', '.')
+    if Usuario().Depositar(tipoUsuario, codUsuario, valor):
+        return jsonify({'message': 'Deposito realizado com sucesso'}), 200
+    else:
+        return jsonify({'message': 'Erro ao realizar deposito'}), 400
+
+@app.route('/saque', methods=['POST'])
+def saque():
+    tipoUsuario = tipo
+    if tipoUsuario:
+        codUsuario = dev.getCodigo()
+    else:
+        codUsuario = emp.getCodigo()
+    valor = request.form.get('valor')
+    valor = valor.replace(',', '.')
+    if Usuario().Sacar(tipoUsuario, codUsuario, valor):
+        return jsonify({'message': 'Saque realizado com sucesso'}), 200
+    else:
+        return jsonify({'message': 'Erro ao realizar saque'}), 400
+
+@app.route('/transacao', methods=['POST'])
+def transacao():
+    codEmpresa = emp.getCodigo()
+    codDesenvolvedor = request.form.get('codDev')
+    valor = request.form.get('valor')
+    valor = valor.replace(',', '.')
+    descricao = request.form.get('descricao')
+    if Usuario().realizarTransacao(codEmpresa, codDesenvolvedor, valor, descricao):
+        return jsonify({'message': 'Transacao realizado com sucesso'}), 200
+    else:
+        return jsonify({'message': 'Erro ao realizar transacao'}), 400
+
+
+@app.route('/carteira', methods=['GET'])
+def carteira():
+    if tipo:
+        saldo = Usuario().verificarSaldo(True, dev.getCodigo())
+    else:
+        saldo = Usuario().verificarSaldo(False, emp.getCodigo())
+    return render_template('carteira.html', saldo=saldo)
 
 
 @app.route('/carteira', methods=['GET'])
