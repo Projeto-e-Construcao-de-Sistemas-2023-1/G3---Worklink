@@ -29,7 +29,8 @@
 	  		<form class="form-inline" action="/pesquisa_usuario" method="post">
 	  			<span><div class="input-icons"> 
 	                <i class="fa fa-search icon"></i> 
-	                <input name="pesquisa_user" class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search"> 
+	                <input name="pesquisa_user" class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Search" aria-label="Search">
+					<div class="search-results" id="results"></div>
 	            </div></span>
 	        </form>
 
@@ -182,9 +183,36 @@
 			<div class="col-sm-6">
 				<div class="common-properties" id="new-post-container">
 					<div id="new-post">
-						<button type="button" class="btn" id="new-post-btn">
-							<i class="fa fa-edit"></i>&nbsp;Comece uma publicação
+						<button type="button" class="btn" onclick="openForm()" id="new-post-btn">
+							<i class="fa fa-edit"></i>&nbsp;Criar um Projeto
 						</button>
+						
+						<div id="myForm" class="form">
+						  <form class="form-floating">
+							
+							<h2 id="criarprojeto">Criar Projeto</h2>
+					
+							<input class="form-control" type="text" id="name" name="name" placeholder="Nome do Projeto">
+
+							
+          					<textarea class="form-control" cols="20" rows="3" name="textarea" id="textarea" placeholder="Descrição"></textarea>
+							<div id="colun">
+							
+							<input class="form-control" type="number" id="numDev" name="numDev" min="1"placeholder="Nº Devs" >
+
+          					<input class="form-control" type="text" name="name" id="valueField" placeholder="Remuneração R$" >
+
+							  <input class="form-control" type="text" name="name" id="valueField" value="" tabindex="1" placeholder="Tempo de Contrato">
+							</div>
+							
+							<input class="form-control" type="text" name="name" id="name" value="" tabindex="1" placeholder="#Hashtags">
+
+						<div id="publicar">
+							<button id="btnCancel" class="form-control" type="button" onclick="closeForm()">Cancelar</button>
+							<input id="botao1" type="submit" value="Publicar">
+						</div>
+						  </form>
+						</div>
 
 						<button type="button" class=" btn share-media" style="border-left: 1px solid rgba(0,0,0,.15);">
 							<i class="fa fa-file-alt"></i>
@@ -200,7 +228,7 @@
 					</div>
 
 					<div id="article">
-						<a href="#" style="color: #8eb521;">Criar um Projeto</a>
+						<a href="#" style="color: #8eb521;">Comece uma publicação</a>
 					</div>
 				</div>
 
