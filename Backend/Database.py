@@ -56,7 +56,22 @@ class Database:
         else:  # False para empresa
             self.cursor.execute('SELECT EMPRESA.razao_social, EMPRESA.area_negocio, EMPRESA.cod_empresa FROM EMPRESA WHERE nome LIKE %s', (f'%{nome}%',))
             self.con.commit()
-        return self.cursor.fetchall()
+        #return self.cursor.fetchall()
+        resultado = []
+        for row in self.cursor.fetchall():
+            if tipo:
+                resultado.append({
+                    'nome': row[0],
+                    'sobrenome': row[1],
+                    'cod_usuario': row[2]
+                })
+            else:
+                resultado.append({
+                    'razao_social': row[0],
+                    'area_negocio': row[1],
+                    'cod_usuario': row[2]
+                })
+        return resultado
 
     # def pesquisaUsuario(self, nome, tipo):
     #     #cursor = self.con.cursor(dictionary=True)

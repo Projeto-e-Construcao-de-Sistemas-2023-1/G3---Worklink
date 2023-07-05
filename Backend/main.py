@@ -96,14 +96,6 @@ def feed():
 
 #metodos 
     
-@app.route('/pesquisa_usuario', methods=['GET'])
-def pesquisaUsuario():
-    nome = request.form.get('nome')
-    tipo = True
-    resultado = Usuario().pesquisaUsuario(nome, tipo)
-    return jsonify(resultado)
-    #print(resultado)
-    
 @app.route('/signup_developer', methods=['POST'])
 def regdev():
         nome = request.form.get('nome')
@@ -236,6 +228,19 @@ def delete():
 #   if ok:
 #     #else sys.last_value
 #     return make_response(msg, 500)
+
+@app.route('/pesquisa_usuario', methods=['GET'])
+def pesquisaUsuario():
+    #nome = request.form.get('nome')
+    nome = request.args.get('nome')
+    tipoUsuario = tipo
+    # if tipoUsuario:
+    #     codUsuario = dev.getCodigo()
+    # else:
+    #     codUsuario = emp.getCodigo()
+    resultado = Usuario().pesquisaUsuario(nome, tipoUsuario)
+    return jsonify(resultado)
+    #print(resultado)
 
 @app.route('/deposito', methods=['POST'])
 def deposito():

@@ -26,13 +26,15 @@
             <img src="../static/logo-sem-fundo-boneco.png" width = "30px" height="30px" alt="Logo WorkLink boneco">
             <img id="wlpi" src="../static/logo-worklink.png" width = "160px" height="30px" alt="Logo WorkLink" onclick="window.location.href='/authlogin#'">
 			
-	  		<form class="form-inline" action="/pesquisa_usuario" method="post">
-	  			<span><div class="input-icons"> 
-	                <i class="fa fa-search icon"></i> 
-	                <input name="pesquisa_user" class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Search" aria-label="Search">
-					<div class="search-results" id="results"></div>
-	            </div></span>
-	        </form>
+			<form class="form-inline">
+				<span><div class="input-icons">
+				  <i class="fa fa-search icon"></i>
+				  <input name="pesquisa_user" class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Search" aria-label="Search">
+				  <div class="search-results" id="results">
+					<ul id="resultsList"></ul>
+				  </div>
+				</div></span>
+			</form>
 
 	        <button class="navbar-toggler" id="custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    		<span class="navbar-toggler-icon"></span>
