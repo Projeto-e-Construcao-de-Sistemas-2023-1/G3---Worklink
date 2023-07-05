@@ -40,39 +40,39 @@ class Projeto():
     # SETTERS - ADICIONAR NOME_PROJETO COMO PARAMETRO RECEBIDO
     def setEspecificacaoProjeto(self, espec, cod_empresa, nome_projeto) :
         Database.connect(self)
-        Database.update(self, 'especificacao', espec, cod_empresa, nome_projeto)
+        Database.updateProjeto(self, 'especificacao', espec, cod_empresa, nome_projeto)
         return True
 
     def setOrcamentoProjeto(self, espec, cod_empresa, nome_projeto) :
         Database.connect(self)
-        Database.update(self, 'valor_orcamento', espec, cod_empresa, nome_projeto)
+        Database.updateProjeto(self, 'valor_orcamento', espec, cod_empresa, nome_projeto)
         return True
 
     def setPrazoProjeto(self, espec, cod_empresa, nome_projeto) :
         Database.connect(self)
-        Database.update(self, 'prazo', espec, cod_empresa, nome_projeto)
+        Database.updateProjeto(self, 'prazo', espec, cod_empresa, nome_projeto)
         return True
 
     def setRequisitoProjeto(self, espec, cod_empresa, nome_projeto) :
         Database.connect(self)
-        Database.update(self, 'requisito_tecnico', espec, cod_empresa, nome_projeto)
+        Database.updateProjeto(self, 'requisito_tecnico', espec, cod_empresa, nome_projeto)
         return True
     
     def setStatusProjeto(self, espec, cod_empresa, nome_projeto) :
         Database.connect(self)
-        Database.update(self, 'status_projeto', espec, cod_empresa, nome_projeto)
+        Database.updateProjeto(self, 'status_projeto', espec, cod_empresa, nome_projeto)
         return True
 
     def setTagProjeto(self, espec, cod_empresa, nome_projeto) :
         Database.connect(self)
-        Database.update(self, 'tag_projeto', espec, cod_empresa, nome_projeto)
+        Database.updateProjeto(self, 'tag_projeto', espec, cod_empresa, nome_projeto)
         return True
 
     def setNomeProjeto(self, espec, cod_empresa, nome_projeto) :
         Database.connect(self)
-        Database.update(self, 'nome_projeto', espec, cod_empresa, nome_projeto)
+        Database.updateProjeto(self, 'nome_projeto', espec, cod_empresa, nome_projeto)
         return True
 
     def deletaProjeto(self, cod_empresa, nome_projeto):
         Database.connect(self)
-        Database.deleteProjeto(cod_empresa, nome_projeto)
+        Database.deleteProjeto(self, cod_empresa, nome_projeto)
