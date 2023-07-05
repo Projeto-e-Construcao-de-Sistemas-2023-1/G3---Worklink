@@ -66,6 +66,18 @@ body {
               <button type="submit" name="Submit" class="submit_btn" onclick="window.location.href='/'">Cadastrar-se</button>
             
             </div>
+
+            <div class="messages">
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  <ul class="messages-list">
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endwith %}
+            </div>
     </form>
 
 </div><!--container_form-->

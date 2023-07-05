@@ -108,10 +108,10 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
         saldo = Database.verificar_saldo(self, tipoUsuario, codUsuario)
         return saldo
 
-    def enviarEmailReuniaoCriada(self, emailUser): 
+    def enviarEmailReuniaoCriada(self, emailUser, nome, data): 
 
-        corpo_email = """
-        <p>Olá! Sua reunião foi marcada com sucesso!</p>
+        corpo_email = f"""
+        <p>Olá {nome}! Sua reunião para o dia {data} foi marcada com sucesso!</p>
         """
 
         msg = email.message.Message()
