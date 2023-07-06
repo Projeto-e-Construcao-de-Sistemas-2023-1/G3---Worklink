@@ -17,59 +17,46 @@
 	<script src="https://kit.fontawesome.com/e6223f541e.js" crossorigin="anonymous"></script>
     <script defer src="../static/script.js"></script>
     <style>
-        
-        #saldoG{
-            font-size: 25px; 
-            display: contents;
-            font-family: 'Roboto Mono', monospace;
-        }
-        #camposCart{
-            width: 50%;
-            display: inline;
-        }
  
-        /* 
-    #popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 400px;
-      padding: 20px;
-      background-color: #f1f1f1;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-    */
-    .popup.show {
-      display: block;
-      transition: opacity 0.3s ease;
-    }
-
-        #follow-button {
-    color: #141034;
-    font-family: "Helvetica";
-    font-size: 10pt;
-    background-color: #ffffff;
-    border: 1px solid;
-    border-color: #141034;
-    border-radius: 3px;
-    /* width: 85px; 
-    height: 30px;*/
-    top: 50px;
-    left: 50px;
-    transition: all 0.3s cubic-bezier(0.59, 0.57, 0, 1.3);
+ #myButton {
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 1px solid #0f0a30;
+    border-radius: 0.6em;
+    color: #0f0a30;
+    cursor: pointer;
+    display: inline;
+    align-self: center;
+    font-size: 1rem;
+    /* font-weight: 400; */
+    line-height: 1;
+    /* margin: 20px; */
+    /* padding: 1.2em 2.8em; */
+    text-decoration: none;
+    text-align: center;
+    /* text-transform: uppercase; */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    padding: 4px;
+    padding-right: 6px;
+    padding-left: 6px;
 }
 
-#follow-button.seguindo {
-  background-color: #cee393;
-  font-size: 12px;
+  &:hover,
+  &:focus {
+    color: #fff;
+    outline: 0;
+  }
+
+  #myButton {
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  &:hover {
+    box-shadow: 0 0 40px 40px #ABDB2A inset;
+  }
 }
 
-#follow-button.seguir {
-  font-size: 12px;
-}
+
         #post-perfil{
             color: #ABDB2A;
         }
@@ -77,53 +64,7 @@
             margin-bottom: 0 !important;
             font-size: 12px;
         }
-        #edit {
-    text-align: center;
-    padding: 8px 16px;
-    background-color: #ABDB2A;
-    color: white;
-    font-family: sans-serif;
-    font-size: 15px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    margin-bottom: 30px;
-    margin-left: 15px;
-        }
-        #edit:hover {
-    background-color: #98c126;
-   
-  }
-  
-  #edit:active {
-    background-color: #ABDB2A;
-    box-shadow: none;
-  }
-
-  #calendario {
-    text-align: center;
-    padding: 7px 10px;
-    background-color: #ABDB2A;
-    color: white;
-    font-family: sans-serif;
-    font-size: 15px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    margin-bottom: 30px;
-    margin-left: 8px;
-        }
-        #calendario:hover {
-    background-color: #98c126;
-   
-  }
-  
-  #calendario:active {
-    background-color: #ABDB2A;
-    box-shadow: none;
-  }
+    
 .profile-page .profile-header {
     box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
     
@@ -184,11 +125,11 @@
 */
 .profile-page .profile-header .cover .cover-body {
     position: absolute;
-    bottom: -20px;
+    bottom: -14px;
     left: 0;
     z-index: 2;
     width: 100%;
-    padding: 0 20px;
+    padding: 10px 20px;
 }
 
 .profile-page .profile-header .cover .cover-body .profile-pic {
@@ -471,76 +412,6 @@ img {
 </head>
 <body>
 
-  <div id="popup" class="popup-overlay">
-    <div class="popup-content">
-      <span class="close-btn" onclick="closePopup()">&times;</span>
-      <img src="../static/carteira-logo.png" width="130px" height="130px" style="padding: 5px;">
-      <p id="saldoG"> <strong>Saldo: R$ {{ saldo }}</strong></p>
-
-      <div id="divform">
-        <div class="btn-group" role="group" aria-label="Basic example" style="margin-top: 10px;">
-        <button  style= " width: 167px; background-color: #141034; color: #EAEAEA; border-color: #3b2f94;" class="btn btn-primary" onclick="mostrarForm('formSacar')">Sacar</button>
-        <button style= " width: 167px; background-color: #141034; color: #EAEAEA; border-color: #3b2f94;" class="btn btn-primary" onclick="mostrarForm('formDepositar')">Depositar</button>
-        <button style= "width: 167px; background-color: #141034; color: #EAEAEA; border-color: #3b2f94;" class="btn btn-primary" onclick="mostrarForm('formTransacao')">Transação</button>
-    </div>
-
-    <form id="formSacar" action="/saque" method="POST" style="display: none; margin: 10px; margin-left: 110px;">
-      <!-- <label for="tipoUsuario">Tipo de Usuário:</label>
-      
-      <input class="form-control" type="text" name="tipoUsuario" id="tipoUsuario">
-
-      <label for="codUsuario">Código do Usuário:</label>
-      <input class="form-control" type="text" name="codUsuario" id="codUsuario"> -->
-
-      <label for="valor">Valor:</label>
-      <input class="form-control" type="text" name="valor" id="camposCart">
-
-      <input id="btnPop" class="btn btn-primary" type="submit" value="Sacar" onclick="confirmarSaque(event)">
-     
-  </form>
-
-  
-  <form id="formDepositar" action="/deposito" method="POST" style="display: none; margin: 10px; margin-left: 100px;">
-      <!-- <label for="tipoUsuario">Tipo de Usuário:</label>
-      <input class="form-control" type="text" name="tipoUsuario" id="tipoUsuario">
-
-      <label for="codUsuario">Código do Usuário:</label>
-      <input class="form-control" type="text" name="codUsuario" id="codUsuario"> -->
- 
-      <label for="valor">Valor:</label>
-      <input class="form-control" type="text" name="valor" id="camposCart">
-
-      <input id="btnPop" class="btn btn-primary" type="submit" value="Depositar" onclick="confirmarDeposito(event)">
-  </form>
-
- 
-  <form id="formTransacao" action="/transacao" method="POST" style="display: none; margin: 10px; margin-left: 50px;">
-
-      <!-- <label for="codEmp">Código do Pagador:</label>
-      <input class="form-control" type="text" name="codEmp" id="codEmp"> -->
-    <div style="display: inline-flex;">
-      <label style="margin: 5px;" for="codDev">Código do Recebedor:</label>
-      <input class="form-control" type="text" name="codDev" style="width: 20%;">
-        
-      <label style="margin: 5px;" for="valor">Valor:</label>
-      <input class="form-control" type="text" name="valor"  style="width: 20%;">
-    </div>
-      <input class="form-control" type="text" name="descricao" id="camposCart" placeholder="Descrição" style="margin-top: 10px;">
-
-      <input id="btnPop" class="btn btn-primary" type="submit" value="Realizar Transação" onclick="confirmarTransacao(event)">
-  </form>
-    </div>
-  </div>
-</div>
-  <script>
-    function openPopup() {
-      document.getElementById("popup").style.display = "flex";
-    }
-
-    function closePopup() {
-      document.getElementById("popup").style.display = "none";
-    }
-  </script>
                                      <!-------------------------------NAVBAR------------------------------------------->
 	<nav class="navbar navbar-expand-lg navbar-dark no-pad" style="background-color: #EAEAEA" id="header">
 		<div class="container">
@@ -601,21 +472,30 @@ img {
                                    <!-- <img class="profile-pic" src="../static/ada.PNG" alt="profile">-->
                                     <i class="fa fa-user-circle fa-4x"></i>
                                     <span class="profile-name">{{ nome }} {{ sobrenome }}</span>
-                                  <!-- <button id="follow-button" onclick="alterarTexto()">Seguir</button>--> 
+                                    <button id="myButton" class="button.btn.first">Seguir</button>
                                 </div>
-                                <div class="d-none d-md-block">
-                                    <button id="edit"  onclick="window.location.href='/editar_perfil'">
-                                        <svg xmlns="http://www.w3.org/2000/svg"width="20" height="20" color="white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit btn-icon-prepend">
-                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                        </svg>  Editar Perfil
-    
-                                    <button id="calendario" onclick="window.location.href='/calendario'"><img src="../static/calendario-botao.png" alt="" width="25px" height="25px"></button>
-                                    
-                                    <button id="calendario" onclick="openPopup()"><img src="../static/carteira-botao.png" alt="" width="23px" height="25px"></button>
-                                </div>
+                              
                             </div>
                         </div>
+
+                        <script>
+                            var button = document.getElementById("myButton");
+                            var clicked = false;
+                        
+                            button.addEventListener("click", function() {
+                              if (clicked) {
+                                button.innerHTML = 'Seguir';
+                                button.style.backgroundColor = "transparent";
+                               
+                                clicked = false;
+                              } else {
+                                button.innerHTML = 'Seguindo';
+                                button.style.backgroundColor = "#ABDB2A";
+                                clicked = true;
+                              }
+                            });
+                          </script>
+
                         <div class="header-links">
                             <ul class="links d-flex align-items-center mt-3 mt-md-0">
                                 <li class="header-link-item d-flex align-items-center active">
@@ -640,39 +520,6 @@ img {
                                     </svg>
                                     <a class="pt-1px d-none d-md-block" href="#">Conexões<span class="text-muted tx-12"> 3,765</span></a>
                                 </li>
-                                <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
-                                    <div>
-                                        <button id="btnSeguir" class="btnSeguir" onclick="seguirUsuario()">Seguir</button>
-                                        <script>
-                                          function seguirUsuario() {
-                                            var btnSeguir = document.getElementById("btnSeguir");
-                                            
-                                            if (btnSeguir.innerText === "Seguir") {
-                                              axios.post('/follow', { cod: 'cod' })
-                                                .then(function(response) {
-                                                  if (response.data.success) {
-                                                    btnSeguir.innerText = "Seguindo";
-                                                  }
-                                                })
-                                                .catch(function(error) {
-                                                  console.error(error);
-                                                });
-                                            } else {
-                                              axios.post('/unfollow', { usuario: usuario })
-                                                .then(function(response) {
-                                                  if (response.data.success) {
-                                                    btnSeguir.innerText = "Seguir";
-                                                  }
-                                                })
-                                                .catch(function(error) {
-                                                  console.error(error);
-                                                });
-                                            }
-                                          }
-                                          </script>
-                                      </div>
-                                </li>
-
 
                                
                             </ul>
@@ -828,7 +675,7 @@ img {
                                             </div>
                                         </div>
                                         <button class="btn btn-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f0a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus" data-toggle="tooltip" title="" data-original-title="Connect">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus" data-toggle="tooltip" title="" data-original-title="Connect">
                                                 <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                                                 <circle cx="8.5" cy="7" r="4"></circle>
                                                 <line x1="20" y1="8" x2="20" y2="14"></line>
