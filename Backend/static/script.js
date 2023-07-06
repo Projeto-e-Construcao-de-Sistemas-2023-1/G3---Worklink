@@ -58,3 +58,114 @@ document.addEventListener('DOMContentLoaded', function() {
   function closeForm() {
     document.getElementById("myForm").style.display = "none";
   }
+
+  document.getElementById('carteira').addEventListener('click', function() {
+    openPopup();
+  });
+
+
+  function confirmarTransacao(event) {
+      event.preventDefault(); 
+
+      if (confirm("Confirmar transação?")) {
+          document.getElementById("formTransacao").submit(); 
+      }
+  }
+
+      function confirmarDeposito(event) {
+          event.preventDefault(); 
+
+          if (confirm("Confirmar Deposito?")) {
+              document.getElementById("formDepositar").submit(); 
+          }
+      }
+
+          function confirmarSaque(event) {
+              event.preventDefault(); 
+  
+              if (confirm("Confirmar Saque?")) {
+                  document.getElementById("formSacar").submit(); 
+              }
+          }
+
+  // Função para buscar o saldo atual da carteira do usuário
+  function getSaldoAtual() {
+      // Fazer uma requisição para o backend para buscar o saldo atual
+      // Aqui você pode usar uma biblioteca como o Axios ou o fetch para fazer a requisição
+      // Exemplo usando o Axios:
+      axios.get('/saldoAtual')
+          .then(response => {
+              // Atualizar o elemento HTML com o saldo atual retornado do backend
+              document.getElementById('saldoAtual').innerText = response.data.saldo;
+          })
+          .catch(error => {
+              console.error(error);
+          });
+  }
+
+  // Chamar a função para buscar o saldo atual assim que a página carregar
+  window.addEventListener('load', getSaldoAtual);
+
+  
+// Função para mostrar o formulário correspondente ao botão clicado
+function mostrarForm(formId) {
+const forms = document.getElementsByTagName('form');
+for (let i = 0; i < forms.length; i++) {
+  forms[i].style.display = 'none';
+}
+document.getElementById(formId).style.display = 'block';
+}
+
+function confirmarTransacao(event) {
+  event.preventDefault(); 
+
+  if (confirm("Confirmar transação?")) {
+      document.getElementById("formTransacao").submit(); 
+  }
+}
+
+  function confirmarDeposito(event) {
+      event.preventDefault(); 
+
+      if (confirm("Confirmar Deposito?")) {
+          document.getElementById("formDepositar").submit(); 
+      }
+  }
+
+      function confirmarSaque(event) {
+          event.preventDefault(); 
+
+          if (confirm("Confirmar Saque?")) {
+              document.getElementById("formSacar").submit(); 
+          }
+      }
+
+
+// Função para buscar o saldo atual da carteira do usuário
+function getSaldoAtual() {
+  // Fazer uma requisição para o backend para buscar o saldo atual
+  // Aqui você pode usar uma biblioteca como o Axios ou o fetch para fazer a requisição
+  // Exemplo usando o Axios:
+  axios.get('/saldoAtual')
+      .then(response => {
+          // Atualizar o elemento HTML com o saldo atual retornado do backend
+          document.getElementById('saldoAtual').innerText = response.data.saldo;
+      })
+      .catch(error => {
+          console.error(error);
+      });
+}
+
+// Chamar a função para buscar o saldo atual assim que a página carregar
+window.addEventListener('load', getSaldoAtual);
+
+
+// Função para mostrar o formulário correspondente ao botão clicado
+function mostrarForm(formId) {
+const forms = document.getElementsByTagName('form');
+for (let i = 0; i < forms.length; i++) {
+forms[i].style.display = 'none';
+}
+document.getElementById(formId).style.display = 'block';
+}
+

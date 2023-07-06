@@ -30,7 +30,7 @@ body {
     z-index: 999;
     background-color: #f9f9f9;
     /* border: 1px solid #ccc; */
-     width: 11%; 
+     width: 17%; 
     max-height: 200px;
     overflow-y: auto;
     display: none;
