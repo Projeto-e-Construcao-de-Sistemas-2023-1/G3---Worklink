@@ -21,7 +21,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
  
 | ID | Descrição |
 | --- | --- |
-| RF01 | O sistema deve permitir cadastro de empresas, com razão social, CNPJ, e-mail, telefone e senha. |
+| RF01 | O sistema deve permitir cadastro de empresas, com razão social, CNPJ, e-mail, telefone, CEP e senha. |
 | RF02 | O sistema deve permitir cadastro de desenvolvedores, com nome, CPF, data de nascimento, telefone, e-mail e senha. |
 | RF03 | O sistema deve permitir login de usuário mediante e-mail e senha cadastrados. |
 | RF04 | O sistema deve permitir manter usuário. |
@@ -80,7 +80,7 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | CDU16 | Realizar transação. |
 | CDU17 | Copiar link de compartilhamento de perfil |
 | CDU18 | Redefinir senha. |
-
+| CDU19 | Realizar publicação |
 
 ## Diagrama de Casos de Uso
 
@@ -97,10 +97,10 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Ator | Desenvolvedor |
 | Pré-Condições | O ator não possui cadastro |
 | Trigger | O ator seleciona a opção “Registre-se como Desenvolvedor” na tela de sessão. |
-| Fluxo Principal | 1 - O sistema exibe os campos “Nome”, “CPF”, “Telefone”, “Data de nascimento”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - O ator preenche os dados e clica em “Cadastrar”. [A1] <br> 3 - O sistema registra o cadastro do ator como desenvolvedor. |
-| Fluxos Alternativos | <strong>A1. Ator seleciona a opção “Registre-se como Desenvolvedor”.</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Fluxo Principal | 1 -O sistema exibe os campos “Nome”, “CPF”, “Telefone”, “Data de nascimento”, “Email”, “Descrição”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - O ator preenche os dados e clica em “Cadastrar-se”. [A1] <br> 3 - O sistema registra o cadastro do ator como desenvolvedor e redireciona o ator para o perfil do desenvolvedor.|
+| Fluxos Alternativos | <strong>Dados inválidos ou campos sem preenchimentos.</strong> <br> 1 - O sistema exibe um pop up “Preencha este campo”. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
-| Pós-Condições | O ator é cadastrado no sistema com sucesso. |
+| Pós-Condições | O ator cadastrado no sistema com sucesso.|
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
 
 ### Caso 1.2: Visualizar Desenvolvedor
@@ -111,11 +111,11 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Objetivo | Mostrar dados do desenvolvedor |
 | Ator | Desenvolvedor |
 | Pré-Condições | O ator está com sessão em andamento |
-| Trigger | O ator seleciona a opção “Perfil” em sua tela de usuário. |
-| Fluxo Principal | 1 - O sistema exibe os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Hashtags”, além dos projetos do ator, na tela. |
+| Trigger |O ator seleciona a opção “Ver Perfil” em sua tela de usuário.|
+| Fluxo Principal | 1 - O sistema exibe os campos “Nome”, “Email”, “Sobre”, “Projetos ativos” e “Projetos Concluídos” e “Seguindo”.|
 | Fluxos Alternativos | N/A |
 | Extensões | N/A. |
-| Pós-Condições | Os dados do ator são exibidos na tela. |
+| Pós-Condições | Os dados do ator exibidos na tela. |
 | Regras de negócios | N/A |
 
 ### Caso 1.3: Editar Desenvolvedor
@@ -125,28 +125,28 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Nome | Editar Desenvolvedor |
 | Objetivo | Editar dados do desenvolvedor |
 | Ator | Desenvolvedor |
-| Pré-Condições | O ator está com sessão em andamento |
+| Pré-Condições | O ator com sessão em andamento |
 | Trigger | O ator seleciona a opção “Editar Perfil” em sua tela de usuário. |
-| Fluxo Principal | 1 - O sistema exibe na tela os campos “Nome”, “Email”, “Telefone”, “Descrição” e “Hastags” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do ator. |
-| Fluxos Alternativos | <strong>A1. Dados inválidos</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Fluxo Principal | 1 - O sistema exibe na tela os campos “Nome”, “Sobrenome”, “Gênero”, “Descrição”, “Telefone”, “Foto”, “Hashtag”, “Conta bancária” e “Senha” preenchidos anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Salvar alterações”. [A1] <br> 3 - O sistema atualiza os campos do ator e redireciona o ator para o perfil do desenvolvedor. |
+| Fluxos Alternativos | <strong>A1. Cancelar edição.</strong> <br> 1 - O usuário clica na opção de voltar para tela anterior. <br> 2 - O sistema redireciona o ator para o perfil do desenvolvedor.|
 | Extensões | N/A. |
-| Pós-Condições | Os dados do ator são alterados. |
-| Regras de negócios | RN5 - O usuário não pode alterar CPF ou CNPJ. |
+| Pós-Condições | Os dados do ator alterados |
+| Regras de negócios | RN5 - O usuário não pode alterar CPF ou CNPJ após o cadastro. |
 
-### Caso 1.4: Deletar Desenvolvedor
+### Caso 1.4: Excluir Desenvolvedor
 
-| 01.4 | Deletar Desenvolvedor |
+| 01.4 | Excluir Desenvolvedor |
 | --- | --- |
-| Nome | Deletar Desenvolvedor |
-| Objetivo | Deletar conta do desenvolvedor |
+| Nome | Excluir Desenvolvedor |
+| Objetivo | Excluir conta do desenvolvedor |
 | Ator | Desenvolvedor |
 | Pré-Condições | O ator possui cadastro |
-| Trigger | O ator seleciona a opção “Deletar conta” em sua tela de usuário. |
-| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 - O ator confirma a deleção de conta. [A1] <br> 3 - O sistema verifica possíveis pendências e deleta a conta. [A2] |
-| Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Não” na pergunta de deleção de conta.</strong> <br> 1 - O ator não confirma a deleção. <br> 2 - Voltar para o passo 1. <br><br ><strong>2 - O ator tem alguma pendência no sistema.</strong> <br> 1 - O sistema exibe mensagem informando que a conta não pode ser deletada. <br> 2 - Voltar para o passo 1. |
+| Trigger | O ator seleciona a opção “Excluir conta” em sua tela de “Editar Perfil” |
+| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente excluir sua conta do sistema, com as opções “Excluir Conta” ou “Cancelar”.  <br> 2 - O ator confirma a exclusão de conta [A1] <br> 3 - O sistema realiza a exclusão da conta e exibe pop up com a mensagem “Conta excluída com sucesso”[A2] |
+| Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Cancelar” na pergunta de excluir a conta.</strong> <br> 1 - O sistema redireciona o ator para a página de “Editar Perfil”. <br ><strong>A2 - O ator tem alguma pendência no sistema.</strong> <br> 1 - O sistema exibe mensagem informando que a conta não pode ser deletada e redireciona o ator para a página de perfil de empresa |
 | Extensões | N/A. |
-| Pós-Condições | A conta do ator é deletada. |
-| Regras de negócios | N/A |
+| Pós-Condições | A conta do ator excluída. |
+| Regras de negócios | RN6 - O usuário não poderá excluir a conta, caso tenha projetos ativos. |
 
 ### Caso 2.1: Cadastrar Empresa
 
@@ -155,12 +155,12 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Nome | Cadastrar Empresa |
 | Objetivo | Cadastrar nova empresa no sistema |
 | Ator | Empresa |
-| Pré-Condições | O ator não possui cadastro |
-| Trigger | O ator seleciona a opção “Registre-se como Empresa” na tela de sessão. |
-| Fluxo Principal | 1 - O sistema exibe os campos “Razão Social”, “CNPJ”, “Telefone”, “Email”, “Senha” e "Confirmar Senha” para serem preenchidos. <br> 2 - O ator preenche os dados e clica em “Cadastrar”. [A1] <br> 3 -O sistema registra o cadastro do ator como empresa. |
-| Fluxos Alternativos | <strong>A1. Dados inválidos</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Pré-Condições | O ator sem cadastro |
+| Trigger | O ator seleciona a opção “Cadastre-se como Empresa” na tela de sessão. |
+| Fluxo Principal | 1 - O sistema exibe os campos “Razão Social”, “CNPJ”, “Telefone”, “Email”, “Conta Bancária”, “Área de negócio”, “Senha” e "CEP” para serem preenchidos. <br> 2 - O ator preenche os dados e clica em “Cadastrar-se”. [A1] <br> 3 - O sistema registra o cadastro do ator como empresa e redireciona o ator para a tela inicial. |
+| Fluxos Alternativos | <strong>A1.  Dados inválidos ou campos sem preenchimentos</strong> <br> 1 - O sistema exibe um pop up “Preencha este campo”. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
-| Pós-Condições | O ator é cadastrado no sistema com sucesso. |
+| Pós-Condições | O ator cadastrado no sistema com sucesso. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
 
 ### Caso 2.2: Visualizar Empresa
@@ -170,12 +170,12 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Nome | Visualizar Empresa |
 | Objetivo | Mostrar dados da empresa |
 | Ator | Empresa |
-| Pré-Condições | O ator está com sessão em andamento |
+| Pré-Condições | O ator com sessão em andamento |
 | Trigger | O ator seleciona a opção “Perfil” em sua tela de usuário. |
-| Fluxo Principal | 1 - O sistema exibe os campos “Razão Social”, “Email”, “Telefone”, “Descrição”, além dos projetos do ator, na tela. |
+| Fluxo Principal | 1 - O sistema exibe os campos “Sobre”, “Email”, “Telefone”, Projetos Ativos”, “Projetos Concluídos”,  “Razão Social” e “Seguindo”. |
 | Fluxos Alternativos | N/A |
 | Extensões | N/A. |
-| Pós-Condições | Os dados do ator são exibidos na tela. |
+| Pós-Condições | Os dados do ator exibidos na tela |
 | Regras de negócios | N/A |
 
 ### Caso 2.3: Editar Empresa
@@ -185,28 +185,28 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Nome | Editar Empresa |
 | Objetivo | Editar dados da empresa |
 | Ator | Empresa |
-| Pré-Condições | O ator está com sessão em andamento |
+| Pré-Condições | O ator com sessão em andamento |
 | Trigger | O ator seleciona a opção “Editar Perfil” em sua tela de usuário. |
-| Fluxo Principal | 1 - O sistema exibe na tela os campos “Razão Social”, “Telefone”, “Email”, “Senha” e "Confirmar Senha” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do ator. |
-| Fluxos Alternativos | <strong>A1. Dados inválidos</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Fluxo Principal | 1 - O sistema exibe os campos “Razão Social”, “Telefone”, “Hashtag”, “Conta Bancária”, “Área de negócio”, “Senha” e "Foto” para serem preenchidos. <br> 2 - O ator altera os campos e seleciona o botão de “Salvar alterações”. [A1] <br> 3 - Sistema atualiza os campos do ator e redireciona o ator para o perfil da empresa. |
+| Fluxos Alternativos | <strong>A1. Cancelar edição.</strong> <br> 1 - O usuário clica na opção de voltar para tela anterior <br> 2 - O sistema redireciona o ator para o perfil do desenvolvedor. |
 | Extensões | N/A. |
-| Pós-Condições | Os dados do ator são alterados. |
-| Regras de negócios | RN5 - O usuário não pode alterar CPF ou CNPJ. |
+| Pós-Condições | Os dados do ator alterados |
+| Regras de negócios | RN5 - O usuário não pode alterar CPF ou CNPJ após cadastro. |
 
-### Caso 2.4: Deletar  Empresa
+### Caso 2.4: Excluir Empresa
 
-| 02.4 | Deletar Empresa |
+| 02.4 | Excluir Empresa |
 | --- | --- |
-| Nome | Deletar Empresa |
-| Objetivo | Deletar conta da empresa |
+| Nome | Excluir Empresa |
+| Objetivo | Excluir conta da empresa |
 | Ator | Empresa |
 | Pré-Condições | O ator possui cadastro |
 | Trigger | O ator seleciona a opção “Excluir conta” em sua tela de usuário. |
-| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 - O ator confirma a deleção de conta. [A1] <br> 3 - O sistema verifica possíveis pendências e deleta a conta. [A2] |
-| Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Não” na pergunta de deleção de conta.</strong> <br> 1 - O ator não confirma a desativação. <br> 2 - Voltar para o passo 1. <br><br> <strong> 2 - O ator tem alguma pendência no sistema.</strong> <br> 1 - O sistema exibe mensagem informando que a conta não pode ser desativada. <br> 2 - Voltar para o passo 1. |
+| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente excluir sua conta do sistema, com as opções “Excluir Conta” ou “Cancelar”. [A1] <br> 2 - O ator confirma a exclusão da conta. [A2] <br> 3 - O sistema realiza a exclusão da conta. |
+| Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Cancelar” na pergunta de excluir a conta.</strong> <br> 1 - O sistema redireciona o ator para a página de “Editar Perfil”. <br> <strong> A2 - O ator tem alguma pendência no sistema.</strong> <br> 1- O sistema exibe mensagem informando que a conta não pode ser excluída redireciona o ator para a página de perfil de empresa. |
 | Extensões | N/A. |
-| Pós-Condições | A conta do ator é deletada. |
-| Regras de negócios | N/A |
+| Pós-Condições | A conta do ator excluída |
+| Regras de negócios | RN6 - O usuário não poderá excluir a conta, caso tenha projetos ativos. |
 
 ### Caso 3: Iniciar Sessão
 
@@ -217,30 +217,60 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Ator | Usuário |
 | Pré-Condições | O ator possui cadastro. |
 | Trigger | O ator entra na tela de sessão do sistema. |
-| Fluxo Principal | 1 - O sistema exibe na tela os campos “Entrar como Desenvolvedor” e “Entrar como Empresa”. <br> 2 - Ator seleciona a opção desejada. <br> 3 - Sistema exibe os campos "Email" e "Senha" para serem preenchidos. <br> 4 - Ator preenche os campos e seleciona a opção "Entrar". [A1] <br> 5 - Sistema checar se o ator tem cadastro, realiza autenticação e permite acesso. |
-| Fluxos Alternativos | <strong>A1. Dados Inválidos</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Fluxo Principal | 1 - O sistema exibe na tela os campos “Entrar”. <br> 2 - O ator seleciona a opção desejada. <br> 3 - O sistema exibe os campos "Email", "Senha" e o “reCAPTCHA” para serem preenchidos. <br> 4 - O ator preenche os campos e seleciona a opção "Entrar". [A1] <br> 5 -  sistema checa se o ator tem cadastro, verifica se o reCAPTCHA validou, realiza autenticação e permite acesso.|
+| Fluxos Alternativos | <strong>A1. Dados Inválidos</strong> <br> 1 - O sistema exibe uma mensagem “***EMAIL OU SENHA INCORRETOS***”. <br> 2 - Voltar para o passo 1. |
 | Extensões | N/A. |
-| Pós-Condições | O ator está autenticado. |
+| Pós-Condições | O ator autenticado. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
 
-### Caso 04: Realizar Recaptcha
+### Caso 04: Realizar reCAPTCHA
 
-| 04 | Realizar Recaptcha |
+| 04 | Realizar reCAPTCHA |
 | --- | --- |
-| Nome | Realizar Recaptcha |
-| Objetivo | Passar pela verificação do Recaptcha para iniciar sessão. |
+| Nome | Realizar reCAPTCHA |
+| Objetivo | Passar pela verificação do reCAPTCHA para iniciar sessão. |
 | Ator | Usuário |
-| Pré-Condições | O ator tem cadastro. |
-| Trigger | O ator entra na tela de sessão do sistema. |
-| Fluxo Principal | 1 - O sistema exibe o Recaptcha na tela. <br> 2 - O ator clica no Recaptcha e o preenche. <br> 3 - O sistema verifica a pontuação do ator e confirma o preenchimento. |
-| Fluxos Alternativos | N/A. |
+| Pré-Condições | O ator com cadastro. |
+| Trigger | O ator entra na tela de sessão do sistema |
+| Fluxo Principal | 1 - O sistema exibe o reCAPTCHA na tela. <br> 2 - O ator clica no reCAPTCHA e o preenche. <br> 3 - O sistema verifica e confirma o preenchimento. |
+| Fluxos Alternativos |<strong>A1. O Ator falha no reCAPTCHA.</strong> <br> 1 - O sistema exibe uma mensagem “Por favor, marque a caixa de verificação reCAPTCHA.” |
 | Extensões | N/A. |
-| Pós-Condições | O Recaptcha está preenchido. |
+| Pós-Condições | O reCAPTCHA preenchido. |
 | Regras de negócios | N/A. |
 
-### Caso 5: Marcar Reunião
+### Caso 5: Pesquisar Usuário
 
-| 05 | Marcar Reunião |
+| 05 | Pesquisar Usuário |
+| --- | --- |
+| Nome | Pesquisar Usuário |
+| Objetivo | Pesquisar um usuário |
+| Ator | Usuário |
+| Pré-Condições | O ator com sessão em andamento |
+| Trigger | O ator digita o nome na barra de pesquisa |
+| Fluxo Principal | 1 - O sistema exibe na tela uma lista com nome dos usuários pelo nome pesquisado na barra de pesquisa, com um botão de “Ver perfil” ao lado de cada usuário. [A1] |
+| Fluxos Alternativos | <strong>A1.Não há usuários com o nome pesquisado.</strong> <br> 1 - O sistema exibe a mensagem “Sua pesquisa não encontrou usuários, por favor tente novamente.” <br> 2 - Voltar para o passo 1. |
+| Extensões | N/A |
+| Pós-Condições | Os usuários pesquisados mostrados na tela. |
+| Regras de negócios | N/A |
+
+### Caso 06: Navegar por calendário
+
+| 06 | Navegar por calendário |
+| --- | --- |
+| Nome | Navegar por calendário |
+| Objetivo | Visualizar os dias do ano e reuniões marcadas |
+| Ator | Usuário |
+| Pré-Condições | O ator com sessão em andamento |
+| Trigger | O ator seleciona o botão de calendário na sua tela de perfil |
+| Fluxo Principal | 1 - O sistema exibe o calendário do ator, com os dias do mês atual e suas reuniões marcadas. |
+| Fluxos Alternativos | N/A. |
+| Extensões | CDU07 - Marcar Reunião |
+| Pós-Condições | O calendário é exibido na tela do ator. |
+| Regras de negócios | N/A |
+
+### Caso 7: Marcar Reunião
+
+| 07 | Marcar Reunião |
 | --- | --- |
 | Nome | Marcar Reunião |
 | Objetivo | Desenvolvedor e empresa se reunirem para comunicação |?
@@ -252,36 +282,6 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Extensões | N/A. |
 | Pós-Condições | O ator recebe notificação da reunião. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
-
-### Caso 06: Navegar por calendário
-
-| 06 | Navegar por calendário |
-| --- | --- |
-| Nome | Navegar por calendário |
-| Objetivo | Visualizar os dias do ano e reuniões marcadas |
-| Ator | Usuário |
-| Pré-Condições | O ator estar com sessão em andamento. |
-| Trigger | O ator seleciona a opção “Calendário” na sua tela de perfil. |
-| Fluxo Principal | 1 - O sistema exibe o calendário do ator, com os dias do mês atual e suas reuniões marcadas. |
-| Fluxos Alternativos | N/A. |
-| Extensões | N/A. |
-| Pós-Condições | O calendário é exibido na tela do ator. |
-
-### Caso 7: Pesquisar Usuário
-
-| 07 | Pesquisar Usuário |
-| --- | --- |
-| Nome | Pesquisar Usuário |
-| Objetivo | Pesquisar um usuário |
-| Ator | Usuário |
-| Pré-Condições | O ator está com sessão em andamento |
-| Trigger | O ator clica no botão de lupa após inserir o nome de um usuário na barra de pesquisa. |
-| Fluxo Principal | 1 - O sistema exibe na tela uma lista com nome dos usuários pelo nome pesquisado na barra de pesquisa, com um botão de “Ver mais” ao lado de cada usuário. [A1] |
-| Fluxos Alternativos | <strong>A1.Não há usuários com o nome pesquisado.</strong> <br> 1 - O sistema exibe a mensagem “Sua pesquisa não encontrou usuários, por favor tente novamente.” <br> 2 - Voltar para o passo 1. |
-| Extensões | N/A. |
-| Pós-Condições | Os usuários pesquisados são mostrados na tela. |
-| Regras de negócios | N/A |
-| Regras de negócios | N/A. |
 
 ### Caso 8: Encerrar Sessão
 
@@ -427,8 +427,8 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Nome | Descrição |
 | --- | --- |
 | reCAPTCHA | Verifica se o usuário que está iniciando sessão é um humano. |
-| Google Calendar API | API de Calendário para visualizar datas e marcar reuniões. |
-| Verificação de CEP | Verificar o CEP das empresas. |
+| Email.message | Envio de email, utilizado ao marcar ou excluir reuniões. |
+| Via CEP | Verificar se o CEP das empresas é válido |
  
 ## Slides e Entregas
  
