@@ -448,19 +448,64 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pós-Condições | O saldo na carteira do ator atualizada com sucesso |
 | Regras de negócios | RN9 - Somente a empresa poderá realizar depósito na carteira. |
 
+### Caso 16: Realizar transação
+
+| 16 | Realizar transação |
+| --- | --- |
+| Nome | Realizar transação |
+| Objetivo | Realizar transferência de dinheiro da empresa pro desenvolvedor |
+| Ator | Empresa|
+| Pré-Condições | O ator está na tela de carteira e possui dinheiro para realizar transação |
+| Trigger | O ator seleciona a opção “Transação” na tela de carteira |
+| Fluxo Principal | 1 - O sistema exibe os campos “Código do recebedor”, “Valor” e “Descrição” para serem preenchidos pelo ator. <br> 2 -O ator preenche os campos para a transação. <br> 3 - O sistema valida a transação e exibe uma tela com mensagem “Transação realizada com sucesso”. [A1][A2] |
+| Fluxos Alternativos |  <strong>A1. Sistema não encontra o desenvolvedor.</strong> <br> 1 - O sistema exibe uma página com a mensagem “Erro ao realizar transação”. <br> 2- Voltar para o passo 1. <br><br ><strong>A2 - Valor inválido.</strong> <br> 1 - O sistema exibe uma página com a mensagem “Erro ao realizar depósito”. <br> 2 - Voltar para o passo 1.|
+| Extensões | N/A. |
+| Pós-Condições | A transação realizada com sucesso |
+| Regras de negócios | N/A |
+
+### Caso 17: Copiar link de compartilhamento
+
+| 17 | Copiar link de compartilhamento |
+| --- | --- |
+| Nome | Copiar link de compartilhamento |
+| Objetivo |Compartilhar links dos usuários |
+| Ator | Usuário |
+| Pré-Condições | O usuário com sessão em andamento |
+| Trigger | O ator seleciona a opção “Copiar link do perfil” na tela do perfil do usuário |
+| Fluxo Principal | 1 -O sistema exibe a mensagem “Link Copiado”. |
+| Fluxos Alternativos | N/A |
+| Extensões | N/A. |
+| Pós-Condições | O usuário com a cópia do link de perfil do usuário selecionado |
+| Regras de negócios | N/A |
+
 ### Caso 18: Redefinir Senha
 
-| 20 | Redefinir Senha |
+| 18 | Redefinir Senha |
 | --- | --- |
 | Nome | Redefinir Senha |
 | Objetivo | Alterar a senha |
 | Ator | Usuário |
-| Pré-Condições | O ator tem cadastro. |
+| Pré-Condições | O ator com cadastro. |
 | Trigger | O ator seleciona a opção “Redefinir Senha”. |
 | Fluxo Principal | 1 - O sistema exibe o campo de “Senha” e “Confirmar Senha”. <br> 2 - O ator preenche os campos e confirma. <br> 3 - O sistema registra a ação do ator e redireciona para a página de perfil do usuário. |
 | Fluxos Alternativos | N/A. |
 | Extensões | N/A. |
-| Pós-Condições | A senha foi alterada. |
+| Pós-Condições | A senha redefinida |
+| Regras de negócios | N/A. |
+
+### Caso 19: Realizar publicação
+
+| 19 | Realizar publicação |
+| --- | --- |
+| Nome | Realizar publicação |
+| Objetivo | Realizar uma publicação sobre um acontecimento |
+| Ator | Usuário |
+| Pré-Condições | O usuário com sessão em andamento |
+| Trigger | O ator seleciona a opção “Comece uma publicação” na página inicial |
+| Fluxo Principal | 1 - O sistema exibe os campos “Hashtags” e “Texto da publicação” para serem preenchidos. <br> 2 - O ator preenche os campos e seleciona a opção “Publicar”. <br> 3 - O sistema registra e confirma a publicação. [A1][A2] |
+| Fluxos Alternativos | <strong>A1. SCampo “Hashtags” vazio.</strong> <br> 1 - O sistema exibe a mensagem “Campo de hashtags vazio!”. <br> 2- Voltar para o passo 1. <br><br ><strong>A2 - Campo “Texto da publicação” vazio.</strong> <br> 1 - O sistema exibe a mensagem “Campo de texto da publicação vazio!”. <br> 2 - Voltar para o passo 1. |
+| Extensões | N/A. |
+| Pós-Condições | O usuário com a cópia do link de perfil do usuário selecionado |
 | Regras de negócios | N/A. |
 
 ## Diagrama de Classes
