@@ -6,12 +6,12 @@ import smtplib
 import email.message
 
 class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
-    def deletaUsuario(self): # Passar tipo = True para DESENVOLVEDOR | tipo = False para EMPRESA
+    def deletaUsuario(self, tipo, email): # Passar tipo = True para DESENVOLVEDOR | tipo = False para EMPRESA
         Database.connect(self)
-        if self.tipo == True:
-            Database.delete(self, 'DESENVOLVEDOR', self.email)
+        if tipo == True:
+            Database.delete(self, 'DESENVOLVEDOR', email)
         else:
-            Database.delete('EMPRESA', self.email)
+            Database.delete(self, 'EMPRESA', email)
             
     def iniciaSessao(self, email, senha):
         Database.connect(self)
@@ -66,7 +66,8 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
 
     def Depositar(self, tipoUsuario, codUsuario, valor):
         Database.connect(self)
-        if Database.inserir_dinheiro(self, tipoUsuario, codUsuario, valor):
+        valorDecimal = Decimal(valor)
+        if Database.inserir_dinheiro(self, tipoUsuario, codUsuario, valorDecimal):
             return True
         return False
 
@@ -74,7 +75,7 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
         Database.connect(self)
         saldo = Database.verificar_saldo(self, tipoUsuario, codUsuario)
         valorDecimal = Decimal(valor)
-        if saldo is None or saldo < valorDecimal:
+        if saldo is None or saldo < valorDecimal or valorDecimal < 0:
             return False
             flash('Valor especificado é maior do que o saldo disponível na conta')
             return jsonify({'message': 'Falha ao sacar dinheiro da carteira'}), 400
@@ -83,11 +84,13 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
             return True
             return jsonify({'message': 'Dinheiro sacado da carteira com sucesso'}), 200
 
-    def realizarTransacao(self, codEmpresa, codDesenvolvedor, valor, descricao):
+    def realizarTransacao(self, codEmpresa, codDesenvolvedor, valor, descricao, tipoUsuario):
+        if tipoUsuario == True:
+            return False
         Database.connect(self)
         saldoEmpresa = Database.verificar_saldo(self, False, codEmpresa)
         valorDecimal = Decimal(valor)
-        if saldoEmpresa is None or saldoEmpresa < valorDecimal:
+        if saldoEmpresa is None or saldoEmpresa < valorDecimal or valorDecimal < 0:
             return False
             flash('Valor para transacao é menor do que valor disponivel na conta')
             return jsonify({'message': 'Falha ao transferir'}), 400

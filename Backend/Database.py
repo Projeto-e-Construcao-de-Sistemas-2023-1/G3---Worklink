@@ -174,15 +174,18 @@ class Database:
              self.cursor.execute('INSERT INTO SEGUIDORES (seguidorEmpresa, seguidoEmpresa) VALUES (?, ?)', (codSeguidor, codSeguido))
         self.conn.commit()
 
-    def inserir_dinheiro(self, tipoUsuario, codUsuario, valor):
+    def inserir_dinheiro(self, tipoUsuario, codUsuario, valorDecimal):
         cursor = self.con.cursor()
+        if valorDecimal < 0:
+            return False
+        
         if tipoUsuario == False:
             update_query = "UPDATE SALDO_EMPRESA SET saldo = saldo + %s WHERE cod_empresa = %s"
         # elif tipoUsuario == 'desenvolvedor':
         #     update_query = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo + %s WHERE cod_desenvolvedor = %s"
         else:
             return False
-        cursor.execute(update_query, (valor, codUsuario))
+        cursor.execute(update_query, (valorDecimal, codUsuario))
         self.con.commit()
         return True
     

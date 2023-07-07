@@ -164,7 +164,10 @@ def regEmp():
 
 @app.route('/delete_conta', methods=['GET'])
 def delete_conta():
-    dev.deletaUsuario()
+    if tipo:
+        dev.deletaUsuario(tipo, dev.getEmail())
+    else:
+        emp.deletaUsuario(tipo, emp.getEmail())
     return render_template('home.html')
 
 @app.route('/edita_perfil', methods=['POST'])
@@ -313,14 +316,18 @@ def saque():
 
 @app.route('/transacao', methods=['POST'])
 def transacao():
-    codEmpresa = emp.getCodigo()
-    codDesenvolvedor = request.form.get('codDev')
-    valor = request.form.get('valor')
-    valor = valor.replace(',', '.')
-    descricao = request.form.get('descricao')
-    if Usuario().realizarTransacao(codEmpresa, codDesenvolvedor, valor, descricao):
-        flash("Transação realizada com sucesso!")
-        return redirect(url_for('perfil'))
+    if tipo == False:
+        codEmpresa = emp.getCodigo()
+        codDesenvolvedor = request.form.get('codDev')
+        valor = request.form.get('valor')
+        valor = valor.replace(',', '.')
+        descricao = request.form.get('descricao')
+        if Usuario().realizarTransacao(codEmpresa, codDesenvolvedor, valor, descricao, tipo):
+            flash("Transação realizada com sucesso!")
+            return redirect(url_for('perfil'))
+        else:
+            flash("Erro ao realizar transação!")
+            return redirect(url_for('perfil'))
     else:
         flash("Erro ao realizar transação!")
         return redirect(url_for('perfil'))
