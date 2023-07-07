@@ -50,13 +50,44 @@ class Database:
             return False # Credenciais inválidas
 
     def pesquisaUsuario(self, nome, tipo):
-        if tipo == True: # TRUE PARA DEV
-            self.cursor.execute(f'SELECT DESENVOLVEDOR.nome, DESENVOLVEDOR.descricao FROM DESENVOLVEDOR WHERE nome = "{nome}"')
+        if tipo:  # True para desenvolvedor
+            self.cursor.execute('SELECT DESENVOLVEDOR.nome, DESENVOLVEDOR.sobrenome, DESENVOLVEDOR.cod_desenvolvedor FROM DESENVOLVEDOR WHERE nome LIKE %s', (f'%{nome}%',))
             self.con.commit()
-        else: # FALSE PARA EMPRESA
-            self.cursor.execute(f'SELECT EMPRESA.razao_social, EMPRESA.area_negocio FROM EMPRESA WHERE nome = "{nome}"')
+        else:  # False para empresa
+            self.cursor.execute('SELECT EMPRESA.razao_social, EMPRESA.area_negocio, EMPRESA.cod_empresa FROM EMPRESA WHERE nome LIKE %s', (f'%{nome}%',))
             self.con.commit()
-        return self.cursor.fetchall() # MOSTRAR OS REGISTROS NA TELA DO FRONT END
+        #return self.cursor.fetchall()
+        resultado = []
+        for row in self.cursor.fetchall():
+            if tipo:
+                resultado.append({
+                    'nome': row[0],
+                    'sobrenome': row[1],
+                    'cod_usuario': row[2]
+                })
+            else:
+                resultado.append({
+                    'razao_social': row[0],
+                    'area_negocio': row[1],
+                    'cod_usuario': row[2]
+                })
+        return resultado
+
+    # def pesquisaUsuario(self, nome, tipo):
+    #     #cursor = self.con.cursor(dictionary=True)
+    #     if tipo:  # True para desenvolvedor
+    #         #cursor.execute("SELECT * FROM DESENVOLVEDOR WHERE nome LIKE %s", (f"%{nome}%",))
+    #         self.cursor.execute(f'SELECT DESENVOLVEDOR.nome, DESENVOLVEDOR.sobrenome, DESENVOLVEDOR.cod_desenvolvedor FROM DESENVOLVEDOR WHERE nome = "{nome}"')
+    #         self.con.commit()
+    #     else:  # False para empresa
+    #         #cursor.execute("SELECT * FROM EMPRESA WHERE nome LIKE %s", (f"%{nome}%",))
+    #         self.cursor.execute(f'SELECT EMPRESA.razao_social, EMPRESA.area_negocio, EMPRESA.cod_empresa FROM EMPRESA WHERE nome = "{nome}"')
+    #         self.con.commit()
+    #     return self.cursor.fetchall()
+        # results = cursor.fetchall()
+        # self.con.commit()
+        # cursor.close()
+        # return results
     
     def verificaUsuario(self, email):
         self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR WHERE email = "{email}"')
@@ -65,6 +96,7 @@ class Database:
             return True # É Desenvolvedor
         else:
             return False # É empresa
+        
     def pesquisaDesenvolvedor(self, nome):
         self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR WHERE nome = "{nome}"')
         self.con.commit()
@@ -111,7 +143,16 @@ class Database:
             "t" : r[5]
             }
         return data
-    
+
+    def connect(self):
+        self.con = mysql.connector.connect(
+        host='35.198.19.238',
+        database='db_worklink',
+        user='root',
+        password='pjSq2023@') # BD acessado!!!
+        if self.con.is_connected():
+            self.cursor = self.con.cursor(buffered= True)
+
     def checkFollow(self, codSeguidor, codSeguido, tipoSeguido, tipoSeguidor):
         if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 
              self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND  seguidoEmpresa = ?', (codSeguidor, codSeguido))
@@ -131,7 +172,7 @@ class Database:
         elif tipoSeguidor == 'dev' and tipoSeguido == 'dev':
              self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
         elif tipoSeguidor == 'emp' and tipoSeguido == 'dev':
-             self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorEmpresa = ? AND seguidoDesenvolvedor = ?', (codSeguidor, codSeguido))
+             self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorEmpresa = ? AND seguidoDesenvolvedor = ?' (codSeguidor, codSeguido))
         else:
         #elif tipoSeguidor =='emp' and tipoSeguido =='emp':
              self.cursor.execute('DELETE FROM SEGUIDORES WHERE seguidorEmpresa = ? AND seguidoEmpresa = ?', (codSeguidor, codSeguido))
@@ -151,10 +192,10 @@ class Database:
 
     def inserir_dinheiro(self, tipoUsuario, codUsuario, valor):
         cursor = self.con.cursor()
-        if tipoUsuario == False:
+        if tipoUsuario == 'empresa':
             update_query = "UPDATE SALDO_EMPRESA SET saldo = saldo + %s WHERE cod_empresa = %s"
-        # elif tipoUsuario == 'desenvolvedor':
-        #     update_query = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo + %s WHERE cod_desenvolvedor = %s"
+        elif tipoUsuario == 'desenvolvedor':
+            update_query = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo + %s WHERE cod_desenvolvedor = %s"
         else:
             return False
         cursor.execute(update_query, (valor, codUsuario))
@@ -163,9 +204,9 @@ class Database:
     
     def verificar_saldo(self, tipo, codigo):
         cursor = self.con.cursor()
-        if tipo == False:
+        if tipo == 'empresa':
             saldo_query = "SELECT saldo FROM SALDO_EMPRESA WHERE cod_empresa = %s"
-        elif tipo == True:
+        elif tipo == 'desenvolvedor':
             saldo_query = "SELECT saldo FROM SALDO_DESENVOLVEDOR WHERE cod_desenvolvedor = %s"
         else:
             return None
@@ -178,9 +219,9 @@ class Database:
 
     def sacar_dinheiro(self, tipoUsuario, codUsuario, valor):
         cursor = self.con.cursor()
-        if tipoUsuario == False:
+        if tipoUsuario == 'empresa':
             update_query = "UPDATE SALDO_EMPRESA SET saldo = saldo - %s WHERE cod_empresa = %s"
-        elif tipoUsuario == True:
+        elif tipoUsuario == 'desenvolvedor':
             update_query = "UPDATE SALDO_DESENVOLVEDOR SET saldo = saldo - %s WHERE cod_desenvolvedor = %s"
         else:
             return False
@@ -198,6 +239,40 @@ class Database:
         cursor.execute(update_query_SALDO_DESENVOLVEDOR, (valor, codDesenvolvedor))
         self.con.commit()
         return True
+    
+    # -- CRUD PROJETO
+    def insertProjeto(self, values):
+        query = """ INSERT INTO `PROJETO` (`cod_empresa`, `especificacao`, `valor_orcamento`, `prazo`, `requisito_tecnico`, `status_projeto`, `tag_projeto`, `nome_projeto`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
+        self.cursor.execute(query, values)
+        self.con.commit() # INSERT REALIZADO
+
+    def updateProjeto(self, coluna, dado, cod_empresa, nome_projeto):
+        self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=0;')
+        self.con.commit()
+        self.cursor.execute(f'UPDATE PROJETO SET {coluna} = "{dado}" WHERE cod_empresa = "{cod_empresa}" AND nome_projeto = "{nome_projeto}"')
+        self.con.commit() # UPDATE REALIZADO
+        self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=1;')
+        self.con.commit()
+
+    def deleteProjeto(self, cod_empresa, nome_projeto):
+        self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=0;')
+        self.con.commit()
+        self.cursor.execute(f'DELETE FROM PROJETO WHERE cod_empresa = "{cod_empresa}" AND nome_projeto = "{nome_projeto}"')
+        self.con.commit()
+        self.cursor.execute(f'SET FOREIGN_KEY_CHECKS=1;')
+        self.con.commit()
+
+    def selectProjeto(self, coluna, cod_empresa, nome_projeto): # Receber nome_projeto via input1
+        self.cursor.execute(f'SELECT {coluna} FROM PROJETO WHERE cod_empresa = "{cod_empresa}" AND nome_projeto = "{nome_projeto}"')
+        self.con.commit()
+        tupla = self.cursor.fetchone()
+        return tupla[0]
+    
+    def listaProjetos(self, cod_empresa):
+        self.cursor.execute(f'SELECT * FROM PROJETO WHERE cod_empresa = "{cod_empresa}"')
+        self.con.commit()
+        tupla = self.cursor.fetchall()
+        return tupla
 
     def connect(self):
         self.con = mysql.connector.connect(

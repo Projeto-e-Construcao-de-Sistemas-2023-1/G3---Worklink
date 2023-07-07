@@ -29,7 +29,7 @@
 
     .project {
     width: 240px;
-    height: 170px;
+    height: fit-content;
     background-color: #EAEAEA;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -135,6 +135,7 @@
       <img id="projeto" src="../static/projetos-pagina.png" alt="">
       <div class="proj" id="project-list"></div>
       <script>
+
         
         var projects = [
           { name: "Projeto 1", descricao: "ablubeleuabnleue", status: "Em andamento" },
@@ -162,8 +163,13 @@
           projectStatus.classList.add("status");
           projectStatus.textContent = "Status: " + project.status;
           projectElement.appendChild(projectStatus);
-    
-          var editButton = document.createElement("button");
+
+                          //adiciona valor se é dev ou empresa
+          var valorDoFlask = "{{ valorDoFlask }}";
+
+          //se for EMPRESA, mostra os botoes
+          if (valorDoFlask === "valorUsuario") {
+            var editButton = document.createElement("button");
           editButton.textContent = "Editar projeto";
           projectElement.appendChild(editButton);
     
@@ -172,6 +178,13 @@
           deleteButton.classList.add("delete-button"); // Adicionando a classe CSS
           projectElement.appendChild(deleteButton);
     
+          }else{
+            var editButton = document.createElement("button");
+            editButton.textContent = "Ver mais";
+            projectElement.appendChild(editButton);
+          }
+    
+         
           return projectElement;
         }
     

@@ -17,7 +17,7 @@
 	<script src="https://kit.fontawesome.com/e6223f541e.js" crossorigin="anonymous"></script>
     <script defer src="../static/script.js"></script>
     <style>
-        
+
         #saldoG{
             font-size: 25px; 
             display: contents;
@@ -479,11 +479,21 @@ img {
 
       <div id="divform">
         <div class="btn-group" role="group" aria-label="Basic example" style="margin-top: 10px;">
-        <button  style= " width: 167px; background-color: #141034; color: #EAEAEA; border-color: #3b2f94;" class="btn btn-primary" onclick="mostrarForm('formSacar')">Sacar</button>
+        <button id="saque"  style= " width: 167px; background-color: #141034; color: #EAEAEA; border-color: #3b2f94;" class="btn btn-primary" onclick="mostrarForm('formSacar')">Sacar</button>
+        <div id="opEmpresa" style="display: contents;">
         <button style= " width: 167px; background-color: #141034; color: #EAEAEA; border-color: #3b2f94;" class="btn btn-primary" onclick="mostrarForm('formDepositar')">Depositar</button>
         <button style= "width: 167px; background-color: #141034; color: #EAEAEA; border-color: #3b2f94;" class="btn btn-primary" onclick="mostrarForm('formTransacao')">Transação</button>
+    </div>  
     </div>
-
+    <script>
+        //adiciona valor se é dev ou empresa
+        var valorDoFlask = "{{ valorDoFlask }}";
+//se for dev, esconde os valores 
+if (valorDoFlask === "valorUsuario") {
+    document.getElementById("saque").style.width = "500px";
+    document.getElementById("opEmpresa").style.display = "none";
+}
+    </script>
     <form id="formSacar" action="/saque" method="POST" style="display: none; margin: 10px; margin-left: 110px;">
       <!-- <label for="tipoUsuario">Tipo de Usuário:</label>
       

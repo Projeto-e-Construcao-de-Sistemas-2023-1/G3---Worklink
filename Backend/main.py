@@ -8,6 +8,7 @@ import requests
 from datetime import datetime as dt
 from Evento import Evento
 import sys
+import json
 
 app = Flask(__name__, template_folder="templates")
 emailsessao=''
@@ -72,7 +73,7 @@ def login():
                 return redirect(url_for('feed'))
         else:
             flash('***EMAIL OU SENHA INCORRETOS***')
-            return redirect(url_for('login'))
+            return redirect(url_for('login')) 
 
 @app.route('/perfil', methods=['GET'])
 def perfil():
@@ -93,11 +94,6 @@ def feed():
         return render_template('pagina_inicial.html', nome=emp.getRazaoSocial(), descricao=emp.getAreaNegocio())
 
 #metodos 
-    
-@app.route('/pesquisa_usuario', methods=['post'])
-def pesquisaUser():
-    pesquisa_user = request.form.get('pesquisa_user')
-    print(pesquisa_user)
     
 @app.route('/signup_developer', methods=['POST'])
 def regdev():
@@ -140,7 +136,8 @@ def regEmp():
         emp.criaEmpresa(cnpj, razao_social, email, telefone, conta, senha, area_negocio, cep)
         return render_template('home.html')
     else:
-       return jsonify({'message': 'CEP Invalido!'}), 400
+        flash("CEP inválido!")
+        return redirect(url_for('regem'))
 
 @app.route('/delete_conta', methods=['GET'])
 def delete_conta():
@@ -192,22 +189,6 @@ def criarProjeto():
     tag = request.form.get('tag')
     descricao = request.form.get('descricao')
     return render_template('perfil_dev.html')
-  
-@app.route('/follow', methods=['POST'])
-def follow():
-    Id = request.json['Id']
-    Usuario.Follow(Id)
-    return jsonify(success=True)
-
-@app.route('/unfollow', methods=['POST'])
-def unfollow():
-    Id = request.json['Id']
-    Usuario.Unfollow(Id)
-    return jsonify(success=True)
-
-@app.route("/calendario", methods=["GET", "POST"])
-def index():
-  return render_template("S4A_calendar.html")
 
 @app.route("/get/", methods=["POST"])
 def get():
@@ -224,10 +205,10 @@ def save():
     data = dict(request.form)
     if dev.verificaUsuario():
         ok = evt.criaEventoDev(data["s"], data["e"], data["t"], data["c"], data["b"], dev.getCodigo(), True)
-        us.enviarEmailReuniaoCriada(dev.getEmail())
+        us.enviarEmailReuniaoCriada(dev.getEmail(), dev.getNome(), data["s"])
     else:
         ok = evt.criaEventoEmp(data["s"], data["e"], data["t"], data["c"], data["b"], emp.getCodigo(), False)
-        us.enviarEmailReuniaoCriada(emp.getEmail())
+        us.enviarEmailReuniaoCriada(emp.getEmail(), emp.getRazaoSocial(), data["s"])
     msg = "OK" 
     return 'Reunião criada com sucesso!'
     # if ok:
@@ -238,14 +219,27 @@ def delete():
   data = dict(request.form)
   ok = evt.deletaEvento(data["id"])
   if dev.verificaUsuario():
-      us.enviarEmailReuniaoExcluida(dev.getEmail())
+      us.enviarEmailReuniaoExcluida(dev.getEmail(), dev.getNome(), data["s"])
   else:
-      us.enviarEmailReuniaoExcluida(emp.getEmail())
+      us.enviarEmailReuniaoExcluida(emp.getEmail(), emp.getRazaoSocial(), data["s"])
   msg = "OK"
   return 'Reunião excluída com sucesso!' 
 #   if ok:
 #     #else sys.last_value
 #     return make_response(msg, 500)
+
+@app.route('/pesquisa_usuario', methods=['GET'])
+def pesquisaUsuario():
+    #nome = request.form.get('nome')
+    nome = request.args.get('nome')
+    tipoUsuario = tipo
+    # if tipoUsuario:
+    #     codUsuario = dev.getCodigo()
+    # else:
+    #     codUsuario = emp.getCodigo()
+    resultado = Usuario().pesquisaUsuario(nome, tipoUsuario)
+    return jsonify(resultado)
+    #print(resultado)
 
 @app.route('/deposito', methods=['POST'])
 def deposito():
@@ -257,9 +251,11 @@ def deposito():
     valor = request.form.get('valor')
     valor = valor.replace(',', '.')
     if Usuario().Depositar(tipoUsuario, codUsuario, valor):
-        return jsonify({'message': 'Deposito realizado com sucesso'}), 200
+        flash("Depósito realizado com sucesso!")
+        return redirect(url_for('carteira'))
     else:
-        return jsonify({'message': 'Erro ao realizar deposito'}), 400
+        flash("Erro ao realizar depósito!")
+        return redirect(url_for('carteira'))
 
 @app.route('/saque', methods=['POST'])
 def saque():
@@ -271,9 +267,12 @@ def saque():
     valor = request.form.get('valor')
     valor = valor.replace(',', '.')
     if Usuario().Sacar(tipoUsuario, codUsuario, valor):
-        return jsonify({'message': 'Saque realizado com sucesso'}), 200
+        flash("Saque realizado com sucesso!")
+        return redirect(url_for('carteira'))
     else:
-        return jsonify({'message': 'Erro ao realizar saque'}), 400
+        flash("Erro ao realizar saque!")
+        return redirect(url_for('carteira'))
+
 
 @app.route('/transacao', methods=['POST'])
 def transacao():
@@ -283,9 +282,11 @@ def transacao():
     valor = valor.replace(',', '.')
     descricao = request.form.get('descricao')
     if Usuario().realizarTransacao(codEmpresa, codDesenvolvedor, valor, descricao):
-        return jsonify({'message': 'Transacao realizado com sucesso'}), 200
+        flash("Transação realizada com sucesso!")
+        return redirect(url_for('carteira'))
     else:
-        return jsonify({'message': 'Erro ao realizar transacao'}), 400
+        flash("Erro ao realizar transação!")
+        return redirect(url_for('carteira'))
 
 
 @app.route('/carteira', methods=['GET'])
@@ -297,7 +298,18 @@ def carteira():
     return render_template('carteira.html', saldo=saldo)
 
 
+# @app.route('/perfil/<nome>/<sobrenome>/<codigo>')
+# def exibir_perfil(nome, sobrenome, codigo):
+#     return render_template('perfil-default.html', nome=nome, sobrenome=sobrenome, codigo=codigo)
+
+@app.route('/perfil/<selectedUser>')
+def exibir_perfil(selectedUser):
+    selectedUser = json.loads(selectedUser)
+    return render_template('perfil-default.html', selectedUser=selectedUser)
+
+@app.route('/testtt', methods=['GET'])
+def testtt():
+    return render_template('perfil-default.html')
+
 if __name__ == "__main__":
     app.run()
-
-VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify"
