@@ -273,14 +273,14 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | 07 | Marcar Reunião |
 | --- | --- |
 | Nome | Marcar Reunião |
-| Objetivo | Desenvolvedor e empresa se reunirem para comunicação |?
+| Objetivo | Desenvolvedor e empresa se reunirem para comunicação |
 | Ator | Usuário |
-| Pré-Condições | O ator está com sessão em andamento. |
-| Trigger | O ator seleciona a opção “Marcar Reunião”. |
-| Fluxo Principal | 1 - O sistema exibe campos “Nome”, “Email” e “Horário” para serem preenchidos. <br> 2 - O ator preenche os campos.[A1][A2] <br> 3 - O sistema envia um aviso de reunião para a pessoa solicitada. |
-| Fluxos Alternativos |  <strong>A1. O sistema não consegue autenticar o nome preenchido.</strong> <br> 1 - O sistema exibe a mensagem de nome não cadastrado. <br> 2- Voltar para o passo 2. <br><br> <strong>A2. O sistema não consegue autenticar email.</strong> <br> 1 - O sistema exibe mensagem de email não cadastrado. <br> 2 - Voltar para o passo 2. |
+| Pré-Condições | O ator com sessão em andamento. |
+| Trigger | O ator seleciona a opção “+” |
+| Fluxo Principal | 1 - O sistema exibe um pop-up com campos “Começo”, “Fim”, “Cor de Texto”, “Cor de Fundo” e “Evento” para serem preenchidos. <br> 2 - O ator preenche os campos.[A1][A2] <br> 3 - O sistema salva a reunião no sistema e envia um email para a pessoa solicitada na reunião. |
+| Fluxos Alternativos |  <strong>A1. Ator preenche uma data de fim antes da data de início.</strong> <br> 1 - O sistema exibe a mensagem “A data de início não pode ser após a data de fim!”.<br> 2- Voltar para o passo 2. <br><br> <strong>A2. Ator deixa um campo vazio.</strong> <br> 1 - O sistema exibe a mensagem “Insira um valor válido. O campo está incompleto ou tem uma data inválida.”|
 | Extensões | N/A. |
-| Pós-Condições | O ator recebe notificação da reunião. |
+| Pós-Condições | A reunião salva no sistema e email enviado. |
 | Regras de negócios | RN2 - Usuário só pode acessar o sistema mediante cadastro. |
 
 ### Caso 8: Encerrar Sessão
@@ -290,13 +290,13 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Nome | Encerrar Sessão |
 | Objetivo | Encerrar sessão do usuário |
 | Ator | Usuário |
-| Pré-Condições | O ator possui sessão em andamento. |
+| Pré-Condições | O ator com sessão em andamento. |
 | Trigger | O ator seleciona a opção “Sair”. |
-| Fluxo Principal | 1 - O sistema exibe uma mensagem para confirmação de encerramento de sessão. <br> 2 - O ator confirma o encerramento da sessão. <br> 3 - O sistema desconecta o ator e retorna para página de login. |
-| Fluxos Alternativos | <strong>A1. Usuário não confirma o encerramento.</strong> <br> 1 - O sistema retorna para página inicial. |
-| Extensões | N/A. |
-| Pós-Condições | O ator está na tela de sessão. |
-| Regras de negócios | N/A. |
+| Fluxo Principal | 1 -O sistema desconecta o ator e retorna para tela inicial. |
+| Fluxos Alternativos | N/A |
+| Extensões | N/A |
+| Pós-Condições | O ator na tela de sessão. |
+| Regras de negócios | N/A |
 
 ### Caso 9: Seguir Usuário
 
@@ -305,13 +305,28 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Nome | Seguir Usuário |
 | Objetivo | Seguir um usuário |
 | Ator | Usuário |
-| Pré-Condições | O ator está no perfil do usuário. |
-| Trigger | O ator clica no botão “Seguir” no usuário. |
+| Pré-Condições | O ator no perfil do usuário. |
+| Trigger | O ator clica no botão “Seguir” no usuário |
 | Fluxo Principal | 1 - O sistema registra a ação do ator e muda o botão para “Seguindo”. |
 | Fluxos Alternativos | N/A |
 | Extensões | N/A |
-| Pós-Condições | O ator está seguindo o usuário. |
+| Pós-Condições | O ator seguindo o usuário. |
 | Regras de negócios | N/A |
+
+### Caso 10: Candidatar-se a um projeto
+
+| 10 | Candidatar-se a um projeto |
+| --- | --- |
+| Nome | Candidatar-se a um projeto |
+| Objetivo | Candidatar-se a um projeto desejado |
+| Ator | Desenvolvedor |
+| Pré-Condições | O ator possui uma hashtag em comum com o projeto |
+| Trigger | O ator seleciona a opção “Candidatar-se” na tela do projeto |
+| Fluxo Principal | 1 - O sistema exibe a mensagem “Você se candidatou a esse projeto”. |
+| Fluxos Alternativos | N/A |
+| Extensões | N/A |
+| Pós-Condições | A candidatura realizada com sucesso |
+| Regras de negócios | RN1 - Um desenvolvedor deve ter, no mínimo, 1 hashtag em comum com o projeto para poder se candidatar à ele. |
 
 ### Caso 11: Filtrar Feed
 
@@ -320,8 +335,8 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Nome | Filtrar Feed |
 | Objetivo | Filtrar Feed e acordo com as hashtags |
 | Ator | Usuário |
-| Pré-Condições | O ator estar com sessão em andamento |
-| Trigger | O ator seleciona a opção “Tags em altas” ou “Tags Seguidas”. |
+| Pré-Condições | O ator com sessão em andamento |
+| Trigger | O ator seleciona a opção “Hashtags em alta” ou “Hashtags seguidas” |
 | Fluxo Principal | 1 - O sistema filtra e exibe todos os projetos que têm as hashtags selecionadas pelo ator. |
 | Fluxos Alternativos | N/A. |
 | Extensões | N/A. |
