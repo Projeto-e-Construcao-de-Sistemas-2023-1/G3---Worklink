@@ -492,9 +492,21 @@ img {
                                 button.innerHTML = 'Seguindo';
                                 button.style.backgroundColor = "#cbee6d";
                                 clicked = true;
-                              }
+                                var seguido = selectedUser.cod_desenvolvedor
+                                fetch('/follow', {
+                                method: 'POST',
+                                headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                                },
+                                body: 'seguido=' + seguido,
+                                })
+                                .then(response => response.text())
+                                .then(data => {
+                                console.log(data); // Exibe a resposta do servidor
                             });
-                          </script>
+                            }
+                            });
+                            </script>
 
                         <div class="header-links">
                             <ul class="links d-flex align-items-center mt-3 mt-md-0">
