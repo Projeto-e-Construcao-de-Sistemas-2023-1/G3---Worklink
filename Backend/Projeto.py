@@ -2,8 +2,8 @@ from Database import Database
 #from Empresa import Empresa
 # OS GETTERS VÃO SER CONSULTAS NO BANCO DE DADOS PEDINDO AQUELA VARIAVEL
 class Projeto():    
-    def criaProjeto(self, cod_empresa,especificacao, valor_orcamento, prazo, requisito_tecnico, status_projeto, tag_projeto, nome_projeto):
-        values = (cod_empresa, especificacao, valor_orcamento, prazo, requisito_tecnico, status_projeto, tag_projeto, nome_projeto)
+    def criaProjeto(self, cod_empresa,especificacao, valor_orcamento, prazo, requisito_tecnico, status_projeto, tag_projeto, nome_projeto, numero_devs):
+        values = (cod_empresa, especificacao, valor_orcamento, prazo, requisito_tecnico, status_projeto, tag_projeto, nome_projeto, numero_devs)
         #tipo = True
         Database.connect(self)
         Database.insertProjeto(self, values)
@@ -12,6 +12,10 @@ class Projeto():
     def getEspecificacaoProjeto(self, cod_empresa, nome_projeto):
         Database.connect(self)
         return Database.selectProjeto(self, 'especificacao',cod_empresa, nome_projeto)
+    
+    def getNumeroDevsProjeto(self, cod_empresa, nome_projeto):
+        Database.connect(self)
+        return Database.selectProjeto(self, 'numero_devs',cod_empresa, nome_projeto)
     
     def getOrcamentoProjeto(self, cod_empresa, nome_projeto):
         Database.connect(self)
@@ -41,6 +45,11 @@ class Projeto():
     def setEspecificacaoProjeto(self, espec, cod_empresa, nome_projeto) :
         Database.connect(self)
         Database.updateProjeto(self, 'especificacao', espec, cod_empresa, nome_projeto)
+        return True
+    
+    def setNumeroDevsProjeto(self, espec, cod_empresa, nome_projeto) :
+        Database.connect(self)
+        Database.updateProjeto(self, 'numero_devs', espec, cod_empresa, nome_projeto)
         return True
 
     def setOrcamentoProjeto(self, espec, cod_empresa, nome_projeto) :
