@@ -9,6 +9,7 @@ select.addEventListener('click', function() {
 document.addEventListener('DOMContentLoaded', function() {
    const searchInput = document.getElementById('searchInput'); // Obtém o elemento de input de pesquisa pelo ID
    const resultsContainer = document.getElementById('results'); // Obtém o elemento de contêiner de resultados pelo ID
+   const pageBody = document.getElementById('pi');
   //  const data = ['Ana Clara', 'Pedro', 'Joana', 'Fernanda', 'Ana Beatriz', 'Roberto']; // Array de dados de exemplo
    let users = [];
   //  searchInput.addEventListener('input', function () {
@@ -37,8 +38,13 @@ document.addEventListener('DOMContentLoaded', function() {
      resultsContainer.classList.add('show'); // Adiciona a classe 'show' para exibir o conteiner de resultados ao focar no campo de pesquisa
    });
 
-   searchInput.addEventListener('blur', function () {
-     resultsContainer.classList.remove('show'); // Remove a classe 'show' para ocultar o conteiner de resultados ao perder o foco do campo de pesquisa
+  //  searchInput.addEventListener('blur', function () {
+  //    resultsContainer.classList.remove('show'); // Remove a classe 'show' para ocultar o conteiner de resultados ao perder o foco do campo de pesquisa
+  //  });
+
+     pageBody.addEventListener('click', function (event) {
+      if (event.target.id !== searchInput.id && event.target.id !== resultsContainer.id)
+        resultsContainer.classList.remove('show'); // Remove a classe 'show' para ocultar o conteiner de resultados ao perder o foco do campo de pesquisa
    });
 
    resultsContainer.addEventListener('click', function (event) {
@@ -47,9 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
      searchInput.value = clickedItem; // Preenche o campo de pesquisa com o texto do item clicado 
      const selectedUser = users.find(user => user.nome + ' ' + user.sobrenome === clickedItem);
      if (selectedUser) {
-      // Redireciona para a página de destino com informações do usuário
        window.location.href = '/perfil/' + encodeURIComponent(JSON.stringify(selectedUser));
-      //window.location.href = '/testtt/' 
     }
    });
     

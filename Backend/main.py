@@ -300,18 +300,21 @@ def carteira():
     return render_template('carteira.html', saldo=saldo)
 
 
-# @app.route('/perfil/<nome>/<sobrenome>/<codigo>')
-# def exibir_perfil(nome, sobrenome, codigo):
-#     return render_template('perfil-default.html', nome=nome, sobrenome=sobrenome, codigo=codigo)
-
 @app.route('/perfil/<selectedUser>')
 def exibir_perfil(selectedUser):
     selectedUser = json.loads(selectedUser)
     return render_template('perfil-default.html', selectedUser=selectedUser)
 
-@app.route('/testtt', methods=['GET'])
-def testtt():
-    return render_template('perfil-default.html')
+@app.route('/follow', methods=['POST'])
+def follow():
+    seguidor = dev.getCodigo()
+    seguido = request.form.get('seguido')
+    tipoSeguidor = 'dev' #if Usuario().verificaUsuario() else 'emp'
+    tipoSeguido = 'dev' #if request.form.get('tipoSeguido') == True else 'emp'
+
+    Usuario().Follow(seguidor, seguido, tipoSeguidor, tipoSeguido)
+    return 'Successo'  
+
 
 if __name__ == "__main__":
     app.run()
