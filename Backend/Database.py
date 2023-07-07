@@ -112,6 +112,12 @@ class Database:
             }
         return data
     
+    def getDataEvento(self, id):
+        self.cursor.execute(f'SELECT start FROM events WHERE id= "{id}"')
+        self.con.commit()
+        tupla = self.cursor.fetchone()
+        return tupla[0]
+    
     def checkFollow(self, codSeguidor, codSeguido, tipoSeguido, tipoSeguidor):
         if tipoSeguidor == 'dev' and tipoSeguido == 'emp': 
              self.cursor.execute('SELECT COUNT(*) FROM SEGUIDORES WHERE seguidorDesenvolvedor = ? AND  seguidoEmpresa = ?', (codSeguidor, codSeguido))

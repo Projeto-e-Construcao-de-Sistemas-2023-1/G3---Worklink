@@ -24,3 +24,7 @@ class Evento():
     def getEvento(self, month, year, id_user, tipo):
         Database.connect(self)
         return Database.getEvent(self, month, year, id_user, tipo)
+    
+    def getDataEvento(self, id):
+        Database.connect(self)
+        return Database.getDataEvento(self, id)

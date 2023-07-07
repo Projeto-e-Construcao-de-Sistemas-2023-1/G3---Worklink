@@ -128,10 +128,10 @@ class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
         s.login(msg['From'], password)
         s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
     
-    def enviarEmailReuniaoExcluida(self, emailUser): 
+    def enviarEmailReuniaoExcluida(self, emailUser, nome, data): 
 
-        corpo_email = """
-        <p>Olá! Sua reunião foi excluída com sucesso!</p>
+        corpo_email = f"""
+        <p>Olá {nome}! Sua reunião para o dia {data} foi excluída com sucesso!</p>
         """
 
         msg = email.message.Message()

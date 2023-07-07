@@ -5,7 +5,7 @@ from Usuario import Usuario
 from Desenvolvedor import Desenvolvedor
 from flask_wtf import FlaskForm, RecaptchaField
 import requests
-from datetime import datetime as dt
+from datetime import datetime
 from Evento import Evento
 import sys
 from Projeto import Projeto
@@ -251,11 +251,14 @@ def save():
 @app.route("/delete/", methods=["POST"])
 def delete():
   data = dict(request.form)
+  dataEvento = evt.getDataEvento(data["id"])
+#   date_time = datetime(dataEvento)
+  dataEvento.strftime('%d/%m/%Y %H:%M:%S')
   ok = evt.deletaEvento(data["id"])
   if dev.verificaUsuario():
-      us.enviarEmailReuniaoExcluida(dev.getEmail(), dev.getNome(), data["s"])
+      us.enviarEmailReuniaoExcluida(dev.getEmail(), dev.getNome(), dataEvento)
   else:
-      us.enviarEmailReuniaoExcluida(emp.getEmail(), emp.getRazaoSocial(), data["s"])
+      us.enviarEmailReuniaoExcluida(emp.getEmail(), emp.getRazaoSocial(), dataEvento)
   msg = "OK"
   return 'Reunião excluída com sucesso!' 
 #   if ok:
