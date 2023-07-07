@@ -9,17 +9,15 @@ select.addEventListener('click', function() {
 document.addEventListener('DOMContentLoaded', function() {
    const searchInput = document.getElementById('searchInput'); // Obtém o elemento de input de pesquisa pelo ID
    const resultsContainer = document.getElementById('results'); // Obtém o elemento de contêiner de resultados pelo ID
-   const data = ['Ana Clara', 'Pedro', 'Joana', 'Fernanda', 'Ana Beatriz', 'Roberto']; // Array de dados de exemplo
-
+  //  const data = ['Ana Clara', 'Pedro', 'Joana', 'Fernanda', 'Ana Beatriz', 'Roberto']; // Array de dados de exemplo
+   let users = [];
   //  searchInput.addEventListener('input', function () {
   //    const searchTerm = searchInput.value.toLowerCase(); // Obtém o termo de pesquisa digitado e converte para minúsculas
   //    const filteredData = data.filter(item => item.toLowerCase().includes(searchTerm)); // Filtra os dados com base no termo de pesquisa
-
   //    displayResults(filteredData); // Chama a função para exibir os resultados filtrados
   //  });
    searchInput.addEventListener('input', function () {
     const searchTerm = searchInput.value.toLowerCase();
-    
     // Fazer uma requisição AJAX para o back-end
     const xhr = new XMLHttpRequest();
     xhr.open('GET', '/pesquisa_usuario?nome=' + searchTerm);
@@ -27,10 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
     xhr.onload = function () {
       if (xhr.status === 200) {
         const responseData = JSON.parse(xhr.responseText);
+        users = responseData;
         displayResults(responseData);
       }
     };
     xhr.send();
+    console.log(users)
   });
 
    searchInput.addEventListener('focus', function () {
@@ -42,12 +42,14 @@ document.addEventListener('DOMContentLoaded', function() {
    });
 
    resultsContainer.addEventListener('click', function (event) {
+    console.log('Evento de clique acionado');
      const clickedItem = event.target.textContent; // Obtém o texto do item de resultado clicado
-     const selectedUser = users.find(user => user.nomeUsuario === clickedItem);
-     searchInput.value = clickedItem; // Preenche o campo de pesquisa com o texto do item clicado
+     searchInput.value = clickedItem; // Preenche o campo de pesquisa com o texto do item clicado 
+     const selectedUser = users.find(user => user.nome + ' ' + user.sobrenome === clickedItem);
      if (selectedUser) {
       // Redireciona para a página de destino com informações do usuário
-      window.location.href = 'pagina-de-destino.html?userId=' + selectedUser.codUsuario;
+       window.location.href = '/perfil/' + encodeURIComponent(JSON.stringify(selectedUser));
+      //window.location.href = '/testtt/' 
     }
    });
     

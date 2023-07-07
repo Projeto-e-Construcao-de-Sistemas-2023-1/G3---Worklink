@@ -9,6 +9,7 @@ from datetime import datetime as dt
 from Evento import Evento
 import sys
 from Projeto import Projeto
+import json
 
 app = Flask(__name__, template_folder="templates")
 emailsessao=''
@@ -298,9 +299,19 @@ def carteira():
         saldo = Usuario().verificarSaldo(False, emp.getCodigo())
     return render_template('carteira.html', saldo=saldo)
 
-@app.route('/listarusuarios', methods=['GET'])
-def listar_usuarios():
-    usuarios_tupla = Usuario.pesquisaUsuario()
+
+# @app.route('/perfil/<nome>/<sobrenome>/<codigo>')
+# def exibir_perfil(nome, sobrenome, codigo):
+#     return render_template('perfil-default.html', nome=nome, sobrenome=sobrenome, codigo=codigo)
+
+@app.route('/perfil/<selectedUser>')
+def exibir_perfil(selectedUser):
+    selectedUser = json.loads(selectedUser)
+    return render_template('perfil-default.html', selectedUser=selectedUser)
+
+@app.route('/testtt', methods=['GET'])
+def testtt():
+    return render_template('perfil-default.html')
 
 if __name__ == "__main__":
     app.run()

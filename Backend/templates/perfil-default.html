@@ -471,7 +471,7 @@ img {
                                 <div>
                                    <!-- <img class="profile-pic" src="../static/ada.PNG" alt="profile">-->
                                     <i class="fa fa-user-circle fa-4x"></i>
-                                    <span class="profile-name">{{ nome }} {{ sobrenome }}</span>
+                                    <span class="profile-name">{{ selectedUser.nome }} {{ selectedUser.sobrenome }}</span>
                                     <button id="myButton" class="button.btn.first">Seguir</button>
                                 </div>
                               
@@ -594,7 +594,7 @@ img {
                                             <!---->
                                             <i class="fa fa-user-circle fa-4x" style="margin-right: 8px;"></i>
                                             <div>
-                                                <b style="color: black;">{{ nome }} {{ sobrenome }}</b>&nbsp; {{ tag }}
+                                                <b style="color: black;">{{ selectedUser.nome }} {{ selectedUser.sobrenome }}</b>&nbsp; {{ tag }}
                                                 <br>
                                                 <p id="pzinho">{{ descricao }}</p>
                                                 <p id="pzinho" style="margin-top: 0px;">1h <i class="fas fa-globe"></i></p>
@@ -740,5 +740,11 @@ img {
             </div>
         </div>
         </div>
+        <div id="codigoUsuario" data-codigo="{{ selectedUser.cod_desenvolvedor }}" style="display: none;"></div>
+        <script>
+            // Acessar o valor do código do usuário
+            var codigoUsuario = document.getElementById("codigoUsuario").dataset.cod_desenvolvedor;
+            console.log(codigoUsuario); // Exemplo: Exibir o código no console
+        </script>
 </body>
 </html>
