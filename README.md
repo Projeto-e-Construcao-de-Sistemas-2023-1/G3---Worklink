@@ -73,9 +73,9 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | CDU09 | Seguir usuário. |
 | CDU10 | Candidatar-se a um projeto. |
 | CDU11 | Filtrar feed. |
-| CDU12 | Sacar dinheiro. |
+| CDU12 | Escolher desenvolvedor. |
 | CDU13 | Manter projeto. |
-| CDU14 | Escolher desenvolvedor. |
+| CDU14 | Sacar dinheiro. |
 | CDU15 | Depositar dinheiro. |
 | CDU16 | Realizar transação. |
 | CDU17 | Copiar link de compartilhamento de perfil |
@@ -343,69 +343,9 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pós-Condições | Feed filtrado com as hashtags desejadas. |
 | Regras de negócios | N/A. | 
 
-### Caso 14.1: Criar Projeto
+### Caso 12: Escolher Desenvolvedor
 
-| 14.1 | Criar Projeto |
-| --- | --- |
-| Nome | Criar Projeto |
-| Objetivo | Criar um novo projeto da empresa |
-| Ator | Empresa |
-| Pré-Condições | O ator está com sessão em andamento |
-| Trigger | O ator seleciona o botão “Criar Novo Projeto” em sua tela de usuário |
-| Fluxo Principal | 1 - O sistema exibe a tela com campos “Nome do Projeto”, “Descrição”, “Número de desenvolvedores”, “Hashtag”, “Remuneração” e “Tempo de Contrato”. <br> 2 - O ator preenche os campos e clica na opção “Publicar Projeto”. [A1] <br> 3 - O sistema cria e publica o novo projeto da empresa. |
-| Fluxos Alternativos | <strong>A1.  Os campos “Nome do Projeto”, “Número de Desenvolvedores” ou “Hashtags” estão inválidos</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
-| Extensões | N/A. |
-| Pós-Condições | O ator cria um novo projeto em seu perfil. |
-| Regras de negócios | RN7 - Somente empresas podem realizar criação de projetos. |
-
-### Caso 14.2: Visualizar Projeto
-
-| 14.2 | Visualizar  Projeto |
-| --- | --- |
-| Nome | Visualizar Projeto |
-| Objetivo | Visualizar detalhes de um projeto feito pela empresa |
-| Ator | Empresa |
-| Pré-Condições | O ator está com sessão em andamento |
-| Trigger | O ator seleciona a opção “Ver mais” em um projeto |
-| Fluxo Principal | 1 -O sistema exibe o “Nome do Projeto”, “Nome da empresa responsável pelo projeto”, “Descrição”, “Número de desenvolvedores necessários”, “Hashtag”, “Remuneração” e “Tempo de Contrato” e “Vagas disponíveis. |
-| Fluxos Alternativos | N/A |
-| Extensões | N/A. |
-| Pós-Condições | O ator visualiza detalhes do projeto. |
-| Regras de negócios | N/A |
-
-### Caso 14.3: Editar Projeto
-
-| 14.3 | Editar Projeto |
-| --- | --- |
-| Nome | Editar Projeto |
-| Objetivo | Editar dados do projeto da empresa |
-| Ator | Empresa |
-| Pré-Condições | O ator está com sessão em andamento |
-| Trigger | O ator seleciona o botão “Editar Projeto” em um projeto |
-| Fluxo Principal | 1 - O sistema exibe tela com campos “Nome do Projeto”, “Descrição”, “Número de desenvolvedores”, “Hashtag”, “Remuneração” e “Tempo de Contrato” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do projeto. |
-| Fluxos Alternativos | <strong>A1. Campos “Nome do Projeto”, “Número de Desenvolvedores” ou “Hashtags” estão inválidos </strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
-| Extensões | N/A. |
-| Pós-Condições | Os dados do projeto do ator são alterados. |
-| Regras de negócios | RN8 - A empresa não poderá editar o projeto caso algum desenvolvedor tenha se candidatado. |
-
-### Caso 14.4: Deletar Projeto
-
-| 14.4 | Deletar Projeto |
-| --- | --- |
-| Nome | Deletar Projeto |
-| Objetivo | Deletar projeto da empresa |
-| Ator | Empresa |
-| Pré-Condições | O ator possui um projeto criado |
-| Trigger | O ator seleciona o botão “Deletar Projeto” em um projeto. |
-| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente deletar sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 -O ator confirma a desativação do projeto. [A1] <br> 3 - O sistema verifica possíveis pendências e desativa o projeto. [A2] |
-| Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Não” na pergunta de deleção de conta.</strong> <br> 1 - O ator não confirma a desativação. <br> 2 - Voltar para o passo 1. <br><br ><strong>2 - Status do Projeto é “Em desenvolvimento”.</strong> <br> 1 - O sistema exibe mensagem informando que o projeto não pode ser desativado. <br> 2 - Voltar para o passo 1. |
-| Extensões | N/A. |
-| Pós-Condições | O ator desativa o projeto de seu perfil. |
-| Regras de negócios | RN4 - A empresa não poderá deletar o projeto após estar "Em Desenvolvimento" |
-
-### Caso 14: Escolher Desenvolvedor
-
-| 15 | Escolher Desenvolvedor |
+| 12 | Escolher Desenvolvedor |
 | --- | --- |
 | Nome | Escolher Desenvolvedor |
 | Objetivo | Escolher o(s) desenvolvedor(es) que participará/participarão do projeto. |
@@ -413,10 +353,100 @@ O feed geral também conta com filtros, para ajudar os desenvolvedores a encontr
 | Pré-Condições | O projeto publicado possui candidaturas de desenvolvedores. |
 | Trigger | O ator clica no botão “Selecionar desenvolvedores” na aba do projeto. |
 | Fluxo Principal | 1 - O sistema exibe na tela uma lista com nome e descrição de todos os desenvolvedores que se candidataram ao projeto.[A1] <br> 2 - O ator clica no botão “Escolher Desenvolvedor” ao lado do desenvolvedor desejado. <br> 3 - O sistema exibe a opção “Confirmar Desenvolvedores” após o número de desenvolvedores para o projeto ser totalizado. <br> 4 - Ator clica no botão “Confirmar Desenvolvedores”. |
-| Fluxos Alternativos |  <strong>A1. O projeto não possui candidaturas de desenvolvedores.</strong> <br> 1 - O sistema exibe a mensagem “Projeto não possui desenvolvedores candidatados, tente novamente mais tarde.” <br> 2- Voltar para o passo 1. |
+| Fluxos Alternativos |  N/A |
 | Extensões | N/A. |
-| Pós-Condições | Os desenvolvedores para o projeto são confirmados. |
+| Pós-Condições | Os desenvolvedores confirmados no projeto |
 | Regras de negócios | RN1 - Um desenvolvedor deve ter, no mínimo, 1 tag em comum com o projeto para poder se candidatar à ele. |
+
+### Caso 13.1: Criar Projeto
+
+| 13.1 | Criar Projeto |
+| --- | --- |
+| Nome | Criar Projeto |
+| Objetivo | Criar um novo projeto da empresa |
+| Ator | Empresa |
+| Pré-Condições | O ator com sessão em andamento |
+| Trigger | O ator seleciona o botão “Criar Novo Projeto” em sua tela de usuário |
+| Fluxo Principal | 1 - O sistema exibe a tela com campos “Nome do Projeto”, “Descrição”, “Número de desenvolvedores”, “Hashtag”, “Remuneração” e “Tempo de Contrato”. <br> 2 - O ator preenche os campos e clica na opção “Publicar Projeto”. [A1] <br> 3 - O sistema cria e publica o novo projeto da empresa. |
+| Fluxos Alternativos | <strong>A1.  Os campos “Nome do Projeto”, “Número de Desenvolvedores” ou “Hashtags” estão inválidos</strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Extensões | N/A. |
+| Pós-Condições | Projeto criado com sucesso |
+| Regras de negócios | RN7 - Somente empresas podem realizar criação de projetos. |
+
+### Caso 13.2: Visualizar Projeto
+
+| 13.2 | Visualizar  Projeto |
+| --- | --- |
+| Nome | Visualizar Projeto |
+| Objetivo | Visualizar detalhes de um projeto feito pela empresa |
+| Ator | Empresa |
+| Pré-Condições | O ator com sessão em andamento |
+| Trigger | O ator seleciona a opção “Ver mais” em um projeto |
+| Fluxo Principal | 1 -O sistema exibe o “Nome do Projeto”, “Nome da empresa responsável pelo projeto”, “Descrição”, “Número de desenvolvedores necessários”, “Hashtag”, “Remuneração” e “Tempo de Contrato” e “Vagas disponíveis. |
+| Fluxos Alternativos | N/A |
+| Extensões | N/A. |
+| Pós-Condições | Detalhes do projetos exibidos na tela do ator |
+| Regras de negócios | N/A |
+
+### Caso 13.3: Editar Projeto
+
+| 13.3 | Editar Projeto |
+| --- | --- |
+| Nome | Editar Projeto |
+| Objetivo | Editar dados do projeto da empresa |
+| Ator | Empresa |
+| Pré-Condições | O ator com sessão em andamento |
+| Trigger | O ator seleciona o botão “Editar Projeto” em um projeto |
+| Fluxo Principal | 1 - O sistema exibe tela com campos “Nome do Projeto”, “Descrição”, “Número de desenvolvedores”, “Hashtag”, “Remuneração” e “Tempo de Contrato” preenchidos como anteriormente para serem alterados. <br> 2 - O ator altera os campos e seleciona o botão de “Confirmar”. [A1] <br> 3 - O sistema atualiza os campos do projeto. |
+| Fluxos Alternativos | <strong>A1. Campos “Nome do Projeto”, “Número de Desenvolvedores” ou “Hashtags” estão inválidos </strong> <br> 1 - O sistema exibe uma mensagem “Dados inválidos, por favor preencha-os novamente”. <br> 2 - Voltar para o passo 1. |
+| Extensões | N/A. |
+| Pós-Condições | Os dados do projeto do ator alterados. |
+| Regras de negócios | RN8 - A empresa não poderá editar o projeto caso algum desenvolvedor tenha se candidatado. |
+
+### Caso 13.4: Excluir Projeto
+
+| 13.4 | Excluir Projeto |
+| --- | --- |
+| Nome | Excluir Projeto |
+| Objetivo | Excluir projeto da empresa |
+| Ator | Empresa |
+| Pré-Condições | O ator possui um projeto criado |
+| Trigger | O ator seleciona o botão “Excluir Projeto” em um projeto |
+| Fluxo Principal | 1 - O sistema exibe um pop-up perguntando se o ator deseja realmente excluir sua conta do sistema, com as opções “Sim” ou “Não”. <br> 2 -O ator confirma a exclusão do projeto. [A1][A2] <br> 3 - O sistema exclui o projeto |
+| Fluxos Alternativos | <strong>A1. O ator seleciona a opção “Não” na pergunta de exclusão de conta.</strong> <br> 1 - O ator não confirma exclusão. <br> 2 - O sistema redireciona para a página de peril do usuário. <br><br ><strong>A2 - Status do Projeto é “Em desenvolvimento”.</strong> <br> 1 - O sistema exibe mensagem informando que o projeto não pode ser excluído. <br> 2 - Voltar para o passo 1. |
+| Extensões | N/A. |
+| Pós-Condições | Projeto excluido do sistema |
+| Regras de negócios | RN4 - A empresa não poderá excluir o projeto após estar "Em Desenvolvimento" |
+
+### Caso 14: Sacar Dinheiro
+
+| 14 | Sacar Dinheiro |
+| --- | --- |
+| Nome | Sacar dinheiro |
+| Objetivo | Sacar dinheiro para sua conta |
+| Ator | Usuário |
+| Pré-Condições | O ator está na tela de carteira e possui dinheiro para sacar |
+| Trigger | O ator seleciona a opção “Sacar” na tela de carteira |
+| Fluxo Principal | 1 - O sistema exibe o campo “Valor” para ser preenchido pelo ator. <br> 2 - O ator preenche o campo para o saque. <br> 3 - O sistema valida se o usuário tem o valor necessário, realiza o saque e exibe uma tela com mensagem “Saque realizado com sucesso”. [A1][A2]|
+| Fluxos Alternativos |  <strong>A1.Saldo Insuficiente.</strong> <br> 1 - O sistema exibe uma página com a mensagem “Erro ao realizar saque”. <br> 2- Voltar para o passo 1. <br><br ><strong>A2 - Valor inválido.</strong> <br> 1 - O sistema exibe uma página com a mensagem “Erro ao realizar depósito”. <br> 2 - Voltar para o passo 1. |
+| Extensões | N/A. |
+| Pós-Condições | O saldo na carteira do ator atualizada com sucesso |
+| Regras de negócios | N/A |
+
+### Caso 15: Depositar Dinheiro
+
+| 15 | Depositar Dinheiro |
+| --- | --- |
+| Nome | Depositar Dinheiro |
+| Objetivo | Depositar Dinheiro na carteira virtual |
+| Ator | Empresa|
+| Pré-Condições | O ator está na tela de carteira |
+| Trigger | O ator seleciona a opção “Depositar” na tela de carteira |
+| Fluxo Principal | 1 - O sistema exibe o campo “Valor” para ser preenchido pelo ator. <br> 2 - O ator preenche o campo para o depósito. <br> 3 - O sistema valida o depósito e exibe uma tela com mensagem “Depósito realizado com sucesso”. [A1] |
+| Fluxos Alternativos |  <strong>A1. Valor inválido.</strong> <br> 1 - O sistema exibe uma página com a mensagem “Erro ao realizar depósito”. <br> 2- Voltar para o passo 1. |
+| Extensões | N/A. |
+| Pós-Condições | O saldo na carteira do ator atualizada com sucesso |
+| Regras de negócios | RN9 - Somente a empresa poderá realizar depósito na carteira. |
 
 ### Caso 18: Redefinir Senha
 
