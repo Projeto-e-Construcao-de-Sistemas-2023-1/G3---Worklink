@@ -2,8 +2,8 @@ from Database import Database
 #from Empresa import Empresa
 # OS GETTERS VÃO SER CONSULTAS NO BANCO DE DADOS PEDINDO AQUELA VARIAVEL
 class Projeto():    
-    def criaProjeto(self, cod_empresa,especificacao, valor_orcamento, prazo, requisito_tecnico, status_projeto, tag_projeto, nome_projeto):
-        values = (cod_empresa, especificacao, valor_orcamento, prazo, requisito_tecnico, status_projeto, tag_projeto, nome_projeto)
+    def criaProjeto(self, cod_empresa,especificacao, valor_orcamento, prazo, status_projeto, tag_projeto, nome_projeto, numero_devs):
+        values = (cod_empresa, especificacao, valor_orcamento, prazo, status_projeto, tag_projeto, nome_projeto, numero_devs)
         #tipo = True
         Database.connect(self)
         Database.insertProjeto(self, values)

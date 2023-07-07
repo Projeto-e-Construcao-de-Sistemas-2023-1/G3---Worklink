@@ -188,24 +188,24 @@
 						</button>
 						
 						<div id="myForm" class="form">
-						  <form class="form-floating">
+						  <form class="form-floating" action="/criarProjeto" method='post'>
 							
 							<h2 id="criarprojeto">Criar Projeto</h2>
 					
-							<input class="form-control" type="text" id="name" name="name" placeholder="Nome do Projeto">
+							<input class="form-control" type="text" id="name" name="nome_projeto" placeholder="Nome do Projeto">
 
 							
-          					<textarea class="form-control" cols="20" rows="3" name="textarea" id="textarea" placeholder="Descrição"></textarea>
+          					<textarea class="form-control" cols="20" rows="3" name="especificacao" id="textarea" placeholder="Descrição"></textarea>
 							<div id="colun">
 							
-							<input class="form-control" type="number" id="numDev" name="numDev" min="1"placeholder="Nº Devs" >
+							<input class="form-control" type="number" id="numDev" name="numero_devs" min="1"placeholder="Nº Devs" >
 
-          					<input class="form-control" type="text" name="name" id="valueField" placeholder="Remuneração R$" >
+          					<input class="form-control" type="text" name="valor_orcamento" id="valueField" placeholder="Orçamento R$" >
 
-							  <input class="form-control" type="text" name="name" id="valueField" value="" tabindex="1" placeholder="Tempo de Contrato">
+							  <input class="form-control" type="text" name="prazo" id="valueField" value="" tabindex="1" placeholder="Prazo">
 							</div>
 							
-							<input class="form-control" type="text" name="name" id="name" value="" tabindex="1" placeholder="#Hashtags">
+							<input class="form-control" type="text" name="tag_projeto" id="name" value="" tabindex="1" placeholder="#Hashtags">
 
 						<div id="publicar">
 							<button id="btnCancel" class="form-control" type="button" onclick="closeForm()">Cancelar</button>

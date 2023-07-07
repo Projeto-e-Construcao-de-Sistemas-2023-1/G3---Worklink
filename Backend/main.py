@@ -76,6 +76,10 @@ def login():
             flash('***EMAIL OU SENHA INCORRETOS***')
             return redirect(url_for('login'))
 
+@app.route('/lista_projetos', methods=['GET'])
+def lista_projetos():
+    return render_template('lista-projetos.html')
+
 @app.route('/perfil', methods=['GET'])
 def perfil():
    if tipo == True:
@@ -190,11 +194,19 @@ def edita_perfil():
 
 @app.route('/criarProjeto', methods=['POST'])
 def criarProjeto():
-    nomeProjeto = request.form.get('nomeProjeto')
-    nunDev = request.form.get('nunDev')
-    tag = request.form.get('tag')
-    descricao = request.form.get('descricao')
-    return render_template('perfil_dev.html')
+    if tipo == False: 
+        cod_empresa = emp.getCodigo()
+        nome_projeto = request.form.get('nome_projeto')
+        numero_devs = request.form.get('numero_devs')
+        tag_projeto = request.form.get('tag_projeto')
+        valor_orcamento = request.form.get('valor_orcamento')
+        prazo = request.form.get('prazo')
+        especificacao = request.form.get('especificacao')
+        status_projeto = "A fazer"
+        pjt.criaProjeto(cod_empresa, especificacao, valor_orcamento, prazo, status_projeto, tag_projeto, nome_projeto, numero_devs)
+        return render_template('pagina_inicial.html')
+    else:
+        return render_template('pagina_inicial.html')
   
 @app.route('/follow', methods=['POST'])
 def follow():

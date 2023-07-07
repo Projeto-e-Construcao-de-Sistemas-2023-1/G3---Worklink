@@ -201,7 +201,7 @@ class Database:
     
     # -- CRUD PROJETO
     def insertProjeto(self, values):
-        query = """ INSERT INTO `PROJETO` (`cod_empresa`, `especificacao`, `valor_orcamento`, `prazo`, `requisito_tecnico`, `status_projeto`, `tag_projeto`, `nome_projeto`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
+        query = """ INSERT INTO `PROJETO` (`cod_empresa`, `especificacao`, `valor_orcamento`, `prazo`, `status_projeto`, `tag_projeto`, `nome_projeto`, `numero_devs`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
         self.cursor.execute(query, values)
         self.con.commit() # INSERT REALIZADO
 
