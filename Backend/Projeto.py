@@ -72,6 +72,11 @@ class Projeto():
         Database.connect(self)
         Database.updateProjeto(self, 'nome_projeto', espec, cod_empresa, nome_projeto)
         return True
+    
+    def listaProjetos(self, cod_empresa):
+        Database.connect(self)
+        Database.listaProjetos(self, cod_empresa)
+        return True
 
     def deletaProjeto(self, cod_empresa, nome_projeto):
         Database.connect(self)

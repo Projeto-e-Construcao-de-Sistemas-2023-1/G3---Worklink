@@ -124,7 +124,7 @@
 </head>
 <body>
   
-    <div class="card mb-3" style="max-width: 350px;">
+    <div id = "popup" class="card mb-3" style="max-width: 350px;">
       <div class="row g-0">
         <div class="col-md-4">
           <img src="../static/logo-carteira.png" class="" alt="hh" height="150px" width="150px" style="text-align: center;">
@@ -190,18 +190,6 @@
 
         <input class="btn btn-primary" type="submit" value="Realizar Transação" style="margin-top: 10px; margin-left: 60px;" onclick="confirmarTransacao(event)">
     </form>
-
-    <div class="messages">
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class="messages-list">
-              {% for message in messages %}
-                <li>{{ message }}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
-      </div>
 
 </div>
     <script>
