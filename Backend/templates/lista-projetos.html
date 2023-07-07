@@ -29,7 +29,7 @@
 
     .project {
     width: 240px;
-    height: 170px;
+    height: fit-content;
     background-color: #EAEAEA;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -163,7 +163,11 @@
           projectStatus.textContent = "Status: " + project.status;
           projectElement.appendChild(projectStatus);
     
-          var editButton = document.createElement("button");
+          var valorDoFlask = "{{ valorDoFlask }}";
+
+          //se for EMPRESA, mostra os botoes
+          if (valorDoFlask === "valorUsuario") {
+            var editButton = document.createElement("button");
           editButton.textContent = "Editar projeto";
           projectElement.appendChild(editButton);
     
@@ -171,6 +175,12 @@
           deleteButton.textContent = "Excluir projeto";
           deleteButton.classList.add("delete-button"); // Adicionando a classe CSS
           projectElement.appendChild(deleteButton);
+    
+          }else{
+            var editButton = document.createElement("button");
+            editButton.textContent = "Ver mais";
+            projectElement.appendChild(editButton);
+          }
     
           return projectElement;
         }

@@ -9,6 +9,7 @@ from datetime import datetime
 from Evento import Evento
 import sys
 from Projeto import Projeto
+import json
 
 app = Flask(__name__, template_folder="templates")
 emailsessao=''
@@ -83,9 +84,11 @@ def lista_projetos():
 @app.route('/perfil', methods=['GET'])
 def perfil():
    if tipo == True:
-        return render_template('perfil_dev.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao(), email=dev.getEmail())
+        saldo = Usuario().verificarSaldo(True, dev.getCodigo())
+        return render_template('perfil_dev.html', nome=dev.getNome(), sobrenome=dev.getSobrenome(), descricao=dev.getDescricao(), email=dev.getEmail(), saldo=saldo)
    else:
-       return render_template('perfil_dev.html', nome=emp.getRazaoSocial(), descricao=emp.getAreaNegocio(), email=emp.getEmail())
+       saldo = Usuario().verificarSaldo(False, emp.getCodigo())
+       return render_template('perfil_dev.html', nome=emp.getRazaoSocial(), descricao=emp.getAreaNegocio(), email=emp.getEmail(), saldo=saldo)
 
 @app.route('/criar_Projeto', methods=['GET'])
 def criar_projeto():
@@ -100,10 +103,20 @@ def feed():
 
 #metodos 
     
-@app.route('/pesquisa_usuario', methods=['post'])
-def pesquisaUser():
-    pesquisa_user = request.form.get('pesquisa_user')
-    print(pesquisa_user)
+@app.route('/pesquisa_usuario', methods=['GET'])
+def pesquisaUsuario():
+    #nome = request.form.get('nome')
+    nome = request.args.get('nome')
+    tipoUsuario = tipo
+    # if tipoUsuario:
+    #     codUsuario = dev.getCodigo()
+    # else:
+    #     codUsuario = emp.getCodigo()
+    resultado = Usuario().pesquisaUsuario(nome, tipoUsuario)
+    return jsonify(resultado)
+    #print(resultado)
+
+@app.route('/copiarURL', methods=['GET'])
     
 @app.route('/signup_developer', methods=['POST'])
 def regdev():
@@ -276,10 +289,10 @@ def deposito():
     valor = valor.replace(',', '.')
     if Usuario().Depositar(tipoUsuario, codUsuario, valor):
         flash("Depósito realizado com sucesso!")
-        return redirect(url_for('carteira'))
+        return redirect(url_for('perfil'))
     else:
         flash("Erro ao realizar depósito!")
-        return redirect(url_for('carteira'))
+        return redirect(url_for('perfil'))
 
 @app.route('/saque', methods=['POST'])
 def saque():
@@ -292,10 +305,10 @@ def saque():
     valor = valor.replace(',', '.')
     if Usuario().Sacar(tipoUsuario, codUsuario, valor):
         flash("Saque realizado com sucesso!")
-        return redirect(url_for('carteira'))
+        return redirect(url_for('perfil'))
     else:
         flash("Erro ao realizar saque!")
-        return redirect(url_for('carteira'))
+        return redirect(url_for('perfil'))
 
 
 @app.route('/transacao', methods=['POST'])
@@ -307,10 +320,10 @@ def transacao():
     descricao = request.form.get('descricao')
     if Usuario().realizarTransacao(codEmpresa, codDesenvolvedor, valor, descricao):
         flash("Transação realizada com sucesso!")
-        return redirect(url_for('carteira'))
+        return redirect(url_for('perfil'))
     else:
         flash("Erro ao realizar transação!")
-        return redirect(url_for('carteira'))
+        return redirect(url_for('perfil'))
 
 
 @app.route('/carteira', methods=['GET'])
@@ -321,6 +334,25 @@ def carteira():
         saldo = Usuario().verificarSaldo(False, emp.getCodigo())
     return render_template('carteira.html', saldo=saldo)
 
+@app.route('/perfil/<selectedUser>')
+def exibir_perfil(selectedUser):
+    selectedUser = json.loads(selectedUser)
+    nomePesquisado = selectedUser["nome"]
+    sobrenomePesquisado = selectedUser["sobrenome"]
+    emailPesquisado = selectedUser["email"]
+    descricaoDevPesquisado = selectedUser["descricao"]
+    #descricaoEmpPesquisado = selectedUser["area_negocio"]
+    print(nomePesquisado)
+    print(selectedUser)
+    return render_template('perfil-default.html', selectedUser=selectedUser, nome=nomePesquisado, sobrenome=sobrenomePesquisado, email=emailPesquisado, descricao=descricaoDevPesquisado)
+
+@app.route('/url', methods=['POST'])
+def get_url():
+    data = request.get_json()
+    url = data['url']
+    # Faça o que quiser com a URL aqui, como armazená-la em um banco de dados
+    print(url)
+    return 'URL recebida com sucesso'
 
 if __name__ == "__main__":
     app.run()

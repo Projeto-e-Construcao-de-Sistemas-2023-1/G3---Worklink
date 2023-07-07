@@ -50,13 +50,32 @@ class Database:
             return False # Credenciais inválidas
 
     def pesquisaUsuario(self, nome, tipo):
-        if tipo == True: # TRUE PARA DEV
-            self.cursor.execute(f'SELECT DESENVOLVEDOR.nome, DESENVOLVEDOR.descricao FROM DESENVOLVEDOR WHERE nome = "{nome}"')
+        if tipo:  # True para desenvolvedor
+            self.cursor.execute('SELECT DESENVOLVEDOR.nome, DESENVOLVEDOR.sobrenome, DESENVOLVEDOR.cod_desenvolvedor, DESENVOLVEDOR.email, DESENVOLVEDOR.descricao FROM DESENVOLVEDOR WHERE nome LIKE %s', (f'%{nome}%',))
             self.con.commit()
-        else: # FALSE PARA EMPRESA
-            self.cursor.execute(f'SELECT EMPRESA.razao_social, EMPRESA.area_negocio FROM EMPRESA WHERE nome = "{nome}"')
+        else:  # False para empresa
+            self.cursor.execute('SELECT EMPRESA.razao_social, EMPRESA.area_negocio, EMPRESA.cod_empresa, EMPRESA.email, EMPRESA.area_negocio FROM EMPRESA WHERE nome LIKE %s', (f'%{nome}%',))
             self.con.commit()
-        return self.cursor.fetchall() # MOSTRAR OS REGISTROS NA TELA DO FRONT END
+        #return self.cursor.fetchall()
+        resultado = []
+        for row in self.cursor.fetchall():
+            if tipo:
+                resultado.append({
+                    'nome': row[0],
+                    'sobrenome': row[1],
+                    'cod_usuario': row[2],
+                    'email': row[3],
+                    'descricao': row[4] 
+                })
+            else:
+                resultado.append({
+                    'razao_social': row[0],
+                    'area_negocio': row[1],
+                    'cod_usuario': row[2],
+                    'email': row[3],
+                    'area_negocio': row[4]  
+                })
+        return resultado
     
     def verificaUsuario(self, email):
         self.cursor.execute(f'SELECT * FROM DESENVOLVEDOR WHERE email = "{email}"')

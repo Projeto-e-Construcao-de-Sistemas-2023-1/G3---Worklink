@@ -479,10 +479,21 @@ img {
 
       <div id="divform">
         <div class="btn-group" role="group" aria-label="Basic example" style="margin-top: 10px;">
-        <button  style= " width: 167px; background-color: #141034; color: #EAEAEA; border-color: #3b2f94;" class="btn btn-primary" onclick="mostrarForm('formSacar')">Sacar</button>
+        <button id="saque"  style= " width: 167px; background-color: #141034; color: #EAEAEA; border-color: #3b2f94;" class="btn btn-primary" onclick="mostrarForm('formSacar')">Sacar</button>
+        <div id="opEmpresa" style="display: contents;">
         <button style= " width: 167px; background-color: #141034; color: #EAEAEA; border-color: #3b2f94;" class="btn btn-primary" onclick="mostrarForm('formDepositar')">Depositar</button>
         <button style= "width: 167px; background-color: #141034; color: #EAEAEA; border-color: #3b2f94;" class="btn btn-primary" onclick="mostrarForm('formTransacao')">Transação</button>
-    </div>
+        </div>  
+      </div>
+        <script>
+        //adiciona valor se é dev ou empresa
+        var valorDoFlask = "{{ valorDoFlask }}";
+        //se for dev, esconde os valores 
+        if (valorDoFlask === "valorUsuario") {
+            document.getElementById("saque").style.width = "500px";
+            document.getElementById("opEmpresa").style.display = "none";
+        }
+        </script>
 
     <form id="formSacar" action="/saque" method="POST" style="display: none; margin: 10px; margin-left: 110px;">
       <!-- <label for="tipoUsuario">Tipo de Usuário:</label>
@@ -603,6 +614,17 @@ img {
                                     <span class="profile-name">{{ nome }} {{ sobrenome }}</span>
                                   <!-- <button id="follow-button" onclick="alterarTexto()">Seguir</button>--> 
                                 </div>
+                                <div class="messages">
+                                    {% with messages = get_flashed_messages() %}
+                                      {% if messages %}
+                                        <ul class="messages-list">
+                                          {% for message in messages %}
+                                            <li>{{ message }}</li>
+                                          {% endfor %}
+                                        </ul>
+                                      {% endif %}
+                                    {% endwith %}
+                                  </div>
                                 <div class="d-none d-md-block">
                                     <button id="edit"  onclick="window.location.href='/editar_perfil'">
                                         <svg xmlns="http://www.w3.org/2000/svg"width="20" height="20" color="white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit btn-icon-prepend">

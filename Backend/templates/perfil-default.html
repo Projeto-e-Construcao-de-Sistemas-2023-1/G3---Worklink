@@ -473,6 +473,7 @@ img {
                                     <i class="fa fa-user-circle fa-4x"></i>
                                     <span class="profile-name">{{ nome }} {{ sobrenome }}</span>
                                     <button id="myButton" class="button.btn.first">Seguir</button>
+                                    <button id="copiarURL" class="button.btn.first">Copiar Link</button>
                                 </div>
                               
                             </div>
@@ -492,9 +493,37 @@ img {
                                 button.innerHTML = 'Seguindo';
                                 button.style.backgroundColor = "#cbee6d";
                                 clicked = true;
-                              }
+                                var seguido = selectedUser.cod_desenvolvedor
+                                fetch('/follow', {
+                                method: 'POST',
+                                headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                                },
+                                body: 'seguido=' + seguido,
+                                })
+                                .then(response => response.text())
+                                .then(data => {
+                                console.log(data); // Exibe a resposta do servidor
                             });
-                          </script>
+                            }
+                            });
+                            </script>
+
+                            <script>
+                                var button = document.getElementById("copiarURL");
+                                // Faz uma requisição para a API Flask enviando a URL atual
+                                button.addEventListener("click", function() {
+                                    if (clicked) {
+                                        fetch('/url', {
+                                        method: 'POST',
+                                        body: JSON.stringify({ url: window.location.href }),
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                }
+                                });
+                                    }
+                                });
+                            </script>
 
                         <div class="header-links">
                             <ul class="links d-flex align-items-center mt-3 mt-md-0">
