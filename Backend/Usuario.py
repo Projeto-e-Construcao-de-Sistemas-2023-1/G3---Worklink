@@ -1,92 +1,145 @@
-import mysql.connector
+from flask import jsonify, flash
+from Database import Database
+from decimal import Decimal
+import pyperclip
+import smtplib
+import email.message
 
-class Usuario:
-    def getEmail(self):
-        return str(self.email)
-    
-    def getConta(self):
-        self.cursor.execute(f'SELECT conta_bancaria FROM empresa WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
-    
-    def setTelefone(self, telefone):
-        self.cursor.execute(f'UPDATE desenvolvedor SET telefone = {telefone} WHERE email = "{self.email}"')
-        self.con.commit()
-        return True
-    
-    def setContaBancaria(self, conta):
-        self.cursor.execute(f'UPDATE desenvolvedor SET conta_bancaria = {conta} WHERE email = "{self.email}"')
-        self.con.commit()
-        return True
-    
-    def setSenha(self, senha):
-        self.cursor.execute(f'UPDATE desenvolvedor SET senha = {senha} WHERE email = "{self.email}"')
-        self.con.commit()
-        return True
-    
-    def getTelefone(self):
-        self.cursor.execute(f'SELECT telefone FROM empresa JOIN desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
-    
-    def editaUsuario(self, mudança):
-        # perguntar ao usuario o que ele quer editar -> ver com pessoal do frontend
-        mudança = mudança.lower()
-        if(mudança == 'email'):
-            # pedir o novo email
-            self.setEmail(novo_email) # RECEBER DO FRONT END
-        elif(mudança == 'telefone'):
-            # pedir o novo telefone
-            self.setTelefone(novo_telefone) # RECEBER DO FRONT END
-        elif(mudança == 'conta bancaria'):
-            # pedir a nova conta bancaria
-            self.setContaBancaria(novo_agencia, novo_conta) # RECEBER DO FRONT END
-        elif(mudança == 'senha'):
-            # pedir a nova senha
-            self.setSenha(novo_senha) # RECEBER DO FRONT END
-        elif(mudança == 0):
-            exit()
+class Usuario: # CLASSE QUE TERÁ OS METODOS COMUNS A DESENVOLVEDOR E EMPRESA
+    def deletaUsuario(self, tipo, email): # Passar tipo = True para DESENVOLVEDOR | tipo = False para EMPRESA
+        Database.connect(self)
+        if tipo == True:
+            Database.delete(self, 'DESENVOLVEDOR', email)
         else:
-            self.editaUsuario()
-
-    def deletaUsuario(self, email):
-        try:
-            self.cursor.execute(f'DELETE FROM usuario WHERE email = {email}')
-            self.con.commit() 
-            return True # PRINTAR NA TELA QUE O USUARIO FOI DELETADO COM SUCESSO
-        except Exception as e:
-            print(e)
-            return False # PRINTAR ERRO NA DELEÇÃO
-        
+            Database.delete(self, 'EMPRESA', email)
+            
     def iniciaSessao(self, email, senha):
-        global sessao_ativa
-        self.email = email # Grava email do usuario logado para futuras consultas
-        self.cursor.execute(f'SELECT * FROM desenvolvedor JOIN empresa WHERE email = {email} AND senha = {senha}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        if self.cursor.fetchone():
-            sessao_ativa = True # Apto para rodar o site do usuário FALAR COM JHONNY
-            return True # Logado com sucesso 
+        Database.connect(self)
+        if Database.autenticaUsuario(self, email, senha):
+            self.email = email # Grava email do usuario logado para futuras consultas
+            return True # vai vir como True ou False
         else:
-            sessao_ativa = False
-            return False # Credenciais inválidas
+            return False
         
     def finalizaSessao(self):
-        global sessao_ativa # Só rodar o site do usuário se a sessão estiver ativa FALAR COM JHONNY
-        sessao_ativa = False
+        pass # Apenas no front end
 
-    def pesquisaUsuario(self):
-        self.cursor.execute(f'SELECT * FROM desenvolvedor JOIN empresa')
-        self.con.commit()
-        return str(self.cursor.fetchall()) # MOSTRAR OS REGISTROS NA TELA DO FRONT END
+    def verificaUsuario(self):
+        Database.connect(self)
+        self.tipo = Database.verificaUsuario(self, self.email)
+        return self.tipo
     
-    def conectaBD(self):
-        self.con = mysql.connector.connect(
-        host='localhost',
-        database='worklink',
-        user='root',
-        password='pjSq2023@') # BD acessado!!!
-        if self.con.is_connected():
-            self.cursor = self.con.cursor()
-            inserir = """INSERT INTO usuario (cod_usuario, telefone, email, conta_bancaria, senha) VALUES (1, '21999999999', 'TESTE@email.com', '123456789', '12345)  """
-            self.cursor.execute(inserir)
-            self.con.commit()
+    def toClipboard(self, texto):
+        pyperclip.copy(texto)
+    
+    def capturaEmail(self, email):
+        self.email = email
+
+    def pesquisaUsuario(self, nome, tipo):
+        Database.connect(self)
+        return Database.pesquisaUsuario(self, nome, tipo)
+    
+    def Follow(self, seguidor, seguido, tipoSeguidor, tipoSeguido):
+        Database.connect(self)
+        # if Database.checkFollow(self, self.cod, codSgd, tipoSgr, tipoSgd):
+        #     return False  
+        #     #Ja segue
+        # else:
+        Database.Follow(self, seguidor, seguido, tipoSeguidor, tipoSeguido)
+        return True 
+
+    # def Unfollow(self, cod, tipo):
+    #     Database.connect(self)
+    #     if self.verificaUsuario(self):
+    #         tipo = 'dev'
+    #     tipo = 'emp'
+    #     if verificaUsuario(cod):
+    #         tipoSeguido = 'dev'
+    #     tipoSeguido = 'emp'
+    #     if Database.checkFollow(self, self.cod, cod, tipo, tipoSeguido):
+    #         Database.Unfollow(self, self.cod, cod)
+    #         return True  
+    #         #deu unfollow
+    #     else:
+    #         return False
+    #         #nao estava seguindo
+
+    def Depositar(self, tipoUsuario, codUsuario, valor):
+        Database.connect(self)
+        valorDecimal = Decimal(valor)
+        if Database.inserir_dinheiro(self, tipoUsuario, codUsuario, valorDecimal):
+            return True
+        return False
+
+    def Sacar(self, tipoUsuario, codUsuario, valor):
+        Database.connect(self)
+        saldo = Database.verificar_saldo(self, tipoUsuario, codUsuario)
+        valorDecimal = Decimal(valor)
+        if saldo is None or saldo < valorDecimal or valorDecimal < 0:
+            return False
+            flash('Valor especificado é maior do que o saldo disponível na conta')
+            return jsonify({'message': 'Falha ao sacar dinheiro da carteira'}), 400
+        else:
+            Database.sacar_dinheiro(self, tipoUsuario, codUsuario, valor)
+            return True
+            return jsonify({'message': 'Dinheiro sacado da carteira com sucesso'}), 200
+
+    def realizarTransacao(self, codEmpresa, codDesenvolvedor, valor, descricao, tipoUsuario):
+        if tipoUsuario == True:
+            return False
+        Database.connect(self)
+        saldoEmpresa = Database.verificar_saldo(self, False, codEmpresa)
+        valorDecimal = Decimal(valor)
+        if saldoEmpresa is None or saldoEmpresa < valorDecimal or valorDecimal < 0:
+            return False
+            flash('Valor para transacao é menor do que valor disponivel na conta')
+            return jsonify({'message': 'Falha ao transferir'}), 400
+        else:
+            Database.realizar_transacao(self, codEmpresa, codDesenvolvedor, valor, descricao)
+            return True
+            return jsonify({'message': 'Transação realizada com sucesso'}), 200
+    
+    def verificarSaldo(self, tipoUsuario, codUsuario):
+        Database.connect(self)
+        saldo = Database.verificar_saldo(self, tipoUsuario, codUsuario)
+        return saldo
+
+    def enviarEmailReuniaoCriada(self, emailUser, nome, data): 
+
+        corpo_email = f"""
+        <p>Olá {nome}! Sua reunião para o dia {data} foi marcada com sucesso!</p>
+        """
+
+        msg = email.message.Message()
+        msg['Subject'] = "Reunião Marcada!"
+        msg['From'] = 'worklink012@gmail.com'
+        msg['To'] = emailUser
+        password = 'dczxgidwrlzgiuar' 
+        msg.add_header('Content-Type', 'text/html')
+        msg.set_payload(corpo_email )
+
+        s = smtplib.SMTP('smtp.gmail.com: 587')
+        s.starttls()
+        # Login Credentials for sending the mail
+        s.login(msg['From'], password)
+        s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
+    
+    def enviarEmailReuniaoExcluida(self, emailUser, nome, data): 
+
+        corpo_email = f"""
+        <p>Olá {nome}! Sua reunião para o dia {data} foi excluída com sucesso!</p>
+        """
+
+        msg = email.message.Message()
+        msg['Subject'] = "Reunião Excluída!"
+        msg['From'] = 'worklink012@gmail.com'
+        msg['To'] = emailUser
+        password = 'dczxgidwrlzgiuar' 
+        msg.add_header('Content-Type', 'text/html')
+        msg.set_payload(corpo_email )
+
+        s = smtplib.SMTP('smtp.gmail.com: 587')
+        s.starttls()
+        # Login Credentials for sending the mail
+        s.login(msg['From'], password)
+        s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))

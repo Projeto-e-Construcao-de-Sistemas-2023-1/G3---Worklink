@@ -1,58 +1,121 @@
 import Usuario
+from Database import Database
 # OS GETTERS VÃO SER CONSULTAS NO BANCO DE DADOS PEDINDO AQUELA VARIAVEL
 class Desenvolvedor(Usuario.Usuario):    
-    def criaDesenvolvedor(self, email, telefone, conta, senha, nome, sobrenome, genero, habilidade, CPF, data_nascimento):
-        self.cursor.execute(f'INSERT INTO desenvolvedor (CPF, email, conta, senha, telefone, nome, sobrenome, genero, habilidade, data_nascimento) VALUES ({CPF}, {email}, {conta}, {senha},{telefone}, {nome}, {sobrenome}, {genero}, {habilidade}, {data_nascimento})')
-        self.con.commit() # INSERT REALIZADO
+    def criaDesenvolvedor(self, nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, descricao, tag):
+        values = (nome, sobrenome, CPF, email, genero, data_nascimento, telefone, conta, senha, descricao, tag)
+        tipo = True
+        Database.connect(self)
+        Database.insert(self, values, tipo)
 
+    # GETTERS
     def getNome(self):
-        self.cursor.execute(f'SELECT nome FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
-    
-    def getGenero(self):
-        self.cursor.execute(f'SELECT genero FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
-    
-    def getHabilidade(self):
-        self.cursor.execute(f'SELECT habilidade FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
-    
-    def getCpf(self):
-        self.cursor.execute(f'SELECT CPF FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
-    
-    def getDataNascimento(self):
-        self.cursor.execute(f'SELECT data_nascimento FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
+        Database.connect(self)
+        return Database.select(self, 'DESENVOLVEDOR', 'nome', self.email)
     
     def getSobrenome(self):
-        self.cursor.execute(f'SELECT sobrenome FROM desenvolvedor WHERE email = {self.email}') # Tenta achar o cara com essas credenciais
-        self.con.commit()
-        return str(self.cursor.fetchall())
-
-    def setHabilidade(self, habilidade):
-        self.cursor.execute(f'UPDATE desenvolvedor SET habilidade = {habilidade} WHERE email = "{self.email}"')
-        self.con.commit()
-        return True
-
+        Database.connect(self)
+        return Database.select(self, 'DESENVOLVEDOR', 'sobrenome', self.email)
+    
+    def getCPF(self):
+        Database.connect(self)
+        return Database.select(self, 'DESENVOLVEDOR', 'CPF', self.email)
+    
+    def getEmail(self):
+        Database.connect(self)
+        return Database.select(self, 'DESENVOLVEDOR', 'email', self.email)
+    
+    def getGenero(self):
+        Database.connect(self)
+        return Database.select(self, 'DESENVOLVEDOR', 'genero', self.email)
+    
+    def getDataNascimento(self):
+        Database.connect(self)
+        return Database.select(self, 'DESENVOLVEDOR', 'data_nascimento', self.email)
+    
+    def getTelefone(self):
+        Database.connect(self)
+        return Database.select(self, 'DESENVOLVEDOR', 'telefone', self.email)
+    
+    def getConta(self):
+        Database.connect(self)
+        return Database.select(self, 'DESENVOLVEDOR', 'conta_bancaria', self.email)
+    
+    def getNome(self):
+        Database.connect(self)
+        return Database.select(self, 'DESENVOLVEDOR', 'nome', self.email)
+    
+    def getSenha(self):
+        Database.connect(self)
+        return Database.select(self, 'DESENVOLVEDOR', 'senha', self.email)
+    
+    def getDescricao(self):
+        Database.connect(self)
+        return Database.select(self, 'DESENVOLVEDOR', 'descricao', self.email)
+    
+    def getCodigo(self):
+        Database.connect(self)
+        self.codigo = Database.select(self, 'DESENVOLVEDOR', 'cod_desenvolvedor', self.email)
+        return Database.select(self, 'DESENVOLVEDOR', 'cod_desenvolvedor', self.email)
+    
+    def getTag(self):
+        Database.connect(self)
+        return Database.select(self, 'DESENVOLVEDOR', 'tag', self.email)
+    
+    # SETTERS
     def setNome(self, nome):
-        self.cursor.execute(f'UPDATE desenvolvedor SET nome = {nome} WHERE email = "{self.email}"')
-        self.con.commit()
+        Database.connect(self)
+        Database.update(self, 'nome', nome, 'DESENVOLVEDOR', self.email)
         return True
 
     def setSobrenome(self, sobrenome):
-        self.cursor.execute(f'UPDATE desenvolvedor SET sobrenome = {sobrenome} WHERE email = "{self.email}"')
-        self.con.commit()
+        Database.connect(self)
+        Database.update(self, 'sobrenome', sobrenome, 'DESENVOLVEDOR', self.email)
         return True
-    
+
+    def setCpf(self, CPF):
+        Database.connect(self)
+        Database.update(self, 'CPF', CPF, 'DESENVOLVEDOR', self.email)
+        return True
+
+    def setEmail(self, email_novo):
+        Database.connect(self)
+        Database.update(self, 'email', email_novo, 'DESENVOLVEDOR', self.email)
+        return True
+
     def setGenero(self, genero):
-        self.cursor.execute(f'UPDATE desenvolvedor SET genero = {genero} WHERE email = "{self.email}"')
-        self.con.commit()
+        Database.connect(self)
+        Database.update(self, 'genero', genero, 'DESENVOLVEDOR', self.email)
+        return True
+
+    def setDataNascimento(self, data_nascimento):
+        Database.connect(self)
+        Database.update(self, 'data_nascimento', data_nascimento, 'DESENVOLVEDOR', self.email)
+        return True
+
+    def setTelefone(self, telefone):
+        Database.connect(self)
+        Database.update(self, 'telefone', telefone, 'DESENVOLVEDOR', self.email)
+        return True
+
+    def setConta(self, conta):
+        Database.connect(self)
+        Database.update(self, 'conta_bancaria', conta, 'DESENVOLVEDOR', self.email)
+        return True
+        
+    def setSenha(self, senha):
+        Database.connect(self)
+        Database.update(self, 'senha', senha, 'DESENVOLVEDOR', self.email)
+        return True
+
+    def setDescricao(self, descricao):
+        Database.connect(self)
+        Database.update(self, 'descricao', descricao, 'DESENVOLVEDOR', self.email)
+        return True
+
+    def setTag(self, tag):
+        Database.connect(self)
+        Database.update(self, 'tag_desenvolvedor', tag, 'DESENVOLVEDOR', self.email)
         return True
     
     #def candidataProjeto(self, projeto):
@@ -92,4 +155,3 @@ class Desenvolvedor(Usuario.Usuario):
 
     
     
-
