@@ -10,6 +10,8 @@ from Evento import Evento
 import sys
 from Projeto import Projeto
 import json
+import pymongo
+
 
 app = Flask(__name__, template_folder="templates")
 emailsessao=''
