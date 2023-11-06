@@ -12,3 +12,4 @@ Werkzeug==2.3.4
 requests
 pyperclip
 pymongo
+flask_wtf
